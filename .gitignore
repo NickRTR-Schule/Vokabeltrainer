@@ -1,3 +1,6 @@
 /bin/
+
+# Files and Folders for Jetbrains IDEA Support.
+# These are not added to the Git repository
 .idea
 Vokabeltrainer.iml
