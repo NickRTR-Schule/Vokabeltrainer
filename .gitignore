@@ -4,3 +4,6 @@
 # These are not added to the Git repository
 .idea
 Vokabeltrainer.iml
+
+# macOS related stuff
+*.DS_Store
