@@ -6,40 +6,31 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import java.awt.CardLayout;
 
 public class GUI extends JFrame
 {
 
-	private JPanel contentPane;
+	private final JPanel contentPane;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args)
 	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
+		EventQueue.invokeLater(() -> {
+			try
 			{
-				try
-				{
-					GUI frame = new GUI();
-					frame.setVisible(true);
-				}
-				catch (Exception e)
-				{
-					e.printStackTrace();
-				}
+				GUI frame = new GUI();
+				frame.setVisible(true);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
 			}
 		});
 	}
@@ -108,11 +99,7 @@ public class GUI extends JFrame
 				}
 			}
 		});
-		btnDashboard.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-			}
+		btnDashboard.addActionListener(e -> {
 		});
 		btnDashboard.setBounds(10, 45, 89, 23);
 		contentPane.add(btnDashboard);
