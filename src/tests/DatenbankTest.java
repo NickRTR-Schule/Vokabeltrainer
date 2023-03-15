@@ -14,7 +14,7 @@ public class DatenbankTest {
 	Datenbank derSpeicher = new Datenbank();
 	
 	@Test
-	public void vokabelHinzufuegenTest() throws Exception
+	public void Test() throws Exception
 	{
 		derSpeicher.vokabelHinzufuegen("duck", "Ente", null, null, null, null);
 		
