@@ -7,14 +7,12 @@ import java.awt.*;
 import java.util.Locale;
 
 public class MainFrame extends JFrame {
-
-    private JPanel contentPane = new Dashboard();
     private final MainFrameSteuerung steuerung;
 
 
     public MainFrame() {
         steuerung = new MainFrameSteuerung(this);
-        setContentPane(contentPane);
+        setContentPane(new Dashboard());
         setOpacity(1);
         setAlwaysOnTop(false);
         setTitle("Vokabeltrainer");
@@ -37,10 +35,8 @@ public class MainFrame extends JFrame {
             try
             {
                 MainFrame frame = new MainFrame();
-                frame.open(UI.Dashboard);
                 frame.setVisible(true);
                 frame.open(UI.Abfrage);
-
             }
             catch (Exception e)
             {
@@ -51,8 +47,7 @@ public class MainFrame extends JFrame {
 
     public void open(UI ui) {
         switch (ui) {
-            case Dashboard -> contentPane = new Dashboard();
-            case Abfrage ->  contentPane = new JPanel();
+            case Dashboard -> setContentPane(new Dashboard());
             // TODO: adjust Method
         }
     }
