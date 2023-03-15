@@ -15,6 +15,43 @@ public class Datenbank
 	private PreparedStatement stmt; // DB-Anfrage (Query)
 	private ResultSet rs; // mögliches Ergebnis einer DB-Abfrage
 
+	private void oeffneDatenbank() throws Exception
+	{
+		try
+		{
+			// Verbindung zur Datenbank herstellen; Struktur:
+			// jdbc = Java Database Connectivity = Mechanismus zum DB-Zugriff
+			// ucanaccess = 
+			// C:/temp/usw. = Pfad zur Datenbank
+			con = DriverManager.getConnection(
+					"jdbc:ucanaccess://Vokabeltrainer.accdb"); // (Zu Testzwecken)
+		}
+		catch (SQLException e)
+		{
+			throw new Exception("Fehler beim Öffnen der Datenbank: " + e.getLocalizedMessage());
+		}
+	}
+
+	private void schliesseDatenbank() throws Exception
+	{
+		try
+		{
+			// Ergebnismenge schließen
+			if (rs != null)
+			{
+				rs.close();
+			}
+			// Statement schließen
+			stmt.close();
+			// Verbindung schließen
+			con.close();
+		}
+		catch (SQLException e)
+		{
+			throw new Exception("Fehler beim Schließen der Datenbank!");
+		}
+	}
+	
 	public ArrayList<Vokabel> liesVokabeln() throws Exception
 	{
 		oeffneDatenbank();
@@ -53,42 +90,53 @@ public class Datenbank
 		schliesseDatenbank();
 		return ergebnis;
 	}
-
-	private void oeffneDatenbank() throws Exception
+	
+	public Vokabel liesVokabel(String wort, String uebersetzung) throws Exception
 	{
+		oeffneDatenbank();
+
+		// DB-Abfrage als String
+		String sqlStmt = "SELECT wort, uebersetzung, abbildung, aussprache, lautschrift, verwendungshinweis, wiederholungen, anzahlrichtig ";
+		sqlStmt += "FROM Vokabel ";
+		sqlStmt += "WHERE wort = ? AND uebersetzung = ?";
+		
+		Vokabel ergebnis = null;
+
 		try
 		{
-			// Verbindung zur Datenbank herstellen; Struktur:
-			// jdbc = Java Database Connectivity = Mechanismus zum DB-Zugriff
-			// ucanaccess = 
-			// C:/temp/usw. = Pfad zur Datenbank
-			con = DriverManager.getConnection(
-					"jdbc:ucanaccess://Vokabeltrainer.accdb"); // (Zu Testzwecken)
-		}
-		catch (SQLException e)
-		{
-			throw new Exception("Fehler beim Öffnen der Datenbank: " + e.getLocalizedMessage());
-		}
-	}
+			// DB-Abfrage vorbereiten
+			stmt = con.prepareStatement(sqlStmt);
+			// DB-Abfrage ausführen
+			stmt.setString(1, wort);
+			stmt.setString(2, uebersetzung);
+			rs = stmt.executeQuery();
 
-	private void schliesseDatenbank() throws Exception
-	{
-		try
-		{
-			// Ergebnismenge schließen
-			if (rs != null)
+			// Ergebnis der DB-Abfrage Zeile für Zeile abarbeiten
+			while (rs.next())
 			{
-				rs.close();
+				// DB-Zeile als Objekt in Ergebnis-Array speichern
+				ergebnis = new Vokabel(rs.getString("wort"),
+					rs.getString("uebersetzung"),
+					rs.getBytes("abbildung"),
+					rs.getBytes("aussprache"),
+					rs.getString("lautschrift"),
+					rs.getString("verwendungshinweis"),
+					rs.getInt("wiederholungen"),
+					rs.getInt("anzahlrichtig"));
 			}
-			// Statement schließen
-			stmt.close();
-			// Verbindung schließen
-			con.close();
+			
+			if (ergebnis == null)
+			{
+				throw new Exception("Keine passende Vokabel gefunden.");
+			}
 		}
 		catch (SQLException e)
 		{
-			throw new Exception("Fehler beim Schließen der Datenbank!");
+			throw new Exception("Fehler beim Lesen der Vokabeln aus der Datenbank: " + e.getLocalizedMessage());
 		}
+
+		schliesseDatenbank();
+		return ergebnis;
 	}
 
 //	public void fuegeHinzu(String pBezeichnung, double pVerkaufspreis,

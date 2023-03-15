@@ -13,10 +13,12 @@ public class Konsole {
 		ArrayList<Vokabel> vokabeln;
 		try {
 			vokabeln = derSpeicher.liesVokabeln();
-			System.out.println(vokabeln);
+			
+			Vokabel vokabel = derSpeicher.liesVokabel("siue", "siu");
+			
+			System.out.println(vokabel.liesUebersetzung());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Fehler: " + e.getLocalizedMessage());
 		}
 	}
 
