@@ -12,10 +12,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.CardLayout;
 
-public class GUI extends JFrame
+public class Dashboard extends JFrame
 {
-
-	private final JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -25,7 +23,7 @@ public class GUI extends JFrame
 		EventQueue.invokeLater(() -> {
 			try
 			{
-				GUI frame = new GUI();
+				Dashboard frame = new Dashboard();
 				frame.setVisible(true);
 			}
 			catch (Exception e)
@@ -38,11 +36,11 @@ public class GUI extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	public GUI()
+	public Dashboard()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 870, 554);
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);

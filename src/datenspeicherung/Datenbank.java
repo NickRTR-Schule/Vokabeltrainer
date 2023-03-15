@@ -1,13 +1,9 @@
 package datenspeicherung;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-
-import datenspeicherung.Vokabel;
 
 public class Datenbank
 {
@@ -16,6 +12,6 @@ public class Datenbank
 	private ResultSet rs; // mögliches Ergebnis einer DB-Abfrage
 
 	public ArrayList<Vokabel> liesVokabeln() throws Exception {
-		
+		return new ArrayList<Vokabel>();
 	}
 }
