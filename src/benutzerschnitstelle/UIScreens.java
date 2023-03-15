@@ -1,6 +1,6 @@
 package benutzerschnitstelle;
 
-public enum UI {
+public enum UIScreens {
     Dashboard,
     Abfrage,
     Ersteller,

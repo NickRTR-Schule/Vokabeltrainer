@@ -1,17 +1,12 @@
 package benutzerschnitstelle;
 
-import steuerung.MainFrameSteuerung;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Locale;
 
 public class MainFrame extends JFrame {
-    private final MainFrameSteuerung steuerung;
-
 
     public MainFrame() {
-        steuerung = new MainFrameSteuerung(this);
         setContentPane(new Dashboard());
         setOpacity(1);
         setAlwaysOnTop(false);
@@ -26,30 +21,17 @@ public class MainFrame extends JFrame {
         setFocusable(true);
     }
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args)
-    {
-        EventQueue.invokeLater(() -> {
-            try
-            {
-                MainFrame frame = new MainFrame();
-                frame.setVisible(true);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        });
-    }
 
-    public void open(UI ui) {
+
+    public void open(UIScreens ui) {
         switch (ui) {
             case Dashboard -> setContentPane(new Dashboard());
-            // TODO: adjust Method
+            case Abfrage -> setContentPane(new Abfrage());
+            case Ersteller -> setContentPane(new VokabelErsteller());
+            case Statistik -> setContentPane(new Statistik());
+            case Kategorieeuebersicht -> setContentPane(new Kategorieuebersicht());
         }
     }
 
-
+    // TODO-js: implement stack?
 }
