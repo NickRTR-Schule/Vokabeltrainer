@@ -5,5 +5,8 @@
 .idea
 Vokabeltrainer.iml
 
+# Outputs and Binary Files
+/out
+
 # macOS related stuff
 *.DS_Store
