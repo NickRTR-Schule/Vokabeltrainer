@@ -17,7 +17,9 @@ public class Konsole {
 //			Vokabel vokabel = derSpeicher.liesVokabel("cat", "Katze");
 //			System.out.println(vokabel.liesUebersetzung());
 			
-			derSpeicher.loescheVokabel("cat", "Katze");
+//			derSpeicher.loescheVokabel("cat", "Katze");
+			
+			derSpeicher.vokabelHinzufuegen("duck", "Ente", null, null, null, null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

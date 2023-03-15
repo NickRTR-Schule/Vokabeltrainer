@@ -132,11 +132,40 @@ public class Datenbank
 		}
 		catch (SQLException e)
 		{
-			throw new Exception("Fehler beim Lesen der Vokabeln aus der Datenbank: " + e.getLocalizedMessage());
+			throw new Exception("Fehler beim Lesen der Vokabel aus der Datenbank: " + e.getLocalizedMessage());
 		}
 
 		schliesseDatenbank();
 		return ergebnis;
+	}
+	
+	public void vokabelHinzufuegen(String wort, String uebersetzung, byte[] abbildung, byte[] aussprache, String lautschrift, String verwendungshinweis) throws Exception
+	{
+		oeffneDatenbank();
+
+		// DB-Abfrage als String
+		String sqlStmt = "INSERT INTO vokabel (wort, uebersetzung, abbildung, aussprache, lautschrift, verwendungshinweis) ";
+		sqlStmt += "VALUES (?, ?, ?, ?, ?, ?)";
+
+		try
+		{
+			// DB-Abfrage vorbereiten
+			stmt = con.prepareStatement(sqlStmt);
+			// DB-Abfrage ausführen
+			stmt.setString(1, wort);
+			stmt.setString(2, uebersetzung);
+			stmt.setBytes(3, abbildung);
+			stmt.setBytes(4, aussprache);
+			stmt.setString(5, lautschrift);
+			stmt.setString(6, verwendungshinweis);
+			stmt.executeUpdate();
+		}
+		catch (SQLException e)
+		{
+			throw new Exception("Fehler beim Speicher der Vokabeln in die Datenbank: " + e.getLocalizedMessage());
+		}
+
+		schliesseDatenbank();
 	}
 	
 	public void loescheVokabel(String wort, String uebersetzung) throws Exception
@@ -158,11 +187,13 @@ public class Datenbank
 		}
 		catch (SQLException e)
 		{
-			throw new Exception("Fehler beim Lesen der Vokabeln aus der Datenbank: " + e.getLocalizedMessage());
+			throw new Exception("Fehler beim Löschen der Vokabel aus der Datenbank: " + e.getLocalizedMessage());
 		}
 
 		schliesseDatenbank();
 	}
+	
+	// TODO: Vokabeln ändern
 
 //	public void fuegeHinzu(String pBezeichnung, double pVerkaufspreis,
 //			double pLagerbestand) throws Exception
@@ -217,31 +248,6 @@ public class Datenbank
 //		catch (SQLException e)
 //		{
 //			throw new Exception("Fehler beim Ändern des Produkts!");
-//		}
-//
-//		schliesseDatenbank();
-//	}
-//
-//	public void loesche(int pProduktNr) throws Exception
-//	{
-//		oeffneDatenbank();
-//
-//		// DB-Anfrage zum Löschen eines Produkts	
-//		String sqlStmt = "DELETE FROM produkt ";
-//		sqlStmt += "WHERE produktnr = ?";
-//
-//		try
-//		{
-//			// DB-Abfrage vorbereiten
-//			stmt = con.prepareStatement(sqlStmt);
-//			// ? Platzhalter durch Paramter ersetzen
-//			stmt.setInt(1, pProduktNr);
-//			// DB-Abfrage ausführen
-//			stmt.executeUpdate();
-//		}
-//		catch (SQLException e)
-//		{
-//			throw new Exception("Fehler beim Löschen des Produkts!");
 //		}
 //
 //		schliesseDatenbank();
