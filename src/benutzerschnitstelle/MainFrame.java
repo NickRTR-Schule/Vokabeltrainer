@@ -8,11 +8,8 @@ import java.util.Locale;
 
 public class MainFrame extends JFrame {
 
-
-
     private JPanel contentPane = new Dashboard();
     private final MainFrameSteuerung steuerung;
-
 
 
     public MainFrame() {
@@ -56,6 +53,7 @@ public class MainFrame extends JFrame {
         switch (ui) {
             case Dashboard -> contentPane = new Dashboard();
             case Abfrage ->  contentPane = new JPanel();
+            // TODO: adjust Method
         }
     }
 
