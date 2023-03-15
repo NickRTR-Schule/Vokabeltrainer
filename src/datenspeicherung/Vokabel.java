@@ -23,5 +23,38 @@ public class Vokabel {
 		anzahlrichtig = pAnzahlrichtig;
 	}
 	
-	// Lese-Methoden macht Lukas!
+	public String liesWort()
+	{
+		return wort;
+	}
+	
+	public String liesUebersetzung()
+	{
+		return uebersetzung;
+	}
+	
+	public byte[] liesAbbildung() 
+	{
+		return abbildung;
+	}
+	public byte [] liesAussprache()
+	{
+		return aussprache;
+	}
+	public String liesLautschrift()
+	{
+		return lautschrift;
+	}
+	public String liesVerwendungshinweis()
+	{
+		return verwendungshinweis;
+	}
+	public int liesWiederholungen()
+	{
+		return wiederholungen;
+	}
+	public int liesAnzahlRichtig()
+	{
+		return anzahlrichtig;
+	}
 }
