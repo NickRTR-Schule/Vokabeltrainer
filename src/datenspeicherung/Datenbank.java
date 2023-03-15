@@ -138,6 +138,31 @@ public class Datenbank
 		schliesseDatenbank();
 		return ergebnis;
 	}
+	
+	public void loescheVokabel(String wort, String uebersetzung) throws Exception
+	{
+		oeffneDatenbank();
+
+		// DB-Abfrage als String
+		String sqlStmt = "DELETE FROM Vokabel ";
+		sqlStmt += "WHERE wort = ? AND uebersetzung = ?";
+
+		try
+		{
+			// DB-Abfrage vorbereiten
+			stmt = con.prepareStatement(sqlStmt);
+			// DB-Abfrage ausführen
+			stmt.setString(1, wort);
+			stmt.setString(2, uebersetzung);
+			stmt.executeUpdate();
+		}
+		catch (SQLException e)
+		{
+			throw new Exception("Fehler beim Lesen der Vokabeln aus der Datenbank: " + e.getLocalizedMessage());
+		}
+
+		schliesseDatenbank();
+	}
 
 //	public void fuegeHinzu(String pBezeichnung, double pVerkaufspreis,
 //			double pLagerbestand) throws Exception

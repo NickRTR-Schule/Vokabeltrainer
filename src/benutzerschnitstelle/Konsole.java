@@ -10,15 +10,17 @@ public class Konsole {
 	public static void main(String[] args) {
 		Datenbank derSpeicher = new Datenbank();
 		
-		ArrayList<Vokabel> vokabeln;
 		try {
-			vokabeln = derSpeicher.liesVokabeln();
+//			ArrayList<Vokabel> vokabeln = derSpeicher.liesVokabeln();
+//			System.out.println(vokabeln);
 			
-			Vokabel vokabel = derSpeicher.liesVokabel("siue", "siu");
+//			Vokabel vokabel = derSpeicher.liesVokabel("cat", "Katze");
+//			System.out.println(vokabel.liesUebersetzung());
 			
-			System.out.println(vokabel.liesUebersetzung());
+			derSpeicher.loescheVokabel("cat", "Katze");
 		} catch (Exception e) {
-			System.out.println("Fehler: " + e.getLocalizedMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
