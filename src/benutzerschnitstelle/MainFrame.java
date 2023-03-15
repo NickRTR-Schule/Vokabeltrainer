@@ -49,7 +49,7 @@ public class MainFrame extends JFrame {
         switch (ui) {
             case Dashboard -> setContentPane(new Dashboard());
             case Abfrage -> setContentPane(new Abfrage());
-            case Ersteller -> setContentPane(new VokabelErsteller());
+            case Ersteller -> setContentPane(new Vokabelersteller());
             case Statistik -> setContentPane(new Statistik());
             case Kategorieeuebersicht -> setContentPane(new Kategorieuebersicht());
         }

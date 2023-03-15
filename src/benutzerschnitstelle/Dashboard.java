@@ -1,5 +1,7 @@
 package benutzerschnitstelle;
 
+import steuerung.DashboardSteuerung;
+
 import java.awt.*;
 
 import javax.swing.*;
@@ -8,15 +10,43 @@ import javax.swing.border.EmptyBorder;
 public class Dashboard extends JPanel
 {
 
+	/**
+	 * The Controller to this View
+	 */
+	private final DashboardSteuerung steuerung;
+
+	/**
+	 * The Constraints being used in the Layout of this Panel
+	 */
 	private final GridBagConstraints constraints = new GridBagConstraints();
 
 	/**
 	 * Create the frame.
 	 */
 	public Dashboard() {
+		steuerung = new DashboardSteuerung();
 		// Set Data
 		setName("Dashboard");
 
+		initComps();
+	}
+
+	/**
+	 * Adds the specified Component to
+	 * the Panel, using the current State of the
+	 * Constraints.
+	 *
+	 * @param component the component that should be added
+	 */
+	private void addComponent(Component component) {
+		add(component, constraints);
+	}
+
+	/**
+	 * Part of the initialization Process,
+	 * adding all the Components to this Panel
+	 */
+	private void initComps() {
 		// Pane Content
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setMinimumSize(new Dimension(1000, 1000));
@@ -60,9 +90,5 @@ public class Dashboard extends JPanel
 		alleKategorienPanel.setBackground(Color.GRAY);
 		alleKategorienPanel.add(new JLabel("Alle Kategorien"));
 		addComponent(alleKategorienPanel);
-	}
-
-	private void addComponent(Component component) {
-		add(component, constraints);
 	}
 }
