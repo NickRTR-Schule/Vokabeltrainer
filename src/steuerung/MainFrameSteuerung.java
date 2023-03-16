@@ -18,7 +18,7 @@ public class MainFrameSteuerung {
      * to access this Controller
      * everywhere in the App
      */
-    private static final MainFrameSteuerung shared = new MainFrameSteuerung();
+    private static MainFrameSteuerung shared;
 
     /**
      * The Main Frame of this Application
@@ -28,19 +28,20 @@ public class MainFrameSteuerung {
      * WARNING: Only one of this Main Frame should exist in
      * a single Application run
      */
-    private final MainFrame mainFrame = new MainFrame();
+    private MainFrame mainFrame;
+    
+    
+    public MainFrameSteuerung() {
+    	mainFrame = new MainFrame();
+    }
 
     /**
      * Launch the application.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                final MainFrameSteuerung mainFrameSteuerung = new MainFrameSteuerung();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+    	EventQueue.invokeLater(() -> {
+    		shared = new MainFrameSteuerung();
+    	});
     }
 
     public static MainFrameSteuerung getInstance() {

@@ -19,6 +19,7 @@ public class MainFrame extends JFrame {
         setValues();
         requestFocus();
     }
+   
 
     /**
      * Call all the Setter Methods
@@ -40,6 +41,7 @@ public class MainFrame extends JFrame {
         setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         setName("Main Frame");
         setUndecorated(false);
+        setVisible(true);
     }
 
     /**
