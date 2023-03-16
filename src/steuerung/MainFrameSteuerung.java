@@ -1,23 +1,76 @@
 package steuerung;
 
-import benutzerschnitstelle.Dashboard;
 import benutzerschnitstelle.MainFrame;
-import benutzerschnitstelle.UI;
+import benutzerschnitstelle.UIScreens;
 
-import javax.swing.*;
+import java.awt.*;
 
+/**
+ * The Main Frame Controller controlling
+ * the Main Frame and with that Navigation
+ * of this App.
+ */
 public class MainFrameSteuerung {
 
-    private final MainFrame mainFrame;
+    /**
+     * The Main Frame of this Application
+     * handling all the other Screens as content Panes
+     * of this single Main Frame.
+     * <p>
+     * WARNING: Only one of this Main Frame should exist in
+     * a single Application run
+     */
+    private static final MainFrame mainFrame = new MainFrame();
 
-    public MainFrameSteuerung(MainFrame mainFrame) {
-        this.mainFrame = mainFrame;
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args)
+    {
+        EventQueue.invokeLater(() -> {
+            try
+            {
+                mainFrame.setVisible(true);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        });
     }
 
-    public void openDashboard() {
-        mainFrame.open(UI.Dashboard);
+    /**
+     * Navigates to the Dashboard of this App
+     */
+    public static void openDashboard() {
+        mainFrame.open(UIScreens.Dashboard);
     }
 
-    public void openAbfrage() {
+    /**
+     * Navigates to the Vokabel Abfrage Screen of this App
+     */
+    public static void openAbfrage() {
+        mainFrame.open(UIScreens.Abfrage);
+    }
+
+    /**
+     * Navigates to the Kategorieuebersicht of this App
+     */
+    public static void openKategorieuebersicht() {
+        mainFrame.open(UIScreens.Kategorieeuebersicht);
+    }
+
+    /**
+     * Navigates to the Vokabel Ersteller of this App
+     */
+    public static void openErsteller() {
+        mainFrame.open(UIScreens.Ersteller);
+    }
+
+    /**
+     * Navigates to the Statistics Screen of this App
+     */
+    public static void openStats() {
+        mainFrame.open(UIScreens.Statistik);
     }
 }
