@@ -5,10 +5,10 @@ import java.awt.*;
 import java.util.Locale;
 
 /**
- *  The Frame containing the
- *  other Screens as Panels
- *  in a Form of its own
- *  content Pane.
+ * The Frame containing the
+ * other Screens as Panels
+ * in a Form of its own
+ * content Pane.
  */
 public class MainFrame extends JFrame {
 
@@ -54,6 +54,4 @@ public class MainFrame extends JFrame {
             case Kategorieeuebersicht -> setContentPane(new Kategorieuebersicht());
         }
     }
-
-    // TODO-js: implement navigation stack?
 }
