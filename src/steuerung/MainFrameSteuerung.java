@@ -13,6 +13,13 @@ import java.awt.*;
 public class MainFrameSteuerung {
 
     /**
+     * The singleton Object
+     * to access this Controller
+     * everywhere in the App
+     */
+    private static final MainFrameSteuerung shared = new MainFrameSteuerung();
+
+    /**
      * The Main Frame of this Application
      * handling all the other Screens as content Panes
      * of this single Main Frame.
@@ -20,57 +27,57 @@ public class MainFrameSteuerung {
      * WARNING: Only one of this Main Frame should exist in
      * a single Application run
      */
-    private static final MainFrame mainFrame = new MainFrame();
+    private final MainFrame mainFrame = new MainFrame();
 
     /**
      * Launch the application.
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
-            try
-            {
-                mainFrame.setVisible(true);
-            }
-            catch (Exception e)
-            {
+            try {
+                final MainFrameSteuerung mainFrameSteuerung = new MainFrameSteuerung();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
     }
 
+    public static MainFrameSteuerung getInstance() {
+        return shared;
+    }
+
     /**
      * Navigates to the Dashboard of this App
      */
-    public static void openDashboard() {
+    public void openDashboard() {
         mainFrame.open(UIScreens.Dashboard);
     }
 
     /**
      * Navigates to the Vokabel Abfrage Screen of this App
      */
-    public static void openAbfrage() {
+    public void openAbfrage() {
         mainFrame.open(UIScreens.Abfrage);
     }
 
     /**
      * Navigates to the Kategorieuebersicht of this App
      */
-    public static void openKategorieuebersicht() {
+    public void openKategorieuebersicht() {
         mainFrame.open(UIScreens.Kategorieeuebersicht);
     }
 
     /**
      * Navigates to the Vokabel Ersteller of this App
      */
-    public static void openErsteller() {
+    public void openErsteller() {
         mainFrame.open(UIScreens.Ersteller);
     }
 
     /**
      * Navigates to the Statistics Screen of this App
      */
-    public static void openStats() {
+    public void openStats() {
         mainFrame.open(UIScreens.Statistik);
     }
 }
