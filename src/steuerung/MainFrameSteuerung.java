@@ -2,6 +2,7 @@ package steuerung;
 
 import benutzerschnitstelle.MainFrame;
 import benutzerschnitstelle.UIScreens;
+import datenspeicherung.Kategorie;
 
 import java.awt.*;
 
@@ -63,8 +64,10 @@ public class MainFrameSteuerung {
     /**
      * Navigates to the Kategorieuebersicht of this App
      */
-    public void openKategorieuebersicht() {
-        mainFrame.open(UIScreens.Kategorieeuebersicht);
+    public void openKategorieuebersicht(Kategorie kategorie) {
+        final Object[] args = new Object[1];
+        args[0] = kategorie;
+        mainFrame.open(UIScreens.Kategorieeuebersicht, args);
     }
 
     /**

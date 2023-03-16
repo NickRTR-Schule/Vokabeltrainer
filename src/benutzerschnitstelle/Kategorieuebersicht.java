@@ -1,6 +1,6 @@
 package benutzerschnitstelle;
 
-import steuerung.AbfrageSteuerung;
+import datenspeicherung.Kategorie;
 import steuerung.KategorieUebersichtsSteuerung;
 
 import javax.swing.*;
@@ -17,8 +17,11 @@ public class Kategorieuebersicht extends JPanel {
      */
     private final KategorieUebersichtsSteuerung steuerung;
 
+    private final Kategorie kategorie;
 
-    public Kategorieuebersicht() {
+
+    public Kategorieuebersicht(Kategorie kategorie) {
         steuerung = new KategorieUebersichtsSteuerung();
+        this.kategorie = kategorie;
     }
 }

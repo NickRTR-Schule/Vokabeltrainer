@@ -1,5 +1,7 @@
 package benutzerschnitstelle;
 
+import datenspeicherung.Kategorie;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Locale;
@@ -51,7 +53,35 @@ public class MainFrame extends JFrame {
             case Abfrage -> setContentPane(new Abfrage());
             case Ersteller -> setContentPane(new Vokabelersteller());
             case Statistik -> setContentPane(new Statistik());
-            case Kategorieeuebersicht -> setContentPane(new Kategorieuebersicht());
+            default -> setContentPane(new ErrorScreen());
+        }
+    }
+
+    /**
+     * Navigates to another Screen
+     * in the App and used the passed arguments
+     * to create the new Screen.
+     *
+     * @param ui   the Screen where to navigate to
+     * @param args the Arguments being passed to the new Screen
+     */
+    public void open(UIScreens ui, Object[] args) {
+        if (args == null) {
+            open(ui);
+        } else {
+            switch (ui) {
+                case Abfrage:
+                    final int numberVocs = (int) args[0];
+                    setContentPane(new Abfrage(numberVocs));
+                    break;
+                case Kategorieeuebersicht:
+                    final Kategorie kategorie = (Kategorie) args[0];
+                    setContentPane(new Kategorieuebersicht(kategorie));
+                    break;
+                default:
+                    setContentPane(new ErrorScreen());
+                    break;
+            }
         }
     }
 }

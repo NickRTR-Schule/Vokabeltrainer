@@ -19,4 +19,8 @@ public class Abfrage extends JPanel {
     public Abfrage() {
         steuerung = new AbfrageSteuerung();
     }
+
+    public Abfrage(int numberVocs) {
+        steuerung = new AbfrageSteuerung(numberVocs);
+    }
 }

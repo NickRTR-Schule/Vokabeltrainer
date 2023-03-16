@@ -1,7 +1,6 @@
 package benutzerschnitstelle;
 
 import steuerung.DashboardSteuerung;
-import steuerung.MainFrameSteuerung;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -77,14 +76,14 @@ public class Dashboard extends JPanel {
         final JButton abfrageBtn = new JButton();
         abfrageBtn.setText("Abfrage starten");
         abfrageBtn.addActionListener((ignored) -> {
-            MainFrameSteuerung.getInstance().openAbfrage();
+            steuerung.abfrageGeklickt();
         });
         addComponent(abfrageBtn);
         constraints.gridx = 5;
         final JButton vokabelErstellerBtn = new JButton();
         vokabelErstellerBtn.setText("Vokabel erstellen");
         vokabelErstellerBtn.addActionListener((ignored) -> {
-            MainFrameSteuerung.getInstance().openErsteller();
+            steuerung.erstellerGecklickt();
         });
         addComponent(vokabelErstellerBtn);
         constraints.gridx = 0;
