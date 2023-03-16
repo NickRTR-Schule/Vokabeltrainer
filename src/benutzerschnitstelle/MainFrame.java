@@ -1,5 +1,6 @@
 package benutzerschnitstelle;
 
+import benutzerschnitstelle.navigation.UIScreens;
 import datenspeicherung.Kategorie;
 
 import javax.swing.*;

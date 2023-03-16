@@ -1,4 +1,4 @@
-package benutzerschnitstelle;
+package benutzerschnitstelle.navigation;
 
 /**
  * Every case of this

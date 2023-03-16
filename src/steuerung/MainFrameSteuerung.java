@@ -1,7 +1,7 @@
 package steuerung;
 
 import benutzerschnitstelle.MainFrame;
-import benutzerschnitstelle.UIScreens;
+import benutzerschnitstelle.navigation.UIScreens;
 import datenspeicherung.Kategorie;
 
 import java.awt.*;
