@@ -1,12 +1,10 @@
-/bin/
-
 # Files and Folders for Jetbrains IDEA Support.
-# These are not added to the Git repository
 .idea
 Vokabeltrainer.iml
 
 # Outputs and Binary Files
 /out
+/bin/
 
 # macOS related stuff
 *.DS_Store
