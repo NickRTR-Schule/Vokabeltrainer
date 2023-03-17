@@ -1,6 +1,6 @@
 package datenspeicherung;
 
-public class Kategorie 
+public final class Kategorie 
 {
 	private String name;
 	private String[] vokabeln;

@@ -8,7 +8,8 @@ import javax.swing.*;
  * The Screen to test the Users knowledge
  * and quiz the vocabs stored
  */
-public class Abfrage extends JPanel {
+@SuppressWarnings("serial")
+public final class Abfrage extends JPanel {
 
     /**
      * The Controller to this View
@@ -18,5 +19,9 @@ public class Abfrage extends JPanel {
 
     public Abfrage() {
         steuerung = new AbfrageSteuerung();
+    }
+
+    public Abfrage(int numberVocs) {
+        steuerung = new AbfrageSteuerung(numberVocs);
     }
 }

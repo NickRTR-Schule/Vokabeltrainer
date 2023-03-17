@@ -1,12 +1,17 @@
 package benutzerschnitstelle;
 
+import benutzerschnitstelle.komponenten.CustomButton;
 import steuerung.DashboardSteuerung;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class Dashboard extends JPanel {
+@SuppressWarnings("serial")
+public final class Dashboard extends JPanel
+{
 
     /**
      * The Controller to this View
@@ -21,17 +26,19 @@ public class Dashboard extends JPanel {
     /**
      * Create the frame.
      */
-    public Dashboard() {
+    public Dashboard()
+    {
         steuerung = new DashboardSteuerung();
         setValues();
         build();
     }
 
     /**
-     * Call all the Setter Methods to relevant variables in the
-     * init process of this Frame
+     * Call all the Setter Methods to relevant variables in the init process of
+     * this Frame
      */
-    private void setValues() {
+    private void setValues()
+    {
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setMinimumSize(new Dimension(1000, 1000));
         setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -45,21 +52,22 @@ public class Dashboard extends JPanel {
     }
 
     /**
-     * Adds the specified Component to
-     * the Panel, using the current State of the
+     * Adds the specified Component to the Panel, using the current State of the
      * Constraints.
      *
      * @param component the component that should be added
      */
-    private void addComponent(Component component) {
+    private void addComponent(Component component)
+    {
         add(component, constraints);
     }
 
     /**
-     * Part of the initialization Process,
-     * adding all the Components to this Panel
+     * Part of the initialization Process, adding all the Components to this
+     * Panel
      */
-    private void build() {
+    private void build()
+    {
         // Pane Content
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -67,18 +75,31 @@ public class Dashboard extends JPanel {
         constraints.gridheight = 1;
         constraints.weightx = 0.5;
         constraints.weighty = 0.5;
-        final JScrollPane statsScrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        final JScrollPane statsScrollPane = new JScrollPane(
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         statsScrollPane.setWheelScrollingEnabled(true);
         addComponent(statsScrollPane);
         constraints.gridx = 1;
         constraints.gridy = 2;
         constraints.gridwidth = 2;
-        final JButton abfrageBtn = new JButton();
-        abfrageBtn.setText("Abfrage starten");
+        final CustomButton abfrageBtn = new CustomButton("Abfrage starten");
+        abfrageBtn.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                steuerung.abfrageGeklickt();
+                super.mouseClicked(e);
+            }
+        });
         addComponent(abfrageBtn);
         constraints.gridx = 5;
         final JButton vokabelErstellerBtn = new JButton();
         vokabelErstellerBtn.setText("Vokabel erstellen");
+        vokabelErstellerBtn.addActionListener((ignored) -> {
+            steuerung.erstellerGecklickt();
+        });
         addComponent(vokabelErstellerBtn);
         constraints.gridx = 0;
         constraints.gridy = 4;
@@ -101,7 +122,8 @@ public class Dashboard extends JPanel {
     /**
      * @return the Panel showing the last Kategorien
      */
-    private JPanel letzteKategorienBuilder() {
+    private JPanel letzteKategorienBuilder()
+    {
         final JPanel panel = new JPanel();
         // for each loop over the last categories
         return panel;
@@ -110,7 +132,8 @@ public class Dashboard extends JPanel {
     /**
      * @return the Panel showing all Kategorien
      */
-    private JPanel alleKategorienBuilder() {
+    private JPanel alleKategorienBuilder()
+    {
         final JPanel panel = new JPanel();
         // For each loop over all categories
         return panel;

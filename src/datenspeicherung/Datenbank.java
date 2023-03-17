@@ -3,7 +3,7 @@ package datenspeicherung;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Datenbank {
+public final class Datenbank {
     private Connection con; // Verbindung zur DB
     private PreparedStatement stmt; // DB-Anfrage (Query)
     private ResultSet rs; // mögliches Ergebnis einer DB-Abfrage

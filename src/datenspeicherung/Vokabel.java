@@ -1,7 +1,7 @@
 package datenspeicherung;
 
 
-public class Vokabel {
+public final class Vokabel {
 	// Vokabel-Datentyp
 	private String wort;
 	private String uebersetzung;

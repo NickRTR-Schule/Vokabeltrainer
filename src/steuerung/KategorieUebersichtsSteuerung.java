@@ -1,5 +1,5 @@
 package steuerung;
 
-public class KategorieUebersichtsSteuerung {
+public final class KategorieUebersichtsSteuerung {
 
 }

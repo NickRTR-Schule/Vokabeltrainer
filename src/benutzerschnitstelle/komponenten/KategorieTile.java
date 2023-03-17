@@ -9,7 +9,8 @@ import javax.swing.*;
  * single Kategorie, for Example
  * in the Dashboard Kategorie Section
  */
-public class KategorieTile extends JPanel {
+@SuppressWarnings("serial")
+public final class KategorieTile extends JPanel {
 
     /**
      * The Kategorie this Tile

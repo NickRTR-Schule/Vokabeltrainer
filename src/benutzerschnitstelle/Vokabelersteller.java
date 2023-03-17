@@ -1,6 +1,5 @@
 package benutzerschnitstelle;
 
-import steuerung.KategorieUebersichtsSteuerung;
 import steuerung.VokabelerstellerSteuerung;
 
 import javax.swing.*;
@@ -8,7 +7,8 @@ import javax.swing.*;
 /**
  * The Screen to add / create a new Vocabulary.
  */
-public class Vokabelersteller extends JPanel {
+@SuppressWarnings("serial")
+public final class Vokabelersteller extends JPanel {
 
     /**
      * The Controller to this View

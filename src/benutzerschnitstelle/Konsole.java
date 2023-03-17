@@ -1,11 +1,8 @@
 package benutzerschnitstelle;
 
-import java.util.ArrayList;
-
 import datenspeicherung.Datenbank;
-import datenspeicherung.Vokabel;
 
-public class Konsole {
+public final class Konsole {
 
 	public static void main(String[] args) {
 		Datenbank derSpeicher = new Datenbank();
