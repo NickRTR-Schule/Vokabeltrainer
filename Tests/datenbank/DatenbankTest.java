@@ -1,3 +1,5 @@
+package datenbank;
+
 import datenspeicherung.Datenbank;
 import datenspeicherung.Vokabel;
 import org.junit.jupiter.api.Test;
