@@ -8,3 +8,4 @@ Vokabeltrainer.iml
 
 # macOS related stuff
 *.DS_Store
+/.apt_generated/
