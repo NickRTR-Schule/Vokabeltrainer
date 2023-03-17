@@ -1,4 +1,4 @@
-package benutzerschnitstelle;
+package benutzerschnittstelle;
 
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
@@ -7,7 +7,7 @@ import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import benutzerschnitstelle.navigation.UIScreens;
+import benutzerschnittstelle.navigation.UIScreens;
 import datenspeicherung.Kategorie;
 
 /**

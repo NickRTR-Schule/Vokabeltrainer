@@ -4,7 +4,7 @@ Vokabeltrainer.iml
 
 # Outputs and Binary Files
 /out
-/bin/
+/bin
 
 # macOS related stuff
 *.DS_Store
