@@ -5,8 +5,11 @@ import steuerung.DashboardSteuerung;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class Dashboard extends JPanel {
+@SuppressWarnings("serial")
+public final class Dashboard extends JPanel {
 
     /**
      * The Controller to this View
@@ -75,9 +78,13 @@ public class Dashboard extends JPanel {
         constraints.gridwidth = 2;
         final JButton abfrageBtn = new JButton();
         abfrageBtn.setText("Abfrage starten");
-        abfrageBtn.addActionListener((ignored) -> {
-            steuerung.abfrageGeklickt();
-        });
+        abfrageBtn.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		steuerung.abfrageGeklickt();
+        		super.mouseClicked(e);
+        	}
+		});;
         addComponent(abfrageBtn);
         constraints.gridx = 5;
         final JButton vokabelErstellerBtn = new JButton();

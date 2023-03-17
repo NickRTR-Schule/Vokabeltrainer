@@ -10,7 +10,7 @@ import org.junit.Test;
 import datenspeicherung.Datenbank;
 import datenspeicherung.Vokabel;
 
-public class DatenbankTest {
+public final class DatenbankTest {
 	Datenbank derSpeicher = new Datenbank();
 	
 	@Test

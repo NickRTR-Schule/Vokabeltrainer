@@ -11,7 +11,7 @@ import java.awt.*;
  * the Main Frame and with that Navigation
  * of this App.
  */
-public class MainFrameSteuerung {
+public final class MainFrameSteuerung {
 
     /**
      * The singleton Object

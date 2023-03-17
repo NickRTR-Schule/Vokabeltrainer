@@ -13,7 +13,8 @@ import java.util.Locale;
  * in a Form of its own
  * content Pane.
  */
-public class MainFrame extends JFrame {
+@SuppressWarnings("serial")
+public final class MainFrame extends JFrame {
 
     public MainFrame() {
         setValues();

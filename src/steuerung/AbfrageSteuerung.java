@@ -1,6 +1,6 @@
 package steuerung;
 
-public class AbfrageSteuerung {
+public final class AbfrageSteuerung {
 
     private final int numberVocs;
 

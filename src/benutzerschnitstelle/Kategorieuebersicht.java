@@ -10,7 +10,8 @@ import javax.swing.*;
  * the User created to manage and organize
  * his / her Vocabs
  */
-public class Kategorieuebersicht extends JPanel {
+@SuppressWarnings("serial")
+public final class Kategorieuebersicht extends JPanel {
 
     /**
      * The Controller to this View

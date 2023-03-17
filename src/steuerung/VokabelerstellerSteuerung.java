@@ -1,5 +1,5 @@
 package steuerung;
 
-public class VokabelerstellerSteuerung {
+public final class VokabelerstellerSteuerung {
 
 }

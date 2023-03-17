@@ -1,5 +1,5 @@
 package steuerung;
 
-public class StatistikSteuerung {
+public final class StatistikSteuerung {
 
 }
