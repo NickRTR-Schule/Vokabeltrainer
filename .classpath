@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="tests/" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="Driver/ucanaccess/commons-lang-2.6.jar">
+	<classpathentry kind="lib" path="Resources/Driver/ucanaccess/commons-lang-2.6.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="Driver/ucanaccess/commons-logging-1.1.1.jar">
+	<classpathentry kind="lib" path="Resources/Driver/ucanaccess/commons-logging-1.1.1.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="Driver/ucanaccess/hsqldb.jar">
+	<classpathentry kind="lib" path="Resources/Driver/ucanaccess/hsqldb.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="Driver/ucanaccess/jackcess-2.1.6.jar">
+	<classpathentry kind="lib" path="Resources/Driver/ucanaccess/jackcess-2.1.6.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="Driver/ucanaccess/ucanaccess-4.0.2.jar">
+	<classpathentry kind="lib" path="Resources/Driver/ucanaccess/ucanaccess-4.0.2.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
