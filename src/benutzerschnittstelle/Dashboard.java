@@ -1,6 +1,5 @@
 package benutzerschnittstelle;
 
-import benutzerschnittstelle.komponenten.CustomButton;
 import steuerung.DashboardSteuerung;
 
 import javax.swing.*;
@@ -82,7 +81,7 @@ public final class Dashboard extends JPanel
         constraints.gridx = 1;
         constraints.gridy = 2;
         constraints.gridwidth = 2;
-        final CustomButton abfrageBtn = new CustomButton("Abfrage starten");
+        final JButton abfrageBtn = new JButton("Abfrage starten");
         abfrageBtn.setAction(new AbstractAction()
         {
             @Override
@@ -93,7 +92,7 @@ public final class Dashboard extends JPanel
         });
         addComponent(abfrageBtn);
         constraints.gridx = 5;
-        final CustomButton vokabelErstellerBtn = new CustomButton("Vokabel erstellen");
+        final JButton vokabelErstellerBtn = new JButton("Vokabel erstellen");
         vokabelErstellerBtn.addActionListener((ignored) -> {
             steuerung.erstellerGecklickt();
         });
