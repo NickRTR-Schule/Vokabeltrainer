@@ -1,12 +1,8 @@
 package benutzerschnittstelle.komponenten;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Insets;
-
-import javax.swing.JButton;
+import javax.swing.*;
 import javax.swing.border.Border;
+import java.awt.*;
 
 /**
  * Default Class for all the Buttons used in this Project
@@ -17,12 +13,14 @@ import javax.swing.border.Border;
 public final class CustomButton extends JButton
 {
 
-	public CustomButton(String title)
-	{
-		setText(title);
-		setBackground(Color.RED);
-		setBorder(new RoundedBorder(25));
-	}
+    public CustomButton(String title)
+    {
+        setText(title);
+        setBackground(Color.RED);
+        setBorder(new RoundedBorder(25));
+        setOpaque(true);
+        setEnabled(true);
+    }
 }
 
 // Discussion from:
@@ -31,29 +29,29 @@ public final class CustomButton extends JButton
 class RoundedBorder implements Border
 {
 
-	private final int radius;
+    private final int radius;
 
-	public RoundedBorder(int radius)
-	{
-		this.radius = radius;
-	}
+    public RoundedBorder(int radius)
+    {
+        this.radius = radius;
+    }
 
-	@Override
-	public void paintBorder(Component c, Graphics g, int x, int y, int width,
-			int height)
-	{
-		g.drawRoundRect(x, y, width, height, radius, radius);
-	}
+    @Override
+    public void paintBorder(Component c, Graphics g, int x, int y, int width,
+                            int height)
+    {
+        g.drawRoundRect(x, y, width, height, radius, radius);
+    }
 
-	@Override
-	public Insets getBorderInsets(Component c)
-	{
-		return new Insets(radius, radius, radius, radius);
-	}
+    @Override
+    public Insets getBorderInsets(Component c)
+    {
+        return new Insets(radius, radius, radius, radius);
+    }
 
-	@Override
-	public boolean isBorderOpaque()
-	{
-		return false;
-	}
+    @Override
+    public boolean isBorderOpaque()
+    {
+        return false;
+    }
 }
