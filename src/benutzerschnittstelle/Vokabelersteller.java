@@ -4,8 +4,8 @@ import steuerung.VokabelerstellerSteuerung;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 /**
  * The Screen to add / create a new Vocabulary.
@@ -85,27 +85,19 @@ public final class Vokabelersteller extends JPanel
  * jump from one textfield to the
  * next one
  */
-final class CustomKeyListener implements KeyListener
+final class CustomKeyListener extends KeyAdapter
 {
-
-    @Override
-    public void keyTyped(KeyEvent e)
-    {
-        // Do nothing
-    }
 
     @Override
     public void keyPressed(KeyEvent e)
     {
-        if (e.isActionKey())
+        if (e.getKeyCode() == KeyEvent.VK_ENTER)
         {
-            // Next Text Field request Focus
+            final Object src = e.getSource();
+            if (src instanceof Component)
+            {
+                ((Component) src).transferFocus();
+            }
         }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e)
-    {
-        // Do nothing
     }
 }
