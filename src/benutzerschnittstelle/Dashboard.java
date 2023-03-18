@@ -1,10 +1,14 @@
 package benutzerschnittstelle;
 
+import benutzerschnittstelle.komponenten.StatistikPanel;
 import steuerung.DashboardSteuerung;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public final class Dashboard extends JPanel
@@ -72,11 +76,7 @@ public final class Dashboard extends JPanel
         constraints.gridheight = 1;
         constraints.weightx = 0.5;
         constraints.weighty = 0.5;
-        final JScrollPane statsScrollPane = new JScrollPane(
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        statsScrollPane.setWheelScrollingEnabled(true);
-        addComponent(statsScrollPane);
+        addComponent(createStats());
         constraints.gridx = 1;
         constraints.gridy = 2;
         constraints.gridwidth = 2;
@@ -88,7 +88,7 @@ public final class Dashboard extends JPanel
         constraints.gridx = 5;
         final JButton vokabelErstellerBtn = new JButton("Vokabel erstellen");
         vokabelErstellerBtn.addActionListener((ignored) -> {
-            steuerung.erstellerGecklickt();
+            steuerung.erstellerGeklickt();
         });
         addComponent(vokabelErstellerBtn);
         constraints.gridx = 0;
@@ -107,6 +107,54 @@ public final class Dashboard extends JPanel
         addComponent(alleKategorienPanel);
         constraints.gridy = 8;
         addComponent(alleKategorienBuilder());
+    }
+
+    /**
+     * Creates the Statistik Panel
+     *
+     * @return a JPanel with the Stats as Content
+     */
+    private JPanel createStats()
+    {
+        final JPanel statsPanel = new JPanel();
+        statsPanel.setLayout(new GridLayout(1, 3));
+        final StatistikPanel stats1 = new StatistikPanel();
+        stats1.setBorder(new BevelBorder(BevelBorder.RAISED));
+        stats1.add(new JLabel("Stats 1 Text"));
+        stats1.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                steuerung.statsGeklickt();
+            }
+        });
+        statsPanel.add(stats1);
+        final StatistikPanel stats2 = new StatistikPanel();
+        stats2.setBorder(new BevelBorder(BevelBorder.RAISED));
+        stats2.add(new JLabel("Stats 2 Text"));
+        stats2.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                steuerung.statsGeklickt();
+            }
+        });
+        statsPanel.add(stats2);
+        final StatistikPanel stats3 = new StatistikPanel();
+        stats3.setBorder(new BevelBorder(BevelBorder.RAISED));
+        stats3.add(new JLabel("Stats 3 Text"));
+        stats3.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                steuerung.statsGeklickt();
+            }
+        });
+        statsPanel.add(stats3);
+        return statsPanel;
     }
 
     /**

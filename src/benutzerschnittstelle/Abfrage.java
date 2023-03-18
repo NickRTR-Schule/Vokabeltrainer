@@ -19,17 +19,29 @@ public final class Abfrage extends JPanel
     public Abfrage()
     {
         steuerung = new AbfrageSteuerung();
-        build();
+        init();
     }
 
     public Abfrage(int numberVocs)
     {
         steuerung = new AbfrageSteuerung(numberVocs);
+        init();
+    }
+
+    private void init()
+    {
+        setValues();
         build();
+    }
+
+    private void setValues()
+    {
+        // TODO-js: set layout
+        setName("Abfrage");
     }
 
     private void build()
     {
-        add(new JButton("test"));
+        add(new JLabel(""));
     }
 }

@@ -60,6 +60,16 @@ public final class MainFrame extends JFrame
             case Statistik -> setContentPane(new Statistik());
             default -> setContentPane(new ErrorScreen());
         }
+        update();
+    }
+
+    /**
+     * Updates the Main Frame
+     * and all it's content
+     */
+    private void update()
+    {
+        revalidate();
         repaint();
     }
 

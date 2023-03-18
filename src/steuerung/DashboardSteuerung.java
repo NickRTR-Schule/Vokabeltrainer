@@ -1,13 +1,21 @@
 package steuerung;
 
-public final class DashboardSteuerung {
+public final class DashboardSteuerung
+{
 
-    public void abfrageGeklickt() {
+    public void abfrageGeklickt()
+    {
         MainFrameSteuerung.getInstance().openAbfrage();
     }
 
-    public void erstellerGecklickt() {
+    public void erstellerGeklickt()
+    {
         MainFrameSteuerung.getInstance().openErsteller();
+    }
+
+    public void statsGeklickt()
+    {
+        MainFrameSteuerung.getInstance().openStats();
     }
 
 }
