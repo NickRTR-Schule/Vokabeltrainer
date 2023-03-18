@@ -5,7 +5,6 @@ import steuerung.DashboardSteuerung;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public final class Dashboard extends JPanel
@@ -82,13 +81,8 @@ public final class Dashboard extends JPanel
         constraints.gridy = 2;
         constraints.gridwidth = 2;
         final JButton abfrageBtn = new JButton("Abfrage starten");
-        abfrageBtn.setAction(new AbstractAction()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                steuerung.abfrageGeklickt();
-            }
+        abfrageBtn.addActionListener((ignored) -> {
+            steuerung.abfrageGeklickt();
         });
         addComponent(abfrageBtn);
         constraints.gridx = 5;
