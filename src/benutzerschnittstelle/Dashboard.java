@@ -1,6 +1,8 @@
 package benutzerschnittstelle;
 
+import benutzerschnittstelle.komponenten.KategorieTile;
 import benutzerschnittstelle.komponenten.StatistikPanel;
+import datenspeicherung.Kategorie;
 import steuerung.DashboardSteuerung;
 
 import javax.swing.*;
@@ -9,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public final class Dashboard extends JPanel
@@ -159,10 +162,25 @@ public final class Dashboard extends JPanel
 
     /**
      * @return the Panel showing the last Kategorien
+     * last meaning the last 3
      */
     private JPanel letzteKategorienBuilder()
     {
         final JPanel panel = new JPanel();
+        // TODO-js: set Layout
+        final ArrayList<Kategorie> kats = steuerung.liesKategorien();
+        final int size;
+        if (kats.size() < 3)
+        {
+            size = kats.size();
+        } else
+        {
+            size = 3;
+        }
+        for (int i = 0; i < size; i++)
+        {
+            panel.add(new KategorieTile(steuerung.liesKategorien().get(i)));
+        }
         // for each loop over the last categories
         return panel;
     }
@@ -173,6 +191,11 @@ public final class Dashboard extends JPanel
     private JPanel alleKategorienBuilder()
     {
         final JPanel panel = new JPanel();
+        // TODO-js: set Layout
+        for (Kategorie kat : steuerung.liesKategorien())
+        {
+            panel.add(new KategorieTile(kat));
+        }
         // For each loop over all categories
         return panel;
     }

@@ -1,7 +1,14 @@
 package steuerung;
 
+import datenspeicherung.Datenbank;
+import datenspeicherung.Kategorie;
+
+import java.util.ArrayList;
+
 public final class DashboardSteuerung
 {
+
+    private final Datenbank db = new Datenbank();
 
     public void abfrageGeklickt()
     {
@@ -16,6 +23,19 @@ public final class DashboardSteuerung
     public void statsGeklickt()
     {
         MainFrameSteuerung.getInstance().openStats();
+    }
+
+    public ArrayList<Kategorie> liesKategorien()
+    {
+        ArrayList<Kategorie> list;
+        try
+        {
+            list = db.liesKategorien();
+        } catch (Exception ignored)
+        {
+            list = new ArrayList<>();
+        }
+        return list;
     }
 
 }
