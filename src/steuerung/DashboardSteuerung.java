@@ -12,7 +12,7 @@ public final class DashboardSteuerung
 
     public void abfrageGeklickt()
     {
-        MainFrameSteuerung.getInstance().openAbfrage();
+        MainFrameSteuerung.getInstance().openAbfrage(30);
     }
 
     public void erstellerGeklickt()

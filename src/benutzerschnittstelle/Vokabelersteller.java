@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
  * The Screen to add / create a new Vocabulary.
  */
 @SuppressWarnings("serial")
-public final class Vokabelersteller extends JPanel
+public final class Vokabelersteller extends JScrollPane
 {
 
     /**
@@ -31,26 +31,31 @@ public final class Vokabelersteller extends JPanel
         uebersetzungTxtField = new JTextField();
         lautschriftTxtField = new JTextField();
         setValues();
-        build();
     }
 
     private void setValues()
     {
-        setLayout(new GridLayout(10, 1));
+        setLayout(new ScrollPaneLayout());
+        setViewportView(build());
         setName("Vokabel Ersteller");
     }
 
-    private void build()
+    private JPanel build()
     {
-        add(new JLabel("Wort"));
+        final JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(10, 1));
+        panel.add(new JLabel("Wort"));
         wortTxtField.addKeyListener(new CustomKeyListener());
-        add(wortTxtField);
-        add(new JLabel("Uebersetzung"));
+        panel.add(wortTxtField);
+        panel.add(new JLabel("Uebersetzung"));
         uebersetzungTxtField.addKeyListener(new CustomKeyListener());
-        add(uebersetzungTxtField);
-        add(btnPanel());
+        panel.add(uebersetzungTxtField);
+        panel.add(btnPanel());
+        panel.add(new JLabel("Lautschrift"));
         lautschriftTxtField.addKeyListener(new CustomKeyListener());
-        add(lautschriftTxtField);
+        panel.add(lautschriftTxtField);
+        wortTxtField.requestFocus();
+        return panel;
     }
 
     private JPanel btnPanel()

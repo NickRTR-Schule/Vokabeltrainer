@@ -102,5 +102,6 @@ public final class MainFrame extends JFrame
                     break;
             }
         }
+        update();
     }
 }

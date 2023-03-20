@@ -1,6 +1,7 @@
 package benutzerschnittstelle;
 
 import benutzerschnittstelle.komponenten.KategorieTile;
+import benutzerschnittstelle.komponenten.RoundedBorder;
 import benutzerschnittstelle.komponenten.StatistikPanel;
 import datenspeicherung.Kategorie;
 import steuerung.DashboardSteuerung;
@@ -134,7 +135,7 @@ public final class Dashboard extends JPanel
         });
         statsPanel.add(stats1);
         final StatistikPanel stats2 = new StatistikPanel();
-        stats2.setBorder(new BevelBorder(BevelBorder.RAISED));
+        stats2.setBorder(new RoundedBorder(25));
         stats2.add(new JLabel("Stats 2 Text"));
         stats2.addMouseListener(new MouseAdapter()
         {
