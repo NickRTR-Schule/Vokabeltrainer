@@ -170,19 +170,10 @@ public final class Dashboard extends JPanel
         final JPanel panel = new JPanel();
         // TODO-js: set Layout
         final ArrayList<Kategorie> kats = steuerung.liesKategorien();
-        final int size;
-        if (kats.size() < 3)
-        {
-            size = kats.size();
-        } else
-        {
-            size = 3;
-        }
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < Math.min(kats.size(), 3); i++)
         {
             panel.add(new KategorieTile(steuerung.liesKategorien().get(i)));
         }
-        // for each loop over the last categories
         return panel;
     }
 
@@ -197,7 +188,6 @@ public final class Dashboard extends JPanel
         {
             panel.add(new KategorieTile(kat));
         }
-        // For each loop over all categories
         return panel;
     }
 
