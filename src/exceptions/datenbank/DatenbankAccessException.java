@@ -14,6 +14,6 @@ public class DatenbankAccessException extends Exception
     @Override
     public String getMessage()
     {
-        return "Fehler beim " + type.name() + "der Datenbank";
+        return String.format("Fehler beim %s der Datenbank", type.name());
     }
 }

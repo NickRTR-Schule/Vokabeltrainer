@@ -12,6 +12,6 @@ public class DatenbankSchreibException extends Exception
     @Override
     public String getMessage()
     {
-        return "Fehler beim Speichern der " + typ.name();
+        return String.format("Fehler beim Schreiben der %s", typ.name());
     }
 }

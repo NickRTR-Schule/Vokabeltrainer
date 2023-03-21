@@ -12,6 +12,6 @@ public class DatenbankLeseException extends Exception
     @Override
     public String getMessage()
     {
-        return super.getLocalizedMessage();
+        return String.format("Fehler beim Lesen der %s", typ.name());
     }
 }
