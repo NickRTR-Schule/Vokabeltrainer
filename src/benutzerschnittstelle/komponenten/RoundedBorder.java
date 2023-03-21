@@ -3,14 +3,27 @@ package benutzerschnittstelle.komponenten;
 import javax.swing.border.Border;
 import java.awt.*;
 
+/**
+ * The custom border class
+ * to implement a rounded border
+ */
 public final class RoundedBorder implements Border
 {
-
+    /**
+     * The Radius of this
+     * rounded border, standardly
+     * implemented with 25
+     */
     private final int radius;
 
     public RoundedBorder(int radius)
     {
         this.radius = radius;
+    }
+
+    public RoundedBorder()
+    {
+        this(25);
     }
 
     @Override
@@ -28,6 +41,6 @@ public final class RoundedBorder implements Border
     @Override
     public boolean isBorderOpaque()
     {
-        return false;
+        return true;
     }
 }

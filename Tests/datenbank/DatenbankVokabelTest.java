@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public final class DatenbankTest {
+public final class DatenbankVokabelTest
+{
     Datenbank derSpeicher = new Datenbank();
 
     @Test
-    public void Test() throws Exception {
+    public void test() throws Exception
+    {
         derSpeicher.vokabelHinzufuegen("duck", "Ente", null, null, null, null);
 
         ArrayList<Vokabel> vokabeln = derSpeicher.liesVokabeln();

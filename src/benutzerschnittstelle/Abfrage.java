@@ -18,8 +18,7 @@ public final class Abfrage extends JPanel
 
     public Abfrage()
     {
-        steuerung = new AbfrageSteuerung();
-        init();
+        this(30);
     }
 
     public Abfrage(int numberVocs)
