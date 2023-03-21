@@ -30,7 +30,7 @@ public final class Dashboard extends JPanel
      */
     public Dashboard()
     {
-        steuerung = new DashboardSteuerung();
+        steuerung = new DashboardSteuerung(this);
         setValues();
         build();
     }

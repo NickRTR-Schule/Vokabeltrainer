@@ -1,6 +1,5 @@
 package benutzerschnittstelle;
 
-import datenspeicherung.Vokabel;
 import exceptions.EndOfAbfrageException;
 import steuerung.AbfrageSteuerung;
 
@@ -24,7 +23,6 @@ public final class Abfrage extends JPanel
 
     private final JTextField uebersetzungField;
 
-    private Vokabel vok;
 
     public Abfrage()
     {
@@ -33,7 +31,7 @@ public final class Abfrage extends JPanel
 
     public Abfrage(int numberVocs)
     {
-        steuerung = new AbfrageSteuerung(numberVocs);
+        steuerung = new AbfrageSteuerung(this, numberVocs);
         // Init Components
         wortLabel = new JLabel();
         uebersetzungField = new JTextField();
@@ -58,13 +56,7 @@ public final class Abfrage extends JPanel
             {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                 {
-                    if (pruefeEingabe())
-                    {
-
-                    } else
-                    {
-
-                    }
+                    steuerung.pruefeEingabe(uebersetzungField.getText());
                 }
             }
         });
@@ -74,15 +66,21 @@ public final class Abfrage extends JPanel
     {
         try
         {
-            vok = steuerung.naechsteVokabel();
+            wortLabel.setText(steuerung.naechsteVokabel().liesWort());
         } catch (EndOfAbfrageException ignored)
         {
         }
-        wortLabel.setText(vok.liesWort());
+
     }
 
-    private boolean pruefeEingabe()
+    public void vokFalsch()
     {
-        return uebersetzungField.getText().equals(vok.liesUebersetzung());
+        // TODO-js: Zeige Meldung
+    }
+
+    public void vokRichtig()
+    {
+        // TODO-js: Zeige Meldung
+        frageAb();
     }
 }

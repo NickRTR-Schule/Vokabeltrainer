@@ -1,5 +1,6 @@
 package steuerung;
 
+import benutzerschnittstelle.Dashboard;
 import datenspeicherung.Datenbank;
 import datenspeicherung.Kategorie;
 
@@ -9,6 +10,13 @@ public final class DashboardSteuerung
 {
 
     private final Datenbank db = new Datenbank();
+
+    private final Dashboard dashboard;
+
+    public DashboardSteuerung(Dashboard dashboard)
+    {
+        this.dashboard = dashboard;
+    }
 
     public void abfrageGeklickt()
     {

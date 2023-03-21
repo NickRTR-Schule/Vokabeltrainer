@@ -131,9 +131,10 @@ public final class Datenbank
         return ergebnis;
     }
 
-    public void vokabelHinzufuegen(String wort, String uebersetzung, byte[] abbildung, byte[] aussprache, String lautschrift, String verwendungshinweis) throws DatenbankAccessException, DatenbankSchreibException
+    public void vokabelHinzufuegen(String wort, String uebersetzung, byte[] abbildung, byte[] aussprache, String lautschrift, String verwendungshinweis) throws DatenbankAccessException, DatenbankSchreibException, DuplicateVokabelException
     {
         oeffneDatenbank();
+        // TODO-nick: Pruefe ob es die Vokabel schon gibt und throw DuplicateVokabelException
 
         // DB-Abfrage als String
         String sqlStmt = "INSERT INTO vokabel (wort, uebersetzung, abbildung, aussprache, lautschrift, verwendungshinweis) ";
@@ -184,6 +185,7 @@ public final class Datenbank
     }
 
     // TODO: Vokabeln ändern
+    // TODO: checken ob Vokabel schon existiert
 
     public ArrayList<Kategorie> liesKategorien() throws DatenbankAccessException, DatenbankLeseException
     {
