@@ -1,5 +1,7 @@
 package datenspeicherung;
 
+import exceptions.datenbank.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -9,7 +11,7 @@ public final class Datenbank
     private PreparedStatement stmt; // DB-Anfrage (Query)
     private ResultSet rs; // mögliches Ergebnis einer DB-Abfrage
 
-    private void oeffneDatenbank() throws Exception
+    private void oeffneDatenbank() throws DatenbankAccessException
     {
         try
         {
@@ -21,11 +23,11 @@ public final class Datenbank
                     "jdbc:ucanaccess://Vokabeltrainer.accdb"); // (Zu Testzwecken)
         } catch (SQLException e)
         {
-            throw new Exception("Fehler beim Öffnen der Datenbank: " + e.getLocalizedMessage());
+            throw new DatenbankAccessException(DatenbankAccessType.oeffnen);
         }
     }
 
-    private void schliesseDatenbank() throws Exception
+    private void schliesseDatenbank() throws DatenbankAccessException
     {
         try
         {
@@ -40,11 +42,11 @@ public final class Datenbank
             con.close();
         } catch (SQLException e)
         {
-            throw new Exception("Fehler beim Schließen der Datenbank!");
+            throw new DatenbankAccessException(DatenbankAccessType.schliessen);
         }
     }
 
-    public ArrayList<Vokabel> liesVokabeln() throws Exception
+    public ArrayList<Vokabel> liesVokabeln() throws DatenbankAccessException, DatenbankLeseException
     {
         oeffneDatenbank();
         ArrayList<Vokabel> ergebnis = new ArrayList<>();
@@ -75,14 +77,14 @@ public final class Datenbank
             }
         } catch (SQLException e)
         {
-            throw new Exception("Fehler beim Lesen der Vokabeln aus der Datenbank: " + e.getLocalizedMessage());
+            throw new DatenbankLeseException(DatenbankObject.vokabel);
         }
 
         schliesseDatenbank();
         return ergebnis;
     }
 
-    public Vokabel liesVokabel(String wort, String uebersetzung) throws Exception
+    public Vokabel liesVokabel(String wort, String uebersetzung) throws DatenbankAccessException, DatenbankLeseException
     {
         oeffneDatenbank();
 
@@ -118,18 +120,18 @@ public final class Datenbank
 
             if (ergebnis == null)
             {
-                throw new Exception("Keine passende Vokabel gefunden.");
+                throw new DatenbankLeseException(DatenbankObject.vokabel);
             }
         } catch (SQLException e)
         {
-            throw new Exception("Fehler beim Lesen der Vokabel aus der Datenbank: " + e.getLocalizedMessage());
+            throw new DatenbankLeseException(DatenbankObject.vokabel);
         }
 
         schliesseDatenbank();
         return ergebnis;
     }
 
-    public void vokabelHinzufuegen(String wort, String uebersetzung, byte[] abbildung, byte[] aussprache, String lautschrift, String verwendungshinweis) throws Exception
+    public void vokabelHinzufuegen(String wort, String uebersetzung, byte[] abbildung, byte[] aussprache, String lautschrift, String verwendungshinweis) throws DatenbankAccessException, DatenbankSchreibException
     {
         oeffneDatenbank();
 
@@ -151,13 +153,13 @@ public final class Datenbank
             stmt.executeUpdate();
         } catch (SQLException e)
         {
-            throw new Exception("Fehler beim Speicher der Vokabeln in die Datenbank: " + e.getLocalizedMessage());
+            throw new DatenbankSchreibException(DatenbankObject.vokabel);
         }
 
         schliesseDatenbank();
     }
 
-    public void loescheVokabel(String wort, String uebersetzung) throws Exception
+    public void loescheVokabel(String wort, String uebersetzung) throws DatenbankAccessException, DatenbankSchreibException
     {
         oeffneDatenbank();
 
@@ -175,7 +177,7 @@ public final class Datenbank
             stmt.executeUpdate();
         } catch (SQLException e)
         {
-            throw new Exception("Fehler beim Löschen der Vokabel aus der Datenbank: " + e.getLocalizedMessage());
+            throw new DatenbankSchreibException(DatenbankObject.vokabel);
         }
 
         schliesseDatenbank();
@@ -183,7 +185,7 @@ public final class Datenbank
 
     // TODO: Vokabeln ändern
 
-    public ArrayList<Kategorie> liesKategorien() throws Exception
+    public ArrayList<Kategorie> liesKategorien() throws DatenbankAccessException, DatenbankLeseException
     {
         oeffneDatenbank();
         ArrayList<Kategorie> ergebnis = new ArrayList<>();
@@ -210,7 +212,7 @@ public final class Datenbank
             }
         } catch (SQLException e)
         {
-            throw new Exception("Fehler beim Lesen der Vokabeln aus der Datenbank: " + e.getLocalizedMessage());
+            throw new DatenbankLeseException(DatenbankObject.kategorie);
         }
 
         schliesseDatenbank();
