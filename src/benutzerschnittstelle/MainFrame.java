@@ -1,5 +1,6 @@
 package benutzerschnittstelle;
 
+import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.navigation.UIScreens;
 import datenspeicherung.Kategorie;
 
@@ -62,10 +63,10 @@ public final class MainFrame extends JFrame
         switch (ui)
         {
             case Dashboard -> setContentPane(new Dashboard());
-            case Abfrage -> setContentPane(new Abfrage());
-            case Ersteller -> setContentPane(new Vokabelersteller());
-            case Statistik -> setContentPane(new Statistik());
-            default -> setContentPane(new ErrorScreen());
+            case Abfrage -> setContentPane(new CustomPanel(new Abfrage()));
+            case Ersteller -> setContentPane(new CustomPanel(new Vokabelersteller()));
+            case Statistik -> setContentPane(new CustomPanel(new Statistik()));
+            default -> setContentPane(new CustomPanel(new ErrorScreen()));
         }
         update();
     }
@@ -95,17 +96,17 @@ public final class MainFrame extends JFrame
         {
             switch (ui)
             {
-                case Abfrage:
+                case Abfrage ->
+                {
                     final int numberVocs = (int) args[0];
-                    setContentPane(new Abfrage(numberVocs));
-                    break;
-                case Kategorieeuebersicht:
+                    setContentPane(new CustomPanel(new Abfrage(numberVocs)));
+                }
+                case Kategorieeuebersicht ->
+                {
                     final Kategorie kategorie = (Kategorie) args[0];
-                    setContentPane(new Kategorieuebersicht(kategorie));
-                    break;
-                default:
-                    setContentPane(new ErrorScreen());
-                    break;
+                    setContentPane(new CustomPanel(new Kategorieuebersicht(kategorie)));
+                }
+                default -> setContentPane(new CustomPanel(new ErrorScreen()));
             }
         }
         update();
