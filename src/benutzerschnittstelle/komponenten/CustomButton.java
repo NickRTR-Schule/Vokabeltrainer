@@ -1,59 +1,62 @@
 package benutzerschnittstelle.komponenten;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Insets;
+import benutzerschnittstelle.MainFrame;
 
-import javax.swing.JButton;
-import javax.swing.border.Border;
+import javax.swing.*;
+import java.awt.*;
 
-/**
- * Default Class for all the Buttons used in this Project
- *
- * @author jules
- */
-@SuppressWarnings("serial")
 public final class CustomButton extends JButton
 {
 
+	private final String title;
+
+	public CustomButton(String title, String tooltip)
+	{
+		this.title = title;
+		setValues(tooltip);
+		build();
+	}
+
 	public CustomButton(String title)
 	{
+		this(title, null);
+	}
+
+	private void setValues(String tooltip)
+	{
 		setText(title);
-		setBackground(Color.RED);
-		setBorder(new RoundedBorder(25));
+		setName("Button: " + title);
+		setToolTipText(tooltip);
 	}
-}
 
-// Discussion from:
-// https://stackoverflow.com/questions/423950/rounded-swing-jbutton-using-java
-// Answer from: https://stackoverflow.com/a/3634480/16376071
-class RoundedBorder implements Border
-{
-
-	private final int radius;
-
-	public RoundedBorder(int radius)
+	private void build()
 	{
-		this.radius = radius;
+		setOpaque(true);
+		setEnabled(true);
+		setFocusable(true);
 	}
 
 	@Override
-	public void paintBorder(Component c, Graphics g, int x, int y, int width,
-			int height)
+	public void paint(Graphics g)
 	{
-		g.drawRoundRect(x, y, width, height, radius, radius);
+		g.setColor(Color.blue);
+		g.fillRoundRect(0, 0, getWidth(), getHeight(), 25, 25);
+		g.setColor(Color.white);
+		drawTitle(g);
 	}
 
-	@Override
-	public Insets getBorderInsets(Component c)
+	// Inspiration by:
+	// Discussion from: https://stackoverflow.com/questions/27706197/how-can-i-center-graphics-drawstring-in-java
+	// Answer here: https://stackoverflow.com/a/27740330/16376071
+	public void drawTitle(Graphics g)
 	{
-		return new Insets(radius, radius, radius, radius);
-	}
-
-	@Override
-	public boolean isBorderOpaque()
-	{
-		return false;
+		// Get the FontMetrics
+		FontMetrics metrics = g.getFontMetrics(MainFrame.liesFont());
+		// Determine the X coordinate for the text
+		int x = (getWidth() - metrics.stringWidth(title)) / 2;
+		// Determine the Y coordinate for the text (note we add the ascent, as in java 2d 0 is top of the screen)
+		int y = (getHeight() - metrics.getHeight()) / 2 + metrics.getAscent();
+		// Draw the String
+		g.drawString(title, x, y);
 	}
 }

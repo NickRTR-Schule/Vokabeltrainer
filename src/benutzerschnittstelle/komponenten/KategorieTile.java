@@ -1,15 +1,18 @@
 package benutzerschnittstelle.komponenten;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import datenspeicherung.Kategorie;
+import steuerung.MainFrameSteuerung;
 
 /**
  * A Tile representing a single Kategorie, for Example in the Dashboard
  * Kategorie Section
  */
-@SuppressWarnings("serial")
 public final class KategorieTile extends JPanel
 {
 
@@ -40,5 +43,14 @@ public final class KategorieTile extends JPanel
 	private void build()
 	{
 		add(new JLabel(kategorie.liesName()));
+		addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				MainFrameSteuerung.getInstance()
+						.openKategorieuebersicht(kategorie);
+			}
+		});
 	}
 }

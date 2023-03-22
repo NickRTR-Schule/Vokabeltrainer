@@ -1,5 +1,15 @@
 package steuerung;
 
-public final class VokabelerstellerSteuerung {
+import benutzerschnittstelle.Vokabelersteller;
+
+public final class VokabelerstellerSteuerung
+{
+
+    private final Vokabelersteller vokabelersteller;
+
+    public VokabelerstellerSteuerung(Vokabelersteller ui)
+    {
+        vokabelersteller = ui;
+    }
 
 }

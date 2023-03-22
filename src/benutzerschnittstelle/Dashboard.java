@@ -6,21 +6,20 @@ import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 
 import benutzerschnittstelle.komponenten.CustomButton;
+import benutzerschnittstelle.komponenten.KategorieTile;
+import benutzerschnittstelle.komponenten.StatistikPanel;
+import datenspeicherung.Kategorie;
 import steuerung.DashboardSteuerung;
 
-@SuppressWarnings("serial")
 public final class Dashboard extends JPanel
 {
 
@@ -39,7 +38,7 @@ public final class Dashboard extends JPanel
 	 */
 	public Dashboard()
 	{
-		steuerung = new DashboardSteuerung();
+		steuerung = new DashboardSteuerung(this);
 		setValues();
 		build();
 	}
@@ -87,30 +86,21 @@ public final class Dashboard extends JPanel
 		constraints.gridheight = 1;
 		constraints.weightx = 0.5;
 		constraints.weighty = 0.5;
-		final JScrollPane statsScrollPane = new JScrollPane(
-				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		statsScrollPane.setWheelScrollingEnabled(true);
-		addComponent(statsScrollPane);
+		addComponent(createStats());
 		constraints.gridx = 1;
 		constraints.gridy = 2;
 		constraints.gridwidth = 2;
-		final CustomButton abfrageBtn = new CustomButton("Abfrage starten");
-		abfrageBtn.addMouseListener(new MouseAdapter()
-		{
-			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				steuerung.abfrageGeklickt();
-				super.mouseClicked(e);
-			}
+		final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
+				"Starte eine Abfrage");
+		abfrageBtn.addActionListener((ignored) -> {
+			steuerung.abfrageGeklickt();
 		});
 		addComponent(abfrageBtn);
 		constraints.gridx = 5;
-		final JButton vokabelErstellerBtn = new JButton();
-		vokabelErstellerBtn.setText("Vokabel erstellen");
+		final CustomButton vokabelErstellerBtn = new CustomButton(
+				"Vokabel erstellen", "Erstelle eine neue Vokabel");
 		vokabelErstellerBtn.addActionListener((ignored) -> {
-			steuerung.erstellerGecklickt();
+			steuerung.erstellerGeklickt();
 		});
 		addComponent(vokabelErstellerBtn);
 		constraints.gridx = 0;
@@ -132,12 +122,38 @@ public final class Dashboard extends JPanel
 	}
 
 	/**
-	 * @return the Panel showing the last Kategorien
+	 * Creates the Statistik Panel
+	 *
+	 * @return a JPanel with the Stats as Content
+	 */
+	private JPanel createStats()
+	{
+		final JPanel statsPanel = new JPanel();
+		statsPanel.setLayout(new GridLayout(1, 3));
+		final StatistikPanel stats1 = new StatistikPanel(
+				new JLabel("Stats 1 Text"));
+		statsPanel.add(stats1);
+		final StatistikPanel stats2 = new StatistikPanel(
+				new JLabel("Stats 2 Text"));
+		statsPanel.add(stats2);
+		final StatistikPanel stats3 = new StatistikPanel(
+				new JLabel("Stats 3 Text"));
+		statsPanel.add(stats3);
+		return statsPanel;
+	}
+
+	/**
+	 * @return the Panel showing the last Kategorien last meaning the last 3
 	 */
 	private JPanel letzteKategorienBuilder()
 	{
 		final JPanel panel = new JPanel();
-		// for each loop over the last categories
+		// TODO-js: set Layout
+		final ArrayList<Kategorie> kats = steuerung.liesKategorien();
+		for (int i = 0; i < Math.min(kats.size(), 3); i++)
+		{
+			panel.add(new KategorieTile(steuerung.liesKategorien().get(i)));
+		}
 		return panel;
 	}
 
@@ -147,7 +163,11 @@ public final class Dashboard extends JPanel
 	private JPanel alleKategorienBuilder()
 	{
 		final JPanel panel = new JPanel();
-		// For each loop over all categories
+		// TODO-js: set Layout
+		for (Kategorie kat : steuerung.liesKategorien())
+		{
+			panel.add(new KategorieTile(kat));
+		}
 		return panel;
 	}
 
