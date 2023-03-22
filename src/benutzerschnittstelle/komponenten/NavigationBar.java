@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * A Navigation Bar
@@ -30,6 +32,7 @@ public class NavigationBar extends JPanel
     private void build()
     {
         final JButton btn = new JButton();
+        btn.setIcon(iconLaden());
         btn.setText("Back"); // TODO-js: change to icon
         btn.addMouseListener(new MouseAdapter()
         {
@@ -43,5 +46,34 @@ public class NavigationBar extends JPanel
         add(btn);
     }
 
+    /**
+     * Lädt ein bestimmtes Icon und gibt es als ImageIcon zurück. Als Name
+     * reicht der Dateiname, wenn sie im Ordner assets liegen.
+     *
+     * @return das Icon
+     */
+    private ImageIcon iconLaden()
+    {
+        // TODO: read here: https://stackoverflow.com/questions/50883802/how-to-rotate-an-imageicon-in-java
+        // Icon laden
+        final InputStream stream = NavigationBar.class.getClassLoader()
+                .getResourceAsStream("KategorieArrow.png");
+        final ImageIcon icon;
+
+        try
+        {
+            icon = new ImageIcon(stream.readAllBytes());
+            final Image image = icon.getImage();
+            final Image scaledInstance = image.getScaledInstance(25, 25,
+                    Image.SCALE_DEFAULT);
+            icon.setImage(scaledInstance);
+            return icon;
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+            return new ImageIcon();
+        }
+
+    }
 
 }
