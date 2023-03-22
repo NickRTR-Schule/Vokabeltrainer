@@ -1,19 +1,18 @@
 package exceptions.datenbank;
 
-
 public class DatenbankAccessException extends Exception
 {
 
-    private final DatenbankAccessType type;
+	private final DatenbankAccessType type;
 
-    public DatenbankAccessException(DatenbankAccessType type)
-    {
-        this.type = type;
-    }
+	public DatenbankAccessException(DatenbankAccessType type)
+	{
+		this.type = type;
+	}
 
-    @Override
-    public String getMessage()
-    {
-        return String.format("Fehler beim %s der Datenbank", type.name());
-    }
+	@Override
+	public String getMessage()
+	{
+		return String.format("Fehler beim %s der Datenbank", type.name());
+	}
 }

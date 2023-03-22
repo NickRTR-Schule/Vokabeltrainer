@@ -1,19 +1,23 @@
 package benutzerschnittstelle.komponenten;
 
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicButtonUI;
-import java.awt.*;
-import java.awt.geom.Ellipse2D;
+import benutzerschnittstelle.MainFrame;
 
-public class CustomButton extends JButton
+import javax.swing.*;
+import java.awt.*;
+
+public final class CustomButton extends JButton
 {
+
+    private final String title;
+
     public CustomButton(String title, String tooltip)
     {
-        setValues(title, tooltip);
+        this.title = title;
+        setValues(tooltip);
         build();
     }
 
-    private void setValues(String title, String tooltip)
+    private void setValues(String tooltip)
     {
         setText(title);
         setName("Button: " + title);
@@ -23,25 +27,31 @@ public class CustomButton extends JButton
     private void build()
     {
         setOpaque(true);
-        setBackground(Color.red);
         setEnabled(true);
         setFocusable(true);
-        setUI(new BasicButtonUI()
-        {
-            @Override
-            public void update(Graphics g, JComponent c)
-            {
-                g.setColor(Color.red);
-                g.setClip(new Ellipse2D.Float());
-                paint(g, c);
-            }
-        });
     }
 
     @Override
-    protected void paintBorder(Graphics g)
+    public void paint(Graphics g)
     {
-        g.setColor(Color.green);
-        g.drawRoundRect(0, 0, getWidth(), getHeight(), 25, 25);
+        g.setColor(Color.blue);
+        g.fillRoundRect(0, 0, getWidth(), getHeight(), 25, 25);
+        g.setColor(Color.white);
+        drawTitle(g);
+    }
+
+    // Inspiration by:
+    // Discussion from: https://stackoverflow.com/questions/27706197/how-can-i-center-graphics-drawstring-in-java
+    // Answer here: https://stackoverflow.com/a/27740330/16376071
+    public void drawTitle(Graphics g)
+    {
+        // Get the FontMetrics
+        FontMetrics metrics = g.getFontMetrics(MainFrame.liesFont());
+        // Determine the X coordinate for the text
+        int x = (getWidth() - metrics.stringWidth(title)) / 2;
+        // Determine the Y coordinate for the text (note we add the ascent, as in java 2d 0 is top of the screen)
+        int y = (getHeight() - metrics.getHeight()) / 2 + metrics.getAscent();
+        // Draw the String
+        g.drawString(title, x, y);
     }
 }

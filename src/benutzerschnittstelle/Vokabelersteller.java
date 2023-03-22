@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 /**
  * The Screen to add / create a new Vocabulary.
  */
-@SuppressWarnings("serial")
 public final class Vokabelersteller extends JScrollPane
 {
 
@@ -26,7 +25,7 @@ public final class Vokabelersteller extends JScrollPane
 
     public Vokabelersteller()
     {
-        steuerung = new VokabelerstellerSteuerung();
+        steuerung = new VokabelerstellerSteuerung(this);
         wortTxtField = new JTextField();
         uebersetzungTxtField = new JTextField();
         lautschriftTxtField = new JTextField();
@@ -86,9 +85,7 @@ public final class Vokabelersteller extends JScrollPane
 }
 
 /**
- * Custom Key Listener to
- * jump from one textfield to the
- * next one
+ * Custom Key Listener to jump from one textfield to the next one
  */
 final class CustomKeyListener extends KeyAdapter
 {

@@ -11,14 +11,20 @@ import java.util.Locale;
  * The Frame containing the other Screens as Panels in a Form of its own content
  * Pane.
  */
-@SuppressWarnings("serial")
 public final class MainFrame extends JFrame
 {
+
+    private static final Font font = new Font("Roboto", Font.PLAIN, 12);
 
     public MainFrame()
     {
         setValues();
         requestFocus();
+    }
+
+    public static Font liesFont()
+    {
+        return font;
     }
 
     /**
@@ -42,6 +48,7 @@ public final class MainFrame extends JFrame
         setName("Main Frame");
         setUndecorated(false);
         setVisible(true);
+        setFont(font);
     }
 
     /**
@@ -64,8 +71,7 @@ public final class MainFrame extends JFrame
     }
 
     /**
-     * Updates the Main Frame
-     * and all it's content
+     * Updates the Main Frame and all it's content
      */
     private void update()
     {
