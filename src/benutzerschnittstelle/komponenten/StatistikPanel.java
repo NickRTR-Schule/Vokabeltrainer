@@ -13,16 +13,19 @@ import java.awt.event.MouseEvent;
  */
 public final class StatistikPanel extends JPanel
 {
+
+    private final Component component;
+
     public StatistikPanel(Component content)
     {
-        build(content);
+        component = content;
+        build();
     }
 
-    private void build(Component content)
+    private void build()
     {
         setLayout(new GridLayout(1, 1));
-        setBorder(new RoundedBorder());
-        add(content);
+        add(component);
         addMouseListener(new MouseAdapter()
         {
             @Override
@@ -31,5 +34,17 @@ public final class StatistikPanel extends JPanel
                 MainFrameSteuerung.getInstance().openStats();
             }
         });
+    }
+
+    @Override
+    public void paint(Graphics g)
+    {
+        g.setColor(Color.green);
+        g.fillRoundRect(0, 0, getWidth(), getHeight(), 25, 25);
+        g.setColor(Color.white);
+        if (component instanceof JLabel)
+        {
+            CustomPainter.drawTitle(this, g, ((JLabel) component).getText());
+        }
     }
 }
