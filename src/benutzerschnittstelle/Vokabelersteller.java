@@ -61,6 +61,7 @@ public final class Vokabelersteller extends JScrollPane
     {
         // TODO-js: Work on layout
         final JPanel panel = new JPanel();
+        setBorder(BorderFactory.createLineBorder(Color.blue));
         final GridBagLayout layout = new GridBagLayout();
         final GridBagConstraints constraints = new GridBagConstraints();
         layout.setConstraints(this, constraints);

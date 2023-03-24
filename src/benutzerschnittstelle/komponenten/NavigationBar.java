@@ -23,6 +23,7 @@ public class NavigationBar extends JPanel
 
     public NavigationBar()
     {
+        super(new FlowLayout(FlowLayout.LEFT));
         setValues();
         build();
     }
@@ -36,7 +37,7 @@ public class NavigationBar extends JPanel
     {
         final JButton btn = new JButton();
         btn.setIcon(iconLaden());
-        btn.setText("Back"); // TODO-js: change to icon
+        btn.setText("Back");
         btn.addMouseListener(new MouseAdapter()
         {
             @Override
@@ -82,6 +83,7 @@ public class NavigationBar extends JPanel
     // Code from: https://stackoverflow.com/a/50884149/16376071
     public ImageIcon rotate(BufferedImage image)
     {
+        // TODO: change to rotated image
         // Calculate the new size of the image based on the angle of rotaion
         final double radians = Math.toRadians(90);
         final double sin = Math.abs(Math.sin(radians));
