@@ -12,11 +12,11 @@ public class CustomPainter
     public static void drawTitle(Component component, Graphics g, String title)
     {
         // Get the FontMetrics
-        FontMetrics metrics = g.getFontMetrics(MainFrame.liesFont());
+        final FontMetrics metrics = g.getFontMetrics(MainFrame.liesFont());
         // Determine the X coordinate for the text
-        int x = (component.getWidth() - metrics.stringWidth(title)) / 2;
+        final int x = (component.getWidth() - metrics.stringWidth(title)) / 2;
         // Determine the Y coordinate for the text (note we add the ascent, as in java 2d 0 is top of the screen)
-        int y = (component.getHeight() - metrics.getHeight()) / 2 + metrics.getAscent();
+        final int y = (component.getHeight() - metrics.getHeight()) / 2 + metrics.getAscent();
         // Draw the String
         g.drawString(title, x, y);
     }

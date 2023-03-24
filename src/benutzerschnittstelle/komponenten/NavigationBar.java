@@ -62,6 +62,7 @@ public class NavigationBar extends JPanel
 
         try
         {
+            assert stream != null;
             icon = new ImageIcon(stream.readAllBytes());
             final Image image = icon.getImage();
             final Image scaledInstance = image.getScaledInstance(25, 25,

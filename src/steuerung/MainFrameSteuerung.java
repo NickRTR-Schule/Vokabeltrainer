@@ -58,11 +58,9 @@ public final class MainFrameSteuerung
     /**
      * Navigates to the Vokabel Abfrage Screen of this App
      */
-    public void openAbfrage(int numberVocs)
+    public void openAbfrage()
     {
-        final Object[] args = new Object[1];
-        args[0] = numberVocs;
-        mainFrame.open(UIScreens.Abfrage, args);
+        mainFrame.open(UIScreens.Abfrage);
     }
 
     /**

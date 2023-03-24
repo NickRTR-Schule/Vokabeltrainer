@@ -7,6 +7,7 @@ import datenspeicherung.Kategorie;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * The Frame containing the other Screens as Panels in a Form of its own content
@@ -94,19 +95,13 @@ public final class MainFrame extends JFrame
             open(ui);
         } else
         {
-            switch (ui)
+            if (Objects.requireNonNull(ui) == UIScreens.Kategorieeuebersicht)
             {
-                case Abfrage ->
-                {
-                    final int numberVocs = (int) args[0];
-                    setContentPane(new CustomPanel(new Abfrage(numberVocs)));
-                }
-                case Kategorieeuebersicht ->
-                {
-                    final Kategorie kategorie = (Kategorie) args[0];
-                    setContentPane(new CustomPanel(new Kategorieuebersicht(kategorie)));
-                }
-                default -> setContentPane(new CustomPanel(new ErrorScreen()));
+                final Kategorie kategorie = (Kategorie) args[0];
+                setContentPane(new CustomPanel(new Kategorieuebersicht(kategorie)));
+            } else
+            {
+                setContentPane(new CustomPanel(new ErrorScreen()));
             }
         }
         update();
