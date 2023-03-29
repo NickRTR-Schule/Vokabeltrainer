@@ -1,15 +1,11 @@
 package benutzerschnittstelle;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import exceptions.EndOfAbfrageException;
 import steuerung.AbfrageSteuerung;
+
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * The Screen to test the Users knowledge and quiz the vocabs stored
@@ -17,76 +13,89 @@ import steuerung.AbfrageSteuerung;
 public final class Abfrage extends JPanel
 {
 
-	/**
-	 * The Controller to this View
-	 */
-	private final AbfrageSteuerung steuerung;
+    /**
+     * The Controller to this View
+     */
+    private final AbfrageSteuerung steuerung;
 
-	private final JLabel wortLabel;
+    private final JLabel wortLabel;
 
-	private final JTextField uebersetzungField;
+    private final JTextField uebersetzungField;
 
-	public Abfrage()
-	{
-		steuerung = new AbfrageSteuerung(this, frageVokabelAnzahl());
-		// Init Components
-		wortLabel = new JLabel();
-		uebersetzungField = new JTextField();
-		setValues();
-		build();
-	}
+    private final int enteredNumberVoks;
 
-	private void setValues()
-	{
-		setName("Abfrage");
-	}
+    public Abfrage()
+    {
+        enteredNumberVoks = frageVokabelAnzahl();
+        steuerung = new AbfrageSteuerung(this, enteredNumberVoks);
+        // Init Components
+        wortLabel = new JLabel();
+        uebersetzungField = new JTextField();
+        setValues();
+        build();
+    }
 
-	private void build()
-	{
-		// TODO-js: set layout
-		add(wortLabel);
-		add(uebersetzungField);
-		uebersetzungField.addKeyListener(new KeyAdapter()
-		{
-			@Override
-			public void keyPressed(KeyEvent e)
-			{
-				if (e.getKeyCode() == KeyEvent.VK_ENTER)
-				{
-					steuerung.pruefeEingabe(uebersetzungField.getText());
-				}
-			}
-		});
-	}
+    private void setValues()
+    {
+        setName("Abfrage");
+    }
 
-	private int frageVokabelAnzahl()
-	{
-		return Integer.parseInt(JOptionPane.showInputDialog(
-				"Wie viele Vokabeln sollen abgefragt werden?", 30));
-	}
+    private void build()
+    {
+        // TODO-js: set layout
+        add(wortLabel);
+        add(uebersetzungField);
+        uebersetzungField.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    if (steuerung.pruefeEingabe(uebersetzungField.getText()))
+                    {
+                        vokRichtig();
+                    } else
+                    {
+                        vokFalsch();
+                    }
+                }
+            }
+        });
+        if (steuerung.anzahlVoks() < enteredNumberVoks)
+        {
+            JOptionPane.showMessageDialog(this, "Nicht ausreichend Vokabeln gespeichert");
+        }
+        wortLabel.setText(steuerung.liesAktuelleVokabel().liesWort());
+    }
 
-	private void frageAb()
-	{
-		try
-		{
-			wortLabel.setText(steuerung.naechsteVokabel().liesWort());
-		}
-		catch (EndOfAbfrageException ignored)
-		{
-		}
+    private int frageVokabelAnzahl()
+    {
+        return Integer.parseInt(JOptionPane.showInputDialog(
+                "Wie viele Vokabeln sollen abgefragt werden?", 30));
+    }
 
-	}
+    private void frageAb()
+    {
+        try
+        {
+            wortLabel.setText(steuerung.naechsteVokabel().liesWort());
+        } catch (EndOfAbfrageException ignored)
+        {
+        }
 
-	public void vokFalsch()
-	{
-		JOptionPane.showMessageDialog(this,
-				"Deine Eingabe ist leider falsch. Versuche es noch einmal");
-	}
+    }
 
-	public void vokRichtig()
-	{
-		JOptionPane.showMessageDialog(this,
-				"Richtig! Auf zur nächsten Vokabel");
-		frageAb();
-	}
+    public void vokFalsch()
+    {
+        JOptionPane.showMessageDialog(this,
+                "Deine Eingabe ist leider falsch. Versuche es noch einmal");
+    }
+
+    public void vokRichtig()
+    {
+        JOptionPane.showMessageDialog(this,
+                "Richtig! Auf zur nächsten Vokabel");
+        frageAb();
+    }
 }
