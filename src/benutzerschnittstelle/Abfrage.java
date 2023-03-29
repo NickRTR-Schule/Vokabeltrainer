@@ -57,7 +57,6 @@ public final class Abfrage extends JPanel
 				}
 			}
 		});
-		System.out.println(steuerung.liesAktuelleVokabel().liesWort());
 	}
 
 	private int frageVokabelAnzahl()
