@@ -1,5 +1,6 @@
 package benutzerschnittstelle;
 
+import benutzerschnittstelle.komponenten.CustomButton;
 import steuerung.VokabelerstellerSteuerung;
 
 import javax.swing.*;
@@ -23,12 +24,15 @@ public final class Vokabelersteller extends JScrollPane
     private final JTextField uebersetzungTxtField;
     private final JTextField lautschriftTxtField;
 
+    private final JTextField verwendungsHinweisTxtField;
+
     public Vokabelersteller()
     {
         steuerung = new VokabelerstellerSteuerung(this);
         wortTxtField = new JTextField();
         uebersetzungTxtField = new JTextField();
         lautschriftTxtField = new JTextField();
+        verwendungsHinweisTxtField = new JTextField();
         setValues();
     }
 
@@ -41,46 +45,60 @@ public final class Vokabelersteller extends JScrollPane
 
     private JPanel build()
     {
-        final JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(10, 1));
-        panel.add(new JLabel("Wort"));
-        wortTxtField.addKeyListener(new CustomKeyListener());
-        panel.add(wortTxtField);
-        panel.add(new JLabel("Uebersetzung"));
-        uebersetzungTxtField.addKeyListener(new CustomKeyListener());
-        panel.add(uebersetzungTxtField);
-        panel.add(btnPanel());
-        panel.add(new JLabel("Lautschrift"));
-        lautschriftTxtField.addKeyListener(new CustomKeyListener());
-        panel.add(lautschriftTxtField);
-        wortTxtField.requestFocus();
-        return panel;
-    }
-
-    private JPanel btnPanel()
-    {
-        // TODO-js: Work on layout
-        final JPanel panel = new JPanel();
-        setBorder(BorderFactory.createLineBorder(Color.blue));
-        final GridBagLayout layout = new GridBagLayout();
         final GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(25, 25, 25, 25);
+        final GridBagLayout layout = new GridBagLayout();
         layout.setConstraints(this, constraints);
-        panel.setLayout(layout);
+        final JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.gridwidth = 3;
-        add(new JLabel("Abbildung"));
-        final JButton abbildungsBtn = new JButton("Abbildung hinzufuegen");
+        constraints.gridwidth = 2;
+        panel.add(new JLabel("Wort"), constraints);
+        wortTxtField.addKeyListener(new CustomKeyListener());
         constraints.gridy = 1;
-        constraints.gridwidth = 1;
-        add(abbildungsBtn);
-        constraints.gridwidth = 3;
+        panel.add(wortTxtField, constraints);
         constraints.gridy = 2;
-        add(new JLabel("Aussprache"));
-        final JButton ausspracheBtn = new JButton("Aussprache hinzufuegen");
+        panel.add(new JLabel("Uebersetzung"), constraints);
+        uebersetzungTxtField.addKeyListener(new CustomKeyListener());
+        constraints.gridy = 4;
+        panel.add(uebersetzungTxtField, constraints);
         constraints.gridwidth = 1;
-        constraints.gridy = 3;
-        add(ausspracheBtn);
+        constraints.gridy = 5;
+        constraints.gridx = 1;
+        final JButton abbildungsBtn = new JButton("Abbildung hinzufuegen");
+        abbildungsBtn.addActionListener((ignored) -> {
+        });
+        panel.add(abbildungsBtn, constraints);
+        constraints.gridx = 2;
+        final JButton ausspracheBtn = new JButton("Aussprache hinzufuegen");
+        ausspracheBtn.addActionListener((ignored) -> {
+        });
+        panel.add(ausspracheBtn, constraints);
+        constraints.gridx = 1;
+        constraints.gridy = 6;
+        constraints.gridwidth = 2;
+        panel.add(new JLabel("Lautschrift"), constraints);
+        lautschriftTxtField.addKeyListener(new CustomKeyListener());
+        constraints.gridy = 7;
+        panel.add(lautschriftTxtField, constraints);
+        constraints.gridy = 8;
+        panel.add(new JLabel("Verwendungshinweis"), constraints);
+        constraints.gridy = 9;
+        panel.add(verwendungsHinweisTxtField, constraints);
+        constraints.gridy = 10;
+        final CustomButton storeBtn = new CustomButton("Speichern");
+        storeBtn.addActionListener((ignored) -> steuerung.vokabelHinzuegen(
+                wortTxtField.getText(),
+                uebersetzungTxtField.getText(),
+                null,
+                null,
+                lautschriftTxtField.getText())
+        );
+        panel.add(storeBtn, constraints);
+        wortTxtField.requestFocus();
         return panel;
     }
 }
