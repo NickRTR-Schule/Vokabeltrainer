@@ -9,7 +9,7 @@ import java.util.Collections;
 
 public class AbfrageKonzept
 {
-    private final Vokabel[] voks;
+    private Vokabel[] voks;
     private int currentVok;
 
     public AbfrageKonzept(int numberVoks) throws Exception
@@ -31,6 +31,7 @@ public class AbfrageKonzept
         if (vokabeln.size() < numberVoks)
         {
             numberVoks = vokabeln.size();
+            voks = new Vokabel[numberVoks];
         }
         Collections.shuffle(vokabeln);
         for (int i = 0; i < numberVoks; i++)
