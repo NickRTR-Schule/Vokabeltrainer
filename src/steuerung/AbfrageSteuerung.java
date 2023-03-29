@@ -3,43 +3,36 @@ package steuerung;
 import benutzerschnittstelle.Abfrage;
 import datenspeicherung.Vokabel;
 import exceptions.EndOfAbfrageException;
+import fachkonzept.AbfrageKonzept;
 
 public final class AbfrageSteuerung
 {
+	private AbfrageKonzept dasAbfrageKonzept;
 
-    private final Abfrage abfrage;
+	public AbfrageSteuerung(Abfrage abfrage, int numberVocs)
+	{
+		try
+		{
+			dasAbfrageKonzept = new AbfrageKonzept(abfrage, numberVocs);
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
 
-    private final Vokabel[] voks;
+	public Vokabel naechsteVokabel() throws EndOfAbfrageException
+	{
+		return dasAbfrageKonzept.naechsteVokabel();
+	}
 
-    private int currentVok;
+	public void pruefeEingabe(String eingabe)
+	{
+		dasAbfrageKonzept.pruefeEingabe(eingabe);
+	}
 
-
-    public AbfrageSteuerung(Abfrage abfrage, int numberVocs)
-    {
-        this.abfrage = abfrage;
-        voks = new Vokabel[numberVocs];
-        currentVok = 0;
-    }
-
-    public Vokabel naechsteVokabel() throws EndOfAbfrageException
-    {
-        if (currentVok < voks.length)
-        {
-            return voks[currentVok++];
-        } else
-        {
-            throw new EndOfAbfrageException();
-        }
-    }
-
-    public void pruefeEingabe(String eingabe)
-    {
-        if (eingabe.equals(voks[currentVok].liesUebersetzung()))
-        {
-            abfrage.vokRichtig();
-        } else
-        {
-            abfrage.vokFalsch();
-        }
-    }
+	public Vokabel liesAktuelleVokabel()
+	{
+		return dasAbfrageKonzept.liesAktuelleVokabel();
+	}
 }

@@ -1,11 +1,15 @@
 package benutzerschnittstelle;
 
-import exceptions.EndOfAbfrageException;
-import steuerung.AbfrageSteuerung;
-
-import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import exceptions.EndOfAbfrageException;
+import steuerung.AbfrageSteuerung;
 
 /**
  * The Screen to test the Users knowledge and quiz the vocabs stored
@@ -13,73 +17,76 @@ import java.awt.event.KeyEvent;
 public final class Abfrage extends JPanel
 {
 
-    /**
-     * The Controller to this View
-     */
-    private final AbfrageSteuerung steuerung;
+	/**
+	 * The Controller to this View
+	 */
+	private final AbfrageSteuerung steuerung;
 
-    private final JLabel wortLabel;
+	private final JLabel wortLabel;
 
-    private final JTextField uebersetzungField;
+	private final JTextField uebersetzungField;
 
+	public Abfrage()
+	{
+		steuerung = new AbfrageSteuerung(this, frageVokabelAnzahl());
+		// Init Components
+		wortLabel = new JLabel();
+		uebersetzungField = new JTextField();
+		setValues();
+		build();
+	}
 
-    public Abfrage()
-    {
-        steuerung = new AbfrageSteuerung(this, frageVokabelAnzahl());
-        // Init Components
-        wortLabel = new JLabel();
-        uebersetzungField = new JTextField();
-        setValues();
-        build();
-    }
+	private void setValues()
+	{
+		setName("Abfrage");
+	}
 
-    private void setValues()
-    {
-        setName("Abfrage");
-    }
+	private void build()
+	{
+		// TODO-js: set layout
+		add(wortLabel);
+		add(uebersetzungField);
+		uebersetzungField.addKeyListener(new KeyAdapter()
+		{
+			@Override
+			public void keyPressed(KeyEvent e)
+			{
+				if (e.getKeyCode() == KeyEvent.VK_ENTER)
+				{
+					steuerung.pruefeEingabe(uebersetzungField.getText());
+				}
+			}
+		});
+	}
 
-    private void build()
-    {
-        // TODO-js: set layout
-        add(wortLabel);
-        add(uebersetzungField);
-        uebersetzungField.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER)
-                {
-                    steuerung.pruefeEingabe(uebersetzungField.getText());
-                }
-            }
-        });
-    }
+	private int frageVokabelAnzahl()
+	{
+		return Integer.parseInt(JOptionPane.showInputDialog(
+				"Wie viele Vokabeln sollen abgefragt werden?", 30));
+	}
 
-    private int frageVokabelAnzahl()
-    {
-        return Integer.parseInt(JOptionPane.showInputDialog("Wie viele Vokabeln sollen abgefragt werden?", 30));
-    }
+	private void frageAb()
+	{
+		try
+		{
+			wortLabel.setText(steuerung.naechsteVokabel().liesWort());
+		}
+		catch (EndOfAbfrageException ignored)
+		{
+		}
 
-    private void frageAb()
-    {
-        try
-        {
-            wortLabel.setText(steuerung.naechsteVokabel().liesWort());
-        } catch (EndOfAbfrageException ignored)
-        {
-        }
+	}
 
-    }
+	public void vokFalsch()
+	{
+		JOptionPane.showMessageDialog(this,
+				"Deine Eingabe ist leider falsch. Versuche es noch einmal");
+	}
 
-    public void vokFalsch()
-    {
-        JOptionPane.showMessageDialog(this, "Deine Eingabe ist leider falsch. Versuche es noch einmal");
-    }
-
-    public void vokRichtig()
-    {
-        JOptionPane.showMessageDialog(this, "Richtig! Auf zur nächsten Vokabel");
-        frageAb();
-    }
+	public void vokRichtig()
+	{
+		JOptionPane.showMessageDialog(this,
+				"Richtig! Auf zur nächsten Vokabel");
+		frageAb();
+	}
 }
