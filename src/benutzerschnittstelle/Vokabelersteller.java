@@ -24,12 +24,15 @@ public final class Vokabelersteller extends JScrollPane
     private final JTextField uebersetzungTxtField;
     private final JTextField lautschriftTxtField;
 
+    private final JTextField verwendungsHinweisTxtField;
+
     public Vokabelersteller()
     {
         steuerung = new VokabelerstellerSteuerung(this);
         wortTxtField = new JTextField();
         uebersetzungTxtField = new JTextField();
         lautschriftTxtField = new JTextField();
+        verwendungsHinweisTxtField = new JTextField();
         setValues();
     }
 
@@ -66,9 +69,13 @@ public final class Vokabelersteller extends JScrollPane
         constraints.gridy = 5;
         constraints.gridx = 1;
         final JButton abbildungsBtn = new JButton("Abbildung hinzufuegen");
+        abbildungsBtn.addActionListener((ignored) -> {
+        });
         panel.add(abbildungsBtn, constraints);
         constraints.gridx = 2;
         final JButton ausspracheBtn = new JButton("Aussprache hinzufuegen");
+        ausspracheBtn.addActionListener((ignored) -> {
+        });
         panel.add(ausspracheBtn, constraints);
         constraints.gridx = 1;
         constraints.gridy = 6;
@@ -78,7 +85,18 @@ public final class Vokabelersteller extends JScrollPane
         constraints.gridy = 7;
         panel.add(lautschriftTxtField, constraints);
         constraints.gridy = 8;
+        panel.add(new JLabel("Verwendungshinweis"), constraints);
+        constraints.gridy = 9;
+        panel.add(verwendungsHinweisTxtField, constraints);
+        constraints.gridy = 10;
         final CustomButton storeBtn = new CustomButton("Speichern");
+        storeBtn.addActionListener((ignored) -> steuerung.vokabelHinzuegen(
+                wortTxtField.getText(),
+                uebersetzungTxtField.getText(),
+                null,
+                null,
+                lautschriftTxtField.getText())
+        );
         panel.add(storeBtn, constraints);
         wortTxtField.requestFocus();
         return panel;
