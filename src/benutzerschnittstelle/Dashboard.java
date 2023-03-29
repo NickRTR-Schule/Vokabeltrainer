@@ -100,7 +100,11 @@ public final class Dashboard extends JPanel
         letzteKategorienPanel.add(new JLabel("Letzte Kategorien"));
         addComponent(letzteKategorienPanel);
         constraints.gridy = 5;
-        addComponent(letzteKategorienBuilder());
+        final JPanel letzteKategorieBuidlerResult = letzteKategorienBuilder();
+        if (letzteKategorieBuidlerResult != null)
+        {
+            addComponent(letzteKategorieBuidlerResult);
+        }
         constraints.gridy++;
         final JPanel alleKategorienPanel = new JPanel();
         alleKategorienPanel.setBackground(Color.GRAY);
@@ -139,10 +143,14 @@ public final class Dashboard extends JPanel
         // TODO-js: set Layout
         final ArrayList<Kategorie> kats = steuerung.liesKategorien();
         anzahlLetzteKategorien = Math.min(kats.size(), 3);
+        if (anzahlLetzteKategorien == 0)
+        {
+            return null;
+        }
         for (int i = 0; i < anzahlLetzteKategorien; i++)
         {
             constraints.gridy++;
-            panel.add(new KategorieTile(steuerung.liesKategorien().get(i)));
+            panel.add(new KategorieTile(steuerung.liesKategorien().get(i)), constraints);
         }
         return panel;
     }
@@ -159,7 +167,7 @@ public final class Dashboard extends JPanel
         for (Kategorie kat : kats)
         {
             constraints.gridy++;
-            panel.add(new KategorieTile(kat));
+            panel.add(new KategorieTile(kat), constraints);
         }
         return panel;
     }

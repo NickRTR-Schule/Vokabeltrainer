@@ -16,14 +16,18 @@ public class CustomPanel extends JPanel
 
     private void build(Component content)
     {
+        setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.weightx = 0;
+        constraints.weighty = 0;
         setLayout(new GridBagLayout());
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.gridwidth = 10;
-        constraints.gridheight = 1;
-        add(new NavigationBar());
+        add(new NavigationBar(), constraints);
         constraints.gridy = 1;
-        constraints.gridheight = 50;
-        add(content);
+        constraints.weightx = 0.5;
+        constraints.weighty = 0.5;
+        add(content, constraints);
     }
 }
