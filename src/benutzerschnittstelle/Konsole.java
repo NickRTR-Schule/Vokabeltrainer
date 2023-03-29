@@ -7,8 +7,6 @@ public final class Konsole
 
 	public static void main(String[] args)
 	{
-		Datenbank derSpeicher = new Datenbank();
-
 		try
 		{
 			// ArrayList<Vokabel> vokabeln = derSpeicher.liesVokabeln();
@@ -19,7 +17,7 @@ public final class Konsole
 
 			// derSpeicher.loescheVokabel("cat", "Katze");
 
-			derSpeicher.vokabelHinzufuegen("duck", "Ente", null, null, null,
+			Datenbank.vokabelHinzufuegen("duck", "Ente", null, null, null,
 					null);
 		}
 		catch (Exception e)

@@ -9,8 +9,6 @@ import java.util.ArrayList;
 public final class DashboardSteuerung
 {
 
-    private final Datenbank db = new Datenbank();
-
     private final Dashboard dashboard;
 
     public DashboardSteuerung(Dashboard dashboard)
@@ -38,7 +36,7 @@ public final class DashboardSteuerung
         ArrayList<Kategorie> list;
         try
         {
-            list = db.liesKategorien();
+            list = Datenbank.liesKategorien();
         } catch (Exception ignored)
         {
             list = new ArrayList<>();

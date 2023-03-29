@@ -11,7 +11,14 @@ public final class AbfrageSteuerung
 
 	public AbfrageSteuerung(Abfrage abfrage, int numberVocs)
 	{
-		dasAbfrageKonzept = new AbfrageKonzept(abfrage, numberVocs);
+		try
+		{
+			dasAbfrageKonzept = new AbfrageKonzept(abfrage, numberVocs);
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getLocalizedMessage());
+		}
 	}
 
 	public Vokabel naechsteVokabel() throws EndOfAbfrageException
@@ -22,5 +29,10 @@ public final class AbfrageSteuerung
 	public void pruefeEingabe(String eingabe)
 	{
 		dasAbfrageKonzept.pruefeEingabe(eingabe);
+	}
+
+	public Vokabel liesAktuelleVokabel()
+	{
+		return dasAbfrageKonzept.liesAktuelleVokabel();
 	}
 }
