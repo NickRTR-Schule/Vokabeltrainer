@@ -18,7 +18,7 @@ public final class DatenbankVokabelTest
     {
         derSpeicher.vokabelHinzufuegen("duck", "Ente", null, null, null, null);
 
-        ArrayList<Vokabel> vokabeln = derSpeicher.liesVokabeln();
+        ArrayList<Vokabel> vokabeln = derSpeicher.liesVokabeln(null);
         assertTrue(vokabeln.size() > 0);
 
         Vokabel vokabel = derSpeicher.liesVokabel("duck", "Ente");

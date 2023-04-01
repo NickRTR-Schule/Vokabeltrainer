@@ -1,7 +1,6 @@
 package fachkonzept;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import javax.swing.JOptionPane;
 
@@ -13,11 +12,17 @@ import exceptions.EndOfAbfrageException;
 public class AbfrageKonzept
 {
 	private final Abfrage abfrage;
-	private final Vokabel[] voks;
+	private Vokabel[] voks;
 	private int currentVok;
 
 	public AbfrageKonzept(Abfrage abfrage, int numberVoks) throws Exception
 	{
+		if (numberVoks < 1)
+		{
+			throw new Error(
+					"Bitte geben stellen Sie die Abfrage min. auf eine Vokabel.");
+		}
+
 		this.abfrage = abfrage;
 		this.voks = new Vokabel[numberVoks];
 		currentVok = 0;
@@ -27,18 +32,13 @@ public class AbfrageKonzept
 
 	private void voksBefuellen(int numberVoks) throws Exception
 	{
-		ArrayList<Vokabel> vokabeln = Datenbank.liesVokabeln();
+		ArrayList<Vokabel> vokabeln = Datenbank.liesVokabeln(numberVoks);
 		if (vokabeln.size() < numberVoks)
 		{
 			JOptionPane.showMessageDialog(abfrage,
 					"Nicht ausreichend Vokabeln gespeichert.");
-			numberVoks = vokabeln.size();
 		}
-		Collections.shuffle(vokabeln);
-		for (int i = 0; i < numberVoks; i++)
-		{
-			voks[i] = vokabeln.get(i);
-		}
+		voks = vokabeln.toArray(new Vokabel[vokabeln.size()]);
 	}
 
 	public Vokabel naechsteVokabel() throws EndOfAbfrageException

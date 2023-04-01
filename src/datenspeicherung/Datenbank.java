@@ -58,7 +58,7 @@ public final class Datenbank
 		}
 	}
 
-	public static ArrayList<Vokabel> liesVokabeln()
+	public static ArrayList<Vokabel> liesVokabeln(Integer anzahl)
 			throws DatenbankAccessException, DatenbankLeseException
 	{
 		oeffneDatenbank();
@@ -66,7 +66,13 @@ public final class Datenbank
 
 		// DB-Abfrage als String
 		String sqlStmt = "SELECT wort, uebersetzung, abbildung, aussprache, lautschrift, verwendungshinweis, wiederholungen, anzahlrichtig ";
-		sqlStmt += "FROM Vokabel";
+		sqlStmt += "FROM Vokabel ";
+		sqlStmt += "ORDER BY RAND()";
+
+		if (anzahl != null)
+		{
+			sqlStmt += " LIMIT " + anzahl;
+		}
 
 		try
 		{

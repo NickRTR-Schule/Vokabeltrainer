@@ -46,6 +46,7 @@ public final class Abfrage extends JPanel
 		// TODO-js: set layout
 		add(wortLabel);
 		add(uebersetzungField);
+		frageAb();
 		uebersetzungField.addKeyListener(new KeyAdapter()
 		{
 			@Override
@@ -69,7 +70,8 @@ public final class Abfrage extends JPanel
 	{
 		try
 		{
-			wortLabel.setText(steuerung.naechsteVokabel().liesWort());
+			wortLabel.setText(steuerung.liesAktuelleVokabel().liesWort());
+			steuerung.naechsteVokabel();
 		}
 		catch (EndOfAbfrageException ignored)
 		{
