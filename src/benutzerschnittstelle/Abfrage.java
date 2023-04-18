@@ -1,9 +1,11 @@
 package benutzerschnittstelle;
 
+import benutzerschnittstelle.komponenten.CustomButton;
 import exceptions.EndOfAbfrageException;
 import steuerung.AbfrageSteuerung;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -29,8 +31,9 @@ public final class Abfrage extends JPanel
         enteredNumberVoks = frageVokabelAnzahl();
         steuerung = new AbfrageSteuerung(this, enteredNumberVoks);
         // Init Components
-        wortLabel = new JLabel();
+        wortLabel = new JLabel("Wort", SwingConstants.CENTER);
         uebersetzungField = new JTextField();
+        uebersetzungField.setHorizontalAlignment(JTextField.CENTER);
         setValues();
         build();
     }
@@ -42,9 +45,29 @@ public final class Abfrage extends JPanel
 
     private void build()
     {
-        // TODO-js: set layout
-        add(wortLabel);
-        add(uebersetzungField);
+        final GridBagLayout layout = new GridBagLayout();
+        final GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(15, 0, 15, 0);
+        layout.setConstraints(this, constraints);
+        constraints.weightx = .5;
+        setLayout(layout);
+        constraints.gridx = 0;
+        add(new JPanel(), constraints);
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        add(wortLabel, constraints);
+        constraints.gridy = 1;
+        add(uebersetzungField, constraints);
+        final CustomButton checkBtn = new CustomButton("Check");
+        checkBtn.addActionListener((e) -> {
+            checkVok();
+        });
+        constraints.gridy = 2;
+        add(checkBtn, constraints);
+        constraints.gridx = 3;
+        add(new JPanel(), constraints);
         uebersetzungField.addKeyListener(new KeyAdapter()
         {
             @Override
@@ -52,13 +75,7 @@ public final class Abfrage extends JPanel
             {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                 {
-                    if (steuerung.pruefeEingabe(uebersetzungField.getText()))
-                    {
-                        vokRichtig();
-                    } else
-                    {
-                        vokFalsch();
-                    }
+                    checkVok();
                 }
             }
         });
@@ -83,7 +100,17 @@ public final class Abfrage extends JPanel
         } catch (EndOfAbfrageException ignored)
         {
         }
+    }
 
+    private void checkVok()
+    {
+        if (steuerung.pruefeEingabe(uebersetzungField.getText()))
+        {
+            vokRichtig();
+        } else
+        {
+            vokFalsch();
+        }
     }
 
     public void vokFalsch()
