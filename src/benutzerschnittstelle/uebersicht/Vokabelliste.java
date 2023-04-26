@@ -6,24 +6,32 @@ import steuerung.uebersicht.VokabellisteSteuerung;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Vokabelliste extends JPanel
 {
 
     private final VokabellisteSteuerung steuerung;
 
-    private final Vokabel[] voks;
+    private ArrayList<Vokabel> voks;
 
     public Vokabelliste()
     {
         steuerung = new VokabellisteSteuerung();
         // TODO: work on
-        voks = new Vokabel[1];
+        try
+        {
+            voks = steuerung.liesVokabeln();
+        } catch (Exception ignored)
+        {
+            voks = new ArrayList<>();
+            JOptionPane.showMessageDialog(this, "Fehler beim Lesen der Vokabeln");
+        }
     }
 
     private void build()
     {
-        setLayout(new GridLayout(voks.length, 1));
+        setLayout(new GridLayout(voks.size(), 1));
         for (Vokabel vok : voks)
         {
             add(new Vokabeltile(vok));
