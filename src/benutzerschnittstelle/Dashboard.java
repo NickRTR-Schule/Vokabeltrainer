@@ -1,5 +1,6 @@
 package benutzerschnittstelle;
 
+import benutzerschnittstelle.komponenten.CustomButton;
 import steuerung.DashboardSteuerung;
 
 import javax.swing.*;
@@ -64,6 +65,23 @@ public final class Dashboard extends JPanel
      */
     private void build()
     {
-
+        final JPanel statsPanel = new JPanel();
+        final CustomButton vokabelErstellerBtn = new CustomButton(
+                "Vokabel erstellen", "Erstelle eine neue Vokabel");
+        vokabelErstellerBtn.addActionListener((ignored) -> steuerung.erstellerGeklickt());
+        final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
+                "Starte eine Abfrage");
+        abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
+        final CustomButton vokabellisteBtn = new CustomButton(
+                "Vokabelliste", "Zeige alle Vokabeln als Liste an");
+        vokabelErstellerBtn.addActionListener((ignored) -> steuerung.erstellerGeklickt());
+        final CustomButton kategorielisteBtn = new CustomButton(
+                "Kategorieliste", "Zeige alle Kategorien in einer Liste an");
+        vokabelErstellerBtn.addActionListener((ignored) -> steuerung.erstellerGeklickt());
+        add(statsPanel);
+        add(vokabellisteBtn);
+        add(vokabelErstellerBtn);
+        add(kategorielisteBtn);
+        add(abfrageBtn);
     }
 }

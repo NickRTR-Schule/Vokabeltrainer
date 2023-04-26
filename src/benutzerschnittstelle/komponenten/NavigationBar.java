@@ -43,7 +43,7 @@ public class NavigationBar extends JPanel
                 MainFrameSteuerung.getInstance().openDashboard();
             }
         });
-        setBackground(Color.yellow);
+        setBackground(Color.WHITE);
         add(btn);
     }
 
