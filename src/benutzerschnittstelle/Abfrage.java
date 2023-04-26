@@ -1,5 +1,6 @@
 package benutzerschnittstelle;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -13,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import benutzerschnittstelle.komponenten.CustomButton;
+import benutzerschnittstelle.komponenten.CustomTextField;
 import exceptions.EndOfAbfrageException;
 import steuerung.AbfrageSteuerung;
 import steuerung.MainFrameSteuerung;
@@ -29,7 +31,7 @@ public final class Abfrage extends JPanel
 
 	private final JLabel wortLabel;
 
-	private final JTextField uebersetzungField;
+	private final CustomTextField uebersetzungField;
 
 	private int enteredNumberVoks;
 
@@ -42,7 +44,7 @@ public final class Abfrage extends JPanel
 		steuerung = new AbfrageSteuerung(this, enteredNumberVoks);
 		// Init Components
 		wortLabel = new JLabel("Wort", SwingConstants.CENTER);
-		uebersetzungField = new JTextField();
+		uebersetzungField = new CustomTextField();
 		uebersetzungField.setHorizontalAlignment(JTextField.CENTER);
 		setValues();
 		build();
@@ -51,6 +53,7 @@ public final class Abfrage extends JPanel
 	private void setValues()
 	{
 		setName("Abfrage");
+		setBackground(Color.WHITE);
 	}
 
 	private void build()
@@ -64,7 +67,10 @@ public final class Abfrage extends JPanel
 		constraints.weightx = .5;
 		setLayout(layout);
 		constraints.gridx = 0;
-		add(new JPanel(), constraints);
+		// TODO-js: Change Layout
+		final JPanel spacerPanel1 = new JPanel();
+		spacerPanel1.setBackground(Color.WHITE);
+		add(spacerPanel1, constraints);
 		constraints.gridx = 1;
 		constraints.gridy = 0;
 		add(wortLabel, constraints);
@@ -77,7 +83,9 @@ public final class Abfrage extends JPanel
 		constraints.gridy = 2;
 		add(checkBtn, constraints);
 		constraints.gridx = 3;
-		add(new JPanel(), constraints);
+		final JPanel spacerPanel2 = new JPanel();
+		spacerPanel2.setBackground(Color.WHITE);
+		add(spacerPanel2, constraints);
 		uebersetzungField.addKeyListener(new KeyAdapter()
 		{
 			@Override
