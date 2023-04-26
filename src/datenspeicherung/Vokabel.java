@@ -9,8 +9,8 @@ public final class Vokabel
     private final byte[] aussprache;
     private final String lautschrift;
     private final String verwendungshinweis;
-    private final int wiederholungen;
-    private final int anzahlrichtig;
+    private int anzahlrichtig;
+    private int wiederholungen;
 
     public Vokabel(String pWort, String pUebersetzung, byte[] pAbbildung, byte[] pAussprache, String pLautschrift, String pVerwendungshinweis, int pWiederholungen, int pAnzahlrichtig)
     {
@@ -62,5 +62,12 @@ public final class Vokabel
     public int liesAnzahlRichtig()
     {
         return anzahlrichtig;
+    }
+
+    public void wiederholt(boolean richtig)
+    {
+        wiederholungen++;
+        if (richtig)
+            anzahlrichtig++;
     }
 }

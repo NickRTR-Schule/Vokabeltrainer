@@ -1,18 +1,9 @@
 package datenspeicherung;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import exceptions.datenbank.*;
 
-import exceptions.datenbank.DatenbankAccessException;
-import exceptions.datenbank.DatenbankAccessType;
-import exceptions.datenbank.DatenbankLeseException;
-import exceptions.datenbank.DatenbankObject;
-import exceptions.datenbank.DatenbankSchreibException;
-import exceptions.datenbank.DuplicateVokabelException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public final class Datenbank
 {
@@ -279,5 +270,30 @@ public final class Datenbank
         }
         schliesseDatenbank();
         return ergebnis;
+    }
+
+    public static void vokabelWiederholt(Vokabel dieVokabel)
+            throws DatenbankAccessException, DatenbankSchreibException
+    {
+        oeffneDatenbank();
+        // DB-Abfrage als String
+        String sqlStmt = "UPDATE vokabel ";
+        sqlStmt += "SET wiederholungen = ?, anzahlrichtig = ? ";
+        sqlStmt += "WHERE wort = ? AND uebersetzung = ?";
+        try
+        {
+            // DB-Abfrage vorbereiten
+            stmt = con.prepareStatement(sqlStmt);
+            // DB-Abfrage ausführen
+            stmt.setInt(1, dieVokabel.liesWiederholungen());
+            stmt.setInt(2, dieVokabel.liesAnzahlRichtig());
+            stmt.setString(3, dieVokabel.liesWort());
+            stmt.setString(4, dieVokabel.liesUebersetzung());
+            stmt.executeUpdate();
+        } catch (SQLException e)
+        {
+            throw new DatenbankSchreibException(DatenbankObject.vokabel);
+        }
+        schliesseDatenbank();
     }
 }
