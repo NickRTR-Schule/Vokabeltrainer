@@ -65,6 +65,7 @@ public final class Dashboard extends JPanel
      */
     private void build()
     {
+        // Add Buttons
         final JPanel statsPanel = new JPanel();
         final CustomButton vokabelErstellerBtn = new CustomButton(
                 "Vokabel erstellen", "Erstelle eine neue Vokabel");

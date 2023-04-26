@@ -30,7 +30,7 @@ public final class Vokabelersteller extends JScrollPane
 
     public Vokabelersteller()
     {
-        steuerung = new VokabelerstellerSteuerung(this);
+        steuerung = new VokabelerstellerSteuerung();
         wortTxtField = new JTextField();
         uebersetzungTxtField = new JTextField();
         lautschriftTxtField = new JTextField();

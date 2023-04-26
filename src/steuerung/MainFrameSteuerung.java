@@ -38,9 +38,7 @@ public final class MainFrameSteuerung
      */
     public static void main(String[] args)
     {
-        EventQueue.invokeLater(() -> {
-            shared = new MainFrameSteuerung();
-        });
+        EventQueue.invokeLater(() -> shared = new MainFrameSteuerung());
     }
 
     public static MainFrameSteuerung getInstance()

@@ -1,10 +1,5 @@
 package fachkonzept;
 
-import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
-
-import benutzerschnittstelle.Abfrage;
 import datenspeicherung.Datenbank;
 import datenspeicherung.Vokabel;
 import exceptions.EndOfAbfrageException;
