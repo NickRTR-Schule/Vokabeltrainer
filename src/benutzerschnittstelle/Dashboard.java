@@ -38,6 +38,7 @@ public final class Dashboard extends JPanel
     {
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setMinimumSize(new Dimension(1000, 1000));
+        setBackground(Color.WHITE);
         setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         setName("Dashboard");
         constraints.fill = GridBagConstraints.BOTH;
