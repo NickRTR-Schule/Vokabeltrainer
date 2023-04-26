@@ -102,16 +102,16 @@ public final class Vokabelersteller extends JScrollPane
 		constraints.gridy = 10;
 		final CustomButton storeBtn = new CustomButton("Speichern");
 		storeBtn.addActionListener((ignored) -> {
-			steuerung.vokabelHinzufuegen(wortTxtField.getText(),
-					uebersetzungTxtField.getText(), null, null,
-					lautschriftTxtField.getText(),
-					verwendungsHinweisTxtField.getText());
+			if (wortTxtField.getText().length() > 0
+					&& uebersetzungTxtField.getText().length() > 0)
+			{
+				steuerung.vokabelHinzufuegen(wortTxtField.getText(),
+						uebersetzungTxtField.getText(), null, null,
+						lautschriftTxtField.getText(),
+						verwendungsHinweisTxtField.getText());
+			}
 			MainFrameSteuerung.getInstance().openDashboard();
 		});
-		storeBtn.addActionListener((ignored) -> steuerung.vokabelHinzufuegen(
-				wortTxtField.getText(), uebersetzungTxtField.getText(), null,
-				null, lautschriftTxtField.getText(),
-				verwendungsHinweisTxtField.getText()));
 		panel.add(storeBtn, constraints);
 		wortTxtField.requestFocus();
 		return panel;
