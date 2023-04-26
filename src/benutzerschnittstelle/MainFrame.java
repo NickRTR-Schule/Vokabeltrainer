@@ -69,7 +69,7 @@ public final class MainFrame extends JFrame
         {
             case Dashboard -> setContentPane(new Dashboard());
             case Abfrage -> setContentPane(new CustomPanel(new Abfrage()));
-            case Ersteller -> setContentPane(new CustomPanel(new Vokabelersteller()));
+            case Ersteller -> setContentPane(new CustomPanel(new VokabelScreen()));
             case Statistik -> setContentPane(new CustomPanel(new Statistik()));
             case Vokabelliste -> setContentPane(new CustomPanel(new Vokabelliste()));
             case Kategorieliste -> setContentPane(new CustomPanel(new Kategorieliste()));
@@ -105,7 +105,7 @@ public final class MainFrame extends JFrame
             {
                 case Kategorieeuebersicht ->
                         setContentPane(new CustomPanel(new Kategorieuebersicht((Kategorie) args[0])));
-                case Vokabeluebersicht -> setContentPane(new CustomPanel(new Vokabelersteller((Vokabel) args[0])));
+                case Vokabeluebersicht -> setContentPane(new CustomPanel(new VokabelScreen((Vokabel) args[0])));
                 default -> setContentPane(new CustomPanel(new ErrorScreen()));
             }
         }

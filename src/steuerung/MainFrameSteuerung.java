@@ -86,7 +86,7 @@ public final class MainFrameSteuerung
     {
         mainFrame.open(UIScreens.Ersteller);
     }
-
+    
     public void openVokabelliste()
     {
         mainFrame.open(UIScreens.Vokabelliste);

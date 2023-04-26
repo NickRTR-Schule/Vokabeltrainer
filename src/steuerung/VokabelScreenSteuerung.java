@@ -2,11 +2,11 @@ package steuerung;
 
 import fachkonzept.ErstellerKonzept;
 
-public final class VokabelerstellerSteuerung
+public final class VokabelScreenSteuerung
 {
     private final ErstellerKonzept dasErstellerKonzept = new ErstellerKonzept();
 
-    public VokabelerstellerSteuerung()
+    public VokabelScreenSteuerung()
     {
     }
 

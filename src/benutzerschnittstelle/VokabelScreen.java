@@ -3,7 +3,7 @@ package benutzerschnittstelle;
 import benutzerschnittstelle.komponenten.CustomButton;
 import datenspeicherung.Vokabel;
 import steuerung.MainFrameSteuerung;
-import steuerung.VokabelerstellerSteuerung;
+import steuerung.VokabelScreenSteuerung;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,13 +13,13 @@ import java.awt.event.KeyEvent;
 /**
  * The Screen to add / create a new Vocabulary.
  */
-public final class Vokabelersteller extends JScrollPane
+public final class VokabelScreen extends JScrollPane
 {
 
     /**
      * The Controller to this View
      */
-    private final VokabelerstellerSteuerung steuerung;
+    private final VokabelScreenSteuerung steuerung;
 
     // Text Fields
     private final JTextField wortTxtField;
@@ -28,9 +28,9 @@ public final class Vokabelersteller extends JScrollPane
 
     private final JTextField verwendungsHinweisTxtField;
 
-    public Vokabelersteller()
+    public VokabelScreen()
     {
-        steuerung = new VokabelerstellerSteuerung();
+        steuerung = new VokabelScreenSteuerung();
         wortTxtField = new JTextField();
         uebersetzungTxtField = new JTextField();
         lautschriftTxtField = new JTextField();
@@ -38,7 +38,7 @@ public final class Vokabelersteller extends JScrollPane
         setValues();
     }
 
-    public Vokabelersteller(Vokabel vokabel)
+    public VokabelScreen(Vokabel vokabel)
     {
         this();
         wortTxtField.setText(vokabel.liesWort());
@@ -64,7 +64,7 @@ public final class Vokabelersteller extends JScrollPane
         final GridBagLayout layout = new GridBagLayout();
         layout.setConstraints(this, constraints);
         final JPanel panel = new JPanel();
-        panel.setLayout(new GridBagLayout());
+        panel.setLayout(layout);
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.gridwidth = 2;
