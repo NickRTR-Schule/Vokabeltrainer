@@ -1,6 +1,7 @@
 package benutzerschnittstelle;
 
 import benutzerschnittstelle.komponenten.CustomButton;
+import datenspeicherung.Vokabel;
 import steuerung.VokabelerstellerSteuerung;
 
 import javax.swing.*;
@@ -33,6 +34,20 @@ public final class Vokabelersteller extends JScrollPane
         uebersetzungTxtField = new JTextField();
         lautschriftTxtField = new JTextField();
         verwendungsHinweisTxtField = new JTextField();
+        setValues();
+    }
+
+    public Vokabelersteller(Vokabel vokabel)
+    {
+        steuerung = new VokabelerstellerSteuerung(this);
+        wortTxtField = new JTextField();
+        uebersetzungTxtField = new JTextField();
+        lautschriftTxtField = new JTextField();
+        verwendungsHinweisTxtField = new JTextField();
+        wortTxtField.setText(vokabel.liesWort());
+        uebersetzungTxtField.setText(vokabel.liesUebersetzung());
+        lautschriftTxtField.setText(vokabel.liesLautschrift());
+        verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
         setValues();
     }
 

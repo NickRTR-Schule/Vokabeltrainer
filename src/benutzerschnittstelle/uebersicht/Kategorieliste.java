@@ -1,5 +1,7 @@
 package benutzerschnittstelle.uebersicht;
 
-public class Kategorieliste
+import javax.swing.*;
+
+public class Kategorieliste extends JPanel
 {
 }

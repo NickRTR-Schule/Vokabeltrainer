@@ -14,10 +14,11 @@ public class Vokabelliste extends JPanel
 
     private final Vokabel[] voks;
 
-    public Vokabelliste(Vokabel[] voks)
+    public Vokabelliste()
     {
         steuerung = new VokabellisteSteuerung();
-        this.voks = voks;
+        // TODO: work on
+        voks = new Vokabel[1];
     }
 
     private void build()

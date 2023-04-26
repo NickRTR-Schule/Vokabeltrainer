@@ -3,13 +3,15 @@ package benutzerschnittstelle;
 import benutzerschnittstelle.error.ErrorScreen;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.navigation.UIScreens;
+import benutzerschnittstelle.uebersicht.Kategorieliste;
 import benutzerschnittstelle.uebersicht.Kategorieuebersicht;
+import benutzerschnittstelle.uebersicht.Vokabelliste;
 import datenspeicherung.Kategorie;
+import datenspeicherung.Vokabel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Locale;
-import java.util.Objects;
 
 /**
  * The Frame containing the other Screens as Panels in a Form of its own content
@@ -69,6 +71,8 @@ public final class MainFrame extends JFrame
             case Abfrage -> setContentPane(new CustomPanel(new Abfrage()));
             case Ersteller -> setContentPane(new CustomPanel(new Vokabelersteller()));
             case Statistik -> setContentPane(new CustomPanel(new Statistik()));
+            case Vokabelliste -> setContentPane(new CustomPanel(new Vokabelliste()));
+            case Kategorieliste -> setContentPane(new CustomPanel(new Kategorieliste()));
             default -> setContentPane(new CustomPanel(new ErrorScreen()));
         }
         update();
@@ -97,13 +101,12 @@ public final class MainFrame extends JFrame
             open(ui);
         } else
         {
-            if (Objects.requireNonNull(ui) == UIScreens.Kategorieeuebersicht)
+            switch (ui)
             {
-                final Kategorie kategorie = (Kategorie) args[0];
-                setContentPane(new CustomPanel(new Kategorieuebersicht(kategorie)));
-            } else
-            {
-                setContentPane(new CustomPanel(new ErrorScreen()));
+                case Kategorieeuebersicht ->
+                        setContentPane(new CustomPanel(new Kategorieuebersicht((Kategorie) args[0])));
+                case Vokabeluebersicht -> setContentPane(new CustomPanel(new Vokabelersteller((Vokabel) args[0])));
+                default -> setContentPane(new CustomPanel(new ErrorScreen()));
             }
         }
         update();
