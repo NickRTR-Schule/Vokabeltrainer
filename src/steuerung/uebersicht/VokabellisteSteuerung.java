@@ -9,7 +9,6 @@ public class VokabellisteSteuerung
 {
     public VokabellisteSteuerung()
     {
-
     }
 
     public ArrayList<Vokabel> liesVokabeln() throws Exception
