@@ -26,6 +26,16 @@ public final class DashboardSteuerung
         MainFrameSteuerung.getInstance().openErsteller();
     }
 
+    public void vokabellisteGeklickt()
+    {
+        MainFrameSteuerung.getInstance().openVokabelliste();
+    }
+
+    public void kategorielisteGeklickt()
+    {
+        MainFrameSteuerung.getInstance().openKategorieliste();
+    }
+
     public void statsGeklickt()
     {
         MainFrameSteuerung.getInstance().openStats();

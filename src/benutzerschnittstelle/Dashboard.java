@@ -74,14 +74,14 @@ public final class Dashboard extends JPanel
         abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
         final CustomButton vokabellisteBtn = new CustomButton(
                 "Vokabelliste", "Zeige alle Vokabeln als Liste an");
-        vokabelErstellerBtn.addActionListener((ignored) -> steuerung.erstellerGeklickt());
+        vokabellisteBtn.addActionListener((ignored) -> steuerung.vokabellisteGeklickt());
         final CustomButton kategorielisteBtn = new CustomButton(
                 "Kategorieliste", "Zeige alle Kategorien in einer Liste an");
-        vokabelErstellerBtn.addActionListener((ignored) -> steuerung.erstellerGeklickt());
-        add(statsPanel);
-        add(vokabellisteBtn);
-        add(vokabelErstellerBtn);
-        add(kategorielisteBtn);
-        add(abfrageBtn);
+        kategorielisteBtn.addActionListener((ignored) -> steuerung.kategorielisteGeklickt());
+        //addComponent(statsPanel);
+        addComponent(vokabellisteBtn);
+        addComponent(vokabelErstellerBtn);
+        addComponent(kategorielisteBtn);
+        addComponent(abfrageBtn);
     }
 }

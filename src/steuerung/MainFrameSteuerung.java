@@ -3,6 +3,7 @@ package steuerung;
 import benutzerschnittstelle.MainFrame;
 import benutzerschnittstelle.navigation.UIScreens;
 import datenspeicherung.Kategorie;
+import datenspeicherung.Vokabel;
 
 import java.awt.*;
 
@@ -73,12 +74,29 @@ public final class MainFrameSteuerung
         mainFrame.open(UIScreens.Kategorieeuebersicht, args);
     }
 
+    public void openVokabeluebersicht(Vokabel vokabel)
+    {
+        final Object[] args = new Object[1];
+        args[0] = vokabel;
+        mainFrame.open(UIScreens.Vokabeluebersicht, args);
+    }
+
     /**
      * Navigates to the Vokabel Ersteller of this App
      */
     public void openErsteller()
     {
         mainFrame.open(UIScreens.Ersteller);
+    }
+
+    public void openVokabelliste()
+    {
+        mainFrame.open(UIScreens.Vokabelliste);
+    }
+
+    public void openKategorieliste()
+    {
+        mainFrame.open(UIScreens.Kategorieliste);
     }
 
     /**
