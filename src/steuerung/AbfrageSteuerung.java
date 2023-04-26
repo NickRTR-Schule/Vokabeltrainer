@@ -7,32 +7,36 @@ import fachkonzept.AbfrageKonzept;
 
 public final class AbfrageSteuerung
 {
-	private AbfrageKonzept dasAbfrageKonzept;
+    private AbfrageKonzept dasAbfrageKonzept;
 
-	public AbfrageSteuerung(Abfrage abfrage, int numberVocs)
-	{
-		try
-		{
-			dasAbfrageKonzept = new AbfrageKonzept(abfrage, numberVocs);
-		}
-		catch (Exception e)
-		{
-			System.out.println(e.getLocalizedMessage());
-		}
-	}
+    public AbfrageSteuerung(Abfrage abfrage, int numberVocs)
+    {
+        try
+        {
+            dasAbfrageKonzept = new AbfrageKonzept(numberVocs);
+        } catch (Exception e)
+        {
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
 
-	public Vokabel naechsteVokabel() throws EndOfAbfrageException
-	{
-		return dasAbfrageKonzept.naechsteVokabel();
-	}
+    public int anzahlVoks()
+    {
+        return dasAbfrageKonzept.anzahlVoks();
+    }
 
-	public void pruefeEingabe(String eingabe)
-	{
-		dasAbfrageKonzept.pruefeEingabe(eingabe);
-	}
+    public Vokabel naechsteVokabel() throws EndOfAbfrageException
+    {
+        return dasAbfrageKonzept.naechsteVokabel();
+    }
 
-	public Vokabel liesAktuelleVokabel()
-	{
-		return dasAbfrageKonzept.liesAktuelleVokabel();
-	}
+    public boolean pruefeEingabe(String eingabe)
+    {
+        return dasAbfrageKonzept.pruefeEingabe(eingabe);
+    }
+
+    public Vokabel liesAktuelleVokabel()
+    {
+        return dasAbfrageKonzept.liesAktuelleVokabel();
+    }
 }
