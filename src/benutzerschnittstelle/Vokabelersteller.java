@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneLayout;
 
 import benutzerschnittstelle.komponenten.CustomButton;
+import steuerung.MainFrameSteuerung;
 import steuerung.VokabelerstellerSteuerung;
 
 /**
@@ -42,6 +43,7 @@ public final class Vokabelersteller extends JScrollPane
 		uebersetzungTxtField = new JTextField();
 		lautschriftTxtField = new JTextField();
 		verwendungsHinweisTxtField = new JTextField();
+
 		setValues();
 	}
 
@@ -99,6 +101,13 @@ public final class Vokabelersteller extends JScrollPane
 		panel.add(verwendungsHinweisTxtField, constraints);
 		constraints.gridy = 10;
 		final CustomButton storeBtn = new CustomButton("Speichern");
+		storeBtn.addActionListener((ignored) -> {
+			steuerung.vokabelHinzufuegen(wortTxtField.getText(),
+					uebersetzungTxtField.getText(), null, null,
+					lautschriftTxtField.getText(),
+					verwendungsHinweisTxtField.getText());
+			MainFrameSteuerung.getInstance().openDashboard();
+		});
 		storeBtn.addActionListener((ignored) -> steuerung.vokabelHinzufuegen(
 				wortTxtField.getText(), uebersetzungTxtField.getText(), null,
 				null, lautschriftTxtField.getText(),
