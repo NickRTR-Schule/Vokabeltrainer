@@ -130,6 +130,52 @@ public final class Datenbank
         return ergebnis;
     }
 
+    public static ArrayList<Vokabel> liesVokabelnForKat(String name)
+            throws DatenbankAccessException, DatenbankLeseException
+    {
+        oeffneDatenbank();
+
+        // DB-Abfrage als String
+        String sqlStmt = "SELECT Vokabel.wort, Vokabel.uebersetzung, abbildung, aussprache, lautschrift, verwendungshinweis, wiederholungen, anzahlrichtig ";
+        sqlStmt += "FROM Vokabel, Beziehung ";
+        sqlStmt += "WHERE name = ?";
+
+        ArrayList<Vokabel> ergebnis = null;
+
+        try
+        {
+            // DB-Abfrage vorbereiten
+            stmt = con.prepareStatement(sqlStmt);
+            // DB-Abfrage ausführen
+            stmt.setString(1, name);
+            rs = stmt.executeQuery();
+
+            // Ergebnis der DB-Abfrage Zeile für Zeile abarbeiten
+            while (rs.next())
+            {
+                ergebnis = new ArrayList<>();
+                // DB-Zeile als Objekt in Ergebnis-Array speichern
+                ergebnis.add(new Vokabel(rs.getString("wort"),
+                        rs.getString("uebersetzung"), rs.getBytes("abbildung"),
+                        rs.getBytes("aussprache"), rs.getString("lautschrift"),
+                        rs.getString("verwendungshinweis"),
+                        rs.getInt("wiederholungen"),
+                        rs.getInt("anzahlrichtig")));
+            }
+
+            if (ergebnis == null)
+            {
+                throw new DatenbankLeseException(DatenbankObject.vokabel);
+            }
+        } catch (SQLException e)
+        {
+            throw new DatenbankLeseException(DatenbankObject.vokabel);
+        }
+
+        //schliesseDatenbank();
+        return ergebnis;
+    }
+
     public static void vokabelHinzufuegen(String wort, String uebersetzung,
                                           byte[] abbildung, byte[] aussprache, String lautschrift,
                                           String verwendungshinweis) throws DatenbankAccessException,
@@ -195,34 +241,33 @@ public final class Datenbank
             throws DatenbankAccessException, DatenbankLeseException
     {
         oeffneDatenbank();
-        ArrayList<Kategorie> ergebnis = new ArrayList<>();
+        final ArrayList<Kategorie> ergebnis = new ArrayList<>();
+        final ResultSet result;
 
         // DB-Abfrage als String
-        String sqlStmt = "SELECT name, wort, uebersetzung";
-        sqlStmt += "FROM Kategorie";
+        String sqlStmt = "SELECT name ";
+        sqlStmt += "FROM Kategorie ";
 
         try
         {
             // DB-Abfrage vorbereiten
             stmt = con.prepareStatement(sqlStmt);
             // DB-Abfrage ausführen
-            rs = stmt.executeQuery();
+            result = stmt.executeQuery();
 
             // Ergebnis der DB-Abfrage Zeile für Zeile abarbeiten
-            while (rs.next())
+            while (result.next())
             {
                 // DB-Zeile als Objekt in Ergebnis-Array speichern
-                final ArrayList<Vokabel> vokabeln = new ArrayList<>();
-                vokabeln.add(liesVokabel(rs.getString("wort"),
-                        rs.getString("uebersetzung")));
+                final String name = result.getString("name");
+                final ArrayList<Vokabel> vokabeln = new ArrayList<>(liesVokabelnForKat(name));
                 final Vokabel[] voks = new Vokabel[vokabeln.size()];
-                ergebnis.add(new Kategorie(rs.getString("name"), voks));
+                ergebnis.add(new Kategorie(name, voks));
             }
         } catch (SQLException e)
         {
             throw new DatenbankLeseException(DatenbankObject.kategorie);
         }
-
         schliesseDatenbank();
         return ergebnis;
     }
