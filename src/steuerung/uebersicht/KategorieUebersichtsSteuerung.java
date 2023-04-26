@@ -1,6 +1,6 @@
-package steuerung;
+package steuerung.uebersicht;
 
-import benutzerschnittstelle.Kategorieuebersicht;
+import benutzerschnittstelle.uebersicht.Kategorieuebersicht;
 
 public final class KategorieUebersichtsSteuerung
 {

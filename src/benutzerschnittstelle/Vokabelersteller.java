@@ -1,22 +1,14 @@
 package benutzerschnittstelle;
 
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.ScrollPaneLayout;
-
 import benutzerschnittstelle.komponenten.CustomButton;
+import datenspeicherung.Vokabel;
 import steuerung.MainFrameSteuerung;
 import steuerung.VokabelerstellerSteuerung;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * The Screen to add / create a new Vocabulary.
@@ -24,35 +16,47 @@ import steuerung.VokabelerstellerSteuerung;
 public final class Vokabelersteller extends JScrollPane
 {
 
-	/**
-	 * The Controller to this View
-	 */
-	private final VokabelerstellerSteuerung steuerung;
+    /**
+     * The Controller to this View
+     */
+    private final VokabelerstellerSteuerung steuerung;
 
-	// Text Fields
-	private final JTextField wortTxtField;
-	private final JTextField uebersetzungTxtField;
-	private final JTextField lautschriftTxtField;
+    // Text Fields
+    private final JTextField wortTxtField;
+    private final JTextField uebersetzungTxtField;
+    private final JTextField lautschriftTxtField;
 
-	private final JTextField verwendungsHinweisTxtField;
+    private final JTextField verwendungsHinweisTxtField;
 
-	public Vokabelersteller()
-	{
-		steuerung = new VokabelerstellerSteuerung(this);
-		wortTxtField = new JTextField();
-		uebersetzungTxtField = new JTextField();
-		lautschriftTxtField = new JTextField();
-		verwendungsHinweisTxtField = new JTextField();
+    public Vokabelersteller()
+    {
+        steuerung = new VokabelerstellerSteuerung(this);
+        wortTxtField = new JTextField();
+        uebersetzungTxtField = new JTextField();
+        lautschriftTxtField = new JTextField();
+        verwendungsHinweisTxtField = new JTextField();
+        setValues();
+    }
+    public Vokabelersteller(Vokabel vokabel)
+    {
+        steuerung = new VokabelerstellerSteuerung(this);
+        wortTxtField = new JTextField();
+        uebersetzungTxtField = new JTextField();
+        lautschriftTxtField = new JTextField();
+        verwendungsHinweisTxtField = new JTextField();
+        wortTxtField.setText(vokabel.liesWort());
+        uebersetzungTxtField.setText(vokabel.liesUebersetzung());
+        lautschriftTxtField.setText(vokabel.liesLautschrift());
+        verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
+        setValues();
+    }
 
-		setValues();
-	}
-
-	private void setValues()
-	{
-		setLayout(new ScrollPaneLayout());
-		setViewportView(build());
-		setName("Vokabel Ersteller");
-	}
+    private void setValues()
+    {
+        setLayout(new ScrollPaneLayout());
+        setViewportView(build());
+        setName("Vokabel Ersteller");
+    }
 
 	private JPanel build()
 	{
@@ -124,16 +128,16 @@ public final class Vokabelersteller extends JScrollPane
 final class CustomKeyListener extends KeyAdapter
 {
 
-	@Override
-	public void keyPressed(KeyEvent e)
-	{
-		if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		{
-			final Object src = e.getSource();
-			if (src instanceof Component)
-			{
-				((Component) src).transferFocus();
-			}
-		}
-	}
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            final Object src = e.getSource();
+            if (src instanceof Component)
+            {
+                ((Component) src).transferFocus();
+            }
+        }
+    }
 }

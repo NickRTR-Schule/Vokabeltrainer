@@ -5,5 +5,5 @@ package benutzerschnittstelle.navigation;
  */
 public enum UIScreens
 {
-	Dashboard, Abfrage, Ersteller, Statistik, Kategorieeuebersicht,
+    Dashboard, Abfrage, Ersteller, Statistik, Kategorieliste, Kategorieeuebersicht, Vokabelliste, Vokabeluebersicht
 }

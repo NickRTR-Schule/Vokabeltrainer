@@ -1,17 +1,16 @@
 package benutzerschnittstelle;
 
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.util.Locale;
-import java.util.Objects;
-
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
-
 import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.navigation.UIScreens;
+import benutzerschnittstelle.uebersicht.Kategorieliste;
+import benutzerschnittstelle.uebersicht.Kategorieuebersicht;
+import benutzerschnittstelle.uebersicht.Vokabelliste;
 import datenspeicherung.Kategorie;
+import datenspeicherung.Vokabel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Locale;
 
 /**
  * The Frame containing the other Screens as Panels in a Form of its own content
@@ -57,26 +56,26 @@ public final class MainFrame extends JFrame
 		setFont(font);
 	}
 
-	/**
-	 * Navigates to another Screen in this App, being passed to this Method as
-	 * the param ui
-	 *
-	 * @param ui
-	 *            the Screen where to navigate to
-	 */
-	public void open(UIScreens ui)
-	{
-		switch (ui)
-		{
-			case Dashboard -> setContentPane(new Dashboard());
-			case Abfrage -> setContentPane(new CustomPanel(new Abfrage()));
-			case Ersteller -> setContentPane(
-					new CustomPanel(new Vokabelersteller()));
-			case Statistik -> setContentPane(new CustomPanel(new Statistik()));
-			default -> setContentPane(new CustomPanel(new ErrorScreen()));
-		}
-		update();
-	}
+    /**
+     * Navigates to another Screen in this App, being passed to this Method as
+     * the param ui
+     *
+     * @param ui the Screen where to navigate to
+     */
+    public void open(UIScreens ui)
+    {
+        switch (ui)
+        {
+            case Dashboard -> setContentPane(new Dashboard());
+            case Abfrage -> setContentPane(new CustomPanel(new Abfrage()));
+            case Ersteller -> setContentPane(new CustomPanel(new Vokabelersteller()));
+            case Statistik -> setContentPane(new CustomPanel(new Statistik()));
+            case Vokabelliste -> setContentPane(new CustomPanel(new Vokabelliste()));
+            case Kategorieliste -> setContentPane(new CustomPanel(new Kategorieliste()));
+            default -> setContentPane(new CustomPanel(new ErrorScreen()));
+        }
+        update();
+    }
 
 	/**
 	 * Updates the Main Frame and all it's content
@@ -87,34 +86,28 @@ public final class MainFrame extends JFrame
 		repaint();
 	}
 
-	/**
-	 * Navigates to another Screen in the App and used the passed arguments to
-	 * create the new Screen.
-	 *
-	 * @param ui
-	 *            the Screen where to navigate to
-	 * @param args
-	 *            the Arguments being passed to the new Screen
-	 */
-	public void open(UIScreens ui, Object[] args)
-	{
-		if (args == null)
-		{
-			open(ui);
-		}
-		else
-		{
-			if (Objects.requireNonNull(ui) == UIScreens.Kategorieeuebersicht)
-			{
-				final Kategorie kategorie = (Kategorie) args[0];
-				setContentPane(
-						new CustomPanel(new Kategorieuebersicht(kategorie)));
-			}
-			else
-			{
-				setContentPane(new CustomPanel(new ErrorScreen()));
-			}
-		}
-		update();
-	}
+    /**
+     * Navigates to another Screen in the App and used the passed arguments to
+     * create the new Screen.
+     *
+     * @param ui   the Screen where to navigate to
+     * @param args the Arguments being passed to the new Screen
+     */
+    public void open(UIScreens ui, Object[] args)
+    {
+        if (args == null)
+        {
+            open(ui);
+        } else
+        {
+            switch (ui)
+            {
+                case Kategorieeuebersicht ->
+                        setContentPane(new CustomPanel(new Kategorieuebersicht((Kategorie) args[0])));
+                case Vokabeluebersicht -> setContentPane(new CustomPanel(new Vokabelersteller((Vokabel) args[0])));
+                default -> setContentPane(new CustomPanel(new ErrorScreen()));
+            }
+        }
+        update();
+    }
 }

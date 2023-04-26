@@ -33,23 +33,22 @@ public class NavigationBar extends JPanel
 		setName("Navigation Bar");
 	}
 
-	private void build()
-	{
-		final JButton btn = new JButton();
-		btn.setIcon(iconLaden());
-		btn.setText("Back");
-		btn.addMouseListener(new MouseAdapter()
-		{
-			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				MainFrameSteuerung.getInstance().openDashboard();
-			}
-		});
-		setBackground(Color.yellow);
-		add(btn);
-	}
-
+    private void build()
+    {
+        final JButton btn = new JButton();
+        btn.setIcon(iconLaden());
+        btn.setText("Back");
+        btn.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                MainFrameSteuerung.getInstance().openDashboard();
+            }
+        });
+        setBackground(Color.WHITE);
+        add(btn);
+    }
 	/**
 	 * Lädt ein bestimmtes Icon und gibt es als ImageIcon zurück. Als Name
 	 * reicht der Dateiname, wenn sie im Ordner assets liegen.
@@ -58,7 +57,7 @@ public class NavigationBar extends JPanel
 	 */
 	private ImageIcon iconLaden()
 	{
-		// Icon lad
+		// Icon laden
 
 		final InputStream stream = NavigationBar.class.getClassLoader()
 				.getResourceAsStream("Icon_arrow_left_highres.png");
