@@ -58,9 +58,10 @@ public class NavigationBar extends JPanel
 	 */
 	private ImageIcon iconLaden()
 	{
-		// Icon laden
+		// Icon lad
+
 		final InputStream stream = NavigationBar.class.getClassLoader()
-				.getResourceAsStream("Icon_arrow_left.png");
+				.getResourceAsStream("Icon_arrow_left_highres.png");
 		final ImageIcon icon;
 
 		try
