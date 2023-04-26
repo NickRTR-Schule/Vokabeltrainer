@@ -1,7 +1,7 @@
-package benutzerschnittstelle;
+package benutzerschnittstelle.uebersicht;
 
 import datenspeicherung.Kategorie;
-import steuerung.KategorieUebersichtsSteuerung;
+import steuerung.uebersicht.KategorieUebersichtsSteuerung;
 
 import javax.swing.*;
 

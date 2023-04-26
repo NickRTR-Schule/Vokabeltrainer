@@ -1,7 +1,9 @@
 package benutzerschnittstelle;
 
+import benutzerschnittstelle.error.ErrorScreen;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.navigation.UIScreens;
+import benutzerschnittstelle.uebersicht.Kategorieuebersicht;
 import datenspeicherung.Kategorie;
 
 import javax.swing.*;
