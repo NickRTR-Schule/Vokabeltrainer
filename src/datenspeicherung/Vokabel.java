@@ -1,7 +1,7 @@
 package datenspeicherung;
 
-
-public final class Vokabel {
+public final class Vokabel
+{
 	// Vokabel-Datentyp
 	private String wort;
 	private String uebersetzung;
@@ -11,8 +11,11 @@ public final class Vokabel {
 	private String verwendungshinweis;
 	private int wiederholungen;
 	private int anzahlrichtig;
-	
-	public Vokabel(String pWort, String pUebersetzung, byte[] pAbbildung, byte[] pAussprache, String pLautschrift, String pVerwendungshinweis, int pWiederholungen, int pAnzahlrichtig) {
+
+	public Vokabel(String pWort, String pUebersetzung, byte[] pAbbildung,
+			byte[] pAussprache, String pLautschrift, String pVerwendungshinweis,
+			int pWiederholungen, int pAnzahlrichtig)
+	{
 		wort = pWort;
 		uebersetzung = pUebersetzung;
 		abbildung = pAbbildung;
@@ -22,39 +25,51 @@ public final class Vokabel {
 		wiederholungen = pWiederholungen;
 		anzahlrichtig = pAnzahlrichtig;
 	}
-	
+
 	public String liesWort()
 	{
 		return wort;
 	}
-	
+
 	public String liesUebersetzung()
 	{
 		return uebersetzung;
 	}
-	
-	public byte[] liesAbbildung() 
+
+	public byte[] liesAbbildung()
 	{
 		return abbildung;
 	}
-	public byte [] liesAussprache()
+
+	public byte[] liesAussprache()
 	{
 		return aussprache;
 	}
+
 	public String liesLautschrift()
 	{
 		return lautschrift;
 	}
+
 	public String liesVerwendungshinweis()
 	{
 		return verwendungshinweis;
 	}
+
 	public int liesWiederholungen()
 	{
 		return wiederholungen;
 	}
+
 	public int liesAnzahlRichtig()
 	{
 		return anzahlrichtig;
+	}
+
+	public void wiederholt(boolean richtig)
+	{
+		wiederholungen++;
+		if (richtig)
+			anzahlrichtig++;
 	}
 }

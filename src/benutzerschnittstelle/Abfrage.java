@@ -113,13 +113,18 @@ public final class Abfrage extends JPanel
 
 	private void checkVok()
 	{
-		if (steuerung.pruefeEingabe(uebersetzungField.getText()))
-		{
-			vokRichtig();
-		}
-		else
-		{
-			vokFalsch();
+		try {
+			boolean richtig = steuerung.pruefeEingabe(uebersetzungField.getText());
+			if (richtig)
+			{
+				vokRichtig();
+			}
+			else
+			{
+				vokFalsch();
+			}
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
 		}
 	}
 
@@ -131,8 +136,8 @@ public final class Abfrage extends JPanel
 
 	public void vokRichtig()
 	{
-		JOptionPane.showMessageDialog(this,
-				"Richtig! Auf zur nächsten Vokabel");
+		// JOptionPane.showMessageDialog(this,
+		// 		"Richtig! Auf zur nächsten Vokabel");
 		frageAb();
 	}
 }
