@@ -1,9 +1,18 @@
 package datenspeicherung;
 
-import exceptions.datenbank.*;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import exceptions.datenbank.DatenbankAccessException;
+import exceptions.datenbank.DatenbankAccessType;
+import exceptions.datenbank.DatenbankLeseException;
+import exceptions.datenbank.DatenbankObject;
+import exceptions.datenbank.DatenbankSchreibException;
+import exceptions.datenbank.DuplicateVokabelException;
 
 public final class Datenbank
 {

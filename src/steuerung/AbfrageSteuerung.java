@@ -1,5 +1,7 @@
 package steuerung;
 
+import exceptions.datenbank.*;
+
 import benutzerschnittstelle.Abfrage;
 import datenspeicherung.Vokabel;
 import exceptions.EndOfAbfrageException;
@@ -30,7 +32,8 @@ public final class AbfrageSteuerung
         return dasAbfrageKonzept.naechsteVokabel();
     }
 
-    public boolean pruefeEingabe(String eingabe)
+    public boolean pruefeEingabe(String eingabe)  throws DatenbankAccessException,
+	DatenbankSchreibException
     {
         return dasAbfrageKonzept.pruefeEingabe(eingabe);
     }

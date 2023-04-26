@@ -1,6 +1,5 @@
 package datenspeicherung;
 
-
 public final class Vokabel
 {
     // Vokabel-Datentyp
