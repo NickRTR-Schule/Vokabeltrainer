@@ -1,14 +1,21 @@
 package benutzerschnittstelle;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import benutzerschnittstelle.komponenten.CustomButton;
 import exceptions.EndOfAbfrageException;
 import steuerung.AbfrageSteuerung;
 import steuerung.MainFrameSteuerung;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  * The Screen to test the Users knowledge and quiz the vocabs stored
@@ -105,12 +112,13 @@ public final class Abfrage extends JPanel
 		}
 		catch (EndOfAbfrageException ignored)
 		{
-			double erfolgsquote = (anzahlRichtig / anzahlAbfragen);
+			double erfolgsquote = (double) anzahlRichtig / anzahlAbfragen * 100;
+			erfolgsquote = Math.round(erfolgsquote * 100) / 100;
 			JOptionPane.showMessageDialog(this,
 					"Anzahl Vokabeln gelernt: " + enteredNumberVoks
 							+ "\nAnzahl Abfragen: " + anzahlAbfragen
 							+ "\nDavon richtig: " + anzahlRichtig
-							+ "\nErfolgsquote: " + erfolgsquote);
+							+ "\nErfolgsquote: " + erfolgsquote + "%");
 			MainFrameSteuerung.getInstance().openDashboard();
 		}
 	}
