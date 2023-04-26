@@ -11,6 +11,7 @@ public class CustomPanel extends JPanel
     public CustomPanel(Component content)
     {
         constraints = new GridBagConstraints();
+        setBackground(Color.WHITE);
         build(content);
     }
 

@@ -1,6 +1,7 @@
 package benutzerschnittstelle;
 
 import benutzerschnittstelle.komponenten.CustomButton;
+import benutzerschnittstelle.komponenten.CustomTextField;
 import datenspeicherung.Vokabel;
 import steuerung.MainFrameSteuerung;
 import steuerung.VokabelScreenSteuerung;
@@ -22,19 +23,19 @@ public final class VokabelScreen extends JScrollPane
     private final VokabelScreenSteuerung steuerung;
 
     // Text Fields
-    private final JTextField wortTxtField;
-    private final JTextField uebersetzungTxtField;
-    private final JTextField lautschriftTxtField;
+    private final CustomTextField wortTxtField;
+    private final CustomTextField uebersetzungTxtField;
+    private final CustomTextField lautschriftTxtField;
 
-    private final JTextField verwendungsHinweisTxtField;
+    private final CustomTextField verwendungsHinweisTxtField;
 
     public VokabelScreen()
     {
         steuerung = new VokabelScreenSteuerung();
-        wortTxtField = new JTextField();
-        uebersetzungTxtField = new JTextField();
-        lautschriftTxtField = new JTextField();
-        verwendungsHinweisTxtField = new JTextField();
+        wortTxtField = new CustomTextField();
+        uebersetzungTxtField = new CustomTextField();
+        lautschriftTxtField = new CustomTextField();
+        verwendungsHinweisTxtField = new CustomTextField();
         setValues();
     }
 
@@ -64,6 +65,7 @@ public final class VokabelScreen extends JScrollPane
         final GridBagLayout layout = new GridBagLayout();
         layout.setConstraints(this, constraints);
         final JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         panel.setLayout(layout);
         constraints.gridx = 0;
         constraints.gridy = 0;
