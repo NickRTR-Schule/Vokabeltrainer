@@ -1,6 +1,5 @@
 package steuerung;
 
-import benutzerschnittstelle.Dashboard;
 import datenspeicherung.Datenbank;
 import datenspeicherung.Kategorie;
 
@@ -9,11 +8,8 @@ import java.util.ArrayList;
 public final class DashboardSteuerung
 {
 
-    private final Dashboard dashboard;
-
-    public DashboardSteuerung(Dashboard dashboard)
+    public DashboardSteuerung()
     {
-        this.dashboard = dashboard;
     }
 
     public void abfrageGeklickt()

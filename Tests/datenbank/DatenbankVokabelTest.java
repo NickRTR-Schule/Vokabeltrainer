@@ -16,14 +16,14 @@ public final class DatenbankVokabelTest
     @Test
     public void test() throws Exception
     {
-        derSpeicher.vokabelHinzufuegen("duck", "Ente", null, null, null, null);
+        Datenbank.vokabelHinzufuegen("duck", "Ente", null, null, null, null);
 
-        ArrayList<Vokabel> vokabeln = derSpeicher.liesVokabeln(null);
+        ArrayList<Vokabel> vokabeln = Datenbank.liesVokabeln();
         assertTrue(vokabeln.size() > 0);
 
-        Vokabel vokabel = derSpeicher.liesVokabel("duck", "Ente");
+        Vokabel vokabel = Datenbank.liesVokabel("duck", "Ente");
         assertEquals("Ente", vokabel.liesUebersetzung());
 
-        derSpeicher.loescheVokabel("duck", "Ente");
+        Datenbank.loescheVokabel("duck", "Ente");
     }
 }

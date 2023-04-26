@@ -1,7 +1,5 @@
 package benutzerschnittstelle.komponenten;
 
-import benutzerschnittstelle.MainFrame;
-
 import javax.swing.*;
 import java.awt.*;
 

@@ -1,27 +1,19 @@
 package benutzerschnittstelle;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
 import benutzerschnittstelle.komponenten.CustomButton;
 import exceptions.EndOfAbfrageException;
 import steuerung.AbfrageSteuerung;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * The Screen to test the Users knowledge and quiz the vocabs stored
  */
 public final class Abfrage extends JPanel
 {
-
 	/**
 	 * The Controller to this View
 	 */
