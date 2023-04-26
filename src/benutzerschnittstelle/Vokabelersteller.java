@@ -59,7 +59,7 @@ public final class Vokabelersteller extends JScrollPane
 		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.anchor = GridBagConstraints.CENTER;
-		constraints.insets = new Insets(25, 25, 25, 25);
+		constraints.insets = new Insets(5, 5, 5, 5);
 		final GridBagLayout layout = new GridBagLayout();
 		layout.setConstraints(this, constraints);
 		final JPanel panel = new JPanel();
