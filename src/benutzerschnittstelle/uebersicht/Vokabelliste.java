@@ -6,27 +6,44 @@ import steuerung.uebersicht.VokabellisteSteuerung;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class Vokabelliste extends JPanel
+public class Vokabelliste extends JScrollPane
 {
 
     private final VokabellisteSteuerung steuerung;
 
-    private final Vokabel[] voks;
+    private ArrayList<Vokabel> voks;
 
     public Vokabelliste()
     {
         steuerung = new VokabellisteSteuerung();
-        // TODO: work on
-        voks = new Vokabel[1];
+        try
+        {
+            voks = steuerung.liesVokabeln();
+        } catch (Exception ignored)
+        {
+            voks = new ArrayList<>();
+            JOptionPane.showMessageDialog(this, "Fehler beim Lesen der Vokabeln");
+        }
+        setValues();
     }
 
-    private void build()
+    private void setValues()
     {
-        setLayout(new GridLayout(voks.length, 1));
+        setLayout(new ScrollPaneLayout());
+        setViewportView(build());
+        setName("Vokabelliste");
+    }
+
+    private JPanel build()
+    {
+        final JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(voks.size(), 1));
         for (Vokabel vok : voks)
         {
-            add(new Vokabeltile(vok));
+            panel.add(new Vokabeltile(vok));
         }
+        return panel;
     }
 }

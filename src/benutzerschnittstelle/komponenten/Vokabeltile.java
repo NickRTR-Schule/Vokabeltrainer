@@ -4,6 +4,7 @@ import datenspeicherung.Vokabel;
 import steuerung.MainFrameSteuerung;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -25,6 +26,7 @@ public class Vokabeltile extends JPanel
     {
         setName(vokabel.liesWort() + "Tile");
         setEnabled(true);
+        setBackground(Color.WHITE);
     }
 
     /**
@@ -40,7 +42,7 @@ public class Vokabeltile extends JPanel
             public void mouseClicked(MouseEvent e)
             {
                 // TODO-js: Work on that
-                MainFrameSteuerung.getInstance().openErsteller();
+                MainFrameSteuerung.getInstance().openVokabeluebersicht(vokabel);
             }
         });
     }

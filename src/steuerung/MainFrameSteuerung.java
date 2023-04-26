@@ -38,9 +38,7 @@ public final class MainFrameSteuerung
      */
     public static void main(String[] args)
     {
-        EventQueue.invokeLater(() -> {
-            shared = new MainFrameSteuerung();
-        });
+        EventQueue.invokeLater(() -> shared = new MainFrameSteuerung());
     }
 
     public static MainFrameSteuerung getInstance()
@@ -88,7 +86,7 @@ public final class MainFrameSteuerung
     {
         mainFrame.open(UIScreens.Ersteller);
     }
-
+    
     public void openVokabelliste()
     {
         mainFrame.open(UIScreens.Vokabelliste);
