@@ -44,7 +44,7 @@ public class AbfrageKonzept
     {
         if (currentVok < voks.length)
         {
-            return voks[currentVok++];
+            return voks[++currentVok];
         } else
         {
             throw new EndOfAbfrageException();
