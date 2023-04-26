@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import benutzerschnittstelle.komponenten.CustomButton;
 import exceptions.EndOfAbfrageException;
 import steuerung.AbfrageSteuerung;
+import steuerung.MainFrameSteuerung;
 
 /**
  * The Screen to test the Users knowledge and quiz the vocabs stored
@@ -31,7 +32,10 @@ public final class Abfrage extends JPanel
 
 	private final JTextField uebersetzungField;
 
-	private final int enteredNumberVoks;
+	private int enteredNumberVoks;
+
+	private int anzahlAbfragen = 0;
+	private int anzahlRichtig = 0;
 
 	public Abfrage()
 	{
@@ -90,6 +94,7 @@ public final class Abfrage extends JPanel
 		{
 			JOptionPane.showMessageDialog(this,
 					"Nicht ausreichend Vokabeln gespeichert");
+			enteredNumberVoks = steuerung.anzahlVoks();
 		}
 		wortLabel.setText(steuerung.liesAktuelleVokabel().liesWort());
 	}
@@ -108,22 +113,37 @@ public final class Abfrage extends JPanel
 		}
 		catch (EndOfAbfrageException ignored)
 		{
+			double erfolgsquote = (anzahlRichtig / anzahlAbfragen);
+			JOptionPane.showMessageDialog(this,
+					"Anzahl Vokabeln gelernt: " + enteredNumberVoks
+							+ "\nAnzahl Abfragen: " + anzahlAbfragen
+							+ "\nDavon richtig: " + anzahlRichtig
+							+ "\nErfolgsquote: " + erfolgsquote);
+			MainFrameSteuerung.getInstance().openDashboard();
 		}
 	}
 
 	private void checkVok()
 	{
-		try {
-			boolean richtig = steuerung.pruefeEingabe(uebersetzungField.getText());
+		anzahlAbfragen++;
+		try
+		{
+			boolean richtig = steuerung
+					.pruefeEingabe(uebersetzungField.getText());
 			if (richtig)
 			{
+				anzahlRichtig++;
 				vokRichtig();
+				uebersetzungField.setText("");
 			}
 			else
 			{
 				vokFalsch();
+				uebersetzungField.selectAll();
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			System.out.println(e.getLocalizedMessage());
 		}
 	}
@@ -137,7 +157,7 @@ public final class Abfrage extends JPanel
 	public void vokRichtig()
 	{
 		// JOptionPane.showMessageDialog(this,
-		// 		"Richtig! Auf zur nächsten Vokabel");
+		// "Richtig! Auf zur nächsten Vokabel");
 		frageAb();
 	}
 }

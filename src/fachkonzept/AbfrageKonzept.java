@@ -44,7 +44,7 @@ public class AbfrageKonzept
 
 	public Vokabel naechsteVokabel() throws EndOfAbfrageException
 	{
-		if (currentVok < voks.length)
+		if (currentVok < voks.length - 1)
 		{
 			return voks[++currentVok];
 		}
