@@ -50,4 +50,10 @@ public class Vokabelliste extends CustomPanel
         }
         return panel;
     }
+
+    private JTable getTable()
+    {
+        final JTable table = new JTable();
+        return table;
+    }
 }

@@ -49,7 +49,6 @@ public final class VokabelScreen extends CustomPanel
         uebersetzungTxtField.setText(vokabel.liesUebersetzung());
         lautschriftTxtField.setText(vokabel.liesLautschrift());
         verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
-        setValues();
     }
 
     private void setValues()
@@ -70,7 +69,7 @@ public final class VokabelScreen extends CustomPanel
         final GridBagLayout layout = new GridBagLayout();
         layout.setConstraints(this, constraints);
         final JPanel panel = new JPanel();
-        panel.setBackground(Color.WHITE);
+        //panel.setBackground(Color.WHITE);
         panel.setLayout(layout);
         constraints.gridx = 0;
         constraints.gridy = 0;

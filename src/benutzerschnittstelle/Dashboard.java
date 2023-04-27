@@ -69,23 +69,34 @@ public final class Dashboard extends CustomPanel
     private void build()
     {
         // Add Buttons
+        constraints.gridy = 0;
+        constraints.gridx = 1;
+        constraints.gridheight = 5;
+        constraints.gridwidth = 10;
         final JPanel statsPanel = new JPanel();
+        addComponent(statsPanel);
+        constraints.gridheight = 1;
+        constraints.gridwidth = 1;
+        constraints.gridy = 3;
+        constraints.gridx = 1;
+        final CustomButton vokabellisteBtn = new CustomButton(
+                "Vokabelliste", "Zeige alle Vokabeln als Liste an");
+        addComponent(vokabellisteBtn);
+        constraints.gridx = 3;
         final CustomButton vokabelErstellerBtn = new CustomButton(
                 "Vokabel erstellen", "Erstelle eine neue Vokabel");
         vokabelErstellerBtn.addActionListener((ignored) -> steuerung.erstellerGeklickt());
-        final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
-                "Starte eine Abfrage");
-        abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
-        final CustomButton vokabellisteBtn = new CustomButton(
-                "Vokabelliste", "Zeige alle Vokabeln als Liste an");
-        vokabellisteBtn.addActionListener((ignored) -> steuerung.vokabellisteGeklickt());
+        addComponent(vokabelErstellerBtn);
+        constraints.gridx = 5;
         final CustomButton kategorielisteBtn = new CustomButton(
                 "Kategorieliste", "Zeige alle Kategorien in einer Liste an");
         kategorielisteBtn.addActionListener((ignored) -> steuerung.kategorielisteGeklickt());
-        //addComponent(statsPanel);
-        addComponent(vokabellisteBtn);
-        addComponent(vokabelErstellerBtn);
         addComponent(kategorielisteBtn);
+        constraints.gridx = 7;
+        final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
+                "Starte eine Abfrage");
+        abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
+        vokabellisteBtn.addActionListener((ignored) -> steuerung.vokabellisteGeklickt());
         addComponent(abfrageBtn);
     }
 }

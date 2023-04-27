@@ -8,6 +8,6 @@ public class CustomTextField extends JTextField
     public CustomTextField()
     {
         final Color c = new Color(240, 240, 240);
-        setBackground(c);
+        //setBackground(c);
     }
 }
