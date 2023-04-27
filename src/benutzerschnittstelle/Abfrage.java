@@ -71,9 +71,7 @@ public final class Abfrage extends CustomPanel
         constraints.gridy = 1;
         add(uebersetzungField, constraints);
         final CustomButton checkBtn = new CustomButton("Check");
-        checkBtn.addActionListener((e) -> {
-            checkVok();
-        });
+        checkBtn.addActionListener((e) -> checkVok());
         constraints.gridy = 2;
         add(checkBtn, constraints);
         constraints.gridx = 3;
@@ -114,7 +112,7 @@ public final class Abfrage extends CustomPanel
         } catch (EndOfAbfrageException ignored)
         {
             double erfolgsquote = (double) anzahlRichtig / anzahlAbfragen * 100;
-            erfolgsquote = Math.round(erfolgsquote * 100) / 100;
+            erfolgsquote = (double) Math.round(erfolgsquote * 100) / 100;
             JOptionPane.showMessageDialog(this,
                     "Anzahl Vokabeln gelernt: " + enteredNumberVoks
                             + "\nAnzahl Abfragen: " + anzahlAbfragen
@@ -155,8 +153,6 @@ public final class Abfrage extends CustomPanel
 
     public void vokRichtig()
     {
-        // JOptionPane.showMessageDialog(this,
-        // "Richtig! Auf zur nächsten Vokabel");
         frageAb();
     }
 }

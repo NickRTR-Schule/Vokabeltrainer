@@ -1,28 +1,25 @@
 package benutzerschnittstelle.uebersicht;
 
 import benutzerschnittstelle.komponenten.CustomPanel;
-import benutzerschnittstelle.komponenten.Vokabeltile;
 import datenspeicherung.Vokabel;
 import steuerung.uebersicht.VokabellisteSteuerung;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Vokabelliste extends CustomPanel
 {
 
-    private final VokabellisteSteuerung steuerung;
-
     private ArrayList<Vokabel> voks;
 
     public Vokabelliste()
     {
         super("Vokabeln");
-        steuerung = new VokabellisteSteuerung();
         try
         {
-            voks = steuerung.liesVokabeln();
+            voks = new VokabellisteSteuerung().liesVokabeln();
         } catch (Exception ignored)
         {
             voks = new ArrayList<>();
@@ -44,16 +41,37 @@ public class Vokabelliste extends CustomPanel
     {
         final JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(voks.size(), 1));
-        for (Vokabel vok : voks)
-        {
-            panel.add(new Vokabeltile(vok));
-        }
+        panel.add(getTable());
         return panel;
     }
 
-    private JTable getTable()
+    private JScrollPane getTable()
     {
-        final JTable table = new JTable();
-        return table;
+        final String[] columnNames = {
+                "Wort",
+                "Uebersetzung",
+                "Quote",
+                "Wiederholungen",
+                "Verwendungshinweis"
+        };
+        final DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(columnNames);
+        for (Vokabel vok : voks)
+        {
+            model.addRow(
+                    new Object[]
+                            {
+                                    vok.liesWort(),
+                                    vok.liesUebersetzung(),
+                                    vok.liesQuote(),
+                                    vok.liesWiederholungen(),
+                                    vok.liesVerwendungshinweis(),
+                            }
+            );
+        }
+        final JScrollPane pane = new JScrollPane();
+        pane.setLayout(new ScrollPaneLayout());
+        pane.setViewportView(new JTable(model));
+        return pane;
     }
 }

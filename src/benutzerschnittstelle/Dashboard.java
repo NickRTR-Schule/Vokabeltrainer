@@ -71,7 +71,7 @@ public final class Dashboard extends CustomPanel
         // Add Buttons
         constraints.gridy = 0;
         constraints.gridx = 1;
-        constraints.gridheight = 5;
+        constraints.gridheight = 3;
         constraints.gridwidth = 10;
         final JPanel statsPanel = new JPanel();
         addComponent(statsPanel);

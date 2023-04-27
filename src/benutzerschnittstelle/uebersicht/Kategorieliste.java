@@ -11,17 +11,15 @@ import java.util.ArrayList;
 
 public class Kategorieliste extends CustomPanel
 {
-    private final KategorielisteSteuerung steuerung;
 
     private ArrayList<Kategorie> kats;
 
     public Kategorieliste()
     {
         super("Kategorien");
-        steuerung = new KategorielisteSteuerung();
         try
         {
-            kats = steuerung.liesKategorien();
+            kats = new KategorielisteSteuerung().liesKategorien();
         } catch (Exception ignored)
         {
             kats = new ArrayList<>();
