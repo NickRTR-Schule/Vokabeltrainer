@@ -1,6 +1,7 @@
 package benutzerschnittstelle;
 
 import benutzerschnittstelle.komponenten.CustomButton;
+import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.CustomTextField;
 import datenspeicherung.Vokabel;
 import steuerung.MainFrameSteuerung;
@@ -14,7 +15,7 @@ import java.awt.event.KeyEvent;
 /**
  * The Screen to add / create a new Vocabulary.
  */
-public final class VokabelScreen extends JScrollPane
+public final class VokabelScreen extends CustomPanel
 {
 
     /**
@@ -31,6 +32,8 @@ public final class VokabelScreen extends JScrollPane
 
     public VokabelScreen()
     {
+        // TODO-js: Work on that
+        super("Vokabel");
         steuerung = new VokabelScreenSteuerung();
         wortTxtField = new CustomTextField();
         uebersetzungTxtField = new CustomTextField();
@@ -51,8 +54,10 @@ public final class VokabelScreen extends JScrollPane
 
     private void setValues()
     {
-        setLayout(new ScrollPaneLayout());
-        setViewportView(build());
+        final JScrollPane pane = new JScrollPane();
+        pane.setLayout(new ScrollPaneLayout());
+        pane.setViewportView(build());
+        add(pane);
         setName("Vokabel Ersteller");
     }
 

@@ -1,5 +1,6 @@
 package benutzerschnittstelle.uebersicht;
 
+import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.KategorieTile;
 import datenspeicherung.Kategorie;
 import steuerung.uebersicht.KategorielisteSteuerung;
@@ -8,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Kategorieliste extends JScrollPane
+public class Kategorieliste extends CustomPanel
 {
     private final KategorielisteSteuerung steuerung;
 
@@ -16,6 +17,7 @@ public class Kategorieliste extends JScrollPane
 
     public Kategorieliste()
     {
+        super("Kategorien");
         steuerung = new KategorielisteSteuerung();
         try
         {
@@ -30,9 +32,11 @@ public class Kategorieliste extends JScrollPane
 
     private void setValues()
     {
-        setLayout(new ScrollPaneLayout());
-        setViewportView(build());
-        setName("Vokabelliste");
+        final JScrollPane contentPane = new JScrollPane();
+        contentPane.setLayout(new ScrollPaneLayout());
+        contentPane.setViewportView(build());
+        add(contentPane);
+        setName(getTitle());
     }
 
     private JPanel build()

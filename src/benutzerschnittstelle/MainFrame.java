@@ -1,7 +1,7 @@
 package benutzerschnittstelle;
 
 import benutzerschnittstelle.error.ErrorScreen;
-import benutzerschnittstelle.komponenten.CustomPanel;
+import benutzerschnittstelle.komponenten.WrapperPanel;
 import benutzerschnittstelle.navigation.UIScreens;
 import benutzerschnittstelle.uebersicht.Kategorieliste;
 import benutzerschnittstelle.uebersicht.Kategorieuebersicht;
@@ -68,12 +68,12 @@ public final class MainFrame extends JFrame
         switch (ui)
         {
             case Dashboard -> setContentPane(new Dashboard());
-            case Abfrage -> setContentPane(new CustomPanel(new Abfrage()));
-            case Ersteller -> setContentPane(new CustomPanel(new VokabelScreen()));
-            case Statistik -> setContentPane(new CustomPanel(new Statistik()));
-            case Vokabelliste -> setContentPane(new CustomPanel(new Vokabelliste()));
-            case Kategorieliste -> setContentPane(new CustomPanel(new Kategorieliste()));
-            default -> setContentPane(new CustomPanel(new ErrorScreen()));
+            case Abfrage -> setContentPane(new WrapperPanel(new Abfrage()));
+            case Ersteller -> setContentPane(new WrapperPanel(new VokabelScreen()));
+            case Statistik -> setContentPane(new WrapperPanel(new Statistik()));
+            case Vokabelliste -> setContentPane(new WrapperPanel(new Vokabelliste()));
+            case Kategorieliste -> setContentPane(new WrapperPanel(new Kategorieliste()));
+            default -> setContentPane(new WrapperPanel(new ErrorScreen()));
         }
         update();
     }
@@ -104,9 +104,9 @@ public final class MainFrame extends JFrame
             switch (ui)
             {
                 case Kategorieeuebersicht ->
-                        setContentPane(new CustomPanel(new Kategorieuebersicht((Kategorie) args[0])));
-                case Vokabeluebersicht -> setContentPane(new CustomPanel(new VokabelScreen((Vokabel) args[0])));
-                default -> setContentPane(new CustomPanel(new ErrorScreen()));
+                        setContentPane(new WrapperPanel(new Kategorieuebersicht((Kategorie) args[0])));
+                case Vokabeluebersicht -> setContentPane(new WrapperPanel(new VokabelScreen((Vokabel) args[0])));
+                default -> setContentPane(new WrapperPanel(new ErrorScreen()));
             }
         }
         update();

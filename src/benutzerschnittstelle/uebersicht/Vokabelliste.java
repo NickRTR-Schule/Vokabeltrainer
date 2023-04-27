@@ -1,5 +1,6 @@
 package benutzerschnittstelle.uebersicht;
 
+import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.Vokabeltile;
 import datenspeicherung.Vokabel;
 import steuerung.uebersicht.VokabellisteSteuerung;
@@ -8,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Vokabelliste extends JScrollPane
+public class Vokabelliste extends CustomPanel
 {
 
     private final VokabellisteSteuerung steuerung;
@@ -17,6 +18,7 @@ public class Vokabelliste extends JScrollPane
 
     public Vokabelliste()
     {
+        super("Vokabeln");
         steuerung = new VokabellisteSteuerung();
         try
         {
@@ -31,8 +33,10 @@ public class Vokabelliste extends JScrollPane
 
     private void setValues()
     {
-        setLayout(new ScrollPaneLayout());
-        setViewportView(build());
+        final JScrollPane contentPane = new JScrollPane();
+        contentPane.setLayout(new ScrollPaneLayout());
+        contentPane.setViewportView(build());
+        add(contentPane);
         setName("Vokabelliste");
     }
 

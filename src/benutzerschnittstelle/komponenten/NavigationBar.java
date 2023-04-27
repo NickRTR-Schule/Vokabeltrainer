@@ -16,9 +16,12 @@ import java.io.InputStream;
 public class NavigationBar extends JPanel
 {
 
-    public NavigationBar()
+    private final String title;
+
+    public NavigationBar(String title)
     {
         super(new FlowLayout(FlowLayout.LEFT));
+        this.title = title;
         setValues();
         build();
     }
@@ -42,6 +45,7 @@ public class NavigationBar extends JPanel
             }
         });
         add(btn);
+        add(new JLabel(title));
     }
 
     /**

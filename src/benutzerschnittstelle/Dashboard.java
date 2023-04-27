@@ -1,13 +1,14 @@
 package benutzerschnittstelle;
 
 import benutzerschnittstelle.komponenten.CustomButton;
+import benutzerschnittstelle.komponenten.CustomPanel;
 import steuerung.DashboardSteuerung;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public final class Dashboard extends JPanel
+public final class Dashboard extends CustomPanel
 {
 
     /**
@@ -25,6 +26,7 @@ public final class Dashboard extends JPanel
      */
     public Dashboard()
     {
+        super("Dashboard");
         steuerung = new DashboardSteuerung();
         setValues();
         build();
@@ -40,7 +42,7 @@ public final class Dashboard extends JPanel
         setMinimumSize(new Dimension(1000, 1000));
         setBackground(Color.WHITE);
         setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        setName("Dashboard");
+        setName(getTitle());
         constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.insets = new Insets(25, 25, 25, 25);
