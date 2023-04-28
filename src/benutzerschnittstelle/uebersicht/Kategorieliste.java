@@ -41,7 +41,7 @@ public final class Kategorieliste extends CustomPanel
     {
         final JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(kats.size(), 1));
-        for (Kategorie kat : kats)
+        for (final Kategorie kat : kats)
         {
             panel.add(new KategorieTile(kat));
         }

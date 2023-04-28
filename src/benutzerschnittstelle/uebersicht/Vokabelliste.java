@@ -48,8 +48,20 @@ public final class Vokabelliste extends CustomPanel
     private JPanel build()
     {
         final JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(voks.size(), 1));
+        final GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(5, 5, 5, 5);
+        final GridBagLayout layout = new GridBagLayout();
+        layout.setConstraints(this, constraints);
+        panel.setLayout(layout);
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        constraints.gridheight = 10;
+        constraints.gridwidth = 10;
         panel.add(getTable());
+        constraints.gridheight = 1;
+        constraints.gridy = 20;
         panel.add(getActionPanel());
         return panel;
     }
@@ -65,7 +77,7 @@ public final class Vokabelliste extends CustomPanel
         };
         final DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columnNames);
-        for (Vokabel vok : voks)
+        for (final Vokabel vok : voks)
         {
             model.addRow(
                     new Object[]
