@@ -1,4 +1,4 @@
-package steuerung.uebersicht;
+package steuerung.management;
 
 import datenspeicherung.Datenbank;
 import datenspeicherung.Kategorie;

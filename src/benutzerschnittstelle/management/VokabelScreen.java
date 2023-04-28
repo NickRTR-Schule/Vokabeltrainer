@@ -1,11 +1,11 @@
-package benutzerschnittstelle;
+package benutzerschnittstelle.management;
 
 import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.CustomTextField;
 import datenspeicherung.Vokabel;
 import steuerung.MainFrameSteuerung;
-import steuerung.VokabelScreenSteuerung;
+import steuerung.management.VokabelScreenSteuerung;
 
 import javax.swing.*;
 import java.awt.*;

@@ -2,10 +2,11 @@ package benutzerschnittstelle;
 
 import benutzerschnittstelle.error.ErrorScreen;
 import benutzerschnittstelle.komponenten.WrapperPanel;
+import benutzerschnittstelle.management.Kategorieliste;
+import benutzerschnittstelle.management.Kategorieuebersicht;
+import benutzerschnittstelle.management.VokabelScreen;
+import benutzerschnittstelle.management.Vokabelliste;
 import benutzerschnittstelle.navigation.UIScreens;
-import benutzerschnittstelle.uebersicht.Kategorieliste;
-import benutzerschnittstelle.uebersicht.Kategorieuebersicht;
-import benutzerschnittstelle.uebersicht.Vokabelliste;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 

@@ -1,9 +1,9 @@
-package benutzerschnittstelle.uebersicht;
+package benutzerschnittstelle.management;
 
 import benutzerschnittstelle.komponenten.CustomPanel;
 import datenspeicherung.Vokabel;
 import steuerung.MainFrameSteuerung;
-import steuerung.uebersicht.VokabellisteSteuerung;
+import steuerung.management.VokabellisteSteuerung;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

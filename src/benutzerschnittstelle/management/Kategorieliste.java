@@ -1,9 +1,9 @@
-package benutzerschnittstelle.uebersicht;
+package benutzerschnittstelle.management;
 
 import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.KategorieTile;
 import datenspeicherung.Kategorie;
-import steuerung.uebersicht.KategorielisteSteuerung;
+import steuerung.management.KategorielisteSteuerung;
 
 import javax.swing.*;
 import java.awt.*;

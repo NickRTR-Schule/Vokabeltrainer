@@ -1,4 +1,4 @@
-package steuerung.uebersicht;
+package steuerung.management;
 
 public final class KategorieUebersichtsSteuerung
 {

@@ -1,8 +1,8 @@
-package benutzerschnittstelle.uebersicht;
+package benutzerschnittstelle.management;
 
 import benutzerschnittstelle.komponenten.CustomPanel;
 import datenspeicherung.Kategorie;
-import steuerung.uebersicht.KategorieUebersichtsSteuerung;
+import steuerung.management.KategorieUebersichtsSteuerung;
 
 /**
  * The Screen showing all the Categories the User created to manage and organize
