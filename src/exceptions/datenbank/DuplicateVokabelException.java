@@ -1,6 +1,6 @@
 package exceptions.datenbank;
 
-public class DuplicateVokabelException extends Exception
+public final class DuplicateVokabelException extends Exception
 {
     @Override
     public String getMessage()

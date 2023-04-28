@@ -13,7 +13,7 @@ import java.io.InputStream;
  * A Navigation Bar to use on the top of every screen to navigate back to the
  * Dashboard
  */
-public class NavigationBar extends JPanel
+public final class NavigationBar extends JPanel
 {
 
     private final String title;

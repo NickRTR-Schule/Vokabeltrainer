@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Kategorieliste extends CustomPanel
+public final class Kategorieliste extends CustomPanel
 {
 
     private ArrayList<Kategorie> kats;

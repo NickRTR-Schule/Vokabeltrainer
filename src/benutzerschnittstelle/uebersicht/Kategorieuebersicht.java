@@ -21,13 +21,13 @@ public final class Kategorieuebersicht extends CustomPanel
     public Kategorieuebersicht(Kategorie kategorie)
     {
         super(kategorie.liesName());
-        steuerung = new KategorieUebersichtsSteuerung(this);
+        steuerung = new KategorieUebersichtsSteuerung();
         this.kategorie = kategorie;
         build();
     }
 
     private void build()
     {
-        
+
     }
 }

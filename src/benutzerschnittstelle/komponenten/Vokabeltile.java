@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Vokabeltile extends JPanel
+public final class Vokabeltile extends JPanel
 {
     private final Vokabel vokabel;
 

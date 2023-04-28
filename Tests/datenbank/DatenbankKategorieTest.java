@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DatenbankKategorieTest
+public final class DatenbankKategorieTest
 {
 
 

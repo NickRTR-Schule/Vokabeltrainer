@@ -9,7 +9,7 @@ import exceptions.datenbank.DatenbankSchreibException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class AbfrageKonzept
+public final class AbfrageKonzept
 {
     private Vokabel[] voks;
     private int currentVok;

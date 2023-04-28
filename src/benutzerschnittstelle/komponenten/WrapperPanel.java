@@ -3,7 +3,7 @@ package benutzerschnittstelle.komponenten;
 import javax.swing.*;
 import java.awt.*;
 
-public class WrapperPanel extends JPanel
+public final class WrapperPanel extends JPanel
 {
 
     private final GridBagConstraints constraints;

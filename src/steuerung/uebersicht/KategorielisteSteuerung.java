@@ -5,7 +5,7 @@ import datenspeicherung.Kategorie;
 
 import java.util.ArrayList;
 
-public class KategorielisteSteuerung
+public final class KategorielisteSteuerung
 {
 
     public KategorielisteSteuerung()

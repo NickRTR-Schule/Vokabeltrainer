@@ -4,7 +4,7 @@ import benutzerschnittstelle.MainFrame;
 
 import java.awt.*;
 
-public class CustomPainter
+public final class CustomPainter
 {
     // Inspiration by:
     // Discussion from: https://stackoverflow.com/questions/27706197/how-can-i-center-graphics-drawstring-in-java
