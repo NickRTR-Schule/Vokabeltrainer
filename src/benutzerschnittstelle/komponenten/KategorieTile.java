@@ -52,5 +52,6 @@ public final class KategorieTile extends JPanel
                         .openKategorieuebersicht(kategorie);
             }
         });
+        add(new JLabel(kategorie.liesVokabeln().length + "Vokabeln"));
     }
 }

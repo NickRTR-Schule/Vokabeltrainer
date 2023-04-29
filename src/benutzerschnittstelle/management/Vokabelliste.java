@@ -6,24 +6,41 @@ import steuerung.MainFrameSteuerung;
 import steuerung.management.VokabellisteSteuerung;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
 public final class Vokabelliste extends CustomPanel
 {
 
-    final DefaultTableModel model;
+    private final VokabelTableModel model;
 
-    final JTable table;
+    private final JTable table;
     private final VokabellisteSteuerung steuerung;
     private ArrayList<Vokabel> voks;
 
     public Vokabelliste()
     {
         super("Vokabeln");
-        model = new DefaultTableModel();
-        table = new JTable();
+        model = new VokabelTableModel();
+        table = new JTable(model);
+        table.getColumnModel().getColumn(VokabelTableModel.COLUMN_QUOTE).setCellRenderer(new DefaultTableCellRenderer()
+        {
+
+
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+            {
+                setHorizontalAlignment(JLabel.RIGHT);
+                Component renderComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                if (renderComponent instanceof JLabel)
+                {
+                    ((JLabel) renderComponent).setText(((JLabel) renderComponent).getText() + " %");
+                }
+                return renderComponent;
+            }
+        });
         steuerung = new VokabellisteSteuerung();
         try
         {
@@ -38,10 +55,10 @@ public final class Vokabelliste extends CustomPanel
 
     private void setValues()
     {
-        final JScrollPane contentPane = new JScrollPane();
-        contentPane.setLayout(new ScrollPaneLayout());
-        contentPane.setViewportView(build());
-        add(contentPane);
+        //final JScrollPane contentPane = new JScrollPane();
+        //contentPane.setLayout(new ScrollPaneLayout());
+        //contentPane.setViewportView();
+        add(build());
         setName(getTitle());
     }
 
@@ -57,42 +74,28 @@ public final class Vokabelliste extends CustomPanel
         panel.setLayout(layout);
         constraints.gridx = 1;
         constraints.gridy = 0;
-        constraints.gridheight = 10;
-        constraints.gridwidth = 10;
-        panel.add(getTable());
-        constraints.gridheight = 1;
-        constraints.gridy = 20;
-        panel.add(getActionPanel());
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+        panel.add(getTable(), constraints);
+        constraints.weightx = 0;
+        constraints.weighty = 0;
+        constraints.gridy = 1;
+        panel.add(getActionPanel(), constraints);
         return panel;
     }
 
     private JScrollPane getTable()
     {
-        final String[] columnNames = {
-                "Wort",
-                "Uebersetzung",
-                "Quote",
-                "Wiederholungen",
-                "Verwendungshinweis"
-        };
-        final DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(columnNames);
+        table.setDragEnabled(false);
+        table.getTableHeader().setReorderingAllowed(false);
         for (final Vokabel vok : voks)
         {
-            model.addRow(
-                    new Object[]
-                            {
-                                    vok.liesWort(),
-                                    vok.liesUebersetzung(),
-                                    vok.liesQuote(),
-                                    vok.liesWiederholungen(),
-                                    vok.liesVerwendungshinweis(),
-                            }
-            );
+            model.addRow(vok);
+
         }
         final JScrollPane pane = new JScrollPane();
         pane.setLayout(new ScrollPaneLayout());
-        table.setModel(model);
+        pane.setBorder(BorderFactory.createEmptyBorder());
         pane.setViewportView(table);
         return pane;
     }
@@ -123,15 +126,7 @@ public final class Vokabelliste extends CustomPanel
     private Vokabel getCurrentVok()
     {
         final int row = table.getSelectedRow();
-        return new Vokabel(
-                (String) model.getValueAt(row, 0),
-                (String) model.getValueAt(row, 1),
-                (byte[]) model.getValueAt(row, 2),
-                (byte[]) model.getValueAt(row, 3),
-                (String) model.getValueAt(row, 4),
-                (String) model.getValueAt(row, 5),
-                (int) model.getValueAt(row, 6),
-                (int) model.getValueAt(row, 7)
-        );
+        final RowSorter<? extends TableModel> sorter = table.getRowSorter();
+        return model.getVokabelForRow(sorter != null ? sorter.convertRowIndexToModel(table.getSelectedRow()) : row);
     }
 }

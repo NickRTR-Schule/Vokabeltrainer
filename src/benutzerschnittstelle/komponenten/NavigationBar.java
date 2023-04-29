@@ -56,12 +56,9 @@ public final class NavigationBar extends JPanel
      */
     private ImageIcon iconLaden()
     {
-        // Icon laden
-
         final InputStream stream = NavigationBar.class.getClassLoader()
                 .getResourceAsStream("Icon_arrow_left_highres.png");
         final ImageIcon icon;
-
         try
         {
             assert stream != null;
