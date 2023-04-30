@@ -56,22 +56,27 @@ public final class NavigationBar extends JPanel
      */
     private ImageIcon iconLaden()
     {
-        final InputStream stream = NavigationBar.class.getClassLoader()
-                .getResourceAsStream("Icon_arrow_left_highres.png");
-        final ImageIcon icon;
-        try
+        try (final InputStream stream = NavigationBar.class.getClassLoader()
+                .getResourceAsStream("Icon_arrow_left_highres.png"))
         {
-            assert stream != null;
-            icon = new ImageIcon(stream.readAllBytes());
-            final Image image = icon.getImage();
-            final Image scaledInstance = image.getScaledInstance(25, 25,
-                    Image.SCALE_DEFAULT);
-            icon.setImage(scaledInstance);
-            return icon;
+            final ImageIcon icon;
+            try
+            {
+                assert stream != null;
+                icon = new ImageIcon(stream.readAllBytes());
+                final Image image = icon.getImage();
+                final Image scaledInstance = image.getScaledInstance(25, 25,
+                        Image.SCALE_DEFAULT);
+                icon.setImage(scaledInstance);
+                return icon;
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+                return new ImageIcon();
+            }
         } catch (IOException e)
         {
-            e.printStackTrace();
-            return new ImageIcon();
+            throw new RuntimeException(e);
         }
     }
 }

@@ -55,9 +55,6 @@ public final class Vokabelliste extends CustomPanel
 
     private void setValues()
     {
-        //final JScrollPane contentPane = new JScrollPane();
-        //contentPane.setLayout(new ScrollPaneLayout());
-        //contentPane.setViewportView();
         add(build());
         setName(getTitle());
     }
