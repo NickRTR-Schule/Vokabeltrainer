@@ -1,10 +1,11 @@
-package benutzerschnittstelle;
+package benutzerschnittstelle.management;
 
 import benutzerschnittstelle.komponenten.CustomButton;
+import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.CustomTextField;
 import datenspeicherung.Vokabel;
 import steuerung.MainFrameSteuerung;
-import steuerung.VokabelScreenSteuerung;
+import steuerung.management.VokabelScreenSteuerung;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +15,7 @@ import java.awt.event.KeyEvent;
 /**
  * The Screen to add / create a new Vocabulary.
  */
-public final class VokabelScreen extends JScrollPane
+public final class VokabelScreen extends CustomPanel
 {
 
     /**
@@ -31,6 +32,8 @@ public final class VokabelScreen extends JScrollPane
 
     public VokabelScreen()
     {
+        // TODO-js: Work on that
+        super("Vokabel");
         steuerung = new VokabelScreenSteuerung();
         wortTxtField = new CustomTextField();
         uebersetzungTxtField = new CustomTextField();
@@ -46,13 +49,14 @@ public final class VokabelScreen extends JScrollPane
         uebersetzungTxtField.setText(vokabel.liesUebersetzung());
         lautschriftTxtField.setText(vokabel.liesLautschrift());
         verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
-        setValues();
     }
 
     private void setValues()
     {
-        setLayout(new ScrollPaneLayout());
-        setViewportView(build());
+        final JScrollPane pane = new JScrollPane();
+        pane.setLayout(new ScrollPaneLayout());
+        pane.setViewportView(build());
+        add(pane);
         setName("Vokabel Ersteller");
     }
 
@@ -65,7 +69,7 @@ public final class VokabelScreen extends JScrollPane
         final GridBagLayout layout = new GridBagLayout();
         layout.setConstraints(this, constraints);
         final JPanel panel = new JPanel();
-        panel.setBackground(Color.WHITE);
+        //panel.setBackground(Color.WHITE);
         panel.setLayout(layout);
         constraints.gridx = 0;
         constraints.gridy = 0;

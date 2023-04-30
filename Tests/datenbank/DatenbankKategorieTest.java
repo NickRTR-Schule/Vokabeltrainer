@@ -8,17 +8,16 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DatenbankKategorieTest
+public final class DatenbankKategorieTest
 {
 
-    final Datenbank derSpeicher = new Datenbank();
 
     @Test
     public void test() throws Exception
     {
         // Kategorie hinzufuegen
 
-        ArrayList<Kategorie> kats = derSpeicher.liesKategorien();
+        ArrayList<Kategorie> kats = Datenbank.liesKategorien();
         assertTrue(kats.size() > 0);
 
         // Einzelne Kategorie lesen

@@ -1,4 +1,4 @@
-package steuerung;
+package steuerung.management;
 
 import fachkonzept.ErstellerKonzept;
 

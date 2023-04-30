@@ -1,12 +1,15 @@
 package benutzerschnittstelle.error;
 
+import benutzerschnittstelle.komponenten.CustomPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
-public final class ErrorScreen extends JPanel
+public final class ErrorScreen extends CustomPanel
 {
     public ErrorScreen()
     {
+        super("Error");
         setValues();
         build();
     }
@@ -14,7 +17,7 @@ public final class ErrorScreen extends JPanel
     private void setValues()
     {
         setEnabled(true);
-        setName("Error Screen");
+        setName(getTitle());
     }
 
     private void build()

@@ -64,6 +64,11 @@ public final class Vokabel
         return anzahlrichtig;
     }
 
+    public long liesQuote()
+    {
+        return Math.round(((double) anzahlrichtig / wiederholungen * 100) * 100) / 100;
+    }
+
     public void wiederholt(boolean richtig)
     {
         wiederholungen++;

@@ -9,19 +9,10 @@ public final class Konsole
     {
         try
         {
-            // ArrayList<Vokabel> vokabeln = derSpeicher.liesVokabeln();
-            // System.out.println(vokabeln);
-
-            // Vokabel vokabel = derSpeicher.liesVokabel("cat", "Katze");
-            // System.out.println(vokabel.liesUebersetzung());
-
-            // derSpeicher.loescheVokabel("cat", "Katze");
-
             Datenbank.vokabelHinzufuegen("duck", "Ente", null, null, null,
                     null);
         } catch (Exception e)
         {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

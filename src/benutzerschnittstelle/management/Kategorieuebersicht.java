@@ -1,15 +1,14 @@
-package benutzerschnittstelle.uebersicht;
+package benutzerschnittstelle.management;
 
+import benutzerschnittstelle.komponenten.CustomPanel;
 import datenspeicherung.Kategorie;
-import steuerung.uebersicht.KategorieUebersichtsSteuerung;
-
-import javax.swing.*;
+import steuerung.management.KategorieUebersichtsSteuerung;
 
 /**
  * The Screen showing all the Categories the User created to manage and organize
  * his / her Vocabs
  */
-public final class Kategorieuebersicht extends JPanel
+public final class Kategorieuebersicht extends CustomPanel
 {
 
     /**
@@ -21,7 +20,14 @@ public final class Kategorieuebersicht extends JPanel
 
     public Kategorieuebersicht(Kategorie kategorie)
     {
-        steuerung = new KategorieUebersichtsSteuerung(this);
+        super(kategorie.liesName());
+        steuerung = new KategorieUebersichtsSteuerung();
         this.kategorie = kategorie;
+        build();
+    }
+
+    private void build()
+    {
+
     }
 }
