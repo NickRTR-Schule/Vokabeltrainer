@@ -99,33 +99,37 @@ public final class Dashboard extends JPanel
 
 		constraints.gridy = 3;
 		constraints.gridx = 1;
-		constraints.gridheight = 3;
+		constraints.gridheight = 1;
 		constraints.gridwidth = 2;
 		// Add Buttons
-		final CustomButton vokabelErstellerBtn = new CustomButton(
-				"Vokabel erstellen", "Erstelle eine neue Vokabel");
-		vokabelErstellerBtn
-				.addActionListener((ignored) -> steuerung.erstellerGeklickt());
-		addComponent(vokabelErstellerBtn);
-
-		final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
-				"Starte eine Abfrage");
-		abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
-		constraints.gridx = 4;
-		addComponent(abfrageBtn);
 
 		final CustomButton vokabellisteBtn = new CustomButton("Vokabelliste",
 				"Zeige alle Vokabeln als Liste an");
 		vokabellisteBtn.addActionListener(
 				(ignored) -> steuerung.vokabellisteGeklickt());
-		constraints.gridx = 6;
 		addComponent(vokabellisteBtn);
+
+		final CustomButton vokabelErstellerBtn = new CustomButton(
+				"Vokabel erstellen", "Erstelle eine neue Vokabel");
+		vokabelErstellerBtn
+				.addActionListener((ignored) -> steuerung.erstellerGeklickt());
+		constraints.gridx = 4;
+		addComponent(vokabelErstellerBtn);
 
 		final CustomButton kategorielisteBtn = new CustomButton(
 				"Kategorieliste", "Zeige alle Kategorien in einer Liste an");
 		kategorielisteBtn.addActionListener(
 				(ignored) -> steuerung.kategorielisteGeklickt());
-		constraints.gridx = 8;
+		constraints.gridx = 6;
 		addComponent(kategorielisteBtn);
+
+		final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
+				"Starte eine Abfrage");
+		abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
+		constraints.gridy = 4;
+		constraints.gridx = 1;
+		constraints.gridheight = 2;
+		constraints.gridwidth = 10;
+		addComponent(abfrageBtn);
 	}
 }
