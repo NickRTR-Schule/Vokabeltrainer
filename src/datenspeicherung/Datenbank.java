@@ -320,4 +320,9 @@ public final class Datenbank
         }
         schliesseDatenbank();
     }
+
+    public static void vokabelZuKategorieHinzufuegen(Vokabel vok, Kategorie kat)
+    {
+        // TODO: implement
+    }
 }

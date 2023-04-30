@@ -3,6 +3,7 @@ package benutzerschnittstelle.management;
 import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.CustomTextField;
+import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 import fachkonzept.listeners.CustomKeyListener;
 import steuerung.MainFrameSteuerung;
@@ -10,6 +11,7 @@ import steuerung.management.VokabelScreenSteuerung;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * The Screen to add / create a new Vocabulary.
@@ -29,10 +31,24 @@ public final class VokabelScreen extends CustomPanel
 
     private final CustomTextField verwendungsHinweisTxtField;
 
+    private final JComboBox<Kategorie> kategorienDropdown;
+
     public VokabelScreen()
     {
         super("Vokabel");
         steuerung = new VokabelScreenSteuerung();
+        ArrayList<Kategorie> kats;
+        try
+        {
+            kats = steuerung.liesKategorien();
+        } catch (Exception ignored)
+        {
+            kats = new ArrayList<>();
+            JOptionPane.showMessageDialog(this, "Fehler beim lesen der Kategorien");
+        }
+        final Kategorie[] katsA = new Kategorie[kats.size()];
+        kats.toArray(katsA);
+        kategorienDropdown = new JComboBox<>(katsA);
         wortTxtField = new CustomTextField();
         uebersetzungTxtField = new CustomTextField();
         lautschriftTxtField = new CustomTextField();
@@ -106,15 +122,22 @@ public final class VokabelScreen extends CustomPanel
         constraints.gridy = 9;
         panel.add(verwendungsHinweisTxtField, constraints);
         constraints.gridy = 10;
+        panel.add(kategorienDropdown, constraints);
+        constraints.gridy = 11;
         final CustomButton storeBtn = new CustomButton("Speichern");
         storeBtn.addActionListener((ignored) -> {
             if (wortTxtField.getText().length() > 0
                     && uebersetzungTxtField.getText().length() > 0)
             {
-                steuerung.vokabelHinzufuegen(wortTxtField.getText(),
-                        uebersetzungTxtField.getText(), null, null,
+                steuerung.vokabelHinzufuegen(
+                        wortTxtField.getText(),
+                        uebersetzungTxtField.getText(),
+                        null,
+                        null,
                         lautschriftTxtField.getText(),
-                        verwendungsHinweisTxtField.getText());
+                        verwendungsHinweisTxtField.getText(),
+                        (Kategorie) kategorienDropdown.getSelectedItem()
+                );
             }
             MainFrameSteuerung.getInstance().openDashboard();
         });
