@@ -92,20 +92,20 @@ public final class MainFrame extends JFrame
      * Navigates to another Screen in the App and used the passed arguments to
      * create the new Screen.
      *
-     * @param ui   the Screen where to navigate to
-     * @param args the Arguments being passed to the new Screen
+     * @param ui  the Screen where to navigate to
+     * @param arg the Arguments being passed to the new Screen
      */
-    public void open(UIScreens ui, Object[] args)
+    public void open(UIScreens ui, Object arg)
     {
-        if (args == null)
+        if (arg == null)
         {
             open(ui);
         } else
         {
             switch (ui)
             {
-                case Kategorieeuebersicht -> setContentPane(new WrapperPanel(new KategorieScreen((Kategorie) args[0])));
-                case Vokabeluebersicht -> setContentPane(new WrapperPanel(new VokabelScreen((Vokabel) args[0])));
+                case Kategorieeuebersicht -> setContentPane(new WrapperPanel(new KategorieScreen((Kategorie) arg)));
+                case Vokabeluebersicht -> setContentPane(new WrapperPanel(new VokabelScreen((Vokabel) arg)));
                 default -> setContentPane(new WrapperPanel(new ErrorScreen()));
             }
         }

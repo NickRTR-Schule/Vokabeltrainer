@@ -1,6 +1,6 @@
-package benutzerschnittstelle.komponenten;
+package benutzerschnittstelle.navigation;
 
-import steuerung.MainFrameSteuerung;
+import fachkonzept.navigation.NavigationStack;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +41,7 @@ public final class NavigationBar extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                MainFrameSteuerung.getInstance().openDashboard();
+                NavigationStack.getInstance().back();
             }
         });
         add(btn);

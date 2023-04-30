@@ -4,6 +4,7 @@ import benutzerschnittstelle.MainFrame;
 import benutzerschnittstelle.navigation.UIScreens;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
+import fachkonzept.navigation.NavigationStack;
 
 import java.awt.*;
 
@@ -28,7 +29,7 @@ public final class MainFrameSteuerung
      */
     private final MainFrame mainFrame;
 
-    public MainFrameSteuerung()
+    private MainFrameSteuerung()
     {
         mainFrame = new MainFrame();
     }
@@ -46,12 +47,24 @@ public final class MainFrameSteuerung
         return shared;
     }
 
+    private void openForward(UIScreens screen)
+    {
+        NavigationStack.getInstance().forward(screen);
+    }
+
+    private void openForward(UIScreens screen, Object obj)
+    {
+        NavigationStack.getInstance().forward(screen, obj);
+    }
+
     /**
      * Navigates to the Dashboard of this App
      */
     public void openDashboard()
     {
-        mainFrame.open(UIScreens.Dashboard);
+        final UIScreens dashboard = UIScreens.Dashboard;
+        openForward(dashboard);
+        mainFrame.open(dashboard);
     }
 
     /**
@@ -59,7 +72,9 @@ public final class MainFrameSteuerung
      */
     public void openAbfrage()
     {
-        mainFrame.open(UIScreens.Abfrage);
+        final UIScreens screen = UIScreens.Abfrage;
+        openForward(screen);
+        mainFrame.open(screen);
     }
 
     public void openUebersicht(Object obj)
@@ -77,20 +92,32 @@ public final class MainFrameSteuerung
     }
 
     /**
+     * WARNING!
+     * Only use in Navigation Stack
+     *
+     * @param screen
+     * @param obj
+     */
+    public void open(UIScreens screen, Object obj)
+    {
+        mainFrame.open(screen, obj);
+    }
+
+    /**
      * Navigates to the KategorieScreen of this App
      */
     private void openKategorieuebersicht(Kategorie kategorie)
     {
-        final Object[] args = new Object[1];
-        args[0] = kategorie;
-        mainFrame.open(UIScreens.Kategorieeuebersicht, args);
+        final UIScreens screen = UIScreens.Kategorieeuebersicht;
+        openForward(screen, kategorie);
+        mainFrame.open(screen, kategorie);
     }
 
     private void openVokabeluebersicht(Vokabel vokabel)
     {
-        final Object[] args = new Object[1];
-        args[0] = vokabel;
-        mainFrame.open(UIScreens.Vokabeluebersicht, args);
+        final UIScreens screen = UIScreens.Vokabeluebersicht;
+        openForward(screen, vokabel);
+        mainFrame.open(screen, vokabel);
     }
 
     /**
@@ -98,17 +125,23 @@ public final class MainFrameSteuerung
      */
     public void openErsteller()
     {
-        mainFrame.open(UIScreens.Ersteller);
+        final UIScreens screen = UIScreens.Ersteller;
+        openForward(screen);
+        mainFrame.open(screen);
     }
 
     public void openVokabelliste()
     {
-        mainFrame.open(UIScreens.Vokabelliste);
+        final UIScreens screen = UIScreens.Vokabelliste;
+        openForward(screen);
+        mainFrame.open(screen);
     }
 
     public void openKategorieliste()
     {
-        mainFrame.open(UIScreens.Kategorieliste);
+        final UIScreens screen = UIScreens.Kategorieliste;
+        openForward(screen);
+        mainFrame.open(screen);
     }
 
     /**
@@ -116,6 +149,8 @@ public final class MainFrameSteuerung
      */
     public void openStats()
     {
-        mainFrame.open(UIScreens.Statistik);
+        final UIScreens screen = UIScreens.Statistik;
+        openForward(screen);
+        mainFrame.open(screen);
     }
 }
