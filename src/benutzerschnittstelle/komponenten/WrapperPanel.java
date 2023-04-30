@@ -1,5 +1,7 @@
 package benutzerschnittstelle.komponenten;
 
+import benutzerschnittstelle.navigation.NavigationBar;
+
 import javax.swing.*;
 import java.awt.*;
 
