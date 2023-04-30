@@ -1,50 +1,18 @@
 package benutzerschnittstelle.management;
 
-import benutzerschnittstelle.komponenten.CustomPanel;
-import benutzerschnittstelle.komponenten.KategorieTile;
 import datenspeicherung.Kategorie;
+import fachkonzept.datamangement.tablemodels.KategorieTableModel;
 import steuerung.management.KategorielisteSteuerung;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-
-public final class Kategorieliste extends CustomPanel
+public final class Kategorieliste extends ListView<Kategorie>
 {
-
-    private ArrayList<Kategorie> kats;
 
     public Kategorieliste()
     {
-        super("Kategorien");
-        try
-        {
-            kats = new KategorielisteSteuerung().liesKategorien();
-        } catch (Exception ignored)
-        {
-            kats = new ArrayList<>();
-            JOptionPane.showMessageDialog(this, "Fehler beim Lesen der Kategorien");
-        }
-        setValues();
-    }
-
-    private void setValues()
-    {
-        final JScrollPane contentPane = new JScrollPane();
-        contentPane.setLayout(new ScrollPaneLayout());
-        contentPane.setViewportView(build());
-        add(contentPane);
-        setName(getTitle());
-    }
-
-    private JPanel build()
-    {
-        final JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(kats.size(), 1));
-        for (final Kategorie kat : kats)
-        {
-            panel.add(new KategorieTile(kat));
-        }
-        return panel;
+        super(
+                "Kategorien",
+                new KategorieTableModel(),
+                new KategorielisteSteuerung()
+        );
     }
 }

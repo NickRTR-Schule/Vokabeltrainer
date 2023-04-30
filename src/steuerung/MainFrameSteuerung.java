@@ -62,17 +62,31 @@ public final class MainFrameSteuerung
         mainFrame.open(UIScreens.Abfrage);
     }
 
+    public void openUebersicht(Object obj)
+    {
+        if (obj instanceof Vokabel)
+        {
+            openVokabeluebersicht((Vokabel) obj);
+        } else if (obj instanceof Kategorie)
+        {
+            openKategorieuebersicht((Kategorie) obj);
+        } else
+        {
+            throw new IllegalArgumentException();
+        }
+    }
+
     /**
      * Navigates to the Kategorieuebersicht of this App
      */
-    public void openKategorieuebersicht(Kategorie kategorie)
+    private void openKategorieuebersicht(Kategorie kategorie)
     {
         final Object[] args = new Object[1];
         args[0] = kategorie;
         mainFrame.open(UIScreens.Kategorieeuebersicht, args);
     }
 
-    public void openVokabeluebersicht(Vokabel vokabel)
+    private void openVokabeluebersicht(Vokabel vokabel)
     {
         final Object[] args = new Object[1];
         args[0] = vokabel;
@@ -86,7 +100,7 @@ public final class MainFrameSteuerung
     {
         mainFrame.open(UIScreens.Ersteller);
     }
-    
+
     public void openVokabelliste()
     {
         mainFrame.open(UIScreens.Vokabelliste);

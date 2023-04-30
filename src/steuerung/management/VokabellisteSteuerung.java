@@ -5,19 +5,18 @@ import datenspeicherung.Vokabel;
 
 import java.util.ArrayList;
 
-public final class VokabellisteSteuerung
+public final class VokabellisteSteuerung implements ListenSteuerung<Vokabel>
 {
-    public VokabellisteSteuerung()
-    {
-    }
 
-    public ArrayList<Vokabel> liesVokabeln() throws Exception
+    @Override
+    public ArrayList<Vokabel> liesDaten() throws Exception
     {
         return Datenbank.liesVokabeln();
     }
 
-    public void loescheVokabel(Vokabel vokabel) throws Exception
+    @Override
+    public void loescheDatensatz(Vokabel obj) throws Exception
     {
-        Datenbank.loescheVokabel(vokabel.liesWort(), vokabel.liesUebersetzung());
+        Datenbank.loescheVokabel(obj.liesWort(), obj.liesUebersetzung());
     }
 }
