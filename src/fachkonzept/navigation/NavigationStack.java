@@ -40,9 +40,9 @@ public final class NavigationStack
     public void back()
     {
         // TODO-js: implement
+        stack.remove(lastIndex());
         final NavigationStackItem item = stack.get(lastIndex());
         MainFrameSteuerung.getInstance().open(item.getScreen(), item.getObject());
-        stack.remove(lastIndex());
     }
 
     public void addToStack(NavigationStackItem item)
