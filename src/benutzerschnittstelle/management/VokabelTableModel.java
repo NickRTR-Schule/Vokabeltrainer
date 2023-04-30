@@ -87,4 +87,9 @@ public class VokabelTableModel extends AbstractTableModel
     {
         rows.add(vokabel);
     }
+
+    public void removeRow(Vokabel vokabel)
+    {
+        rows.remove(vokabel);
+    }
 }

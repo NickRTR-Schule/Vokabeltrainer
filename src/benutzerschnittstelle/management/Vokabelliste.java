@@ -108,13 +108,15 @@ public final class Vokabelliste extends CustomPanel
         deleteBtn.addActionListener((ignored) -> {
             try
             {
-                steuerung.loescheVokabel(getCurrentVok());
+                final Vokabel vokabel = getCurrentVok();
+                steuerung.loescheVokabel(vokabel);
+                model.removeRow(vokabel);
             } catch (Exception ig)
             {
                 JOptionPane.showMessageDialog(this, "Fehler beim loeschen der Vokabel");
             }
-            voks.remove(table.getSelectedRow());
             model.fireTableRowsUpdated(0, voks.size());
+            voks.remove(table.getSelectedRow());
         });
         panel.add(deleteBtn);
         return panel;
