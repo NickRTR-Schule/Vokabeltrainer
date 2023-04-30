@@ -2,6 +2,7 @@ package benutzerschnittstelle.management;
 
 import benutzerschnittstelle.komponenten.CustomPanel;
 import datenspeicherung.Vokabel;
+import fachkonzept.datamangement.tablemodels.VokabelTableModel;
 import steuerung.MainFrameSteuerung;
 import steuerung.management.VokabellisteSteuerung;
 
