@@ -3,10 +3,24 @@ package benutzerschnittstelle;
 import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import steuerung.DashboardSteuerung;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+
+import benutzerschnittstelle.komponenten.CustomButton;
+import steuerung.DashboardSteuerung;
 
 public final class Dashboard extends CustomPanel
 {
@@ -62,41 +76,59 @@ public final class Dashboard extends CustomPanel
         add(component, constraints);
     }
 
-    /**
-     * Part of the initialization Process, adding all the Components to this
-     * Panel
-     */
-    private void build()
-    {
-        // Add Buttons
-        constraints.gridy = 0;
-        constraints.gridx = 1;
-        constraints.gridheight = 3;
-        constraints.gridwidth = 10;
-        final JPanel statsPanel = new JPanel();
-        addComponent(statsPanel);
-        constraints.gridheight = 1;
-        constraints.gridwidth = 1;
-        constraints.gridy = 3;
-        constraints.gridx = 1;
-        final CustomButton vokabellisteBtn = new CustomButton(
-                "Vokabelliste", "Zeige alle Vokabeln als Liste an");
-        addComponent(vokabellisteBtn);
-        constraints.gridx = 3;
-        final CustomButton vokabelErstellerBtn = new CustomButton(
-                "Vokabel erstellen", "Erstelle eine neue Vokabel");
-        vokabelErstellerBtn.addActionListener((ignored) -> steuerung.erstellerGeklickt());
-        addComponent(vokabelErstellerBtn);
-        constraints.gridx = 5;
-        final CustomButton kategorielisteBtn = new CustomButton(
-                "Kategorieliste", "Zeige alle Kategorien in einer Liste an");
-        kategorielisteBtn.addActionListener((ignored) -> steuerung.kategorielisteGeklickt());
-        addComponent(kategorielisteBtn);
-        constraints.gridx = 7;
-        final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
-                "Starte eine Abfrage");
-        abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
-        vokabellisteBtn.addActionListener((ignored) -> steuerung.vokabellisteGeklickt());
-        addComponent(abfrageBtn);
-    }
+	/**
+	 * Part of the initialization Process, adding all the Components to this
+	 * Panel
+	 */
+	private void build()
+	{
+		// statistics
+		constraints.gridy = 0;
+		constraints.gridx = 1;
+		constraints.gridheight = 3;
+		constraints.gridwidth = 10;
+		final JPanel statsPanel = new JPanel();
+		JLabel heading = new JLabel("Statistiken");
+		heading.setFont(
+				new Font(MainFrame.liesFont().getFontName(), Font.BOLD, 16));
+		statsPanel.add(heading);
+		statsPanel.setLayout(new GridLayout(2, 4));
+
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+		LocalTime localTime = LocalTime.now();
+		statsPanel.add(new JLabel("\nUhrzeit: " + dtf.format(localTime)));
+
+		addComponent(statsPanel);
+
+		constraints.gridy = 3;
+		constraints.gridx = 1;
+		constraints.gridheight = 3;
+		constraints.gridwidth = 2;
+		// Add Buttons
+		final CustomButton vokabelErstellerBtn = new CustomButton(
+				"Vokabel erstellen", "Erstelle eine neue Vokabel");
+		vokabelErstellerBtn
+				.addActionListener((ignored) -> steuerung.erstellerGeklickt());
+		addComponent(vokabelErstellerBtn);
+
+		final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
+				"Starte eine Abfrage");
+		abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
+		constraints.gridx = 4;
+		addComponent(abfrageBtn);
+
+		final CustomButton vokabellisteBtn = new CustomButton("Vokabelliste",
+				"Zeige alle Vokabeln als Liste an");
+		vokabellisteBtn.addActionListener(
+				(ignored) -> steuerung.vokabellisteGeklickt());
+		constraints.gridx = 6;
+		addComponent(vokabellisteBtn);
+
+		final CustomButton kategorielisteBtn = new CustomButton(
+				"Kategorieliste", "Zeige alle Kategorien in einer Liste an");
+		kategorielisteBtn.addActionListener(
+				(ignored) -> steuerung.kategorielisteGeklickt());
+		constraints.gridx = 8;
+		addComponent(kategorielisteBtn);
+	}
 }
