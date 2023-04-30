@@ -77,7 +77,7 @@ public final class MainFrameSteuerung
     }
 
     /**
-     * Navigates to the Kategorieuebersicht of this App
+     * Navigates to the KategorieScreen of this App
      */
     private void openKategorieuebersicht(Kategorie kategorie)
     {

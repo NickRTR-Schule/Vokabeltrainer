@@ -37,6 +37,7 @@ public class ListView<T> extends CustomPanel
 
     private void init()
     {
+        setBackground(Color.WHITE);
         add(build());
         setName(getTitle());
     }

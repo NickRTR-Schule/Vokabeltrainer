@@ -2,8 +2,8 @@ package benutzerschnittstelle;
 
 import benutzerschnittstelle.error.ErrorScreen;
 import benutzerschnittstelle.komponenten.WrapperPanel;
+import benutzerschnittstelle.management.KategorieScreen;
 import benutzerschnittstelle.management.Kategorieliste;
-import benutzerschnittstelle.management.Kategorieuebersicht;
 import benutzerschnittstelle.management.VokabelScreen;
 import benutzerschnittstelle.management.Vokabelliste;
 import benutzerschnittstelle.navigation.UIScreens;
@@ -104,8 +104,7 @@ public final class MainFrame extends JFrame
         {
             switch (ui)
             {
-                case Kategorieeuebersicht ->
-                        setContentPane(new WrapperPanel(new Kategorieuebersicht((Kategorie) args[0])));
+                case Kategorieeuebersicht -> setContentPane(new WrapperPanel(new KategorieScreen((Kategorie) args[0])));
                 case Vokabeluebersicht -> setContentPane(new WrapperPanel(new VokabelScreen((Vokabel) args[0])));
                 default -> setContentPane(new WrapperPanel(new ErrorScreen()));
             }

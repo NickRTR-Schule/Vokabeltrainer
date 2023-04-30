@@ -4,13 +4,12 @@ import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.CustomTextField;
 import datenspeicherung.Vokabel;
+import fachkonzept.listeners.CustomKeyListener;
 import steuerung.MainFrameSteuerung;
 import steuerung.management.VokabelScreenSteuerung;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  * The Screen to add / create a new Vocabulary.
@@ -32,7 +31,6 @@ public final class VokabelScreen extends CustomPanel
 
     public VokabelScreen()
     {
-        // TODO-js: Work on that
         super("Vokabel");
         steuerung = new VokabelScreenSteuerung();
         wortTxtField = new CustomTextField();
@@ -54,10 +52,11 @@ public final class VokabelScreen extends CustomPanel
     private void setValues()
     {
         final JScrollPane pane = new JScrollPane();
+        pane.setBackground(Color.WHITE);
         pane.setLayout(new ScrollPaneLayout());
         pane.setViewportView(build());
         add(pane);
-        setName("Vokabel Ersteller");
+        setName(getName());
     }
 
     private JPanel build()
@@ -69,7 +68,7 @@ public final class VokabelScreen extends CustomPanel
         final GridBagLayout layout = new GridBagLayout();
         layout.setConstraints(this, constraints);
         final JPanel panel = new JPanel();
-        //panel.setBackground(Color.WHITE);
+        panel.setBackground(Color.WHITE);
         panel.setLayout(layout);
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -122,25 +121,5 @@ public final class VokabelScreen extends CustomPanel
         panel.add(storeBtn, constraints);
         wortTxtField.requestFocus();
         return panel;
-    }
-}
-
-/**
- * Custom Key Listener to jump from one textfield to the next one
- */
-final class CustomKeyListener extends KeyAdapter
-{
-
-    @Override
-    public void keyPressed(KeyEvent e)
-    {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER)
-        {
-            final Object src = e.getSource();
-            if (src instanceof Component)
-            {
-                ((Component) src).transferFocus();
-            }
-        }
     }
 }
