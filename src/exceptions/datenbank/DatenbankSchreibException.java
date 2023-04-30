@@ -1,6 +1,6 @@
 package exceptions.datenbank;
 
-public class DatenbankSchreibException extends Exception
+public final class DatenbankSchreibException extends Exception
 {
     private final DatenbankObject typ;
 

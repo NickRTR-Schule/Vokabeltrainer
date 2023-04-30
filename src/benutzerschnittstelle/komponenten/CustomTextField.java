@@ -3,7 +3,7 @@ package benutzerschnittstelle.komponenten;
 import javax.swing.*;
 import java.awt.*;
 
-public class CustomTextField extends JTextField
+public final class CustomTextField extends JTextField
 {
     public CustomTextField()
     {

@@ -1,6 +1,6 @@
-package benutzerschnittstelle.komponenten;
+package benutzerschnittstelle.navigation;
 
-import steuerung.MainFrameSteuerung;
+import fachkonzept.navigation.NavigationStack;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,12 +13,15 @@ import java.io.InputStream;
  * A Navigation Bar to use on the top of every screen to navigate back to the
  * Dashboard
  */
-public class NavigationBar extends JPanel
+public final class NavigationBar extends JPanel
 {
 
-    public NavigationBar()
+    private final String title;
+
+    public NavigationBar(String title)
     {
         super(new FlowLayout(FlowLayout.LEFT));
+        this.title = title;
         setValues();
         build();
     }
@@ -38,10 +41,11 @@ public class NavigationBar extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                MainFrameSteuerung.getInstance().openDashboard();
+                NavigationStack.getInstance().back();
             }
         });
         add(btn);
+        add(new JLabel(title));
     }
 
     /**
@@ -52,25 +56,27 @@ public class NavigationBar extends JPanel
      */
     private ImageIcon iconLaden()
     {
-        // Icon laden
-
-        final InputStream stream = NavigationBar.class.getClassLoader()
-                .getResourceAsStream("Icon_arrow_left_highres.png");
-        final ImageIcon icon;
-
-        try
+        try (final InputStream stream = NavigationBar.class.getClassLoader()
+                .getResourceAsStream("Icon_arrow_left_highres.png"))
         {
-            assert stream != null;
-            icon = new ImageIcon(stream.readAllBytes());
-            final Image image = icon.getImage();
-            final Image scaledInstance = image.getScaledInstance(25, 25,
-                    Image.SCALE_DEFAULT);
-            icon.setImage(scaledInstance);
-            return icon;
+            final ImageIcon icon;
+            try
+            {
+                assert stream != null;
+                icon = new ImageIcon(stream.readAllBytes());
+                final Image image = icon.getImage();
+                final Image scaledInstance = image.getScaledInstance(25, 25,
+                        Image.SCALE_DEFAULT);
+                icon.setImage(scaledInstance);
+                return icon;
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+                return new ImageIcon();
+            }
         } catch (IOException e)
         {
-            e.printStackTrace();
-            return new ImageIcon();
+            throw new RuntimeException(e);
         }
     }
 }

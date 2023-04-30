@@ -272,6 +272,30 @@ public final class Datenbank
         return ergebnis;
     }
 
+    public static void loescheKategorie(String name)
+            throws DatenbankAccessException, DatenbankSchreibException
+    {
+        oeffneDatenbank();
+
+        // DB-Abfrage als String
+        String sqlStmt = "DELETE FROM Kategorie ";
+        sqlStmt += "WHERE name = ?";
+
+        try
+        {
+            // DB-Abfrage vorbereiten
+            stmt = con.prepareStatement(sqlStmt);
+            // DB-Abfrage ausführen
+            stmt.setString(1, name);
+            stmt.executeUpdate();
+        } catch (SQLException e)
+        {
+            throw new DatenbankSchreibException(DatenbankObject.kategorie);
+        }
+
+        schliesseDatenbank();
+    }
+
     public static void vokabelWiederholt(Vokabel dieVokabel)
             throws DatenbankAccessException, DatenbankSchreibException
     {

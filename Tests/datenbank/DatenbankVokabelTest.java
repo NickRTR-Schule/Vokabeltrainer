@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class DatenbankVokabelTest
 {
-    Datenbank derSpeicher = new Datenbank();
 
     @Test
     public void test() throws Exception

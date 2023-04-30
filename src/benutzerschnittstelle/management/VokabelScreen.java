@@ -1,20 +1,20 @@
-package benutzerschnittstelle;
+package benutzerschnittstelle.management;
 
 import benutzerschnittstelle.komponenten.CustomButton;
+import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.CustomTextField;
 import datenspeicherung.Vokabel;
+import fachkonzept.listeners.CustomKeyListener;
 import steuerung.MainFrameSteuerung;
-import steuerung.VokabelScreenSteuerung;
+import steuerung.management.VokabelScreenSteuerung;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  * The Screen to add / create a new Vocabulary.
  */
-public final class VokabelScreen extends JScrollPane
+public final class VokabelScreen extends CustomPanel
 {
 
     /**
@@ -31,6 +31,7 @@ public final class VokabelScreen extends JScrollPane
 
     public VokabelScreen()
     {
+        super("Vokabel");
         steuerung = new VokabelScreenSteuerung();
         wortTxtField = new CustomTextField();
         uebersetzungTxtField = new CustomTextField();
@@ -46,14 +47,16 @@ public final class VokabelScreen extends JScrollPane
         uebersetzungTxtField.setText(vokabel.liesUebersetzung());
         lautschriftTxtField.setText(vokabel.liesLautschrift());
         verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
-        setValues();
     }
 
     private void setValues()
     {
-        setLayout(new ScrollPaneLayout());
-        setViewportView(build());
-        setName("Vokabel Ersteller");
+        final JScrollPane pane = new JScrollPane();
+        pane.setBackground(Color.WHITE);
+        pane.setLayout(new ScrollPaneLayout());
+        pane.setViewportView(build());
+        add(pane);
+        setName(getName());
     }
 
     private JPanel build()
@@ -118,25 +121,5 @@ public final class VokabelScreen extends JScrollPane
         panel.add(storeBtn, constraints);
         wortTxtField.requestFocus();
         return panel;
-    }
-}
-
-/**
- * Custom Key Listener to jump from one textfield to the next one
- */
-final class CustomKeyListener extends KeyAdapter
-{
-
-    @Override
-    public void keyPressed(KeyEvent e)
-    {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER)
-        {
-            final Object src = e.getSource();
-            if (src instanceof Component)
-            {
-                ((Component) src).transferFocus();
-            }
-        }
     }
 }

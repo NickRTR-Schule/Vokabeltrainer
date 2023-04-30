@@ -1,5 +1,5 @@
 package exceptions;
 
-public class EndOfAbfrageException extends Exception
+public final class EndOfAbfrageException extends Exception
 {
 }

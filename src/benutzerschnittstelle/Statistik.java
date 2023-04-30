@@ -1,14 +1,13 @@
 package benutzerschnittstelle;
 
+import benutzerschnittstelle.komponenten.CustomPanel;
 import steuerung.StatistikSteuerung;
-
-import javax.swing.*;
 
 /**
  * The Screen showing the Stats of the User, containing learning progress, words
  * entered correctly etc...
  */
-public final class Statistik extends JPanel
+public final class Statistik extends CustomPanel
 {
 
     /**
@@ -18,6 +17,7 @@ public final class Statistik extends JPanel
 
     public Statistik()
     {
+        super("Statistiken");
         steuerung = new StatistikSteuerung(this);
     }
 }
