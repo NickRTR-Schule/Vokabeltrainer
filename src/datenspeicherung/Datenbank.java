@@ -261,8 +261,7 @@ public final class Datenbank
                 // DB-Zeile als Objekt in Ergebnis-Array speichern
                 final String name = result.getString("name");
                 final ArrayList<Vokabel> vokabeln = new ArrayList<>(liesVokabelnForKat(name));
-                final Vokabel[] voks = new Vokabel[vokabeln.size()];
-                ergebnis.add(new Kategorie(name, voks));
+                ergebnis.add(new Kategorie(name, vokabeln));
             }
         } catch (SQLException e)
         {

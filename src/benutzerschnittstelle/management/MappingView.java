@@ -4,11 +4,12 @@ import benutzerschnittstelle.komponenten.CustomPanel;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 import fachkonzept.datamangement.tablemodels.CustomTableModel;
-import fachkonzept.datamangement.tablemodels.VokabelTableModel;
 import steuerung.management.MappingSteuerung;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MappingView extends CustomPanel
 {
@@ -20,19 +21,30 @@ public class MappingView extends CustomPanel
     private final JTable vokTable;
 
     private final JTable katTable;
+    private final HashMap<Vokabel, ArrayList<Kategorie>> vokabelLookUp;
+    private final HashMap<Kategorie, ArrayList<Vokabel>> kategorieLookUp;
+    private boolean vokEditing = false;
+    private boolean katEditing = false;
+    private ArrayList<Kategorie> kats;
+    private MappingSteuerung steuerung;
+    private ArrayList<Vokabel> voks;
+    private Kategorie selectedKat;
 
-    private final MappingSteuerung steuerung;
+    private Vokabel selectedVok;
 
     public MappingView()
     {
         super("Mapping Übersicht");
-        steuerung = new MappingSteuerung();
+        vokabelLookUp = new HashMap<>();
+        kategorieLookUp = new HashMap<>();
         vokModel = new CustomTableModel<>(
                 new String[]{
+                        "Ausgewaehlt",
                         "Wort",
                         "Uebersetzung"
                 },
                 new Class<?>[]{
+                        boolean.class,
                         String.class,
                         String.class
                 }
@@ -44,17 +56,20 @@ public class MappingView extends CustomPanel
                 final Vokabel vok = rows.get(rowIndex);
                 return switch (columnIndex)
                 {
-                    case VokabelTableModel.COLUMN_WORT -> vok.liesWort();
-                    case VokabelTableModel.COLUMN_UBERSETZUNG -> vok.liesUebersetzung();
+                    case 0 -> katEditing ? kategorieLookUp.get(selectedKat).contains(vok) : null;
+                    case 1 -> vok.liesWort();
+                    case 2 -> vok.liesUebersetzung();
                     default -> "";
                 };
             }
         };
         katModel = new CustomTableModel<>(
                 new String[]{
+                        "Ausgewaehlt",
                         "Name"
                 },
                 new Class<?>[]{
+                        boolean.class,
                         String.class
                 }
         )
@@ -62,13 +77,29 @@ public class MappingView extends CustomPanel
             @Override
             public Object getValueAt(int rowIndex, int columnIndex)
             {
-                return rows.get(rowIndex).liesName();
+                final Kategorie kat = rows.get(rowIndex);
+                return switch (columnIndex)
+                {
+                    case 0 -> vokEditing ? vokabelLookUp.get(selectedVok).contains(kat) : null;
+                    case 1 -> kat.liesName();
+                    default -> "";
+                };
             }
         };
         vokTable = new JTable(vokModel);
         katTable = new JTable(katModel);
+        try
+        {
+            steuerung = new MappingSteuerung();
+        } catch (Exception ignored)
+        {
+            JOptionPane.showMessageDialog(this, "Fehler beim Lesen der Daten");
+            return;
+        }
+        voks = steuerung.liesVokabeln();
+        kats = steuerung.liesKategorien();
         setValues();
-        build();
+        add(build());
     }
 
     private void setValues()
@@ -76,10 +107,40 @@ public class MappingView extends CustomPanel
         setName(getTitle());
     }
 
-    private void build()
+    private JPanel build()
     {
-        setLayout(new GridLayout(1, 3));
-        add(vokTable);
-        add(katTable);
+        for (final Vokabel vok : voks)
+        {
+            vokModel.addRow(vok);
+        }
+        for (final Kategorie kat : kats)
+        {
+            katModel.addRow(kat);
+        }
+        final JScrollPane vokPane = new JScrollPane();
+        final JScrollPane katPane = new JScrollPane();
+        vokPane.setLayout(new ScrollPaneLayout());
+        katPane.setLayout(new ScrollPaneLayout());
+        katTable.getSelectionModel().addListSelectionListener(e -> {
+            katEditing = true;
+            selectedKat = katModel.getObjectForRow(katTable.getSelectedRow());
+            kategorieLookUp.put(selectedKat, steuerung.liesVokabelnFuerKategorie(selectedKat));
+            vokModel.fireTableDataChanged();
+        });
+        vokTable.getSelectionModel().addListSelectionListener(e -> {
+            vokEditing = true;
+            selectedVok = vokModel.getObjectForRow(vokTable.getSelectedRow());
+            vokabelLookUp.put(selectedVok, steuerung.liesKategorienFuerVokabel(selectedVok));
+            katModel.fireTableDataChanged();
+        });
+        vokPane.setViewportView(vokTable);
+        katPane.setViewportView(katTable);
+        vokPane.setBorder(BorderFactory.createEmptyBorder());
+        katPane.setBorder(BorderFactory.createEmptyBorder());
+        final JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 2));
+        panel.add(vokPane);
+        panel.add(katPane);
+        return panel;
     }
 }

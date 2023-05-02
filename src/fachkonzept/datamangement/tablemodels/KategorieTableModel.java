@@ -29,7 +29,7 @@ public class KategorieTableModel extends CustomTableModel<Kategorie>
         return switch (column)
         {
             case COLUMN_NAME -> kategorie.liesName();
-            case COLUMN_VOKSANZAHL -> kategorie.liesVokabeln().length;
+            case COLUMN_VOKSANZAHL -> kategorie.liesVokabeln().size();
             default -> null;
         };
     }

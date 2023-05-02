@@ -1,11 +1,13 @@
 package datenspeicherung;
 
+import java.util.ArrayList;
+
 public final class Kategorie
 {
     private final String name;
-    private final Vokabel[] vokabeln;
+    private final ArrayList<Vokabel> vokabeln;
 
-    public Kategorie(String name, Vokabel[] vokabeln)
+    public Kategorie(String name, ArrayList<Vokabel> vokabeln)
     {
         this.name = name;
         this.vokabeln = vokabeln;
@@ -16,7 +18,7 @@ public final class Kategorie
         return name;
     }
 
-    public Vokabel[] liesVokabeln()
+    public ArrayList<Vokabel> liesVokabeln()
     {
         return vokabeln;
     }
