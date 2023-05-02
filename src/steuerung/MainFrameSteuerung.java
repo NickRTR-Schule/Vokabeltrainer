@@ -95,10 +95,11 @@ public final class MainFrameSteuerung
      * WARNING!
      * Only use in Navigation Stack
      *
-     * @param screen
-     * @param obj
+     * @param screen - The Screen to navigate to
+     * @param obj    - the Object that can be passed to the Screen you want to
+     *               navigate to
      */
-    public void open(UIScreens screen, Object obj)
+    public void openForNavigationStack(UIScreens screen, Object obj)
     {
         mainFrame.open(screen, obj);
     }

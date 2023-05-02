@@ -15,8 +15,7 @@ public final class VokabelScreenSteuerung
                                    byte[] abbildung,
                                    byte[] aussprache,
                                    String lautschrift,
-                                   String verwendungshinweis,
-                                   Kategorie kategorie
+                                   String verwendungshinweis
     )
     {
         try
@@ -27,8 +26,7 @@ public final class VokabelScreenSteuerung
                     abbildung,
                     aussprache,
                     lautschrift,
-                    verwendungshinweis,
-                    kategorie
+                    verwendungshinweis
             );
         } catch (Exception e)
         {
