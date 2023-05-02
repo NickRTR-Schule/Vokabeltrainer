@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public final class NavigationStack
 {
-
     private static final NavigationStack shared = new NavigationStack();
     private final ArrayList<NavigationStackItem> stack;
 
@@ -43,10 +42,5 @@ public final class NavigationStack
         stack.remove(lastIndex());
         final NavigationStackItem item = stack.get(lastIndex());
         MainFrameSteuerung.getInstance().openForNavigationStack(item.getScreen(), item.getObject());
-    }
-
-    public void addToStack(NavigationStackItem item)
-    {
-        stack.add(item);
     }
 }

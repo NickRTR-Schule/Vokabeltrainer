@@ -1,5 +1,6 @@
 package benutzerschnittstelle.management;
 
+import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import fachkonzept.datamangement.tablemodels.CustomTableModel;
 import steuerung.MainFrameSteuerung;
@@ -18,9 +19,9 @@ public class ListView<T> extends CustomPanel
     private final ListenSteuerung<T> steuerung;
     private ArrayList<T> objects;
 
-    public ListView(String name, CustomTableModel<T> model, ListenSteuerung<T> steuerung)
+    public ListView(String name, CustomTableModel<T> model, ListenSteuerung<T> steuerung, CustomButton btn)
     {
-        super("Vokabeln");
+        super(name, btn);
         this.steuerung = steuerung;
         try
         {

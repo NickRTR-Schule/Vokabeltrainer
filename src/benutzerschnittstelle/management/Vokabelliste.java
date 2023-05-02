@@ -1,5 +1,6 @@
 package benutzerschnittstelle.management;
 
+import benutzerschnittstelle.komponenten.CustomButton;
 import datenspeicherung.Vokabel;
 import fachkonzept.datamangement.tablemodels.VokabelTableModel;
 import steuerung.management.VokabellisteSteuerung;
@@ -16,7 +17,9 @@ public final class Vokabelliste extends ListView<Vokabel>
         super(
                 "Vokabeln",
                 new VokabelTableModel(),
-                new VokabellisteSteuerung()
+                new VokabellisteSteuerung(),
+                CustomButton.newVocabBtn((ignored) -> {
+                })
         );
         table.getColumnModel().getColumn(VokabelTableModel.COLUMN_QUOTE).setCellRenderer(new DefaultTableCellRenderer()
         {

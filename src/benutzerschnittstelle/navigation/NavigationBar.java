@@ -1,5 +1,6 @@
 package benutzerschnittstelle.navigation;
 
+import benutzerschnittstelle.komponenten.CustomButton;
 import fachkonzept.navigation.NavigationStack;
 
 import javax.swing.*;
@@ -18,10 +19,16 @@ public final class NavigationBar extends JPanel
 
     private final String title;
 
-    public NavigationBar(String title)
+    private final CustomButton btn;
+
+    private final GridBagConstraints constraints;
+
+    public NavigationBar(String title, CustomButton btn)
     {
         super(new FlowLayout(FlowLayout.LEFT));
         this.title = title;
+        this.btn = btn;
+        constraints = new GridBagConstraints();
         setValues();
         build();
     }
@@ -29,10 +36,19 @@ public final class NavigationBar extends JPanel
     private void setValues()
     {
         setName("Navigation Bar");
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.weightx = 2;
+        constraints.insets = new Insets(5, 10, 5, 10);
+        final GridBagLayout layout = new GridBagLayout();
+        layout.setConstraints(this, constraints);
+        setLayout(layout);
     }
 
     private void build()
     {
+        constraints.gridx = 0;
+        constraints.gridy = 0;
         final JButton btn = new JButton();
         btn.setIcon(iconLaden());
         btn.setText("Back");
@@ -44,8 +60,15 @@ public final class NavigationBar extends JPanel
                 NavigationStack.getInstance().back();
             }
         });
-        add(btn);
-        add(new JLabel(title));
+        add(btn, constraints);
+        constraints.gridx = 1;
+        constraints.gridwidth = 10;
+        final JLabel label = new JLabel(title);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        add(label, constraints);
+        constraints.gridwidth = 1;
+        constraints.gridx = 12;
+        add(this.btn, constraints);
     }
 
     /**
