@@ -63,7 +63,7 @@ public final class KategorieScreen extends CustomPanel
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.gridwidth = 2;
-        panel.add(new JLabel("Wort"), constraints);
+        panel.add(new JLabel("Name"), constraints);
         nameTxtField.addKeyListener(new CustomKeyListener());
         constraints.gridy = 1;
         panel.add(nameTxtField, constraints);
