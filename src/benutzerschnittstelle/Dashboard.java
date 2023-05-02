@@ -93,11 +93,7 @@ public final class Dashboard extends CustomPanel
         constraints.gridheight = 3;
         constraints.gridwidth = 2;
         // Add Buttons
-        final CustomButton vokabelErstellerBtn = new CustomButton(
-                "Vokabel erstellen", "Erstelle eine neue Vokabel");
-        vokabelErstellerBtn
-                .addActionListener((ignored) -> steuerung.erstellerGeklickt());
-        addComponent(vokabelErstellerBtn);
+        addComponent(CustomButton.newVocabBtn((ignored) -> steuerung.erstellerGeklickt()));
 
         final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
                 "Starte eine Abfrage");
