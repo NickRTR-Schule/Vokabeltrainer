@@ -1,27 +1,37 @@
 package steuerung.management;
 
-import fachkonzept.ErstellerKonzept;
+import datenspeicherung.Datenbank;
+import datenspeicherung.Vokabel;
 
 public final class VokabelScreenSteuerung
 {
-    private final ErstellerKonzept dasErstellerKonzept = new ErstellerKonzept();
+	public VokabelScreenSteuerung()
+	{
+	}
 
-    public VokabelScreenSteuerung()
-    {
-    }
+	public void vokabelHinzufuegen(Vokabel dieVokabel)
+	{
+		try
+		{
+			Datenbank.vokabelHinzufuegen(dieVokabel);
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
 
-    public void vokabelHinzufuegen(String wort, String uebersetzung,
-                                   byte[] abbildung, byte[] aussprache, String lautschrift,
-                                   String verwendungshinweis)
-    {
-        try
-        {
-            dasErstellerKonzept.vokabelHinzufuegen(wort, uebersetzung,
-                    abbildung, aussprache, lautschrift, verwendungshinweis);
-        } catch (Exception e)
-        {
-            System.out.println(e.getLocalizedMessage());
-        }
-    }
-
+	public void vokabelAendern(Vokabel dieVokabel, Vokabel alteVokabel)
+	{
+		try
+		{
+			Datenbank.loescheVokabel(alteVokabel.liesWort(),
+					alteVokabel.liesUebersetzung());
+			Datenbank.vokabelHinzufuegen(dieVokabel);
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
 }
