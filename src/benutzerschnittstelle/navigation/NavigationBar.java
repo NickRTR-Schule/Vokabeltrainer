@@ -66,9 +66,12 @@ public final class NavigationBar extends JPanel
         final JLabel label = new JLabel(title);
         label.setHorizontalAlignment(JLabel.CENTER);
         add(label, constraints);
-        constraints.gridwidth = 1;
-        constraints.gridx = 12;
-        add(this.btn, constraints);
+        if (this.btn != null)
+        {
+            constraints.gridwidth = 1;
+            constraints.gridx = 12;
+            add(this.btn, constraints);
+        }
     }
 
     /**

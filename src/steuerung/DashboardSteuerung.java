@@ -50,4 +50,8 @@ public final class DashboardSteuerung
         return list;
     }
 
+    public void mappingGeklickt()
+    {
+        MainFrameSteuerung.getInstance().openMappingUebersicht();
+    }
 }
