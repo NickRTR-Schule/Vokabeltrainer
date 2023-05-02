@@ -2,8 +2,6 @@ package fachkonzept.datamangement.tablemodels;
 
 import datenspeicherung.Kategorie;
 
-import java.util.Vector;
-
 public class KategorieTableModel extends CustomTableModel<Kategorie>
 {
 
@@ -13,7 +11,6 @@ public class KategorieTableModel extends CustomTableModel<Kategorie>
     public KategorieTableModel()
     {
         super(
-                new Vector<>(),
                 new String[]{
                         "Name",
                         "Anzahl Vokabeln"

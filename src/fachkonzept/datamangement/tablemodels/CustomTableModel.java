@@ -12,9 +12,9 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
 
     protected final Class<?>[] columnClasses;
 
-    public CustomTableModel(Vector<T> rows, String[] columnNames, Class<?>[] columnClasses)
+    public CustomTableModel(String[] columnNames, Class<?>[] columnClasses)
     {
-        this.rows = rows;
+        this.rows = new Vector<>();
         this.columnNames = columnNames;
         this.columnClasses = columnClasses;
     }
