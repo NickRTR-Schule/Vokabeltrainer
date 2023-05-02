@@ -148,13 +148,13 @@ public class MappingView extends CustomPanel
         panel.setLayout(layout);
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.gridwidth = 5;
+        constraints.gridwidth = 8;
         panel.add(vokPane, constraints);
-        constraints.gridx = 6;
+        constraints.gridx = 9;
         constraints.gridwidth = 1;
         panel.add(new JPanel(), constraints);
-        constraints.gridwidth = 5;
-        constraints.gridx = 7;
+        constraints.gridwidth = 8;
+        constraints.gridx = 10;
         panel.add(katPane, constraints);
         return panel;
     }
