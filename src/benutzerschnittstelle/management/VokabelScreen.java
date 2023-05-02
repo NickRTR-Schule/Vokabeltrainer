@@ -29,9 +29,12 @@ public final class VokabelScreen extends CustomPanel
 
     private final CustomTextField verwendungsHinweisTxtField;
 
+    private boolean bearbeiten;
+
     public VokabelScreen()
     {
         super("Vokabel");
+        bearbeiten = false;
         steuerung = new VokabelScreenSteuerung();
         wortTxtField = new CustomTextField();
         uebersetzungTxtField = new CustomTextField();
@@ -43,6 +46,7 @@ public final class VokabelScreen extends CustomPanel
     public VokabelScreen(Vokabel vokabel)
     {
         this();
+        bearbeiten = true;
         wortTxtField.setText(vokabel.liesWort());
         uebersetzungTxtField.setText(vokabel.liesUebersetzung());
         lautschriftTxtField.setText(vokabel.liesLautschrift());
