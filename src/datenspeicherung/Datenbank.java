@@ -193,7 +193,7 @@ public final class Datenbank
 	private static boolean existiertVokabel(String wort, String uebersetzung)
 	{
 		// DB-Abfrage als String
-		String sqlStmt = "SELECT COUNT(*) ";
+		String sqlStmt = "SELECT * ";
 		sqlStmt += "FROM Vokabel ";
 		sqlStmt += "WHERE wort = ? AND uebersetzung = ?";
 
