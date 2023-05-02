@@ -93,20 +93,17 @@ public final class Dashboard extends CustomPanel
         constraints.gridwidth = 2;
         // Add Buttons
         addComponent(CustomButton.newVocabBtn((ignored) -> steuerung.erstellerGeklickt()));
-
         final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
                 "Starte eine Abfrage");
         abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
         constraints.gridx = 4;
         addComponent(abfrageBtn);
-
         final CustomButton vokabellisteBtn = new CustomButton("Vokabelliste",
                 "Zeige alle Vokabeln als Liste an");
         vokabellisteBtn.addActionListener(
                 (ignored) -> steuerung.vokabellisteGeklickt());
         constraints.gridx = 6;
         addComponent(vokabellisteBtn);
-
         final CustomButton kategorielisteBtn = new CustomButton(
                 "Kategorieliste", "Zeige alle Kategorien in einer Liste an");
         kategorielisteBtn.addActionListener(
@@ -114,6 +111,7 @@ public final class Dashboard extends CustomPanel
         constraints.gridx = 8;
         addComponent(kategorielisteBtn);
         constraints.gridy = 6;
+        constraints.gridx = 6;
         final CustomButton mappingBtn = new CustomButton(
                 "Mapping Übersicht",
                 "Verwalte deine Vokabeln und Kategorien"
