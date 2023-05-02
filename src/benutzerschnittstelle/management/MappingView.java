@@ -29,7 +29,6 @@ public class MappingView extends CustomPanel
     private MappingSteuerung steuerung;
     private ArrayList<Vokabel> voks;
     private Kategorie selectedKat;
-
     private Vokabel selectedVok;
 
     public MappingView()
@@ -138,9 +137,25 @@ public class MappingView extends CustomPanel
         vokPane.setBorder(BorderFactory.createEmptyBorder());
         katPane.setBorder(BorderFactory.createEmptyBorder());
         final JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 2));
-        panel.add(vokPane);
-        panel.add(katPane);
+        final GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(25, 25, 25, 25);
+        final GridBagLayout layout = new GridBagLayout();
+        layout.setConstraints(this, constraints);
+        panel.setLayout(layout);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 5;
+        panel.add(vokPane, constraints);
+        constraints.gridx = 6;
+        constraints.gridwidth = 1;
+        panel.add(new JPanel(), constraints);
+        constraints.gridwidth = 5;
+        constraints.gridx = 7;
+        panel.add(katPane, constraints);
         return panel;
     }
 }
