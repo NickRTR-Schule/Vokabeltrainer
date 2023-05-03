@@ -2,6 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="Resources/Icons"/>
+	<!-- Make Test visible as source Folder in Eclipse to enable launching it, even out of the real src folder -->
+	<classpathentry kind="src" path="Tests/"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
