@@ -1,6 +1,7 @@
 package fachkonzept.datamangement.tablemodels;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public abstract class CustomTableModel<T> extends AbstractTableModel
@@ -12,11 +13,22 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
 
     protected final Class<?>[] columnClasses;
 
+    protected final ArrayList<Integer> editableRows;
+
     public CustomTableModel(String[] columnNames, Class<?>[] columnClasses)
     {
         this.rows = new Vector<>();
         this.columnNames = columnNames;
         this.columnClasses = columnClasses;
+        this.editableRows = new ArrayList<>();
+    }
+
+    public CustomTableModel(String[] columnNames, Class<?>[] columnClasses, ArrayList<Integer> editableRows)
+    {
+        this.rows = new Vector<>();
+        this.columnNames = columnNames;
+        this.columnClasses = columnClasses;
+        this.editableRows = editableRows;
     }
 
     @Override
@@ -56,5 +68,11 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
     public void removeRow(T obj)
     {
         rows.remove(obj);
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex)
+    {
+        return editableRows.contains(columnIndex);
     }
 }

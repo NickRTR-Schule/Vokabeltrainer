@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MappingView extends CustomPanel
 {
@@ -43,10 +44,11 @@ public class MappingView extends CustomPanel
                         "Uebersetzung"
                 },
                 new Class<?>[]{
-                        boolean.class,
+                        Boolean.class,
                         String.class,
                         String.class
-                }
+                },
+                new ArrayList<>(List.of(0))
         )
         {
             @Override
@@ -68,9 +70,10 @@ public class MappingView extends CustomPanel
                         "Name"
                 },
                 new Class<?>[]{
-                        boolean.class,
+                        Boolean.class,
                         String.class
-                }
+                },
+                new ArrayList<>(List.of(0))
         )
         {
             @Override
@@ -120,6 +123,8 @@ public class MappingView extends CustomPanel
         final JScrollPane katPane = new JScrollPane();
         vokPane.setLayout(new ScrollPaneLayout());
         katPane.setLayout(new ScrollPaneLayout());
+        vokTable.getTableHeader().setReorderingAllowed(false);
+        katTable.getTableHeader().setReorderingAllowed(false);
         katTable.getSelectionModel().addListSelectionListener(e -> {
             katEditing = true;
             selectedKat = katModel.getObjectForRow(katTable.getSelectedRow());

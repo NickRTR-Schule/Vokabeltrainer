@@ -2,7 +2,7 @@ package fachkonzept.datamangement.tablemodels;
 
 import datenspeicherung.Vokabel;
 
-public class VokabelTableModel extends CustomTableModel<Vokabel>
+public final class VokabelTableModel extends CustomTableModel<Vokabel>
 {
 
     public static final int COLUMN_QUOTE = 2;

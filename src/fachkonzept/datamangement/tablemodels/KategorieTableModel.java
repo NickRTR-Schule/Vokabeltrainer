@@ -2,7 +2,7 @@ package fachkonzept.datamangement.tablemodels;
 
 import datenspeicherung.Kategorie;
 
-public class KategorieTableModel extends CustomTableModel<Kategorie>
+public final class KategorieTableModel extends CustomTableModel<Kategorie>
 {
 
     private static final int COLUMN_NAME = 0;
