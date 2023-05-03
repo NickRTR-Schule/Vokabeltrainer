@@ -1,10 +1,5 @@
 package steuerung;
 
-import datenspeicherung.Datenbank;
-import datenspeicherung.Kategorie;
-
-import java.util.ArrayList;
-
 public final class DashboardSteuerung
 {
 
@@ -35,19 +30,6 @@ public final class DashboardSteuerung
     public void statsGeklickt()
     {
         MainFrameSteuerung.getInstance().openStats();
-    }
-
-    public ArrayList<Kategorie> liesKategorien()
-    {
-        ArrayList<Kategorie> list;
-        try
-        {
-            list = Datenbank.liesKategorien();
-        } catch (Exception ignored)
-        {
-            list = new ArrayList<>();
-        }
-        return list;
     }
 
     public void mappingGeklickt()

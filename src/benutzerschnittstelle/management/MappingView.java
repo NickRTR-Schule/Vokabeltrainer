@@ -14,13 +14,9 @@ import java.util.List;
 
 public class MappingView extends CustomPanel
 {
-
     private final CustomTableModel<Vokabel> vokModel;
-
     private final CustomTableModel<Kategorie> katModel;
-
     private final JTable vokTable;
-
     private final JTable katTable;
     private final HashMap<Vokabel, ArrayList<Kategorie>> vokabelLookUp;
     private final HashMap<Kategorie, ArrayList<Vokabel>> kategorieLookUp;

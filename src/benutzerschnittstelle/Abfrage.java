@@ -35,7 +35,7 @@ public final class Abfrage extends CustomPanel
     {
         super("Abfrage");
         enteredNumberVoks = frageVokabelAnzahl();
-        steuerung = new AbfrageSteuerung(this, enteredNumberVoks);
+        steuerung = new AbfrageSteuerung(enteredNumberVoks);
         // Init Components
         wortLabel = new JLabel("Wort", SwingConstants.CENTER);
         uebersetzungField = new CustomTextField();
