@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MappingView extends CustomPanel
+public final class MappingView extends CustomPanel
 {
     private final CustomTableModel<Vokabel> vokModel;
     private final CustomTableModel<Kategorie> katModel;
@@ -96,6 +96,7 @@ public class MappingView extends CustomPanel
         }
         voks = steuerung.liesVokabeln();
         kats = steuerung.liesKategorien();
+        initLookUp();
         setValues();
         add(build());
     }
@@ -122,16 +123,28 @@ public class MappingView extends CustomPanel
         vokTable.getTableHeader().setReorderingAllowed(false);
         katTable.getTableHeader().setReorderingAllowed(false);
         katTable.getSelectionModel().addListSelectionListener(e -> {
-            katEditing = true;
-            selectedKat = katModel.getObjectForRow(katTable.getSelectedRow());
-            kategorieLookUp.put(selectedKat, steuerung.liesVokabelnFuerKategorie(selectedKat));
-            vokModel.fireTableDataChanged();
+            if (katTable.getSelectedRow() != -1)
+            {
+                katEditing = true;
+                selectedKat = katModel.getObjectForRow(katTable.getSelectedRow());
+                kategorieLookUp.put(selectedKat, getAddedVoks());
+                vokModel.fireTableDataChanged();
+            } else
+            {
+                katEditing = false;
+            }
         });
         vokTable.getSelectionModel().addListSelectionListener(e -> {
-            vokEditing = true;
-            selectedVok = vokModel.getObjectForRow(vokTable.getSelectedRow());
-            vokabelLookUp.put(selectedVok, steuerung.liesKategorienFuerVokabel(selectedVok));
-            katModel.fireTableDataChanged();
+            if (vokTable.getSelectedRow() != -1)
+            {
+                vokEditing = true;
+                selectedVok = vokModel.getObjectForRow(vokTable.getSelectedRow());
+                vokabelLookUp.put(selectedVok, getAddedKats());
+                katModel.fireTableDataChanged();
+            } else
+            {
+                vokEditing = false;
+            }
         });
         vokPane.setViewportView(vokTable);
         katPane.setViewportView(katTable);
@@ -158,5 +171,41 @@ public class MappingView extends CustomPanel
         constraints.gridx = 10;
         panel.add(vokPane, constraints);
         return panel;
+    }
+
+    /**
+     * Initializes the LookUp
+     * Maps for the Tables to get their data from
+     */
+    private void initLookUp()
+    {
+        voks.forEach(vokabel -> vokabelLookUp.put(vokabel, steuerung.liesKategorienFuerVokabel(vokabel)));
+        kats.forEach(kategorie -> kategorieLookUp.put(kategorie, steuerung.liesVokabelnFuerKategorie(kategorie)));
+    }
+
+    private ArrayList<Kategorie> getAddedKats()
+    {
+        final ArrayList<Kategorie> kats = new ArrayList<>();
+        for (int i = 0; i < katModel.getRowCount(); i++)
+        {
+            if ((boolean) katModel.getValueAt(i, 0))
+            {
+                kats.add(katModel.getObjectForRow(i));
+            }
+        }
+        return kats;
+    }
+
+    private ArrayList<Vokabel> getAddedVoks()
+    {
+        final ArrayList<Vokabel> voks = new ArrayList<>();
+        for (int i = 0; i < vokModel.getRowCount(); i++)
+        {
+            if ((boolean) vokModel.getValueAt(i, 0))
+            {
+                voks.add(vokModel.getObjectForRow(i));
+            }
+        }
+        return voks;
     }
 }

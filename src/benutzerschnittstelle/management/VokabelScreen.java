@@ -10,6 +10,7 @@ import steuerung.management.VokabelScreenSteuerung;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
 
 /**
  * The Screen to add / create a new Vocabulary.
@@ -123,6 +124,8 @@ public final class VokabelScreen extends CustomPanel
         });
         panel.add(storeBtn, constraints);
         wortTxtField.requestFocus();
+        // TODO-js: Work on that
+        wortTxtField.requestFocus(FocusEvent.Cause.ACTIVATION);
         return panel;
     }
 }

@@ -7,7 +7,7 @@ import datenspeicherung.Vokabel;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class MappingSteuerung
+public final class MappingSteuerung
 {
 
     private final ArrayList<Vokabel> voks;
