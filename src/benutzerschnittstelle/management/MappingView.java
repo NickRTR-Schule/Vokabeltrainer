@@ -59,6 +59,18 @@ public final class MappingView extends CustomPanel
                     default -> "";
                 };
             }
+
+            @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex)
+            {
+                // TODO-js: guard needed?
+                if ((boolean) aValue)
+                {
+                    final ArrayList<Vokabel> voks = kategorieLookUp.get(selectedKat);
+                    voks.add(rows.get(rowIndex));
+                    kategorieLookUp.put(selectedKat, voks);
+                }
+            }
         };
         katModel = new CustomTableModel<>(
                 new String[]{
@@ -82,6 +94,18 @@ public final class MappingView extends CustomPanel
                     case 1 -> kat.liesName();
                     default -> "";
                 };
+            }
+
+            @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex)
+            {
+                // TODO-js: guard needed?
+                if ((boolean) aValue)
+                {
+                    final ArrayList<Kategorie> kats = vokabelLookUp.get(selectedVok);
+                    kats.add(rows.get(rowIndex));
+                    vokabelLookUp.put(selectedVok, kats);
+                }
             }
         };
         vokTable = new JTable(vokModel);
