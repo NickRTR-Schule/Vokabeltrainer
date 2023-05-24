@@ -30,6 +30,7 @@ public final class MappingSteuerung
     {
         // TODO: optimize
         // TODO: work on removing warning
+        // TODO: not working I guess
         return kats.stream().filter(
                 (kat) -> kat.equals(katForFilter)
         ).findFirst().get().liesVokabeln();
