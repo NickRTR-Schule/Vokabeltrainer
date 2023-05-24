@@ -1,6 +1,7 @@
 package benutzerschnittstelle.management;
 
 import benutzerschnittstelle.komponenten.CustomPanel;
+import fachkonzept.Suchkonzept;
 import fachkonzept.datamangement.tablemodels.CustomTableModel;
 import steuerung.MainFrameSteuerung;
 import steuerung.management.ListenSteuerung;
@@ -12,10 +13,11 @@ import java.util.ArrayList;
 
 public class ListView<T> extends CustomPanel
 {
-
     public final JTable table;
     private final CustomTableModel<T> model;
     private final ListenSteuerung<T> steuerung;
+    private final JTextField searchField;
+    private final Suchkonzept suchkonzept;
     private ArrayList<T> objects;
 
     public ListView(String name, CustomTableModel<T> model, ListenSteuerung<T> steuerung)
@@ -31,6 +33,9 @@ public class ListView<T> extends CustomPanel
             JOptionPane.showMessageDialog(this, "Fehler beim laden der Daten");
         }
         this.model = model;
+        searchField = new JTextField();
+        suchkonzept = new Suchkonzept();
+        searchField.addActionListener((e) -> suchkonzept.suche());
         table = new JTable(model);
         init();
     }
@@ -52,14 +57,17 @@ public class ListView<T> extends CustomPanel
         final GridBagLayout layout = new GridBagLayout();
         layout.setConstraints(this, constraints);
         panel.setLayout(layout);
-        constraints.gridx = 1;
         constraints.gridy = 0;
+        constraints.gridx = 1;
+        panel.add(searchField, constraints);
+        constraints.gridx = 1;
+        constraints.gridy = 1;
         constraints.weightx = 1;
         constraints.weighty = 1;
         panel.add(getTable(), constraints);
         constraints.weightx = 0;
         constraints.weighty = 0;
-        constraints.gridy = 1;
+        constraints.gridy = 2;
         panel.add(getActionPanel(), constraints);
         return panel;
     }
