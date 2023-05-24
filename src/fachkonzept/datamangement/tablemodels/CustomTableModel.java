@@ -73,6 +73,6 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex)
     {
-        return editableRows.contains(Integer.valueOf(columnIndex));
+        return editableRows.contains(columnIndex);
     }
 }
