@@ -1,7 +1,6 @@
 package datenspeicherung;
 
-public final class Vokabel implements Comparable<Vokabel>
-{
+public final class Vokabel implements Comparable<Vokabel> {
 	// Vokabel-Datentyp
 	private final String wort;
 	private final String uebersetzung;
@@ -12,10 +11,8 @@ public final class Vokabel implements Comparable<Vokabel>
 	private int anzahlrichtig;
 	private int wiederholungen;
 
-	public Vokabel(String pWort, String pUebersetzung, byte[] pAbbildung,
-			byte[] pAussprache, String pLautschrift, String pVerwendungshinweis,
-			int pWiederholungen, int pAnzahlrichtig)
-	{
+	public Vokabel(String pWort, String pUebersetzung, byte[] pAbbildung, byte[] pAussprache, String pLautschrift,
+			String pVerwendungshinweis, int pWiederholungen, int pAnzahlrichtig) {
 		wort = pWort;
 		uebersetzung = pUebersetzung;
 		abbildung = pAbbildung;
@@ -26,62 +23,50 @@ public final class Vokabel implements Comparable<Vokabel>
 		anzahlrichtig = pAnzahlrichtig;
 	}
 
-	public String liesWort()
-	{
+	public String liesWort() {
 		return wort;
 	}
 
-	public String liesUebersetzung()
-	{
+	public String liesUebersetzung() {
 		return uebersetzung;
 	}
 
-	public byte[] liesAbbildung()
-	{
+	public byte[] liesAbbildung() {
 		return abbildung;
 	}
 
-	public byte[] liesAussprache()
-	{
+	public byte[] liesAussprache() {
 		return aussprache;
 	}
 
-	public String liesLautschrift()
-	{
+	public String liesLautschrift() {
 		return lautschrift;
 	}
 
-	public String liesVerwendungshinweis()
-	{
+	public String liesVerwendungshinweis() {
 		return verwendungshinweis;
 	}
 
-	public int liesWiederholungen()
-	{
+	public int liesWiederholungen() {
 		return wiederholungen;
 	}
 
-	public int liesAnzahlRichtig()
-	{
+	public int liesAnzahlRichtig() {
 		return anzahlrichtig;
 	}
 
-	public int liesQuote()
-	{
-		return (int) (Math.round(
-				((double) anzahlrichtig / wiederholungen * 100) * 100) / 100);
+	public int liesQuote() {
+		return (int) (Math.round(((double) anzahlrichtig / wiederholungen * 100) * 100) / 100);
 	}
 
-	public void wiederholt(boolean richtig)
-	{
+	public void wiederholt(boolean richtig) {
 		wiederholungen++;
 		if (richtig)
 			anzahlrichtig++;
 	}
 
 	@Override
-	public int compareTo(Vokabel v)
-	{
+	public int compareTo(Vokabel v) {
 		return Integer.compare(liesQuote(), v.liesQuote());
 	}
 }
