@@ -31,9 +31,4 @@ public final class DashboardSteuerung
     {
         MainFrameSteuerung.getInstance().openStats();
     }
-
-    public void mappingGeklickt()
-    {
-        MainFrameSteuerung.getInstance().openMappingUebersicht();
-    }
 }

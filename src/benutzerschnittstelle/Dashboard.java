@@ -110,13 +110,5 @@ public final class Dashboard extends CustomPanel
                 (ignored) -> steuerung.kategorielisteGeklickt());
         constraints.gridx = 8;
         addComponent(kategorielisteBtn);
-        constraints.gridy = 6;
-        constraints.gridx = 6;
-        final CustomButton mappingBtn = new CustomButton(
-                "Mapping Übersicht",
-                "Verwalte deine Vokabeln und Kategorien"
-        );
-        mappingBtn.addActionListener((ignored) -> steuerung.mappingGeklickt());
-        addComponent(mappingBtn);
     }
 }

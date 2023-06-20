@@ -13,5 +13,4 @@ public enum UIScreens
     Kategorieeuebersicht,
     Vokabelliste,
     Vokabeluebersicht,
-    MappingUebersicht,
 }

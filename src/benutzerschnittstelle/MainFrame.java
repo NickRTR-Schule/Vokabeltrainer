@@ -2,7 +2,10 @@ package benutzerschnittstelle;
 
 import benutzerschnittstelle.error.ErrorScreen;
 import benutzerschnittstelle.komponenten.WrapperPanel;
-import benutzerschnittstelle.management.*;
+import benutzerschnittstelle.management.KategorieScreen;
+import benutzerschnittstelle.management.Kategorieliste;
+import benutzerschnittstelle.management.VokabelScreen;
+import benutzerschnittstelle.management.Vokabelliste;
 import benutzerschnittstelle.navigation.UIScreens;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
@@ -71,7 +74,6 @@ public final class MainFrame extends JFrame
             case Statistik -> setContentPane(new WrapperPanel(new Statistik()));
             case Vokabelliste -> setContentPane(new WrapperPanel(new Vokabelliste()));
             case Kategorieliste -> setContentPane(new WrapperPanel(new Kategorieliste()));
-            case MappingUebersicht -> setContentPane(new WrapperPanel(new MappingView()));
             default -> setContentPane(new WrapperPanel(new ErrorScreen()));
         }
         update();

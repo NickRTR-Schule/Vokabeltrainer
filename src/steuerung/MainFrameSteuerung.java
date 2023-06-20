@@ -154,11 +154,4 @@ public final class MainFrameSteuerung
         openForward(screen);
         mainFrame.open(screen);
     }
-
-    public void openMappingUebersicht()
-    {
-        final UIScreens screen = UIScreens.MappingUebersicht;
-        openForward(screen);
-        mainFrame.open(screen);
-    }
 }

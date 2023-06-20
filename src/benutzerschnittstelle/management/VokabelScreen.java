@@ -106,6 +106,10 @@ public final class VokabelScreen extends CustomPanel
         constraints.gridy = 9;
         panel.add(verwendungsHinweisTxtField, constraints);
         constraints.gridy = 10;
+        panel.add(new JLabel("Kategorien"), constraints);
+        constraints.gridy = 12;
+        // TODO-js: add Dropdown
+        constraints.gridy = 11;
         final CustomButton storeBtn = new CustomButton("Speichern");
         storeBtn.addActionListener((ignored) -> {
             if (wortTxtField.getText().length() > 0
