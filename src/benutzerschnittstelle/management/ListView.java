@@ -95,7 +95,6 @@ public class ListView<T> extends CustomPanel
         for (final T obj : objects)
         {
             model.addRow(obj);
-
         }
         final JScrollPane pane = new JScrollPane();
         pane.setLayout(new ScrollPaneLayout());
