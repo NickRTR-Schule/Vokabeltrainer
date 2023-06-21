@@ -37,6 +37,8 @@ public final class VokabelScreen extends CustomPanel {
 
 	private final CustomTextField verwendungsHinweisTxtField;
 
+	private JLabel abbildungsLabel;
+
 	private boolean bearbeiten;
 	private Vokabel vokabel;
 	private Vokabel test;
@@ -55,12 +57,13 @@ public final class VokabelScreen extends CustomPanel {
 	public VokabelScreen(Vokabel vokabel) {
 		this();
 		this.vokabel = vokabel;
-		this.test = vokabel;
 		bearbeiten = true;
 		wortTxtField.setText(vokabel.liesWort());
 		uebersetzungTxtField.setText(vokabel.liesUebersetzung());
 		lautschriftTxtField.setText(vokabel.liesLautschrift());
 		verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
+
+		abbildungsLabel = new JLabel(new ImageIcon(test.liesAbbildung()));
 	}
 
 	private void setValues() {
@@ -135,8 +138,7 @@ public final class VokabelScreen extends CustomPanel {
 		});
 		panel.add(storeBtn, constraints);
 
-		ImageIcon abbildung = new ImageIcon(test.liesAbbildung());
-		panel.add(new JLabel(abbildung));
+		panel.add(abbildungsLabel);
 
 		wortTxtField.requestFocus();
 		return panel;

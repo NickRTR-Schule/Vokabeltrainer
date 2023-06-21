@@ -32,6 +32,7 @@ public final class Abfrage extends CustomPanel {
 
 	private final JLabel wortLabel;
 	private final JLabel verwendungshinweisLabel;
+	private final JLabel lautschriftLabel;
 
 	private final CustomTextField uebersetzungField;
 
@@ -47,6 +48,7 @@ public final class Abfrage extends CustomPanel {
 		// Init Components
 		wortLabel = new JLabel("Wort", SwingConstants.CENTER);
 		verwendungshinweisLabel = new JLabel("Verwendungshinweis", SwingConstants.CENTER);
+		lautschriftLabel = new JLabel("Lautschrift", SwingConstants.CENTER);
 		uebersetzungField = new CustomTextField();
 		uebersetzungField.setHorizontalAlignment(JTextField.CENTER);
 		setValues();
@@ -77,12 +79,15 @@ public final class Abfrage extends CustomPanel {
 		add(wortLabel, constraints);
 		constraints.gridx = 1;
 		constraints.gridy = 1;
-		add(verwendungshinweisLabel, constraints);
+		add(lautschriftLabel, constraints);
+		constraints.gridx = 1;
 		constraints.gridy = 2;
+		add(verwendungshinweisLabel, constraints);
+		constraints.gridy = 3;
 		add(uebersetzungField, constraints);
 		final CustomButton checkBtn = new CustomButton("Check");
 		checkBtn.addActionListener((e) -> checkVok());
-		constraints.gridy = 2;
+		constraints.gridy = 4;
 		add(checkBtn, constraints);
 		constraints.gridx = 3;
 		final JPanel spacerPanel2 = new JPanel();
@@ -102,6 +107,7 @@ public final class Abfrage extends CustomPanel {
 		}
 		wortLabel.setText(steuerung.liesAktuelleVokabel().liesWort());
 		wortLabel.setFont(new Font(MainFrame.liesFont().getFontName(), Font.BOLD, 16));
+		lautschriftLabel.setText(steuerung.liesAktuelleVokabel().liesLautschrift());
 		verwendungshinweisLabel.setText(steuerung.liesAktuelleVokabel().liesVerwendungshinweis());
 	}
 
