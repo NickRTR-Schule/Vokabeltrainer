@@ -1,8 +1,22 @@
 package fachkonzept;
 
-public final class Suchkonzept
+import java.util.ArrayList;
+
+import exceptions.datenbank.DatenbankAccessException;
+import exceptions.datenbank.DatenbankLeseException;
+
+public abstract class Suchkonzept<T>
 {
-    public void suche()
-    {
-    }
+
+	protected final ArrayList<T> alleObjekte;
+
+	public Suchkonzept() throws DatenbankAccessException, DatenbankLeseException
+	{
+		alleObjekte = liesAlleDaten();
+	}
+
+	protected abstract ArrayList<T> liesAlleDaten()
+			throws DatenbankLeseException, DatenbankAccessException;
+
+	public abstract ArrayList<T> suche(String text);
 }
