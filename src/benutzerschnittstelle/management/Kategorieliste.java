@@ -8,13 +8,19 @@ import steuerung.management.KategorielisteSteuerung;
 public final class Kategorieliste extends ListView<Kategorie>
 {
 
-    public Kategorieliste()
+    public Kategorieliste(boolean edit)
     {
         super(
                 "Kategorien",
                 new KategorieTableModel(),
                 new KategorielisteSteuerung(),
-                new CustomButton("Test")
+                new CustomButton("Test"),
+                edit
         );
+    }
+
+    public Kategorieliste()
+    {
+        this(false);
     }
 }

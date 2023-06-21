@@ -79,7 +79,6 @@ public class MappingWindow<O, T> extends JFrame
             return;
         }
         addComponent(listView);
-        
     }
 
     private void addComponent(Component comp)
