@@ -96,7 +96,7 @@ public class ListView<T> extends CustomPanel {
 		if (steuerung instanceof VokabellisteSteuerung) {
 			addBtn.addActionListener((ignored) -> new DashboardSteuerung().erstellerGeklickt());
 		} else {
-			addBtn.addActionListener((ignored) -> MainFrameSteuerung.getInstance());
+			addBtn.addActionListener((ignored) -> MainFrameSteuerung.getInstance().openKategorieuebersicht());
 		}
 		panel.add(addBtn);
 		final JButton deleteBtn = new JButton("Delete");
