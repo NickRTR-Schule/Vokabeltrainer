@@ -19,10 +19,14 @@ public class ListView<T> extends CustomPanel
     private final ListenSteuerung<T> steuerung;
     private ArrayList<T> objects;
 
-    public ListView(String name, CustomTableModel<T> model, ListenSteuerung<T> steuerung, CustomButton btn)
+    public ListView(
+            String name,
+            CustomTableModel<T> model,
+            ListenSteuerung<T> steuerung,
+            CustomButton btn
+    )
     {
         super(name, btn);
-        this.steuerung = steuerung;
         try
         {
             objects = steuerung.liesDaten();
@@ -31,6 +35,23 @@ public class ListView<T> extends CustomPanel
             objects = new ArrayList<>();
             JOptionPane.showMessageDialog(this, "Fehler beim laden der Daten");
         }
+        this.steuerung = steuerung;
+        this.model = model;
+        table = new JTable(model);
+        init();
+    }
+
+    public ListView(
+            ArrayList<T> objs,
+            String name,
+            CustomTableModel<T> model,
+            ListenSteuerung<T> steuerung,
+            CustomButton btn
+    )
+    {
+        super(name, btn);
+        objects = objs;
+        this.steuerung = steuerung;
         this.model = model;
         table = new JTable(model);
         init();

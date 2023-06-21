@@ -113,7 +113,7 @@ public final class MainFrameSteuerung
         openForward(screen, kategorie);
         mainFrame.open(screen, kategorie);
     }
-
+    
     private void openVokabeluebersicht(Vokabel vokabel)
     {
         final UIScreens screen = UIScreens.Vokabeluebersicht;
