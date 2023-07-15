@@ -23,28 +23,24 @@ import datenspeicherung.Vokabel;
  * The Frame containing the other Screens as Panels in a Form of its own content
  * Pane.
  */
-public final class MainFrame extends JFrame
-{
+public final class MainFrame extends JFrame {
 
 	private static final Font font = new Font("Roboto", Font.PLAIN, 12);
-
-	public MainFrame()
-	{
+  
+	public MainFrame() {
 		setValues();
 		requestFocus();
 	}
 
-	public static Font liesFont()
-	{
+
+	public static Font liesFont() {
 		return font;
 	}
-
-	/**
-	 * Call all the Setter Methods to relevant variables in the init process of
-	 * this Frame
+  
+	 * Call all the Setter Methods to relevant variables in the init process of this
+	 * Frame
 	 */
-	private void setValues()
-	{
+	private void setValues() {
 		setContentPane(new Dashboard());
 		setOpacity(1);
 		setAlwaysOnTop(false);
@@ -109,8 +105,7 @@ public final class MainFrame extends JFrame
 	/**
 	 * Updates the Main Frame and all it's content
 	 */
-	private void update()
-	{
+	private void update() {
 		revalidate();
 		repaint();
 	}
@@ -119,26 +114,17 @@ public final class MainFrame extends JFrame
 	 * Navigates to another Screen in the App and used the passed arguments to
 	 * create the new Screen.
 	 *
-	 * @param ui
-	 *            the Screen where to navigate to
-	 * @param arg
-	 *            the Arguments being passed to the new Screen
+	 * @param ui  the Screen where to navigate to
+	 * @param arg the Arguments being passed to the new Screen
 	 */
-	public void open(UIScreens ui, Object arg)
-	{
-		if (arg == null)
-		{
+	public void open(UIScreens ui, Object arg) {
+		if (arg == null) {
 			open(ui);
-		}
-		else
-		{
-			switch (ui)
-			{
-				case Kategorieeuebersicht -> setContentPane(
-						new WrapperPanel(new KategorieScreen((Kategorie) arg)));
-				case Vokabeluebersicht -> setContentPane(
-						new WrapperPanel(new VokabelScreen((Vokabel) arg)));
-				default -> setContentPane(new WrapperPanel(new ErrorScreen()));
+		} else {
+			switch (ui) {
+			case Kategorieeuebersicht -> setContentPane(new WrapperPanel(new KategorieScreen((Kategorie) arg)));
+			case Vokabeluebersicht -> setContentPane(new WrapperPanel(new VokabelScreen((Vokabel) arg)));
+			default -> setContentPane(new WrapperPanel(new ErrorScreen()));
 			}
 		}
 		update();

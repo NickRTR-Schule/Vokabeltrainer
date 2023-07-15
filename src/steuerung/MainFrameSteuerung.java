@@ -21,11 +21,10 @@ public final class MainFrameSteuerung
     private static MainFrameSteuerung shared;
 
     /**
-     * The Main Frame of this Application handling all the other Screens as
-     * content Panes of this single Main Frame.
+     * The Main Frame of this Application handling all the other Screens as content
+     * Panes of this single Main Frame.
      * <p>
-     * WARNING: Only one of this Main Frame should exist in a single Application
-     * run
+     * WARNING: Only one of this Main Frame should exist in a single Application run
      */
     private final MainFrame mainFrame;
 
@@ -92,8 +91,7 @@ public final class MainFrameSteuerung
     }
 
     /**
-     * WARNING!
-     * Only use in Navigation Stack
+     * WARNING! Only use in Navigation Stack
      *
      * @param screen
      * @param obj
@@ -111,6 +109,13 @@ public final class MainFrameSteuerung
         final UIScreens screen = UIScreens.Kategorieeuebersicht;
         openForward(screen, kategorie);
         mainFrame.open(screen, kategorie);
+    }
+
+    public void openKategorieuebersicht()
+    {
+        final UIScreens screen = UIScreens.Kategorieeuebersicht;
+        openForward(screen);
+        mainFrame.open(screen);
     }
 
     private void openVokabeluebersicht(Vokabel vokabel)

@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,8 +23,7 @@ import steuerung.management.VokabelScreenSteuerung;
 /**
  * The Screen to add / create a new Vocabulary.
  */
-public final class VokabelScreen extends CustomPanel
-{
+public final class VokabelScreen extends CustomPanel {
 
 	/**
 	 * The Controller to this View
@@ -37,11 +37,13 @@ public final class VokabelScreen extends CustomPanel
 
 	private final CustomTextField verwendungsHinweisTxtField;
 
+	private JLabel abbildungsLabel;
+
 	private boolean bearbeiten;
 	private Vokabel vokabel;
+	private Vokabel test;
 
-	public VokabelScreen()
-	{
+	public VokabelScreen() {
 		super("Vokabel");
 		bearbeiten = false;
 		steuerung = new VokabelScreenSteuerung();
@@ -52,8 +54,7 @@ public final class VokabelScreen extends CustomPanel
 		setValues();
 	}
 
-	public VokabelScreen(Vokabel vokabel)
-	{
+	public VokabelScreen(Vokabel vokabel) {
 		this();
 		this.vokabel = vokabel;
 		bearbeiten = true;
@@ -61,10 +62,11 @@ public final class VokabelScreen extends CustomPanel
 		uebersetzungTxtField.setText(vokabel.liesUebersetzung());
 		lautschriftTxtField.setText(vokabel.liesLautschrift());
 		verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
+
+		abbildungsLabel = new JLabel(new ImageIcon(test.liesAbbildung()));
 	}
 
-	private void setValues()
-	{
+	private void setValues() {
 		final JScrollPane pane = new JScrollPane();
 		pane.setBackground(Color.WHITE);
 		pane.setLayout(new ScrollPaneLayout());
@@ -73,8 +75,7 @@ public final class VokabelScreen extends CustomPanel
 		setName(getName());
 	}
 
-	private JPanel build()
-	{
+	private JPanel build() {
 		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.anchor = GridBagConstraints.CENTER;
@@ -122,30 +123,23 @@ public final class VokabelScreen extends CustomPanel
 		constraints.gridy = 10;
 		final CustomButton storeBtn = new CustomButton("Speichern");
 		storeBtn.addActionListener((ignored) -> {
-			if (wortTxtField.getText().length() > 0
-					&& uebersetzungTxtField.getText().length() > 0)
-			{
-				if (!bearbeiten)
-				{
-					steuerung.vokabelHinzufuegen(new Vokabel(
-							wortTxtField.getText(),
-							uebersetzungTxtField.getText(), null, null,
-							lautschriftTxtField.getText(),
-							verwendungsHinweisTxtField.getText(), 0, 0));
-				}
-				else
-				{
+			if (wortTxtField.getText().length() > 0 && uebersetzungTxtField.getText().length() > 0) {
+				if (!bearbeiten) {
+					steuerung.vokabelHinzufuegen(new Vokabel(wortTxtField.getText(), uebersetzungTxtField.getText(),
+							null, null, lautschriftTxtField.getText(), verwendungsHinweisTxtField.getText(), 0, 0));
+				} else {
 					steuerung.vokabelAendern(
-							new Vokabel(wortTxtField.getText(),
-									uebersetzungTxtField.getText(), null, null,
-									lautschriftTxtField.getText(),
-									verwendungsHinweisTxtField.getText(), 0, 0),
+							new Vokabel(wortTxtField.getText(), uebersetzungTxtField.getText(), null, null,
+									lautschriftTxtField.getText(), verwendungsHinweisTxtField.getText(), 0, 0),
 							vokabel);
 				}
 			}
 			NavigationStack.getInstance().back();
 		});
 		panel.add(storeBtn, constraints);
+
+		panel.add(abbildungsLabel);
+
 		wortTxtField.requestFocus();
 		return panel;
 	}
