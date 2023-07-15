@@ -14,12 +14,19 @@ public final class Vokabelliste extends ListView<Vokabel>
 
     public Vokabelliste()
     {
+        this(false);
+    }
+
+
+    public Vokabelliste(boolean edit)
+    {
         super(
                 "Vokabeln",
                 new VokabelTableModel(),
                 new VokabellisteSteuerung(),
                 CustomButton.newVocabBtn((ignored) -> {
-                })
+                }),
+                edit
         );
         table.getColumnModel().getColumn(VokabelTableModel.COLUMN_QUOTE).setCellRenderer(new DefaultTableCellRenderer()
         {

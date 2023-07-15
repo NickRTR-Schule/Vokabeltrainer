@@ -69,10 +69,10 @@ public class MappingWindow<O, T> extends JFrame
         final ListView<?> listView;
         if (type == MappingType.vok)
         {
-            listView = new Vokabelliste();
+            listView = new Vokabelliste(true);
         } else if (type == MappingType.kat)
         {
-            listView = new Kategorieliste();
+            listView = new Kategorieliste(true);
         } else
         {
             // Abort execution
