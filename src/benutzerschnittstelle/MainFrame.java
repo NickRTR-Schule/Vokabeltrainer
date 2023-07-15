@@ -26,17 +26,17 @@ import datenspeicherung.Vokabel;
 public final class MainFrame extends JFrame {
 
 	private static final Font font = new Font("Roboto", Font.PLAIN, 12);
-  
+
 	public MainFrame() {
 		setValues();
 		requestFocus();
 	}
 
-
 	public static Font liesFont() {
 		return font;
 	}
-  
+
+	/*
 	 * Call all the Setter Methods to relevant variables in the init process of this
 	 * Frame
 	 */
@@ -60,44 +60,32 @@ public final class MainFrame extends JFrame {
 	}
 
 	/**
-	 * Navigates to another Screen in this App, being passed to this Method as
-	 * the param ui
+	 * Navigates to another Screen in this App, being passed to this Method as the
+	 * param ui
 	 *
-	 * @param ui
-	 *            the Screen where to navigate to
+	 * @param ui the Screen where to navigate to
 	 */
-	public void open(UIScreens ui)
-	{
-		switch (ui)
-		{
-			case Dashboard -> setContentPane(new Dashboard());
-			case Abfrage -> setContentPane(new WrapperPanel(new Abfrage()));
-			case Ersteller -> setContentPane(
-					new WrapperPanel(new VokabelScreen()));
-			case Statistik -> setContentPane(new WrapperPanel(new Statistik()));
-			case Vokabelliste ->
-			{
-				try
-				{
-					setContentPane(new WrapperPanel(new Vokabelliste()));
-				}
-				catch (Exception ignored)
-				{
-					JOptionPane.showMessageDialog(this, "Alles kaputt");
-				}
+	public void open(UIScreens ui) {
+		switch (ui) {
+		case Dashboard -> setContentPane(new Dashboard());
+		case Abfrage -> setContentPane(new WrapperPanel(new Abfrage()));
+		case Ersteller -> setContentPane(new WrapperPanel(new VokabelScreen()));
+		case Statistik -> setContentPane(new WrapperPanel(new Statistik()));
+		case Vokabelliste -> {
+			try {
+				setContentPane(new WrapperPanel(new Vokabelliste()));
+			} catch (Exception ignored) {
+				JOptionPane.showMessageDialog(this, "Alles kaputt");
 			}
-			case Kategorieliste ->
-			{
-				try
-				{
-					setContentPane(new WrapperPanel(new Kategorieliste()));
-				}
-				catch (Exception ignored)
-				{
-					JOptionPane.showMessageDialog(this, "Alles kaputt");
-				}
+		}
+		case Kategorieliste -> {
+			try {
+				setContentPane(new WrapperPanel(new Kategorieliste()));
+			} catch (Exception ignored) {
+				JOptionPane.showMessageDialog(this, "Alles kaputt");
 			}
-			default -> setContentPane(new WrapperPanel(new ErrorScreen()));
+		}
+		default -> setContentPane(new WrapperPanel(new ErrorScreen()));
 		}
 		update();
 	}
