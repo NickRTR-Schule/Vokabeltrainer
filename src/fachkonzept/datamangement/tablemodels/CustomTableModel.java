@@ -15,20 +15,30 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
 
     protected final ArrayList<Integer> editableRows;
 
-    public CustomTableModel(String[] columnNames, Class<?>[] columnClasses)
+    public CustomTableModel(String[] columnNames, Class<?>[] columnClasses, boolean edit)
     {
         this.rows = new Vector<>();
-        this.columnNames = columnNames;
-        this.columnClasses = columnClasses;
         this.editableRows = new ArrayList<>();
-    }
-
-    public CustomTableModel(String[] columnNames, Class<?>[] columnClasses, ArrayList<Integer> editableRows)
-    {
-        this.rows = new Vector<>();
-        this.columnNames = columnNames;
-        this.columnClasses = columnClasses;
-        this.editableRows = editableRows;
+        final String[] localColumnNames;
+        final Class<?>[] localColumnClasses;
+        final int columnCountWithoutEdit = columnNames.length;
+        final int columnCountWithEdit = columnCountWithoutEdit + 1;
+        if (edit)
+        {
+            localColumnNames = new String[columnCountWithEdit];
+            // TODO-js: change
+            localColumnNames[0] = "Aktiv";
+            System.arraycopy(columnNames, 0, localColumnNames, 1, columnCountWithoutEdit);
+            localColumnClasses = new Class<?>[columnCountWithEdit];
+            localColumnClasses[0] = boolean.class;
+            System.arraycopy(columnClasses, 0, localColumnClasses, 1, columnCountWithoutEdit);
+        } else
+        {
+            localColumnNames = columnNames;
+            localColumnClasses = columnClasses;
+        }
+        this.columnNames = localColumnNames;
+        this.columnClasses = localColumnClasses;
     }
 
     @Override

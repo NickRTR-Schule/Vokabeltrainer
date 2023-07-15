@@ -12,7 +12,7 @@ public final class VokabelTableModel extends CustomTableModel<Vokabel>
     private static final int COLUMN_VERWENDUNGSHINWEIS = 4;
 
 
-    public VokabelTableModel()
+    public VokabelTableModel(boolean edit)
     {
         super(
                 new String[]{
@@ -28,8 +28,14 @@ public final class VokabelTableModel extends CustomTableModel<Vokabel>
                         String.class,
                         Integer.class,
                         String.class
-                }
+                },
+                edit
         );
+    }
+
+    public VokabelTableModel()
+    {
+        this(false);
     }
 
     @Override

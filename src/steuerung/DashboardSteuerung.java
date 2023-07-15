@@ -3,10 +3,6 @@ package steuerung;
 public final class DashboardSteuerung
 {
 
-    public DashboardSteuerung()
-    {
-    }
-
     public void abfrageGeklickt()
     {
         MainFrameSteuerung.getInstance().openAbfrage();

@@ -1,6 +1,7 @@
 package steuerung;
 
 import benutzerschnittstelle.MainFrame;
+import benutzerschnittstelle.komponenten.MappingWindow;
 import benutzerschnittstelle.navigation.UIScreens;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
@@ -47,6 +48,8 @@ public final class MainFrameSteuerung
         return shared;
     }
 
+    /* Navigation Stack Methods */
+
     private void openForward(UIScreens screen)
     {
         NavigationStack.getInstance().forward(screen);
@@ -56,6 +59,21 @@ public final class MainFrameSteuerung
     {
         NavigationStack.getInstance().forward(screen, obj);
     }
+
+    /**
+     * WARNING!
+     * Only use in Navigation Stack
+     *
+     * @param screen - The Screen to navigate to
+     * @param obj    - the Object that can be passed to the Screen you want to
+     *               navigate to
+     */
+    public void openForNavigationStack(UIScreens screen, Object obj)
+    {
+        mainFrame.open(screen, obj);
+    }
+
+    /* Open Methods to open different Screens inside the Application */
 
     /**
      * Navigates to the Dashboard of this App
@@ -92,19 +110,6 @@ public final class MainFrameSteuerung
     }
 
     /**
-     * WARNING!
-     * Only use in Navigation Stack
-     *
-     * @param screen - The Screen to navigate to
-     * @param obj    - the Object that can be passed to the Screen you want to
-     *               navigate to
-     */
-    public void openForNavigationStack(UIScreens screen, Object obj)
-    {
-        mainFrame.open(screen, obj);
-    }
-
-    /**
      * Navigates to the KategorieScreen of this App
      */
     private void openKategorieuebersicht(Kategorie kategorie)
@@ -113,7 +118,7 @@ public final class MainFrameSteuerung
         openForward(screen, kategorie);
         mainFrame.open(screen, kategorie);
     }
-    
+
     private void openVokabeluebersicht(Vokabel vokabel)
     {
         final UIScreens screen = UIScreens.Vokabeluebersicht;
@@ -153,5 +158,11 @@ public final class MainFrameSteuerung
         final UIScreens screen = UIScreens.Statistik;
         openForward(screen);
         mainFrame.open(screen);
+    }
+
+    public void openMapping(Object object)
+    {
+        final MappingWindow<?, ?> window = new MappingWindow<>(object);
+        window.setVisible(true);
     }
 }

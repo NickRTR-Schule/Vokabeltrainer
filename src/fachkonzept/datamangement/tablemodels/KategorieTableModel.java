@@ -8,7 +8,7 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
     private static final int COLUMN_NAME = 0;
     private static final int COLUMN_VOKSANZAHL = 1;
 
-    public KategorieTableModel()
+    public KategorieTableModel(boolean edit)
     {
         super(
                 new String[]{
@@ -18,8 +18,14 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
                 new Class<?>[]{
                         String.class,
                         Integer.class
-                }
+                },
+                edit
         );
+    }
+
+    public KategorieTableModel()
+    {
+        this(false);
     }
 
     @Override

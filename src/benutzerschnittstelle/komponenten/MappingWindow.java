@@ -86,6 +86,11 @@ public class MappingWindow<O, T> extends JFrame
         add(comp, constraints);
     }
 
+    private void mapObject(T object)
+    {
+
+    }
+
     private enum MappingType
     {
         vok,

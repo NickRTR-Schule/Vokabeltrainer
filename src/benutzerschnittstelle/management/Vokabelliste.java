@@ -22,7 +22,7 @@ public final class Vokabelliste extends ListView<Vokabel>
     {
         super(
                 "Vokabeln",
-                new VokabelTableModel(),
+                new VokabelTableModel(edit),
                 new VokabellisteSteuerung(),
                 CustomButton.newVocabBtn((ignored) -> {
                 }),
