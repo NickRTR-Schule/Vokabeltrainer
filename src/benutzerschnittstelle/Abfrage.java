@@ -100,8 +100,16 @@ public final class Abfrage extends CustomPanel
 
     private int frageVokabelAnzahl()
     {
-        return Integer.parseInt(JOptionPane.showInputDialog(
-                "Wie viele Vokabeln sollen abgefragt werden?", 30));
+        final String input = JOptionPane.showInputDialog(
+                "Wie viele Vokabeln sollen abgefragt werden?", 30);
+        if (input == null || input.equals(""))
+        {
+            steuerung.oeffnenAbgebrochen();
+            return 0;
+        } else
+        {
+            return Integer.parseInt(input);
+        }
     }
 
     private void frageAb()

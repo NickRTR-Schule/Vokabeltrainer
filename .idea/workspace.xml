@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c7d2ceba-f3ad-451f-8876-ea7a1aa1ab35" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/Abfrage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/Abfrage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fachkonzept/navigation/NavigationStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fachkonzept/navigation/NavigationStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/steuerung/AbfrageSteuerung.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steuerung/AbfrageSteuerung.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,12 +68,12 @@
     "jdk.selected.JAVA_MODULE": "zulu-19",
     "last_directory_selection": "/Users/jules/School local/Projekte/Vokabeltrainer/src/tests",
     "last_opened_file_path": "/Users/jules/Library/Mobile Documents/com~apple~CloudDocs/Schule/12-2/IT-SW/Projekte/Vokabeltrainer",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "rearrange.code.on.save": "true",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "editor.preferences.appearance",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "show.migrate.to.gradle.popup": "false",
     "timeTracker.activityTracker": "null",
     "timeTracker.comment": "",

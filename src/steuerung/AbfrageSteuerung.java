@@ -5,6 +5,7 @@ import exceptions.EndOfAbfrageException;
 import exceptions.datenbank.DatenbankAccessException;
 import exceptions.datenbank.DatenbankSchreibException;
 import fachkonzept.AbfrageKonzept;
+import fachkonzept.navigation.NavigationStack;
 
 public final class AbfrageSteuerung
 {
@@ -19,6 +20,11 @@ public final class AbfrageSteuerung
         {
             System.out.println(e.getLocalizedMessage());
         }
+    }
+
+    public void oeffnenAbgebrochen()
+    {
+        NavigationStack.getInstance().back();
     }
 
     public int anzahlVoks()
