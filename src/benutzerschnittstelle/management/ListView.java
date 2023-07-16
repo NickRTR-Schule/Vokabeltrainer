@@ -11,11 +11,11 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ListView<T> extends CustomPanel
+public abstract class ListView<T> extends CustomPanel
 {
 
     public final JTable table;
-    private final CustomTableModel<T> model;
+    protected final CustomTableModel<T> model;
     private final ListenSteuerung<T> steuerung;
     private ArrayList<T> objects;
 
@@ -132,4 +132,6 @@ public class ListView<T> extends CustomPanel
         final RowSorter<? extends TableModel> sorter = table.getRowSorter();
         return model.getObjectForRow(sorter != null ? sorter.convertRowIndexToModel(table.getSelectedRow()) : row);
     }
+
+    public abstract ArrayList<T> getSelectedObjects();
 }

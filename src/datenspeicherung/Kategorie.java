@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public final class Kategorie
 {
     private final String name;
-    private final ArrayList<Vokabel> vokabeln;
+    private ArrayList<Vokabel> vokabeln;
 
     public Kategorie(String name, ArrayList<Vokabel> vokabeln)
     {
@@ -23,18 +23,18 @@ public final class Kategorie
         return vokabeln;
     }
 
-    public void entferneVokabel()
+    public void entferneVokabel(Vokabel vok)
     {
-
+        vokabeln.remove(vok);
     }
 
-    public void fuegeVokabelHinzu()
+    public void fuegeVokabelHinzu(Vokabel vok)
     {
-
+        vokabeln.add(vok);
     }
 
-    public void aendereVokabel()
+    public void aendereVokabeln(ArrayList<Vokabel> voks)
     {
-
+        vokabeln = voks;
     }
 }

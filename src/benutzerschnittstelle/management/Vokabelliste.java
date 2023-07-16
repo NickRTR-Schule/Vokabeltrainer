@@ -9,6 +9,7 @@ import steuerung.management.VokabellisteSteuerung;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.util.ArrayList;
 
 public final class Vokabelliste extends ListView<Vokabel>
 {
@@ -46,5 +47,19 @@ public final class Vokabelliste extends ListView<Vokabel>
     public Vokabelliste()
     {
         super("Vokabeln", new VokabelTableModel(), new VokabellisteSteuerung(), csb);
+    }
+
+    @Override
+    public ArrayList<Vokabel> getSelectedObjects()
+    {
+        final ArrayList<Vokabel> voks = new ArrayList<>();
+        for (int i = 0; i < model.getRowCount(); i++)
+        {
+            if ((boolean) model.getValueAt(i, 0))
+            {
+                voks.add(model.getObjectForRow(i));
+            }
+        }
+        return voks;
     }
 }
