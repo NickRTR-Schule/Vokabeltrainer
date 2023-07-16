@@ -68,7 +68,7 @@ public final class VokabelTableModel extends CustomTableModel<Vokabel>
         {
             result = switch (column)
             {
-                case EDITABLE_STATE_COLUMN_EDIT -> kat.liesVokabeln().contains(vokabel);
+                case EDITABLE_STATE_COLUMN_EDIT -> vokabel.liesKategorien().contains(kat);
                 case EDITABLE_STATE_COLUMN_WORT -> vokabel.liesWort();
                 case EDITABLE_STATE_COLUMN_UEBERSETZUNG -> vokabel.liesUebersetzung();
                 case EDITABLE_STATE_COLUMN_QUOTE -> vokabel.liesQuote();

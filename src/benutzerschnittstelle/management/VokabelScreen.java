@@ -3,6 +3,7 @@ package benutzerschnittstelle.management;
 import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.CustomTextField;
+import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 import fachkonzept.listeners.CustomKeyListener;
 import steuerung.MainFrameSteuerung;
@@ -11,6 +12,7 @@ import steuerung.management.VokabelScreenSteuerung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
+import java.util.ArrayList;
 
 /**
  * The Screen to add / create a new Vocabulary.
@@ -29,6 +31,10 @@ public final class VokabelScreen extends CustomPanel
     private final CustomTextField lautschriftTxtField;
     private final CustomTextField verwendungsHinweisTxtField;
 
+    private ArrayList<Kategorie> kategorien;
+
+    private Vokabel vok;
+
     public VokabelScreen()
     {
         super("Vokabel");
@@ -37,16 +43,20 @@ public final class VokabelScreen extends CustomPanel
         uebersetzungTxtField = new CustomTextField();
         lautschriftTxtField = new CustomTextField();
         verwendungsHinweisTxtField = new CustomTextField();
+        kategorien = new ArrayList<>();
+        vok = null;
         setValues();
     }
 
     public VokabelScreen(Vokabel vokabel)
     {
         this();
+        vok = vokabel;
         wortTxtField.setText(vokabel.liesWort());
         uebersetzungTxtField.setText(vokabel.liesUebersetzung());
         lautschriftTxtField.setText(vokabel.liesLautschrift());
         verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
+        kategorien = vokabel.liesKategorien();
     }
 
     private void setValues()
@@ -107,9 +117,11 @@ public final class VokabelScreen extends CustomPanel
         panel.add(verwendungsHinweisTxtField, constraints);
         constraints.gridy = 10;
         panel.add(new JLabel("Kategorien"), constraints);
-        constraints.gridy = 12;
-        // TODO-js: add Dropdown
         constraints.gridy = 11;
+        final CustomButton mappingBtn = new CustomButton("Mapping");
+        mappingBtn.addActionListener((ignored) -> steuerung.mappingGeklickt(vok, kategorien));
+        panel.add(mappingBtn, constraints);
+        constraints.gridy = 12;
         final CustomButton storeBtn = new CustomButton("Speichern");
         storeBtn.addActionListener((ignored) -> {
             if (wortTxtField.getText().length() > 0

@@ -13,7 +13,7 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
 
     protected final Class<?>[] columnClasses;
 
-    protected final ArrayList<Integer> editableRows;
+    protected final ArrayList<Integer> editableColumns;
 
     private final boolean edit;
 
@@ -21,19 +21,20 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
     {
         this.edit = edit;
         this.rows = new Vector<>();
-        this.editableRows = new ArrayList<>();
+        this.editableColumns = new ArrayList<>();
         final String[] localColumnNames;
         final Class<?>[] localColumnClasses;
         final int columnCountWithoutEdit = columnNames.length;
         final int columnCountWithEdit = columnCountWithoutEdit + 1;
         if (edit)
         {
+            this.editableColumns.add(0);
             localColumnNames = new String[columnCountWithEdit];
             // TODO-js: change
             localColumnNames[0] = "Aktiv";
             System.arraycopy(columnNames, 0, localColumnNames, 1, columnCountWithoutEdit);
             localColumnClasses = new Class<?>[columnCountWithEdit];
-            localColumnClasses[0] = boolean.class;
+            localColumnClasses[0] = Boolean.class;
             System.arraycopy(columnClasses, 0, localColumnClasses, 1, columnCountWithoutEdit);
         } else
         {
@@ -53,7 +54,7 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
     @Override
     public int getColumnCount()
     {
-        return edit ? columnNames.length + 1 : columnNames.length;
+        return columnNames.length;
     }
 
     @Override
@@ -86,6 +87,12 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex)
     {
-        return editableRows.contains(columnIndex);
+        return editableColumns.contains(columnIndex);
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex)
+    {
+        super.setValueAt(aValue, rowIndex, columnIndex);
     }
 }

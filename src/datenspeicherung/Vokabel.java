@@ -1,5 +1,7 @@
 package datenspeicherung;
 
+import java.util.ArrayList;
+
 public final class Vokabel
 {
     // Vokabel-Datentyp
@@ -12,7 +14,24 @@ public final class Vokabel
     private int anzahlrichtig;
     private int wiederholungen;
 
+    private final ArrayList<Kategorie> kategorien;
+
     public Vokabel(String pWort, String pUebersetzung, byte[] pAbbildung, byte[] pAussprache, String pLautschrift, String pVerwendungshinweis, int pWiederholungen, int pAnzahlrichtig)
+    {
+        this(pWort, pUebersetzung, pAbbildung, pAussprache, pLautschrift, pVerwendungshinweis, pWiederholungen, pAnzahlrichtig, new ArrayList<>());
+    }
+
+    public Vokabel(
+            String pWort,
+            String pUebersetzung,
+            byte[] pAbbildung,
+            byte[] pAussprache,
+            String pLautschrift,
+            String pVerwendungshinweis,
+            int pWiederholungen,
+            int pAnzahlrichtig,
+            ArrayList<Kategorie> kategorien
+    )
     {
         wort = pWort;
         uebersetzung = pUebersetzung;
@@ -22,6 +41,7 @@ public final class Vokabel
         verwendungshinweis = pVerwendungshinweis;
         wiederholungen = pWiederholungen;
         anzahlrichtig = pAnzahlrichtig;
+        this.kategorien = kategorien;
     }
 
     public String liesWort()
@@ -74,5 +94,20 @@ public final class Vokabel
         wiederholungen++;
         if (richtig)
             anzahlrichtig++;
+    }
+
+    public ArrayList<Kategorie> liesKategorien()
+    {
+        return kategorien;
+    }
+
+    public void fuegeKategorieHinzu(Kategorie kat)
+    {
+        kategorien.add(kat);
+    }
+
+    public void entferneKategorie(Kategorie kat)
+    {
+        kategorien.remove(kat);
     }
 }

@@ -3,6 +3,11 @@ package fachkonzept.datamangement.tablemodels;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public final class KategorieTableModel extends CustomTableModel<Kategorie>
 {
 
@@ -18,6 +23,8 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
     private static final int SOLID_STATE_COLUMN_VOKSANZAHL = 1;
     private final Vokabel vok;
     private final boolean edit;
+
+    private final Map<Kategorie, List<Vokabel>> ausgewaelteVokabeln = new HashMap<>();
 
     private KategorieTableModel(boolean edit, Vokabel vok)
     {
@@ -50,14 +57,21 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
     public Object getValueAt(int row, int column)
     {
         final Kategorie kategorie = rows.get(row);
+
         final Object result;
         if (edit)
         {
+            List<Vokabel> ausgewaehlteVokelnFuerKategorie = ausgewaelteVokabeln.get(kategorie);
+            if (ausgewaehlteVokelnFuerKategorie == null)
+            {
+                ausgewaehlteVokelnFuerKategorie = new ArrayList<>(kategorie.liesVokabeln());
+                ausgewaelteVokabeln.put(kategorie, ausgewaehlteVokelnFuerKategorie);
+            }
             result = switch (column)
             {
-                case EDITABLE_STATE_COLUMN_EDIT -> kategorie.liesVokabeln().contains(vok);
+                case EDITABLE_STATE_COLUMN_EDIT -> ausgewaehlteVokelnFuerKategorie.contains(vok);
                 case EDITABLE_STATE_COLUMN_NAME -> kategorie.liesName();
-                case EDITABLE_STATE_COLUMN_VOKSANZAHL -> kategorie.liesVokabeln().size();
+                case EDITABLE_STATE_COLUMN_VOKSANZAHL -> ausgewaehlteVokelnFuerKategorie.size();
                 default -> null;
             };
         } else

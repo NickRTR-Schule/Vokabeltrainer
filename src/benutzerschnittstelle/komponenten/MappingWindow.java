@@ -24,18 +24,12 @@ public class MappingWindow<O, T> extends JFrame
 
     private final MappingType type;
 
-    /*
-    The Object to map other objects to.
-    This is a single instance such as a vocabulary
-    or a category
-     */
-    private final O object;
     private final GridBagLayout layout;
     private final GridBagConstraints constraints;
-
+    private final O object;
     private ListView<?> listView;
 
-    public MappingWindow(O object)
+    public MappingWindow(O object, ArrayList<T> objects)
     {
         if (object instanceof Vokabel)
         {
@@ -47,8 +41,8 @@ public class MappingWindow<O, T> extends JFrame
         {
             type = MappingType.none;
         }
-        objects = new ArrayList<T>();
         this.object = object;
+        this.objects = objects;
         layout = new GridBagLayout();
         constraints = new GridBagConstraints();
         build();
@@ -62,6 +56,7 @@ public class MappingWindow<O, T> extends JFrame
         setEnabled(true);
         setFocusable(true);
         setName("Mapping Frame");
+        setLayout(layout);
     }
 
     private void build()

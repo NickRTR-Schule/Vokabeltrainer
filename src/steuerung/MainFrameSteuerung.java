@@ -8,6 +8,7 @@ import datenspeicherung.Vokabel;
 import fachkonzept.navigation.NavigationStack;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * The Main Frame Controller controlling the Main Frame and with that Navigation
@@ -160,9 +161,10 @@ public final class MainFrameSteuerung
         mainFrame.open(screen);
     }
 
-    public void openMapping(Object object)
+    public void openMapping(Object object, ArrayList<?> objects)
     {
-        final MappingWindow<?, ?> window = new MappingWindow<>(object);
+        final MappingWindow<?, ?> window = new MappingWindow<>(object, objects);
+        window.pack();
         window.setVisible(true);
     }
 }
