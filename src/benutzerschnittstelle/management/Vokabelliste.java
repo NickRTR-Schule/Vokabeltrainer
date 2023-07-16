@@ -1,6 +1,7 @@
 package benutzerschnittstelle.management;
 
 import benutzerschnittstelle.komponenten.CustomButton;
+import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 import fachkonzept.datamangement.tablemodels.VokabelTableModel;
 import steuerung.management.VokabellisteSteuerung;
@@ -12,23 +13,19 @@ import java.awt.*;
 public final class Vokabelliste extends ListView<Vokabel>
 {
 
-    public Vokabelliste()
-    {
-        this(false);
-    }
+    private static final CustomButton csb = CustomButton.newVocabBtn((ignored) -> {
 
+    });
 
-    public Vokabelliste(boolean edit)
+    public Vokabelliste(Kategorie kat)
     {
         super(
                 "Vokabeln",
-                new VokabelTableModel(edit),
+                new VokabelTableModel(kat),
                 new VokabellisteSteuerung(),
-                CustomButton.newVocabBtn((ignored) -> {
-                }),
-                edit
+                csb
         );
-        table.getColumnModel().getColumn(VokabelTableModel.COLUMN_QUOTE).setCellRenderer(new DefaultTableCellRenderer()
+        table.getColumnModel().getColumn(VokabelTableModel.EDITABLE_STATE_COLUMN_QUOTE).setCellRenderer(new DefaultTableCellRenderer()
         {
 
 
@@ -44,5 +41,10 @@ public final class Vokabelliste extends ListView<Vokabel>
                 return renderComponent;
             }
         });
+    }
+
+    public Vokabelliste()
+    {
+        super("Vokabeln", new VokabelTableModel(), new VokabellisteSteuerung(), csb);
     }
 }

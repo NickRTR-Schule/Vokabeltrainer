@@ -15,8 +15,11 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
 
     protected final ArrayList<Integer> editableRows;
 
+    private final boolean edit;
+
     public CustomTableModel(String[] columnNames, Class<?>[] columnClasses, boolean edit)
     {
+        this.edit = edit;
         this.rows = new Vector<>();
         this.editableRows = new ArrayList<>();
         final String[] localColumnNames;
@@ -50,7 +53,7 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
     @Override
     public int getColumnCount()
     {
-        return columnNames.length;
+        return edit ? columnNames.length + 1 : columnNames.length;
     }
 
     @Override

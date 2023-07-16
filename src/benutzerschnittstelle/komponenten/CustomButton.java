@@ -28,6 +28,14 @@ public final class CustomButton extends JButton
         return btn;
     }
 
+    public static CustomButton newKatBtn(ActionListener listener)
+    {
+        final CustomButton btn = new CustomButton("Kategorie erstellen", "Erstelle eine neue Kategorie");
+        btn.addActionListener(listener);
+        return btn;
+    }
+
+
     private void setValues(String tooltip)
     {
         setText(title);

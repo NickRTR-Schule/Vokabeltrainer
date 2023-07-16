@@ -2,25 +2,27 @@ package benutzerschnittstelle.management;
 
 import benutzerschnittstelle.komponenten.CustomButton;
 import datenspeicherung.Kategorie;
+import datenspeicherung.Vokabel;
 import fachkonzept.datamangement.tablemodels.KategorieTableModel;
 import steuerung.management.KategorielisteSteuerung;
 
 public final class Kategorieliste extends ListView<Kategorie>
 {
 
-    public Kategorieliste(boolean edit)
+    private static final CustomButton csb = new CustomButton("Kategorie hinzufügen");
+
+    public Kategorieliste(Vokabel vok)
     {
         super(
                 "Kategorien",
-                new KategorieTableModel(),
+                new KategorieTableModel(vok),
                 new KategorielisteSteuerung(),
-                new CustomButton("Test"),
-                edit
+                csb
         );
     }
 
     public Kategorieliste()
     {
-        this(false);
+        super("Kategorien", new KategorieTableModel(), new KategorielisteSteuerung(), csb);
     }
 }

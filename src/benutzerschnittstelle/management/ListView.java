@@ -23,8 +23,7 @@ public class ListView<T> extends CustomPanel
             String name,
             CustomTableModel<T> model,
             ListenSteuerung<T> steuerung,
-            CustomButton btn,
-            boolean edit
+            CustomButton btn
     )
     {
         super(name, btn);
@@ -47,8 +46,7 @@ public class ListView<T> extends CustomPanel
             String name,
             CustomTableModel<T> model,
             ListenSteuerung<T> steuerung,
-            CustomButton btn,
-            boolean edit
+            CustomButton btn
     )
     {
         super(name, btn);
