@@ -2,25 +2,16 @@ package benutzerschnittstelle;
 
 import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
+import datenspeicherung.Datenbank;
+import exceptions.datenbank.DatenbankAccessException;
+import exceptions.datenbank.DatenbankLeseException;
 import steuerung.DashboardSteuerung;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import benutzerschnittstelle.komponenten.CustomButton;
-import steuerung.DashboardSteuerung;
 
 public final class Dashboard extends CustomPanel
 {
@@ -42,6 +33,7 @@ public final class Dashboard extends CustomPanel
     {
         super("Dashboard");
         steuerung = new DashboardSteuerung();
+
         setValues();
         build();
     }
@@ -76,63 +68,76 @@ public final class Dashboard extends CustomPanel
         add(component, constraints);
     }
 
-	/**
-	 * Part of the initialization Process, adding all the Components to this
-	 * Panel
-	 */
-	private void build()
-	{
-		// statistics
-		constraints.gridy = 0;
-		constraints.gridx = 1;
-		constraints.gridheight = 3;
-		constraints.gridwidth = 10;
-		final JPanel statsPanel = new JPanel();
-		JLabel heading = new JLabel("Statistiken");
-		heading.setFont(
-				new Font(MainFrame.liesFont().getFontName(), Font.BOLD, 16));
-		statsPanel.add(heading);
-		statsPanel.setLayout(new GridLayout(2, 4));
+    /**
+     * Part of the initialization Process, adding all the Components to this
+     * Panel
+     */
+    private void build()
+    {
+        // statistics
+        constraints.gridy = 0;
+        constraints.gridx = 1;
+        constraints.gridheight = 3;
+        constraints.gridwidth = 10;
+        final JPanel statsPanel = new JPanel();
+        statsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.Y_AXIS));
 
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-		LocalTime localTime = LocalTime.now();
-		statsPanel.add(new JLabel("\nUhrzeit: " + dtf.format(localTime)));
+        JLabel heading = new JLabel("Statistiken");
+        heading.setBorder(new EmptyBorder(0, 0, 5, 0)); // Adding a margin of 5 pixels below the label
+        heading.setFont(new Font(MainFrame.liesFont().getFontName(), Font.BOLD, 18));
+        statsPanel.add(heading);
 
-		addComponent(statsPanel);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime localTime = LocalTime.now();
+        statsPanel.add(new JLabel("Uhrzeit: " + dtf.format(localTime)));
 
-		constraints.gridy = 3;
-		constraints.gridx = 1;
-		constraints.gridheight = 1;
-		constraints.gridwidth = 2;
-		// Add Buttons
+        try
+        {
+            statsPanel.add(new JLabel("Wissensstand: " + Datenbank.wissensstand() + " %"));
+        } catch (DatenbankAccessException e)
+        {
+            throw new RuntimeException(e);
+        } catch (DatenbankLeseException e)
+        {
+            throw new RuntimeException(e);
+        }
 
-		final CustomButton vokabellisteBtn = new CustomButton("Vokabelliste",
-				"Zeige alle Vokabeln als Liste an");
-		vokabellisteBtn.addActionListener(
-				(ignored) -> steuerung.vokabellisteGeklickt());
-		addComponent(vokabellisteBtn);
+        addComponent(statsPanel);
 
-		final CustomButton vokabelErstellerBtn = new CustomButton(
-				"Vokabel erstellen", "Erstelle eine neue Vokabel");
-		vokabelErstellerBtn
-				.addActionListener((ignored) -> steuerung.erstellerGeklickt());
-		constraints.gridx = 4;
-		addComponent(vokabelErstellerBtn);
+        constraints.gridy = 3;
+        constraints.gridx = 1;
+        constraints.gridheight = 1;
+        constraints.gridwidth = 2;
+        // Add Buttons
 
-		final CustomButton kategorielisteBtn = new CustomButton(
-				"Kategorieliste", "Zeige alle Kategorien in einer Liste an");
-		kategorielisteBtn.addActionListener(
-				(ignored) -> steuerung.kategorielisteGeklickt());
-		constraints.gridx = 6;
-		addComponent(kategorielisteBtn);
+        final CustomButton vokabellisteBtn = new CustomButton("Vokabelliste",
+                "Zeige alle Vokabeln als Liste an");
+        vokabellisteBtn.addActionListener(
+                (ignored) -> steuerung.vokabellisteGeklickt());
+        addComponent(vokabellisteBtn);
 
-		final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
-				"Starte eine Abfrage");
-		abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
-		constraints.gridy = 4;
-		constraints.gridx = 1;
-		constraints.gridheight = 2;
-		constraints.gridwidth = 10;
-		addComponent(abfrageBtn);
-	}
+        final CustomButton vokabelErstellerBtn = new CustomButton(
+                "Vokabel erstellen", "Erstelle eine neue Vokabel");
+        vokabelErstellerBtn
+                .addActionListener((ignored) -> steuerung.erstellerGeklickt());
+        constraints.gridx = 4;
+        addComponent(vokabelErstellerBtn);
+
+        final CustomButton kategorielisteBtn = new CustomButton(
+                "Kategorieliste", "Zeige alle Kategorien in einer Liste an");
+        kategorielisteBtn.addActionListener(
+                (ignored) -> steuerung.kategorielisteGeklickt());
+        constraints.gridx = 6;
+        addComponent(kategorielisteBtn);
+
+        final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
+                "Starte eine Abfrage");
+        abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
+        constraints.gridy = 4;
+        constraints.gridx = 1;
+        constraints.gridheight = 2;
+        constraints.gridwidth = 10;
+        addComponent(abfrageBtn);
+    }
 }
