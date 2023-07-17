@@ -49,15 +49,6 @@ public final class MainFrameSteuerung
             try
             {
                 shared.initDatabase();
-                for (Kategorie kat : Datenbank.liesKategorien())
-                {
-                    System.out.println(kat.liesName());
-                    for (Vokabel vok : Datenbank.liesVokabelnForKat(kat.liesName()))
-                    {
-                        System.out.println(" " + vok.liesWort());
-                    }
-
-                }
             } catch (Exception ignored)
             {
                 JOptionPane.showMessageDialog(shared.mainFrame, "Fehler beim Laden der Datenbank");

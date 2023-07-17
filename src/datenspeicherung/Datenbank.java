@@ -204,10 +204,6 @@ public final class Datenbank
                 );
             }
             result.close();
-            if (ergebnis.isEmpty())
-            {
-                throw new DatenbankLeseException(DatenbankObject.vokabel);
-            }
         } catch (SQLException e)
         {
             throw new DatenbankLeseException(DatenbankObject.vokabel);
