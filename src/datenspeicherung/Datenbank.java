@@ -136,8 +136,7 @@ public final class Datenbank
             while (result.next())
             {
                 final String name = result.getString("name");
-                final ArrayList<Vokabel> vokabeln = new ArrayList<>(
-                        liesVokabelnForKat(name));
+                final ArrayList<Vokabel> vokabeln = liesVokabelnForKat(name);
                 ergebnis.add(new Kategorie(name, vokabeln));
             }
             result.close();
@@ -183,7 +182,7 @@ public final class Datenbank
         String sqlStmt = "SELECT Vokabel.wort, Vokabel.uebersetzung, abbildung, aussprache, lautschrift, verwendungshinweis, wiederholungen, anzahlrichtig ";
         sqlStmt += "FROM Vokabel, Beziehung ";
         sqlStmt += "WHERE name = ?";
-        ArrayList<Vokabel> ergebnis = null;
+        ArrayList<Vokabel> ergebnis = new ArrayList<>();
         try
         {
             stmt = con.prepareStatement(sqlStmt);
@@ -191,7 +190,6 @@ public final class Datenbank
             final ResultSet result = stmt.executeQuery();
             while (result.next())
             {
-                ergebnis = new ArrayList<>();
                 ergebnis.add(
                         new Vokabel(
                                 result.getString("wort"),
@@ -206,7 +204,7 @@ public final class Datenbank
                 );
             }
             result.close();
-            if (ergebnis == null)
+            if (ergebnis.isEmpty())
             {
                 throw new DatenbankLeseException(DatenbankObject.vokabel);
             }
