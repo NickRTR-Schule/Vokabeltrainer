@@ -33,7 +33,6 @@ public final class Dashboard extends CustomPanel
     {
         super("Dashboard");
         steuerung = new DashboardSteuerung();
-
         setValues();
         build();
     }
@@ -95,10 +94,7 @@ public final class Dashboard extends CustomPanel
         try
         {
             statsPanel.add(new JLabel("Wissensstand: " + Datenbank.wissensstand() + " %"));
-        } catch (DatenbankAccessException e)
-        {
-            throw new RuntimeException(e);
-        } catch (DatenbankLeseException e)
+        } catch (DatenbankAccessException | DatenbankLeseException e)
         {
             throw new RuntimeException(e);
         }

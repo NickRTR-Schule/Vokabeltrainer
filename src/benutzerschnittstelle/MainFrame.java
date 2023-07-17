@@ -20,7 +20,6 @@ import java.util.Locale;
  */
 public final class MainFrame extends JFrame
 {
-
     private static final Font font = new Font("Roboto", Font.PLAIN, 12);
 
     public MainFrame()

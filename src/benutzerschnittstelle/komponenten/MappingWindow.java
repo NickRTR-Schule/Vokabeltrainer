@@ -71,7 +71,7 @@ public class MappingWindow<O, T> extends JFrame
     private void init()
     {
         setTitle("Mapping");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(false);
         setEnabled(true);
         setFocusable(true);
