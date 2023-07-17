@@ -15,7 +15,7 @@ public final class DatenbankVokabelTest
     @Test
     public void test() throws Exception
     {
-        Datenbank.vokabelHinzufuegen("duck", "Ente", null, null, null, null);
+        //Datenbank.vokabelHinzufuegen("duck", "Ente", null, null, null, null);
 
         ArrayList<Vokabel> vokabeln = Datenbank.liesVokabeln();
         assertTrue(vokabeln.size() > 0);

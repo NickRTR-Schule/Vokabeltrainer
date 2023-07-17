@@ -7,9 +7,10 @@
     <list default="true" id="c7d2ceba-f3ad-451f-8876-ea7a1aa1ab35" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/komponenten/MappingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/komponenten/MappingWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/datenbank/DatenbankVokabelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/datenbank/DatenbankVokabelTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/management/VokabelScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/management/VokabelScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/steuerung/MainFrameSteuerung.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steuerung/MainFrameSteuerung.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/datenspeicherung/Vokabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/datenspeicherung/Vokabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fachkonzept/ErstellerKonzept.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fachkonzept/ErstellerKonzept.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/steuerung/management/VokabelScreenSteuerung.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steuerung/management/VokabelScreenSteuerung.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

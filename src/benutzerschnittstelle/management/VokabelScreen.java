@@ -133,16 +133,24 @@ public final class VokabelScreen extends CustomPanel
         storeBtn.addActionListener((ignored) -> {
             if (wortTxtField.getText().length() > 0 && uebersetzungTxtField.getText().length() > 0)
             {
+                final Vokabel localVok = new Vokabel(
+                        wortTxtField.getText(),
+                        uebersetzungTxtField.getText(),
+                        null, null,
+                        lautschriftTxtField.getText(),
+                        verwendungsHinweisTxtField.getText(),
+                        0, 0,
+                        kategorien
+                );
                 if (!bearbeiten)
                 {
-                    steuerung.vokabelHinzufuegen(wortTxtField.getText(), uebersetzungTxtField.getText(),
-                            null, null, lautschriftTxtField.getText(), verwendungsHinweisTxtField.getText());
+                    steuerung.vokabelHinzufuegen(localVok);
                 } else
                 {
                     steuerung.vokabelAendern(
-                            new Vokabel(wortTxtField.getText(), uebersetzungTxtField.getText(), null, null,
-                                    lautschriftTxtField.getText(), verwendungsHinweisTxtField.getText(), 0, 0),
-                            vok);
+                            localVok,
+                            vok
+                    );
                 }
             }
             NavigationStack.getInstance().back();

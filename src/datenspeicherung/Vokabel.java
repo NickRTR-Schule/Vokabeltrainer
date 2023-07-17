@@ -15,11 +15,6 @@ public final class Vokabel implements Comparable<Vokabel>
     private int anzahlrichtig;
     private int wiederholungen;
 
-    public Vokabel(String pWort, String pUebersetzung, byte[] pAbbildung, byte[] pAussprache, String pLautschrift, String pVerwendungshinweis, int pWiederholungen, int pAnzahlrichtig)
-    {
-        this(pWort, pUebersetzung, pAbbildung, pAussprache, pLautschrift, pVerwendungshinweis, pWiederholungen, pAnzahlrichtig, new ArrayList<>());
-    }
-
     public Vokabel(
             String pWort,
             String pUebersetzung,

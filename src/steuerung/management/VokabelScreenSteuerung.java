@@ -19,24 +19,12 @@ public final class VokabelScreenSteuerung
     }
 
     public void vokabelHinzufuegen(
-            String wort,
-            String uebersetzung,
-            byte[] abbildung,
-            byte[] aussprache,
-            String lautschrift,
-            String verwendungshinweis
+            Vokabel vok
     )
     {
         try
         {
-            dasErstellerKonzept.vokabelHinzufuegen(
-                    wort,
-                    uebersetzung,
-                    abbildung,
-                    aussprache,
-                    lautschrift,
-                    verwendungshinweis
-            );
+            dasErstellerKonzept.vokabelHinzufuegen(vok);
         } catch (Exception e)
         {
             System.out.println(e.getLocalizedMessage());
