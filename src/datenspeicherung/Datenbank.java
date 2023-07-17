@@ -73,7 +73,9 @@ public final class Datenbank
                         rs.getBytes("aussprache"), rs.getString("lautschrift"),
                         rs.getString("verwendungshinweis"),
                         rs.getInt("wiederholungen"),
-                        rs.getInt("anzahlrichtig")));
+                        rs.getInt("anzahlrichtig"),
+                        liesKategorienFuerVokabel(rs.getString("wort"), rs.getString("uebersetzung"))
+                ));
             }
         } catch (SQLException e)
         {
@@ -114,7 +116,9 @@ public final class Datenbank
                         rs.getBytes("aussprache"), rs.getString("lautschrift"),
                         rs.getString("verwendungshinweis"),
                         rs.getInt("wiederholungen"),
-                        rs.getInt("anzahlrichtig"));
+                        rs.getInt("anzahlrichtig"),
+                        liesKategorienFuerVokabel(rs.getString("wort"), rs.getString("uebersetzung"))
+                );
             }
 
             if (ergebnis == null)
@@ -160,7 +164,9 @@ public final class Datenbank
                         rs.getBytes("aussprache"), rs.getString("lautschrift"),
                         rs.getString("verwendungshinweis"),
                         rs.getInt("wiederholungen"),
-                        rs.getInt("anzahlrichtig")));
+                        rs.getInt("anzahlrichtig"),
+                        liesKategorienFuerVokabel(rs.getString("wort"), rs.getString("uebersetzung"))
+                ));
             }
 
             if (ergebnis == null)
@@ -260,9 +266,6 @@ public final class Datenbank
         schliesseDatenbank();
     }
 
-    // TODO: Vokabeln ändern
-    // TODO: checken ob Vokabel schon existiert
-
     public static ArrayList<Kategorie> liesKategorien()
             throws DatenbankAccessException, DatenbankLeseException
     {
@@ -297,6 +300,9 @@ public final class Datenbank
         schliesseDatenbank();
         return ergebnis;
     }
+
+    // TODO: Vokabeln ändern
+    // TODO: checken ob Vokabel schon existiert
 
     public static void loescheKategorie(String name)
             throws DatenbankAccessException, DatenbankSchreibException
@@ -346,7 +352,6 @@ public final class Datenbank
         }
         schliesseDatenbank();
     }
-
 
     public static void vokabelZuKategorieHinzufuegen(Vokabel vok, Kategorie kat)
     {
@@ -407,5 +412,42 @@ public final class Datenbank
         schliesseDatenbank();
 
         return Math.round(((float) anzahlR / anzahl) * 100);
+    }
+
+    private static ArrayList<Kategorie> liesKategorienFuerVokabel(String wort, String uebersetzung) throws DatenbankAccessException, DatenbankLeseException
+    {
+        oeffneDatenbank();
+        final ArrayList<Kategorie> ergebnis = new ArrayList<>();
+        final ResultSet result;
+
+        // DB-Abfrage als String
+        String sqlStmt = "SELECT name ";
+        sqlStmt += "FROM Kategorie, Beziehung ";
+        sqlStmt += "WHERE wort = ? AND uebersetzung = ?";
+
+        try
+        {
+            // DB-Abfrage vorbereiten
+            stmt = con.prepareStatement(sqlStmt);
+            // DB-Abfrage ausführen
+            stmt.setString(1, wort);
+            stmt.setString(2, uebersetzung);
+            result = stmt.executeQuery();
+
+            // Ergebnis der DB-Abfrage Zeile für Zeile abarbeiten
+            while (result.next())
+            {
+                // DB-Zeile als Objekt in Ergebnis-Array speichern
+                final String name = result.getString("name");
+                final ArrayList<Vokabel> vokabeln = new ArrayList<>(
+                        liesVokabelnForKat(name));
+                ergebnis.add(new Kategorie(name, vokabeln));
+            }
+        } catch (SQLException e)
+        {
+            throw new DatenbankLeseException(DatenbankObject.kategorie);
+        }
+        schliesseDatenbank();
+        return ergebnis;
     }
 }
