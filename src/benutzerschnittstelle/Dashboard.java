@@ -2,6 +2,9 @@ package benutzerschnittstelle;
 
 import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
+import datenspeicherung.Datenbank;
+import exceptions.datenbank.DatenbankAccessException;
+import exceptions.datenbank.DatenbankLeseException;
 import steuerung.DashboardSteuerung;
 
 import javax.swing.*;
@@ -30,6 +33,7 @@ public final class Dashboard extends CustomPanel
     {
         super("Dashboard");
         steuerung = new DashboardSteuerung();
+
         setValues();
         build();
     }
@@ -98,17 +102,65 @@ public final class Dashboard extends CustomPanel
         abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
         constraints.gridx = 4;
         addComponent(abfrageBtn);
+        statsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.Y_AXIS));
+
+        JLabel heading = new JLabel("Statistiken");
+        heading.setBorder(new EmptyBorder(0, 0, 5, 0)); // Adding a margin of 5 pixels below the label
+        heading.setFont(new Font(MainFrame.liesFont().getFontName(), Font.BOLD, 18));
+        statsPanel.add(heading);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime localTime = LocalTime.now();
+        statsPanel.add(new JLabel("Uhrzeit: " + dtf.format(localTime)));
+
+        try
+        {
+            statsPanel.add(new JLabel("Wissensstand: " + Datenbank.wissensstand() + " %"));
+        } catch (DatenbankAccessException e)
+        {
+            throw new RuntimeException(e);
+        } catch (DatenbankLeseException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        addComponent(statsPanel);
+
+        constraints.gridy = 3;
+        constraints.gridx = 1;
+        constraints.gridheight = 1;
+        constraints.gridwidth = 2;
+        // Add Buttons
+
         final CustomButton vokabellisteBtn = new CustomButton("Vokabelliste",
                 "Zeige alle Vokabeln als Liste an");
         vokabellisteBtn.addActionListener(
                 (ignored) -> steuerung.vokabellisteGeklickt());
         constraints.gridx = 6;
         addComponent(vokabellisteBtn);
+
+        final CustomButton vokabelErstellerBtn = new CustomButton(
+                "Vokabel erstellen", "Erstelle eine neue Vokabel");
+        vokabelErstellerBtn
+                .addActionListener((ignored) -> steuerung.erstellerGeklickt());
+        constraints.gridx = 4;
+        addComponent(vokabelErstellerBtn);
+
         final CustomButton kategorielisteBtn = new CustomButton(
                 "Kategorieliste", "Zeige alle Kategorien in einer Liste an");
         kategorielisteBtn.addActionListener(
                 (ignored) -> steuerung.kategorielisteGeklickt());
-        constraints.gridx = 8;
+        constraints.gridx = 6;
         addComponent(kategorielisteBtn);
+
+        final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
+                "Starte eine Abfrage");
+        abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
+        constraints.gridy = 4;
+        constraints.gridx = 1;
+        constraints.gridheight = 2;
+        constraints.gridwidth = 10;
+        addComponent(abfrageBtn);
     }
 }

@@ -172,18 +172,44 @@ public final class Datenbank
             throw new DatenbankLeseException(DatenbankObject.vokabel);
         }
 
-        //schliesseDatenbank();
+        // schliesseDatenbank();
         return ergebnis;
     }
 
-    public static void vokabelHinzufuegen(String wort, String uebersetzung,
-                                          byte[] abbildung, byte[] aussprache, String lautschrift,
-                                          String verwendungshinweis) throws DatenbankAccessException,
-            DatenbankSchreibException, DuplicateVokabelException
+    private static boolean existiertVokabel(String wort, String uebersetzung)
+    {
+        // DB-Abfrage als String
+        String sqlStmt = "SELECT * ";
+        sqlStmt += "FROM Vokabel ";
+        sqlStmt += "WHERE wort = ? AND uebersetzung = ?";
+
+        try
+        {
+            // DB-Abfrage vorbereiten
+            stmt = con.prepareStatement(sqlStmt);
+            // DB-Abfrage ausführen
+            stmt.setString(1, wort);
+            stmt.setString(2, uebersetzung);
+            rs = stmt.executeQuery();
+
+            return rs.next();
+        } catch (SQLException ignored)
+        {
+            return false;
+        }
+    }
+
+    public static void vokabelHinzufuegen(Vokabel dieVokabel)
+            throws DatenbankAccessException, DatenbankSchreibException,
+            DuplicateVokabelException, DatenbankLeseException
     {
         oeffneDatenbank();
-        // TODO-nick: Pruefe ob es die Vokabel schon gibt und throw
-        // DuplicateVokabelException
+
+        if (existiertVokabel(dieVokabel.liesWort(),
+                dieVokabel.liesUebersetzung()))
+        {
+            throw new DuplicateVokabelException();
+        }
 
         // DB-Abfrage als String
         String sqlStmt = "INSERT INTO vokabel (wort, uebersetzung, abbildung, aussprache, lautschrift, verwendungshinweis) ";
@@ -194,12 +220,12 @@ public final class Datenbank
             // DB-Abfrage vorbereiten
             stmt = con.prepareStatement(sqlStmt);
             // DB-Abfrage ausführen
-            stmt.setString(1, wort);
-            stmt.setString(2, uebersetzung);
-            stmt.setBytes(3, abbildung);
-            stmt.setBytes(4, aussprache);
-            stmt.setString(5, lautschrift);
-            stmt.setString(6, verwendungshinweis);
+            stmt.setString(1, dieVokabel.liesWort());
+            stmt.setString(2, dieVokabel.liesUebersetzung());
+            stmt.setBytes(3, dieVokabel.liesAbbildung());
+            stmt.setBytes(4, dieVokabel.liesAussprache());
+            stmt.setString(5, dieVokabel.liesLautschrift());
+            stmt.setString(6, dieVokabel.liesVerwendungshinweis());
             stmt.executeUpdate();
         } catch (SQLException e)
         {
@@ -260,8 +286,10 @@ public final class Datenbank
             {
                 // DB-Zeile als Objekt in Ergebnis-Array speichern
                 final String name = result.getString("name");
-                final ArrayList<Vokabel> vokabeln = new ArrayList<>(liesVokabelnForKat(name));
-                ergebnis.add(new Kategorie(name, vokabeln));
+                final ArrayList<Vokabel> vokabeln = new ArrayList<>(
+                        liesVokabelnForKat(name));
+                final Vokabel[] voks = new Vokabel[vokabeln.size()];
+                ergebnis.add(new Kategorie(name, voks));
             }
         } catch (SQLException e)
         {
@@ -320,8 +348,65 @@ public final class Datenbank
         schliesseDatenbank();
     }
 
+
     public static void vokabelZuKategorieHinzufuegen(Vokabel vok, Kategorie kat)
     {
         // TODO: implement
+        }
+    
+    public static int wissensstand()
+            throws DatenbankAccessException, DatenbankLeseException
+    {
+        int anzahlR = 0;
+        int anzahl = 0;
+
+        oeffneDatenbank();
+
+        // DB-Abfrage als String
+        String sqlStmt = "SELECT COUNT(*) AS anzahl ";
+        sqlStmt += "FROM Vokabel";
+
+        try
+        {
+            // DB-Abfrage vorbereiten
+            stmt = con.prepareStatement(sqlStmt);
+            // DB-Abfrage ausführen
+            rs = stmt.executeQuery();
+
+            // Ergebnis der DB-Abfrage Zeile für Zeile abarbeiten
+            while (rs.next())
+            {
+                anzahl = rs.getInt("anzahl");
+            }
+        } catch (SQLException e)
+        {
+            throw new DatenbankLeseException(DatenbankObject.vokabel);
+        }
+
+        // DB-Abfrage als String
+        sqlStmt = "SELECT COUNT(*) AS anzahl ";
+        sqlStmt += "FROM Vokabel ";
+        sqlStmt += "WHERE anzahlrichtig >= 2";
+
+        try
+        {
+            // DB-Abfrage vorbereiten
+            stmt = con.prepareStatement(sqlStmt);
+            // DB-Abfrage ausführen
+            rs = stmt.executeQuery();
+
+            // Ergebnis der DB-Abfrage Zeile für Zeile abarbeiten
+            while (rs.next())
+            {
+                anzahlR = rs.getInt("anzahl");
+            }
+        } catch (SQLException e)
+        {
+            throw new DatenbankLeseException(DatenbankObject.vokabel);
+        }
+
+        schliesseDatenbank();
+
+        return Math.round(((float) anzahlR / anzahl) * 100);
     }
 }

@@ -6,7 +6,7 @@ import benutzerschnittstelle.komponenten.CustomTextField;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 import fachkonzept.listeners.CustomKeyListener;
-import steuerung.MainFrameSteuerung;
+import fachkonzept.navigation.NavigationStack;
 import steuerung.management.VokabelScreenSteuerung;
 
 import javax.swing.*;
@@ -30,14 +30,19 @@ public final class VokabelScreen extends CustomPanel
     private final CustomTextField uebersetzungTxtField;
     private final CustomTextField lautschriftTxtField;
     private final CustomTextField verwendungsHinweisTxtField;
-
     private ArrayList<Kategorie> kategorien;
 
     private Vokabel vok;
+    private JLabel abbildungsLabel;
+
+    private boolean bearbeiten;
+    private Vokabel vokabel;
+    private Vokabel test;
 
     public VokabelScreen()
     {
         super("Vokabel");
+        bearbeiten = false;
         steuerung = new VokabelScreenSteuerung();
         wortTxtField = new CustomTextField();
         uebersetzungTxtField = new CustomTextField();
@@ -52,11 +57,15 @@ public final class VokabelScreen extends CustomPanel
     {
         this();
         vok = vokabel;
+        this.vokabel = vokabel;
+        bearbeiten = true;
         wortTxtField.setText(vokabel.liesWort());
         uebersetzungTxtField.setText(vokabel.liesUebersetzung());
         lautschriftTxtField.setText(vokabel.liesLautschrift());
         verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
         kategorien = vokabel.liesKategorien();
+
+        //abbildungsLabel = new JLabel(new ImageIcon(test.liesAbbildung()));
     }
 
     private void setValues()
@@ -124,22 +133,27 @@ public final class VokabelScreen extends CustomPanel
         constraints.gridy = 12;
         final CustomButton storeBtn = new CustomButton("Speichern");
         storeBtn.addActionListener((ignored) -> {
-            System.out.print(kategorien);
-            if (wortTxtField.getText().length() > 0
-                    && uebersetzungTxtField.getText().length() > 0)
+            if (wortTxtField.getText().length() > 0 && uebersetzungTxtField.getText().length() > 0)
             {
-                steuerung.vokabelHinzufuegen(
-                        wortTxtField.getText(),
-                        uebersetzungTxtField.getText(),
-                        null,
-                        null,
-                        lautschriftTxtField.getText(),
-                        verwendungsHinweisTxtField.getText()
-                );
+                if (!bearbeiten)
+                {
+                    steuerung.vokabelHinzufuegen(new Vokabel(wortTxtField.getText(), uebersetzungTxtField.getText(),
+                            null, null, lautschriftTxtField.getText(), verwendungsHinweisTxtField.getText(), 0, 0));
+                } else
+                {
+                    steuerung.vokabelAendern(
+                            new Vokabel(wortTxtField.getText(), uebersetzungTxtField.getText(), null, null,
+                                    lautschriftTxtField.getText(), verwendungsHinweisTxtField.getText(), 0, 0),
+                            vokabel);
+                }
             }
-            MainFrameSteuerung.getInstance().openDashboard();
+            NavigationStack.getInstance().back();
         });
         panel.add(storeBtn, constraints);
+
+        //constraints.gridy = 11;
+        //panel.add(abbildungsLabel, constraints);
+
         wortTxtField.requestFocus();
         // TODO-js: Work on that
         wortTxtField.requestFocus(FocusEvent.Cause.ACTIVATION);

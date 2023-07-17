@@ -44,50 +44,41 @@ public final class Vokabel
         this.kategorien = kategorien;
     }
 
-    public String liesWort()
-    {
-        return wort;
-    }
+	public String liesWort() {
+		return wort;
+	}
 
-    public String liesUebersetzung()
-    {
-        return uebersetzung;
-    }
+	public String liesUebersetzung() {
+		return uebersetzung;
+	}
 
-    public byte[] liesAbbildung()
-    {
-        return abbildung;
-    }
+	public byte[] liesAbbildung() {
+		return abbildung;
+	}
 
-    public byte[] liesAussprache()
-    {
-        return aussprache;
-    }
+	public byte[] liesAussprache() {
+		return aussprache;
+	}
 
-    public String liesLautschrift()
-    {
-        return lautschrift;
-    }
+	public String liesLautschrift() {
+		return lautschrift;
+	}
 
-    public String liesVerwendungshinweis()
-    {
-        return verwendungshinweis;
-    }
+	public String liesVerwendungshinweis() {
+		return verwendungshinweis;
+	}
 
-    public int liesWiederholungen()
-    {
-        return wiederholungen;
-    }
+	public int liesWiederholungen() {
+		return wiederholungen;
+	}
 
-    public int liesAnzahlRichtig()
-    {
-        return anzahlrichtig;
-    }
+	public int liesAnzahlRichtig() {
+		return anzahlrichtig;
+	}
 
-    public long liesQuote()
-    {
-        return Math.round(((double) anzahlrichtig / wiederholungen * 100) * 100) / 100;
-    }
+	public int liesQuote() {
+		return (int) (Math.round(((double) anzahlrichtig / wiederholungen * 100) * 100) / 100);
+	}
 
     public void wiederholt(boolean richtig)
     {
@@ -110,4 +101,9 @@ public final class Vokabel
     {
         kategorien.remove(kat);
     }
+
+	@Override
+	public int compareTo(Vokabel v) {
+		return Integer.compare(liesQuote(), v.liesQuote());
+	}
 }
