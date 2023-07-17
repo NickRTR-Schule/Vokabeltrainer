@@ -1,27 +1,48 @@
 package datenspeicherung;
 
-public final class Vokabel implements Comparable<Vokabel> {
-	// Vokabel-Datentyp
-	private final String wort;
-	private final String uebersetzung;
-	private final byte[] abbildung;
-	private final byte[] aussprache;
-	private final String lautschrift;
-	private final String verwendungshinweis;
-	private int anzahlrichtig;
-	private int wiederholungen;
+import java.util.ArrayList;
 
-	public Vokabel(String pWort, String pUebersetzung, byte[] pAbbildung, byte[] pAussprache, String pLautschrift,
-			String pVerwendungshinweis, int pWiederholungen, int pAnzahlrichtig) {
-		wort = pWort;
-		uebersetzung = pUebersetzung;
-		abbildung = pAbbildung;
-		aussprache = pAussprache;
-		lautschrift = pLautschrift;
-		verwendungshinweis = pVerwendungshinweis;
-		wiederholungen = pWiederholungen;
-		anzahlrichtig = pAnzahlrichtig;
-	}
+public final class Vokabel
+{
+    // Vokabel-Datentyp
+    private final String wort;
+    private final String uebersetzung;
+    private final byte[] abbildung;
+    private final byte[] aussprache;
+    private final String lautschrift;
+    private final String verwendungshinweis;
+    private int anzahlrichtig;
+    private int wiederholungen;
+
+    private final ArrayList<Kategorie> kategorien;
+
+    public Vokabel(String pWort, String pUebersetzung, byte[] pAbbildung, byte[] pAussprache, String pLautschrift, String pVerwendungshinweis, int pWiederholungen, int pAnzahlrichtig)
+    {
+        this(pWort, pUebersetzung, pAbbildung, pAussprache, pLautschrift, pVerwendungshinweis, pWiederholungen, pAnzahlrichtig, new ArrayList<>());
+    }
+
+    public Vokabel(
+            String pWort,
+            String pUebersetzung,
+            byte[] pAbbildung,
+            byte[] pAussprache,
+            String pLautschrift,
+            String pVerwendungshinweis,
+            int pWiederholungen,
+            int pAnzahlrichtig,
+            ArrayList<Kategorie> kategorien
+    )
+    {
+        wort = pWort;
+        uebersetzung = pUebersetzung;
+        abbildung = pAbbildung;
+        aussprache = pAussprache;
+        lautschrift = pLautschrift;
+        verwendungshinweis = pVerwendungshinweis;
+        wiederholungen = pWiederholungen;
+        anzahlrichtig = pAnzahlrichtig;
+        this.kategorien = kategorien;
+    }
 
 	public String liesWort() {
 		return wort;
@@ -59,11 +80,27 @@ public final class Vokabel implements Comparable<Vokabel> {
 		return (int) (Math.round(((double) anzahlrichtig / wiederholungen * 100) * 100) / 100);
 	}
 
-	public void wiederholt(boolean richtig) {
-		wiederholungen++;
-		if (richtig)
-			anzahlrichtig++;
-	}
+    public void wiederholt(boolean richtig)
+    {
+        wiederholungen++;
+        if (richtig)
+            anzahlrichtig++;
+    }
+
+    public ArrayList<Kategorie> liesKategorien()
+    {
+        return kategorien;
+    }
+
+    public void fuegeKategorieHinzu(Kategorie kat)
+    {
+        kategorien.add(kat);
+    }
+
+    public void entferneKategorie(Kategorie kat)
+    {
+        kategorien.remove(kat);
+    }
 
 	@Override
 	public int compareTo(Vokabel v) {

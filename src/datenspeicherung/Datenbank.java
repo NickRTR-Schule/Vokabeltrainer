@@ -348,6 +348,12 @@ public final class Datenbank
         schliesseDatenbank();
     }
 
+
+    public static void vokabelZuKategorieHinzufuegen(Vokabel vok, Kategorie kat)
+    {
+        // TODO: implement
+        }
+    
     public static int wissensstand()
             throws DatenbankAccessException, DatenbankLeseException
     {

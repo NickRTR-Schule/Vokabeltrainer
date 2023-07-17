@@ -3,6 +3,7 @@ package benutzerschnittstelle.management;
 import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.CustomTextField;
+import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 import fachkonzept.listeners.CustomKeyListener;
 import fachkonzept.navigation.NavigationStack;
@@ -10,6 +11,8 @@ import steuerung.management.VokabelScreenSteuerung;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.util.ArrayList;
 
 /**
  * The Screen to add / create a new Vocabulary.
@@ -26,9 +29,10 @@ public final class VokabelScreen extends CustomPanel
     private final CustomTextField wortTxtField;
     private final CustomTextField uebersetzungTxtField;
     private final CustomTextField lautschriftTxtField;
-
     private final CustomTextField verwendungsHinweisTxtField;
+    private ArrayList<Kategorie> kategorien;
 
+    private Vokabel vok;
     private JLabel abbildungsLabel;
 
     private boolean bearbeiten;
@@ -44,20 +48,24 @@ public final class VokabelScreen extends CustomPanel
         uebersetzungTxtField = new CustomTextField();
         lautschriftTxtField = new CustomTextField();
         verwendungsHinweisTxtField = new CustomTextField();
+        kategorien = new ArrayList<>();
+        vok = null;
         setValues();
     }
 
     public VokabelScreen(Vokabel vokabel)
     {
         this();
+        vok = vokabel;
         this.vokabel = vokabel;
         bearbeiten = true;
         wortTxtField.setText(vokabel.liesWort());
         uebersetzungTxtField.setText(vokabel.liesUebersetzung());
         lautschriftTxtField.setText(vokabel.liesLautschrift());
         verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
+        kategorien = vokabel.liesKategorien();
 
-        abbildungsLabel = new JLabel(new ImageIcon(test.liesAbbildung()));
+        //abbildungsLabel = new JLabel(new ImageIcon(test.liesAbbildung()));
     }
 
     private void setValues()
@@ -117,6 +125,12 @@ public final class VokabelScreen extends CustomPanel
         constraints.gridy = 9;
         panel.add(verwendungsHinweisTxtField, constraints);
         constraints.gridy = 10;
+        panel.add(new JLabel("Kategorien"), constraints);
+        constraints.gridy = 11;
+        final CustomButton mappingBtn = new CustomButton("Mapping");
+        mappingBtn.addActionListener((ignored) -> steuerung.mappingGeklickt(vok, kategorien));
+        panel.add(mappingBtn, constraints);
+        constraints.gridy = 12;
         final CustomButton storeBtn = new CustomButton("Speichern");
         storeBtn.addActionListener((ignored) -> {
             if (wortTxtField.getText().length() > 0 && uebersetzungTxtField.getText().length() > 0)
@@ -141,6 +155,8 @@ public final class VokabelScreen extends CustomPanel
         //panel.add(abbildungsLabel, constraints);
 
         wortTxtField.requestFocus();
+        // TODO-js: Work on that
+        wortTxtField.requestFocus(FocusEvent.Cause.ACTIVATION);
         return panel;
     }
 }

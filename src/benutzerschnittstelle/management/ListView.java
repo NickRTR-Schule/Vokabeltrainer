@@ -1,5 +1,6 @@
 package benutzerschnittstelle.management;
 
+import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import fachkonzept.datamangement.tablemodels.CustomTableModel;
 import fachkonzept.search.Suchkonzept;
@@ -15,10 +16,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class ListView<T> extends CustomPanel
+public abstract class ListView<T> extends CustomPanel
 {
     public final JTable table;
-    private final CustomTableModel<T> model;
+    protected final CustomTableModel<T> model;
     private final ListenSteuerung<T> steuerung;
     private final JTextField searchField;
     private final Suchkonzept<T> suchkonzept;
@@ -27,8 +28,7 @@ public class ListView<T> extends CustomPanel
     public ListView(String name, CustomTableModel<T> model,
                     ListenSteuerung<T> steuerung, Suchkonzept<T> suchkonzept)
     {
-        super("Vokabeln");
-        this.steuerung = steuerung;
+        super(name, btn);
         try
         {
             objects = steuerung.liesDaten();
@@ -37,6 +37,23 @@ public class ListView<T> extends CustomPanel
             objects = new ArrayList<>();
             JOptionPane.showMessageDialog(this, "Fehler beim laden der Daten");
         }
+        this.steuerung = steuerung;
+        this.model = model;
+        table = new JTable(model);
+        init();
+    }
+
+    public ListView(
+            ArrayList<T> objs,
+            String name,
+            CustomTableModel<T> model,
+            ListenSteuerung<T> steuerung,
+            CustomButton btn
+    )
+    {
+        super(name, btn);
+        objects = objs;
+        this.steuerung = steuerung;
         this.model = model;
         searchField = new JTextField();
         this.suchkonzept = suchkonzept;
@@ -92,7 +109,6 @@ public class ListView<T> extends CustomPanel
         for (final T obj : objects)
         {
             model.addRow(obj);
-
         }
         final JScrollPane pane = new JScrollPane();
         pane.setLayout(new ScrollPaneLayout());

@@ -1,17 +1,17 @@
 package steuerung;
 
-import exceptions.datenbank.*;
-
-import benutzerschnittstelle.Abfrage;
 import datenspeicherung.Vokabel;
 import exceptions.EndOfAbfrageException;
+import exceptions.datenbank.DatenbankAccessException;
+import exceptions.datenbank.DatenbankSchreibException;
 import fachkonzept.AbfrageKonzept;
+import fachkonzept.navigation.NavigationStack;
 
 public final class AbfrageSteuerung
 {
     private AbfrageKonzept dasAbfrageKonzept;
 
-    public AbfrageSteuerung(Abfrage abfrage, int numberVocs)
+    public AbfrageSteuerung(int numberVocs)
     {
         try
         {
@@ -20,6 +20,11 @@ public final class AbfrageSteuerung
         {
             System.out.println(e.getLocalizedMessage());
         }
+    }
+
+    public void oeffnenAbgebrochen()
+    {
+        NavigationStack.getInstance().back();
     }
 
     public int anzahlVoks()
@@ -32,8 +37,8 @@ public final class AbfrageSteuerung
         return dasAbfrageKonzept.naechsteVokabel();
     }
 
-    public boolean pruefeEingabe(String eingabe)  throws DatenbankAccessException,
-	DatenbankSchreibException
+    public boolean pruefeEingabe(String eingabe) throws DatenbankAccessException,
+            DatenbankSchreibException
     {
         return dasAbfrageKonzept.pruefeEingabe(eingabe);
     }

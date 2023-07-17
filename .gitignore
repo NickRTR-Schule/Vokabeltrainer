@@ -1,7 +1,3 @@
-# Files and Folders for Jetbrains IDEA Support.
-.idea
-Vokabeltrainer.iml
-
 # Outputs and Binary Files
 /out
 /bin
