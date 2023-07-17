@@ -429,9 +429,11 @@ public final class Datenbank
         {
             // DB-Abfrage vorbereiten
             stmt = con.prepareStatement(sqlStmt);
-            // DB-Abfrage ausführen
             stmt.setString(1, wort);
             stmt.setString(2, uebersetzung);
+
+            // DB-Abfrage ausführen
+
             result = stmt.executeQuery();
 
             // Ergebnis der DB-Abfrage Zeile für Zeile abarbeiten
