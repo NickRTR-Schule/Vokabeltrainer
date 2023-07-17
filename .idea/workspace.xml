@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7d2ceba-f3ad-451f-8876-ea7a1aa1ab35" name="Changes" comment="">
+    <list default="true" id="c7d2ceba-f3ad-451f-8876-ea7a1aa1ab35" name="Changes" comment="Translate Buttons to German">
+      <change beforePath="$PROJECT_DIR$/.idea/misc 2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/datenspeicherung/Datenbank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/datenspeicherung/Datenbank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vokabeltrainer.accdb" beforeDir="false" afterPath="$PROJECT_DIR$/Vokabeltrainer.accdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/management/ListView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/management/ListView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +47,9 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2LMZtTtrfYkdTHoOV25m20cGZSw" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

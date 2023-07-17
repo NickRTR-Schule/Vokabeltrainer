@@ -101,12 +101,7 @@ public abstract class ListView<T> extends CustomPanel
             model.addRow(obj);
         }
     }
-
-    private void resetTable()
-    {
-        updateTable(objects);
-    }
-
+    
     public void geklicktSuche(String text)
     {
         updateTable(suchkonzept.suche(text));
