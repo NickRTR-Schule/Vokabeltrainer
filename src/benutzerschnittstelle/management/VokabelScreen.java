@@ -36,8 +36,6 @@ public final class VokabelScreen extends CustomPanel
     private JLabel abbildungsLabel;
 
     private boolean bearbeiten;
-    private Vokabel vokabel;
-    private Vokabel test;
 
     public VokabelScreen()
     {
@@ -57,7 +55,6 @@ public final class VokabelScreen extends CustomPanel
     {
         this();
         vok = vokabel;
-        this.vokabel = vokabel;
         bearbeiten = true;
         wortTxtField.setText(vokabel.liesWort());
         uebersetzungTxtField.setText(vokabel.liesUebersetzung());
@@ -128,7 +125,8 @@ public final class VokabelScreen extends CustomPanel
         panel.add(new JLabel("Kategorien"), constraints);
         constraints.gridy = 11;
         final CustomButton mappingBtn = new CustomButton("Mapping");
-        mappingBtn.addActionListener((ignored) -> steuerung.mappingGeklickt(vok, kategorien));
+        mappingBtn.addActionListener((ignored) ->
+                steuerung.mappingGeklickt(vok, kategorien));
         panel.add(mappingBtn, constraints);
         constraints.gridy = 12;
         final CustomButton storeBtn = new CustomButton("Speichern");
@@ -144,7 +142,7 @@ public final class VokabelScreen extends CustomPanel
                     steuerung.vokabelAendern(
                             new Vokabel(wortTxtField.getText(), uebersetzungTxtField.getText(), null, null,
                                     lautschriftTxtField.getText(), verwendungsHinweisTxtField.getText(), 0, 0),
-                            vokabel);
+                            vok);
                 }
             }
             NavigationStack.getInstance().back();

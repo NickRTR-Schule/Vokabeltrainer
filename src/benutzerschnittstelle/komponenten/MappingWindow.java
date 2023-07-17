@@ -49,6 +49,25 @@ public class MappingWindow<O, T> extends JFrame
         build();
     }
 
+    public MappingWindow(Class<O> oClass, ArrayList<T> objects)
+    {
+        if (Vokabel.class.isAssignableFrom(oClass))
+        {
+            type = MappingType.vok;
+        } else if (Kategorie.class.isAssignableFrom(oClass))
+        {
+            type = MappingType.kat;
+        } else
+        {
+            type = MappingType.none;
+        }
+        this.object = null;
+        this.objects = objects;
+        layout = new GridBagLayout();
+        constraints = new GridBagConstraints();
+        build();
+    }
+
     private void init()
     {
         setTitle("Mapping");
@@ -64,7 +83,6 @@ public class MappingWindow<O, T> extends JFrame
     {
         init();
         layout.setConstraints(this, constraints);
-        addComponent(new JLabel("kurze Beschreibung"));
         try
         {
             if (type == MappingType.vok)

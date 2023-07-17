@@ -178,6 +178,13 @@ public final class MainFrameSteuerung
         mainFrame.open(screen);
     }
 
+    public void openMapping(Class<?> oClass, ArrayList<?> objects)
+    {
+        final MappingWindow<?, ?> window = new MappingWindow<>(oClass, objects);
+        window.pack();
+        window.setVisible(true);
+    }
+
     public void openMapping(Object object, ArrayList<?> objects)
     {
         final MappingWindow<?, ?> window = new MappingWindow<>(object, objects);

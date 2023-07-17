@@ -1,3 +1,6 @@
+# IntelliJ related stuff
+.idea/workspace.xml
+
 # Outputs and Binary Files
 /out
 /bin

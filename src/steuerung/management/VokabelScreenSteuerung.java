@@ -45,7 +45,14 @@ public final class VokabelScreenSteuerung
 
     public void mappingGeklickt(Vokabel vok, ArrayList<Kategorie> kats)
     {
-        MainFrameSteuerung.getInstance().openMapping(vok, kats);
+        if (vok == null)
+        {
+            MainFrameSteuerung.getInstance().openMapping(Vokabel.class, kats);
+        } else
+        {
+            MainFrameSteuerung.getInstance().openMapping(vok, kats);
+        }
+
     }
 
     public ArrayList<Kategorie> liesKategorien() throws Exception
