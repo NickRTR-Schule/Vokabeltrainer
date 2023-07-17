@@ -3,10 +3,14 @@ package steuerung;
 import benutzerschnittstelle.MainFrame;
 import benutzerschnittstelle.komponenten.MappingWindow;
 import benutzerschnittstelle.navigation.UIScreens;
+import datenspeicherung.Datenbank;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
+import exceptions.datenbank.DatenbankAccessException;
+import exceptions.datenbank.DatenbankLeseException;
 import fachkonzept.navigation.NavigationStack;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -40,12 +44,26 @@ public final class MainFrameSteuerung
      */
     public static void main(String[] args)
     {
-        EventQueue.invokeLater(() -> shared = new MainFrameSteuerung());
+        EventQueue.invokeLater(() -> {
+            shared = new MainFrameSteuerung();
+            try
+            {
+                shared.initDatabase();
+            } catch (Exception ignored)
+            {
+                JOptionPane.showMessageDialog(shared.mainFrame, "Fehler beim Laden der Datenbank");
+            }
+        });
     }
 
     public static MainFrameSteuerung getInstance()
     {
         return shared;
+    }
+
+    public void initDatabase() throws DatenbankAccessException, DatenbankLeseException
+    {
+        Datenbank.init();
     }
 
     /* Navigation Stack Methods */

@@ -11,9 +11,31 @@ public final class Vokabel implements Comparable<Vokabel>
     private final byte[] aussprache;
     private final String lautschrift;
     private final String verwendungshinweis;
-    private final ArrayList<Kategorie> kategorien;
+    private ArrayList<Kategorie> kategorien;
     private int anzahlrichtig;
     private int wiederholungen;
+
+    public Vokabel(
+            String pWort,
+            String pUebersetzung,
+            byte[] pAbbildung,
+            byte[] pAussprache,
+            String pLautschrift,
+            String pVerwendungshinweis,
+            int pWiederholungen,
+            int pAnzahlrichtig
+    )
+    {
+        wort = pWort;
+        uebersetzung = pUebersetzung;
+        abbildung = pAbbildung;
+        aussprache = pAussprache;
+        lautschrift = pLautschrift;
+        verwendungshinweis = pVerwendungshinweis;
+        wiederholungen = pWiederholungen;
+        anzahlrichtig = pAnzahlrichtig;
+        kategorien = null;
+    }
 
     public Vokabel(
             String pWort,
@@ -93,6 +115,11 @@ public final class Vokabel implements Comparable<Vokabel>
     public ArrayList<Kategorie> liesKategorien()
     {
         return kategorien;
+    }
+
+    public void setzeKategorien(ArrayList<Kategorie> kats)
+    {
+        kategorien = kats;
     }
 
     public void fuegeKategorieHinzu(Kategorie kat)

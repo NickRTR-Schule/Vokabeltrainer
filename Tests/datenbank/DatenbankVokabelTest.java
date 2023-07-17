@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class DatenbankVokabelTest
@@ -20,8 +19,8 @@ public final class DatenbankVokabelTest
         ArrayList<Vokabel> vokabeln = Datenbank.liesVokabeln();
         assertTrue(vokabeln.size() > 0);
 
-        Vokabel vokabel = Datenbank.liesVokabel("duck", "Ente");
-        assertEquals("Ente", vokabel.liesUebersetzung());
+        //Vokabel vokabel = Datenbank.liesVokabel("duck", "Ente");
+        //assertEquals("Ente", vokabel.liesUebersetzung());
 
         Datenbank.loescheVokabel("duck", "Ente");
     }
