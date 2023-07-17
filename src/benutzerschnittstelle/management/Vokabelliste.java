@@ -7,6 +7,7 @@ import exceptions.datenbank.DatenbankAccessException;
 import exceptions.datenbank.DatenbankLeseException;
 import fachkonzept.datamangement.tablemodels.VokabelTableModel;
 import fachkonzept.search.SuchkonzeptVokabeln;
+import steuerung.MainFrameSteuerung;
 import steuerung.management.VokabellisteSteuerung;
 
 import javax.swing.*;
@@ -16,10 +17,6 @@ import java.util.ArrayList;
 
 public final class Vokabelliste extends ListView<Vokabel>
 {
-    private static final CustomButton csb = CustomButton.newVocabBtn((ignored) -> {
-
-    });
-
     public Vokabelliste(Kategorie kat, ArrayList<Vokabel> vokabeln) throws DatenbankAccessException, DatenbankLeseException
     {
         super(
@@ -27,7 +24,7 @@ public final class Vokabelliste extends ListView<Vokabel>
                 new VokabelTableModel(kat, vokabeln),
                 new VokabellisteSteuerung(),
                 new SuchkonzeptVokabeln(),
-                csb
+                getCsb()
         );
         table.getColumnModel().getColumn(VokabelTableModel.EDITABLE_STATE_COLUMN_QUOTE).setCellRenderer(new DefaultTableCellRenderer()
         {
@@ -53,6 +50,13 @@ public final class Vokabelliste extends ListView<Vokabel>
 
     public Vokabelliste() throws DatenbankAccessException, DatenbankLeseException
     {
-        super("Vokabeln", new VokabelTableModel(), new VokabellisteSteuerung(), new SuchkonzeptVokabeln(), csb);
+        super("Vokabeln", new VokabelTableModel(), new VokabellisteSteuerung(), new SuchkonzeptVokabeln(), getCsb());
+    }
+
+    private static CustomButton getCsb()
+    {
+        final CustomButton btn = new CustomButton("Vokabel hinzufügen");
+        btn.addActionListener((ignored) -> MainFrameSteuerung.getInstance().openErsteller());
+        return btn;
     }
 }

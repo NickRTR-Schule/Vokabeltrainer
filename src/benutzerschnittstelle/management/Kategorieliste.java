@@ -7,14 +7,13 @@ import exceptions.datenbank.DatenbankAccessException;
 import exceptions.datenbank.DatenbankLeseException;
 import fachkonzept.datamangement.tablemodels.KategorieTableModel;
 import fachkonzept.search.SuchkonzeptKategorie;
+import steuerung.MainFrameSteuerung;
 import steuerung.management.KategorielisteSteuerung;
 
 import java.util.ArrayList;
 
 public final class Kategorieliste extends ListView<Kategorie>
 {
-
-    private static final CustomButton csb = new CustomButton("Kategorie hinzufügen");
 
     public Kategorieliste(Vokabel vok, ArrayList<Kategorie> kategorien) throws DatenbankAccessException, DatenbankLeseException
     {
@@ -23,12 +22,19 @@ public final class Kategorieliste extends ListView<Kategorie>
                 new KategorieTableModel(vok, kategorien),
                 new KategorielisteSteuerung(),
                 new SuchkonzeptKategorie(),
-                csb
+                getCsb()
         );
     }
 
     public Kategorieliste() throws DatenbankAccessException, DatenbankLeseException
     {
-        super("Kategorien", new KategorieTableModel(), new KategorielisteSteuerung(), new SuchkonzeptKategorie(), csb);
+        super("Kategorien", new KategorieTableModel(), new KategorielisteSteuerung(), new SuchkonzeptKategorie(), getCsb());
+    }
+
+    private static CustomButton getCsb()
+    {
+        final CustomButton btn = new CustomButton("Kategorie hinzufügen");
+        btn.addActionListener((ignored) -> MainFrameSteuerung.getInstance().openKategorieuebersicht());
+        return btn;
     }
 }
