@@ -132,6 +132,4 @@ public abstract class ListView<T> extends CustomPanel
         final RowSorter<? extends TableModel> sorter = table.getRowSorter();
         return model.getObjectForRow(sorter != null ? sorter.convertRowIndexToModel(table.getSelectedRow()) : row);
     }
-
-    public abstract ArrayList<T> getSelectedObjects();
 }

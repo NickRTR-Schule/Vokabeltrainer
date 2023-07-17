@@ -3,6 +3,8 @@ package fachkonzept.datamangement.tablemodels;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 
+import java.util.ArrayList;
+
 public final class VokabelTableModel extends CustomTableModel<Vokabel>
 {
 
@@ -25,8 +27,10 @@ public final class VokabelTableModel extends CustomTableModel<Vokabel>
 
     private final Kategorie kat;
 
+    private final ArrayList<Vokabel> vokabeln;
 
-    private VokabelTableModel(boolean edit, Kategorie kat)
+
+    private VokabelTableModel(boolean edit, Kategorie kat, ArrayList<Vokabel> vokabeln)
     {
         super(
                 new String[]{
@@ -47,16 +51,17 @@ public final class VokabelTableModel extends CustomTableModel<Vokabel>
         );
         this.edit = edit;
         this.kat = kat;
+        this.vokabeln = vokabeln;
     }
 
-    public VokabelTableModel(Kategorie kat)
+    public VokabelTableModel(Kategorie kat, ArrayList<Vokabel> vokabeln)
     {
-        this(true, kat);
+        this(true, kat, vokabeln);
     }
 
     public VokabelTableModel()
     {
-        this(false, null);
+        this(false, null, null);
     }
 
     @Override
@@ -89,5 +94,20 @@ public final class VokabelTableModel extends CustomTableModel<Vokabel>
             };
         }
         return result;
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex)
+    {
+        if (columnIndex == 0)
+        {
+            if ((boolean) aValue)
+            {
+                vokabeln.add(rows.get(rowIndex));
+            } else
+            {
+                vokabeln.remove(rows.get(rowIndex));
+            }
+        }
     }
 }

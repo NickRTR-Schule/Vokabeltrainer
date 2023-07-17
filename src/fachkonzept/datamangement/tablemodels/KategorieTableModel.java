@@ -4,9 +4,6 @@ import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public final class KategorieTableModel extends CustomTableModel<Kategorie>
 {
@@ -23,10 +20,9 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
     private static final int SOLID_STATE_COLUMN_VOKSANZAHL = 1;
     private final Vokabel vok;
     private final boolean edit;
+    private final ArrayList<Kategorie> kategorien;
 
-    private final Map<Kategorie, List<Vokabel>> ausgewaelteVokabeln = new HashMap<>();
-
-    private KategorieTableModel(boolean edit, Vokabel vok)
+    private KategorieTableModel(boolean edit, Vokabel vok, ArrayList<Kategorie> kategorien)
     {
         super(
                 new String[]{
@@ -41,37 +37,32 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
         );
         this.edit = edit;
         this.vok = vok;
+        this.kategorien = kategorien;
     }
 
-    public KategorieTableModel(Vokabel vok)
+    public KategorieTableModel(Vokabel vok, ArrayList<Kategorie> kategorien)
     {
-        this(true, vok);
+        this(true, vok, kategorien);
     }
 
     public KategorieTableModel()
     {
-        this(false, null);
+        this(false, null, null);
     }
 
     @Override
     public Object getValueAt(int row, int column)
     {
         final Kategorie kategorie = rows.get(row);
-
         final Object result;
         if (edit)
         {
-            List<Vokabel> ausgewaehlteVokelnFuerKategorie = ausgewaelteVokabeln.get(kategorie);
-            if (ausgewaehlteVokelnFuerKategorie == null)
-            {
-                ausgewaehlteVokelnFuerKategorie = new ArrayList<>(kategorie.liesVokabeln());
-                ausgewaelteVokabeln.put(kategorie, ausgewaehlteVokelnFuerKategorie);
-            }
             result = switch (column)
             {
-                case EDITABLE_STATE_COLUMN_EDIT -> ausgewaehlteVokelnFuerKategorie.contains(vok);
+                case EDITABLE_STATE_COLUMN_EDIT -> kategorien.contains(kategorie);
                 case EDITABLE_STATE_COLUMN_NAME -> kategorie.liesName();
-                case EDITABLE_STATE_COLUMN_VOKSANZAHL -> ausgewaehlteVokelnFuerKategorie.size();
+                case EDITABLE_STATE_COLUMN_VOKSANZAHL ->
+                        kategorien.contains(kategorie) ? kategorie.liesVokabeln().size() + 1 : kategorie.liesVokabeln().size();
                 default -> null;
             };
         } else
@@ -84,5 +75,20 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
             };
         }
         return result;
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex)
+    {
+        if (columnIndex == 0)
+        {
+            if ((boolean) aValue)
+            {
+                kategorien.add(rows.get(rowIndex));
+            } else
+            {
+                kategorien.remove(rows.get(rowIndex));
+            }
+        }
     }
 }

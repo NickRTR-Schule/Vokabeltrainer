@@ -124,6 +124,7 @@ public final class VokabelScreen extends CustomPanel
         constraints.gridy = 12;
         final CustomButton storeBtn = new CustomButton("Speichern");
         storeBtn.addActionListener((ignored) -> {
+            System.out.print(kategorien);
             if (wortTxtField.getText().length() > 0
                     && uebersetzungTxtField.getText().length() > 0)
             {

@@ -3,7 +3,6 @@ package benutzerschnittstelle.komponenten;
 import benutzerschnittstelle.management.Kategorieliste;
 import benutzerschnittstelle.management.ListView;
 import benutzerschnittstelle.management.Vokabelliste;
-import datenspeicherung.Datenbank;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 
@@ -66,10 +65,10 @@ public class MappingWindow<O, T> extends JFrame
         addComponent(new JLabel("kurze Beschreibung"));
         if (type == MappingType.vok)
         {
-            listView = new Kategorieliste((Vokabel) object);
+            listView = new Kategorieliste((Vokabel) object, (ArrayList<Kategorie>) objects);
         } else if (type == MappingType.kat)
         {
-            listView = new Vokabelliste((Kategorie) object);
+            listView = new Vokabelliste((Kategorie) object, (ArrayList<Vokabel>) objects);
         } else
         {
             // Abort execution
@@ -81,7 +80,7 @@ public class MappingWindow<O, T> extends JFrame
         constraints.gridy = 1;
         final CustomButton saveBtn = new CustomButton("Speichern", "Speichere deine Änderungen");
         saveBtn.addActionListener((ignored) -> {
-            save();
+            dispose();
         });
         addComponent(saveBtn);
     }
@@ -89,37 +88,6 @@ public class MappingWindow<O, T> extends JFrame
     private void addComponent(Component comp)
     {
         add(comp, constraints);
-    }
-
-    private void save()
-    {
-        if (type == MappingType.vok)
-        {
-            final ArrayList<Kategorie> kats = (ArrayList<Kategorie>) listView.getSelectedObjects();
-            final Vokabel vok = (Vokabel) object;
-            try
-            {
-                for (Kategorie kat : Datenbank.liesKategorien())
-                {
-                    if (kats.contains(kat))
-                    {
-                        kat.fuegeVokabelHinzu(vok);
-                    } else
-                    {
-                        kat.entferneVokabel(vok);
-                    }
-                }
-            } catch (Exception e)
-            {
-                JOptionPane.showMessageDialog(this, "Fehler beim Speichern");
-                return;
-            }
-        } else if (type == MappingType.kat)
-        {
-            final Kategorie kat = (Kategorie) object;
-            kat.aendereVokabeln((ArrayList<Vokabel>) listView.getSelectedObjects());
-        }
-        listView.getSelectedObjects();
     }
 
     private enum MappingType

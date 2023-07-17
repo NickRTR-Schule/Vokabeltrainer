@@ -13,11 +13,11 @@ public final class Kategorieliste extends ListView<Kategorie>
 
     private static final CustomButton csb = new CustomButton("Kategorie hinzufügen");
 
-    public Kategorieliste(Vokabel vok)
+    public Kategorieliste(Vokabel vok, ArrayList<Kategorie> kategorien)
     {
         super(
                 "Kategorien",
-                new KategorieTableModel(vok),
+                new KategorieTableModel(vok, kategorien),
                 new KategorielisteSteuerung(),
                 csb
         );
@@ -26,19 +26,5 @@ public final class Kategorieliste extends ListView<Kategorie>
     public Kategorieliste()
     {
         super("Kategorien", new KategorieTableModel(), new KategorielisteSteuerung(), csb);
-    }
-
-    @Override
-    public ArrayList<Kategorie> getSelectedObjects()
-    {
-        final ArrayList<Kategorie> kats = new ArrayList<>();
-        for (int i = 0; i < model.getRowCount(); i++)
-        {
-            if ((boolean) model.getValueAt(i, 0))
-            {
-                kats.add(model.getObjectForRow(i));
-            }
-        }
-        return kats;
     }
 }

@@ -18,11 +18,11 @@ public final class Vokabelliste extends ListView<Vokabel>
 
     });
 
-    public Vokabelliste(Kategorie kat)
+    public Vokabelliste(Kategorie kat, ArrayList<Vokabel> vokabeln)
     {
         super(
                 "Vokabeln",
-                new VokabelTableModel(kat),
+                new VokabelTableModel(kat, vokabeln),
                 new VokabellisteSteuerung(),
                 csb
         );
@@ -47,19 +47,5 @@ public final class Vokabelliste extends ListView<Vokabel>
     public Vokabelliste()
     {
         super("Vokabeln", new VokabelTableModel(), new VokabellisteSteuerung(), csb);
-    }
-
-    @Override
-    public ArrayList<Vokabel> getSelectedObjects()
-    {
-        final ArrayList<Vokabel> voks = new ArrayList<>();
-        for (int i = 0; i < model.getRowCount(); i++)
-        {
-            if ((boolean) model.getValueAt(i, 0))
-            {
-                voks.add(model.getObjectForRow(i));
-            }
-        }
-        return voks;
     }
 }
