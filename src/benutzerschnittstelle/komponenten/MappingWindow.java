@@ -33,9 +33,11 @@ public class MappingWindow<O, T> extends JFrame
         if (object instanceof Vokabel)
         {
             type = MappingType.vok;
+            objects = ((ArrayList<T>) ((Vokabel) object).liesKategorien());
         } else if (object instanceof Kategorie)
         {
             type = MappingType.kat;
+            objects = ((ArrayList<T>) ((Kategorie) object).liesVokabeln());
         } else
         {
             type = MappingType.none;

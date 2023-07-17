@@ -6,17 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c7d2ceba-f3ad-451f-8876-ea7a1aa1ab35" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/Abfrage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/Abfrage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/Dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/Dashboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vokabeltrainer.accdb" beforeDir="false" afterPath="$PROJECT_DIR$/Vokabeltrainer.accdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/komponenten/MappingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/komponenten/MappingWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/management/Kategorieliste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/management/Kategorieliste.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/management/ListView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/management/ListView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/management/VokabelScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/management/VokabelScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/management/Vokabelliste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/management/Vokabelliste.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/datenspeicherung/Datenbank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/datenspeicherung/Datenbank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/datenspeicherung/Vokabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/datenspeicherung/Vokabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fachkonzept/ErstellerKonzept.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fachkonzept/ErstellerKonzept.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/steuerung/management/VokabelScreenSteuerung.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steuerung/management/VokabelScreenSteuerung.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
