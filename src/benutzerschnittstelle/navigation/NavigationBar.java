@@ -35,7 +35,7 @@ public final class NavigationBar extends JPanel
     {
         final JButton btn = new JButton();
         btn.setIcon(iconLaden());
-        btn.setText("Back");
+        btn.setText("Zurück");
         btn.addMouseListener(new MouseAdapter()
         {
             @Override
