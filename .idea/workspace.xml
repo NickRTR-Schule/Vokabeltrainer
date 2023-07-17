@@ -6,13 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="c7d2ceba-f3ad-451f-8876-ea7a1aa1ab35" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/Abfrage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/Abfrage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/Dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/Dashboard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/komponenten/MappingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/komponenten/MappingWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/management/Kategorieliste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/management/Kategorieliste.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/management/ListView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/management/ListView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/management/VokabelScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/management/VokabelScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/benutzerschnittstelle/management/Vokabelliste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/benutzerschnittstelle/management/Vokabelliste.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fachkonzept/datamangement/tablemodels/KategorieTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fachkonzept/datamangement/tablemodels/KategorieTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fachkonzept/datamangement/tablemodels/VokabelTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fachkonzept/datamangement/tablemodels/VokabelTableModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/datenspeicherung/Datenbank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/datenspeicherung/Datenbank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/datenspeicherung/Vokabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/datenspeicherung/Vokabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fachkonzept/ErstellerKonzept.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fachkonzept/ErstellerKonzept.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/steuerung/management/VokabelScreenSteuerung.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/steuerung/management/VokabelScreenSteuerung.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +72,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "feature/vok-kat-mapping",
+    "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "zulu-19",
     "last_directory_selection": "/Users/jules/School local/Projekte/Vokabeltrainer/src/tests",
     "last_opened_file_path": "/Users/jules/Library/Mobile Documents/com~apple~CloudDocs/Schule/12-2/IT-SW/Projekte/Vokabeltrainer",
@@ -161,15 +165,6 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/benutzerschnittstelle/management/VokabelScreen.java</url>
-          <line>126</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.hsqldb.jdbc.JDBCResultSetMetaData" memberName="resultMetaData" />

@@ -288,8 +288,7 @@ public final class Datenbank
                 final String name = result.getString("name");
                 final ArrayList<Vokabel> vokabeln = new ArrayList<>(
                         liesVokabelnForKat(name));
-                final Vokabel[] voks = new Vokabel[vokabeln.size()];
-                ergebnis.add(new Kategorie(name, voks));
+                ergebnis.add(new Kategorie(name, vokabeln));
             }
         } catch (SQLException e)
         {
@@ -352,8 +351,8 @@ public final class Datenbank
     public static void vokabelZuKategorieHinzufuegen(Vokabel vok, Kategorie kat)
     {
         // TODO: implement
-        }
-    
+    }
+
     public static int wissensstand()
             throws DatenbankAccessException, DatenbankLeseException
     {

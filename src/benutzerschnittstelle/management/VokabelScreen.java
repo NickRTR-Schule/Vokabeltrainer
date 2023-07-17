@@ -137,8 +137,8 @@ public final class VokabelScreen extends CustomPanel
             {
                 if (!bearbeiten)
                 {
-                    steuerung.vokabelHinzufuegen(new Vokabel(wortTxtField.getText(), uebersetzungTxtField.getText(),
-                            null, null, lautschriftTxtField.getText(), verwendungsHinweisTxtField.getText(), 0, 0));
+                    steuerung.vokabelHinzufuegen(wortTxtField.getText(), uebersetzungTxtField.getText(),
+                            null, null, lautschriftTxtField.getText(), verwendungsHinweisTxtField.getText());
                 } else
                 {
                     steuerung.vokabelAendern(

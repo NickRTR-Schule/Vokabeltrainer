@@ -20,12 +20,13 @@ public final class Vokabelliste extends ListView<Vokabel>
 
     });
 
-    public Vokabelliste(Kategorie kat, ArrayList<Vokabel> vokabeln)
+    public Vokabelliste(Kategorie kat, ArrayList<Vokabel> vokabeln) throws DatenbankAccessException, DatenbankLeseException
     {
         super(
                 "Vokabeln",
                 new VokabelTableModel(kat, vokabeln),
                 new VokabellisteSteuerung(),
+                new SuchkonzeptVokabeln(),
                 csb
         );
         table.getColumnModel().getColumn(VokabelTableModel.EDITABLE_STATE_COLUMN_QUOTE).setCellRenderer(new DefaultTableCellRenderer()
@@ -40,28 +41,18 @@ public final class Vokabelliste extends ListView<Vokabel>
                 if (renderComponent instanceof JLabel)
                 {
 
-                    @Override
-                    public Component getTableCellRendererComponent(JTable table,
-                                                                   Object value, boolean isSelected, boolean hasFocus,
-                                                                   int row, int column)
-                    {
-                        setHorizontalAlignment(JLabel.RIGHT);
-                        Component renderComponent = super.getTableCellRendererComponent(
-                                table, value, isSelected, hasFocus, row,
-                                column);
-                        if (renderComponent instanceof JLabel)
-                        {
-                            ((JLabel) renderComponent).setText(
-                                    ((JLabel) renderComponent).getText()
-                                            + " %");
-                        }
-                        return renderComponent;
-                    }
-                });
+
+                    ((JLabel) renderComponent).setText(
+                            ((JLabel) renderComponent).getText()
+                                    + " %");
+                }
+                return renderComponent;
+            }
+        });
     }
 
-    public Vokabelliste()
+    public Vokabelliste() throws DatenbankAccessException, DatenbankLeseException
     {
-        super("Vokabeln", new VokabelTableModel(), new VokabellisteSteuerung(), csb);
+        super("Vokabeln", new VokabelTableModel(), new VokabellisteSteuerung(), new SuchkonzeptVokabeln(), csb);
     }
 }

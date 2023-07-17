@@ -16,17 +16,19 @@ public final class Kategorieliste extends ListView<Kategorie>
 
     private static final CustomButton csb = new CustomButton("Kategorie hinzufügen");
 
-    public Kategorieliste(Vokabel vok, ArrayList<Kategorie> kategorien)
+    public Kategorieliste(Vokabel vok, ArrayList<Kategorie> kategorien) throws DatenbankAccessException, DatenbankLeseException
     {
         super(
                 "Kategorien",
                 new KategorieTableModel(vok, kategorien),
                 new KategorielisteSteuerung(),
+                new SuchkonzeptKategorie(),
                 csb
         );
-        
-    public Kategorieliste()
+    }
+
+    public Kategorieliste() throws DatenbankAccessException, DatenbankLeseException
     {
-        super("Kategorien", new KategorieTableModel(), new KategorielisteSteuerung(), csb);
+        super("Kategorien", new KategorieTableModel(), new KategorielisteSteuerung(), new SuchkonzeptKategorie(), csb);
     }
 }

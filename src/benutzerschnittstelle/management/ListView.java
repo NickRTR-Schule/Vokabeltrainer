@@ -12,8 +12,6 @@ import steuerung.management.VokabellisteSteuerung;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public abstract class ListView<T> extends CustomPanel
@@ -26,7 +24,7 @@ public abstract class ListView<T> extends CustomPanel
     private ArrayList<T> objects;
 
     public ListView(String name, CustomTableModel<T> model,
-                    ListenSteuerung<T> steuerung, Suchkonzept<T> suchkonzept)
+                    ListenSteuerung<T> steuerung, Suchkonzept<T> suchkonzept, CustomButton btn)
     {
         super(name, btn);
         try
@@ -39,33 +37,8 @@ public abstract class ListView<T> extends CustomPanel
         }
         this.steuerung = steuerung;
         this.model = model;
-        table = new JTable(model);
-        init();
-    }
-
-    public ListView(
-            ArrayList<T> objs,
-            String name,
-            CustomTableModel<T> model,
-            ListenSteuerung<T> steuerung,
-            CustomButton btn
-    )
-    {
-        super(name, btn);
-        objects = objs;
-        this.steuerung = steuerung;
-        this.model = model;
-        searchField = new JTextField();
         this.suchkonzept = suchkonzept;
-        // searchField.addActionListener((e) -> geklicktSuche(name));
-        searchField.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyReleased(KeyEvent e)
-            {
-                geklicktSuche(searchField.getText());
-            }
-        });
+        this.searchField = new JTextField();
         table = new JTable(model);
         init();
     }

@@ -10,9 +10,13 @@ import java.util.ArrayList;
 
 public final class VokabelScreenSteuerung
 {
-	public VokabelScreenSteuerung()
-	{
-	}
+
+    private final ErstellerKonzept dasErstellerKonzept;
+
+    public VokabelScreenSteuerung()
+    {
+        dasErstellerKonzept = new ErstellerKonzept();
+    }
 
     public void vokabelHinzufuegen(
             String wort,
@@ -49,17 +53,16 @@ public final class VokabelScreenSteuerung
         return Datenbank.liesKategorien();
     }
 
-	public void vokabelAendern(Vokabel dieVokabel, Vokabel alteVokabel)
-	{
-		try
-		{
-			Datenbank.loescheVokabel(alteVokabel.liesWort(),
-					alteVokabel.liesUebersetzung());
-			Datenbank.vokabelHinzufuegen(dieVokabel);
-		}
-		catch (Exception e)
-		{
-			System.out.println(e.getLocalizedMessage());
-		}
-	}
+    public void vokabelAendern(Vokabel dieVokabel, Vokabel alteVokabel)
+    {
+        try
+        {
+            Datenbank.loescheVokabel(alteVokabel.liesWort(),
+                    alteVokabel.liesUebersetzung());
+            Datenbank.vokabelHinzufuegen(dieVokabel);
+        } catch (Exception e)
+        {
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
 }

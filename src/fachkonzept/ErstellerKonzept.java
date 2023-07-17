@@ -1,6 +1,7 @@
 package fachkonzept;
 
 import datenspeicherung.Datenbank;
+import datenspeicherung.Vokabel;
 
 public final class ErstellerKonzept
 {
@@ -12,7 +13,15 @@ public final class ErstellerKonzept
                                    String verwendungshinweis
     ) throws Exception
     {
-        Datenbank.vokabelHinzufuegen(wort, uebersetzung, abbildung, aussprache,
-                lautschrift, verwendungshinweis);
+        Datenbank.vokabelHinzufuegen(new Vokabel(
+                wort,
+                uebersetzung,
+                abbildung,
+                aussprache,
+                lautschrift,
+                verwendungshinweis,
+                0,
+                0)
+        );
     }
 }

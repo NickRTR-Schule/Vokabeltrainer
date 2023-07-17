@@ -74,34 +74,12 @@ public final class Dashboard extends CustomPanel
      */
     private void build()
     {
+        // statistics
         constraints.gridy = 0;
         constraints.gridx = 1;
         constraints.gridheight = 3;
         constraints.gridwidth = 10;
         final JPanel statsPanel = new JPanel();
-        JLabel heading = new JLabel("Statistiken");
-        heading.setFont(
-                new Font(MainFrame.liesFont().getFontName(), Font.BOLD, 16));
-        statsPanel.add(heading);
-        statsPanel.setLayout(new GridLayout(2, 4));
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-        LocalTime localTime = LocalTime.now();
-        statsPanel.add(new JLabel("\nUhrzeit: " + dtf.format(localTime)));
-
-        addComponent(statsPanel);
-
-        constraints.gridy = 3;
-        constraints.gridx = 1;
-        constraints.gridheight = 3;
-        constraints.gridwidth = 2;
-        // Add Buttons
-        addComponent(CustomButton.newVocabBtn((ignored) -> steuerung.erstellerGeklickt()));
-        final CustomButton abfrageBtn = new CustomButton("Abfrage starten",
-                "Starte eine Abfrage");
-        abfrageBtn.addActionListener((ignored) -> steuerung.abfrageGeklickt());
-        constraints.gridx = 4;
-        addComponent(abfrageBtn);
         statsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.Y_AXIS));
 
@@ -137,7 +115,6 @@ public final class Dashboard extends CustomPanel
                 "Zeige alle Vokabeln als Liste an");
         vokabellisteBtn.addActionListener(
                 (ignored) -> steuerung.vokabellisteGeklickt());
-        constraints.gridx = 6;
         addComponent(vokabellisteBtn);
 
         final CustomButton vokabelErstellerBtn = new CustomButton(

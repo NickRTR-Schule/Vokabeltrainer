@@ -63,16 +63,22 @@ public class MappingWindow<O, T> extends JFrame
         init();
         layout.setConstraints(this, constraints);
         addComponent(new JLabel("kurze Beschreibung"));
-        if (type == MappingType.vok)
+        try
         {
-            listView = new Kategorieliste((Vokabel) object, (ArrayList<Kategorie>) objects);
-        } else if (type == MappingType.kat)
+            if (type == MappingType.vok)
+            {
+                listView = new Kategorieliste((Vokabel) object, (ArrayList<Kategorie>) objects);
+            } else if (type == MappingType.kat)
+            {
+                listView = new Vokabelliste((Kategorie) object, (ArrayList<Vokabel>) objects);
+            } else
+            {
+                // Abort execution
+                return;
+            }
+        } catch (Exception e)
         {
-            listView = new Vokabelliste((Kategorie) object, (ArrayList<Vokabel>) objects);
-        } else
-        {
-            // Abort execution
-            return;
+            JOptionPane.showMessageDialog(this, "Fehler");
         }
         constraints.gridx = 0;
         constraints.gridy = 0;
