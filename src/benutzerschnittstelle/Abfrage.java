@@ -6,6 +6,7 @@ import benutzerschnittstelle.komponenten.CustomTextField;
 import datenspeicherung.Datenbank;
 import datenspeicherung.Kategorie;
 import exceptions.EndOfAbfrageException;
+import fachkonzept.datamangement.converting.CustomConverter;
 import steuerung.AbfrageSteuerung;
 import steuerung.MainFrameSteuerung;
 
@@ -13,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 /**
  * The Screen to test the Users knowledge and quiz the vocabs stored
@@ -27,6 +29,7 @@ public final class Abfrage extends CustomPanel
     private final JLabel verwendungshinweisLabel;
     private final JLabel lautschriftLabel;
     private final CustomTextField uebersetzungField;
+    private final JLabel abbildungsLabel;
     private int enteredNumberVoks;
     private int anzahlAbfragen = 0;
     private int anzahlRichtig = 0;
@@ -42,6 +45,7 @@ public final class Abfrage extends CustomPanel
         lautschriftLabel = new JLabel("Lautschrift", SwingConstants.CENTER);
         uebersetzungField = new CustomTextField();
         uebersetzungField.setHorizontalAlignment(JTextField.CENTER);
+        abbildungsLabel = new JLabel();
         setValues();
         build();
     }
@@ -68,18 +72,20 @@ public final class Abfrage extends CustomPanel
         add(spacerPanel1, constraints);
         constraints.gridx = 1;
         constraints.gridy = 0;
+        add(abbildungsLabel);
+        constraints.gridy = 1;
         add(wortLabel, constraints);
         constraints.gridx = 1;
-        constraints.gridy = 1;
+        constraints.gridy = 2;
         add(lautschriftLabel, constraints);
         constraints.gridx = 1;
-        constraints.gridy = 2;
-        add(verwendungshinweisLabel, constraints);
         constraints.gridy = 3;
+        add(verwendungshinweisLabel, constraints);
+        constraints.gridy = 4;
         add(uebersetzungField, constraints);
         final CustomButton checkBtn = new CustomButton("Check");
         checkBtn.addActionListener((e) -> checkVok());
-        constraints.gridy = 4;
+        constraints.gridy = 5;
         add(checkBtn, constraints);
         constraints.gridx = 3;
         final JPanel spacerPanel2 = new JPanel();
@@ -102,9 +108,21 @@ public final class Abfrage extends CustomPanel
             enteredNumberVoks = steuerung.anzahlVoks();
         }
         wortLabel.setText(steuerung.liesAktuelleVokabel().liesWort());
+        updateAbbildungsLabel(steuerung.liesAktuelleVokabel().liesAbbildung());
         wortLabel.setFont(new Font(MainFrame.liesFont().getFontName(), Font.BOLD, 16));
         lautschriftLabel.setText(steuerung.liesAktuelleVokabel().liesLautschrift());
         verwendungshinweisLabel.setText(steuerung.liesAktuelleVokabel().liesVerwendungshinweis());
+    }
+
+    private void updateAbbildungsLabel(byte[] abbildung)
+    {
+        try
+        {
+            abbildungsLabel.setIcon(CustomConverter.byteToIcon(abbildung, 50));
+        } catch (IOException e)
+        {
+            JOptionPane.showMessageDialog(this, "Fehler beim Laden der Abbildung");
+        }
     }
 
     private int frageVokabelAnzahl()
@@ -126,6 +144,7 @@ public final class Abfrage extends CustomPanel
         final JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 1));
         final JComboBox<Kategorie> dropdown = new JComboBox<>(Datenbank.liesKategorien().toArray(new Kategorie[0]));
+        dropdown.addItem(new Kategorie("Alle", Datenbank.liesVokabeln()));
         panel.add(dropdown);
         if (JOptionPane.showConfirmDialog(this, panel) == JOptionPane.OK_OPTION)
         {
@@ -142,6 +161,7 @@ public final class Abfrage extends CustomPanel
         {
             wortLabel.setText(steuerung.naechsteVokabel().liesWort());
             verwendungshinweisLabel.setText(steuerung.liesAktuelleVokabel().liesVerwendungshinweis());
+            updateAbbildungsLabel(steuerung.liesAktuelleVokabel().liesAbbildung());
         } catch (EndOfAbfrageException ignored)
         {
             double erfolgsquote = (double) anzahlRichtig / anzahlAbfragen * 100;

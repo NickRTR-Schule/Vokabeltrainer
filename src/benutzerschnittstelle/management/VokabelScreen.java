@@ -3,15 +3,23 @@ package benutzerschnittstelle.management;
 import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.CustomTextField;
+import benutzerschnittstelle.navigation.NavigationBar;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
+import fachkonzept.datamangement.converting.CustomConverter;
 import fachkonzept.listeners.CustomKeyListener;
 import fachkonzept.navigation.NavigationStack;
 import steuerung.management.VokabelScreenSteuerung;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.FocusEvent;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -30,11 +38,10 @@ public final class VokabelScreen extends CustomPanel
     private final CustomTextField uebersetzungTxtField;
     private final CustomTextField lautschriftTxtField;
     private final CustomTextField verwendungsHinweisTxtField;
+    private final JLabel abbildungsLabel;
+    private byte[] abbildung;
     private ArrayList<Kategorie> kategorien;
-
     private Vokabel vok;
-    private JLabel abbildungsLabel;
-
     private boolean bearbeiten;
 
     public VokabelScreen()
@@ -48,6 +55,8 @@ public final class VokabelScreen extends CustomPanel
         verwendungsHinweisTxtField = new CustomTextField();
         kategorien = new ArrayList<>();
         vok = null;
+        abbildung = null;
+        abbildungsLabel = new JLabel(iconLaden());
         setValues();
     }
 
@@ -61,8 +70,28 @@ public final class VokabelScreen extends CustomPanel
         lautschriftTxtField.setText(vokabel.liesLautschrift());
         verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
         kategorien = vokabel.liesKategorien();
+        abbildung = vokabel.liesAbbildung();
+        updateImage();
+    }
 
-        //abbildungsLabel = new JLabel(new ImageIcon(test.liesAbbildung()));
+    private ImageIcon iconLaden()
+    {
+        try (final InputStream stream = NavigationBar.class.getClassLoader()
+                .getResourceAsStream("Image-placeholder.png"))
+        {
+            try
+            {
+                assert stream != null;
+                return CustomConverter.byteToIcon(stream.readAllBytes(), 75);
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+                return new ImageIcon();
+            }
+        } catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setValues()
@@ -96,13 +125,35 @@ public final class VokabelScreen extends CustomPanel
         constraints.gridy = 2;
         panel.add(new JLabel("Übersetzung"), constraints);
         uebersetzungTxtField.addKeyListener(new CustomKeyListener());
+        constraints.gridy = 1;
+        constraints.gridx = 2;
+        constraints.gridheight = 4;
+        panel.add(abbildungsLabel, constraints);
         constraints.gridy = 4;
+        constraints.gridx = 0;
+        constraints.gridheight = 1;
         panel.add(uebersetzungTxtField, constraints);
         constraints.gridwidth = 1;
         constraints.gridy = 5;
         constraints.gridx = 1;
         final JButton abbildungsBtn = new JButton("Abbildung hinzufügen");
         abbildungsBtn.addActionListener((ignored) -> {
+            final JFileChooser fileChooser = new JFileChooser();
+            final FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "jpeg", "png", "heic", "heif");
+            fileChooser.setFileFilter(filter);
+            final File file;
+            if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+            {
+                file = fileChooser.getSelectedFile();
+                try
+                {
+                    abbildung = Files.readAllBytes(Paths.get(file.getPath()));
+                    updateImage();
+                } catch (IOException e)
+                {
+                    JOptionPane.showMessageDialog(this, "Fehler beim Laden der Abbildung");
+                }
+            }
         });
         panel.add(abbildungsBtn, constraints);
         constraints.gridx = 2;
@@ -136,7 +187,7 @@ public final class VokabelScreen extends CustomPanel
                 final Vokabel localVok = new Vokabel(
                         wortTxtField.getText(),
                         uebersetzungTxtField.getText(),
-                        null, null,
+                        abbildung, null,
                         lautschriftTxtField.getText(),
                         verwendungsHinweisTxtField.getText(),
                         0, 0,
@@ -156,12 +207,23 @@ public final class VokabelScreen extends CustomPanel
             NavigationStack.getInstance().back();
         });
         panel.add(storeBtn, constraints);
-
-        //constraints.gridy = 11;
-        //panel.add(abbildungsLabel, constraints);
-
         wortTxtField.requestFocus();
         wortTxtField.requestFocus(FocusEvent.Cause.ACTIVATION);
         return panel;
+    }
+
+    private void updateImage()
+    {
+        if (abbildung == null)
+        {
+            return;
+        }
+        try
+        {
+            abbildungsLabel.setIcon(CustomConverter.byteToIcon(abbildung, 75));
+        } catch (IOException ignored)
+        {
+            JOptionPane.showMessageDialog(this, "Fehler beim Laden der Abbildung");
+        }
     }
 }
