@@ -176,14 +176,37 @@ public final class Datenbank
     }
 
     public static ArrayList<Vokabel> liesVokabelnForKat(String name)
+            throws DatenbankAccessException, DatenbankLeseException
     {
-        final ArrayList<Vokabel> ergebnis = new ArrayList<>();
-        for (Vokabel vokabel : vokabeln)
+        oeffneDatenbank();
+        String sqlStmt = "SELECT Vokabel.wort, Vokabel.uebersetzung, abbildung, aussprache, lautschrift, verwendungshinweis, wiederholungen, anzahlrichtig ";
+        sqlStmt += "FROM Vokabel, Beziehung ";
+        sqlStmt += "WHERE name = ?";
+        ArrayList<Vokabel> ergebnis = new ArrayList<>();
+        try
         {
-            if (vokabel.liesKategorien().contains(new Kategorie(name)))
+            stmt = con.prepareStatement(sqlStmt);
+            stmt.setString(1, name);
+            final ResultSet result = stmt.executeQuery();
+            while (result.next())
             {
-                ergebnis.add(vokabel);
+                ergebnis.add(
+                        new Vokabel(
+                                result.getString("wort"),
+                                result.getString("uebersetzung"),
+                                result.getBytes("abbildung"),
+                                result.getBytes("aussprache"),
+                                result.getString("lautschrift"),
+                                result.getString("verwendungshinweis"),
+                                result.getInt("wiederholungen"),
+                                result.getInt("anzahlrichtig")
+                        )
+                );
             }
+            result.close();
+        } catch (SQLException e)
+        {
+            throw new DatenbankLeseException(DatenbankObject.vokabel);
         }
         return ergebnis;
     }
