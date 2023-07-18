@@ -101,7 +101,7 @@ public final class Abfrage extends CustomPanel
         });
         if (steuerung.liesAktuelleVokabel().liesAussprache() != null)
         {
-            add(audioButton, constraints);
+            //add(audioButton, constraints);
         }
         constraints.gridx = 1;
         constraints.gridy = 3;
