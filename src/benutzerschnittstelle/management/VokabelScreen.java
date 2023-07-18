@@ -6,17 +6,15 @@ import benutzerschnittstelle.komponenten.CustomTextField;
 import benutzerschnittstelle.navigation.NavigationBar;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
+import fachkonzept.datamangement.converting.CustomConverter;
 import fachkonzept.listeners.CustomKeyListener;
 import fachkonzept.navigation.NavigationStack;
 import steuerung.management.VokabelScreenSteuerung;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.FocusEvent;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -81,16 +79,10 @@ public final class VokabelScreen extends CustomPanel
         try (final InputStream stream = NavigationBar.class.getClassLoader()
                 .getResourceAsStream("Image-placeholder.png"))
         {
-            final ImageIcon icon;
             try
             {
                 assert stream != null;
-                icon = new ImageIcon(stream.readAllBytes());
-                final Image image = icon.getImage();
-                final Image scaledInstance = image.getScaledInstance(75, 75,
-                        Image.SCALE_DEFAULT);
-                icon.setImage(scaledInstance);
-                return icon;
+                return CustomConverter.byteToIcon(stream.readAllBytes(), 75);
             } catch (IOException e)
             {
                 e.printStackTrace();
@@ -228,13 +220,7 @@ public final class VokabelScreen extends CustomPanel
         }
         try
         {
-            final BufferedImage bfi = ImageIO.read(new ByteArrayInputStream(abbildung));
-            final ImageIcon icon = new ImageIcon(bfi);
-            final Image image = icon.getImage();
-            final Image scaledInstance = image.getScaledInstance(75, 75,
-                    Image.SCALE_DEFAULT);
-            icon.setImage(scaledInstance);
-            abbildungsLabel.setIcon(icon);
+            abbildungsLabel.setIcon(CustomConverter.byteToIcon(abbildung, 75));
         } catch (IOException ignored)
         {
             JOptionPane.showMessageDialog(this, "Fehler beim Laden der Abbildung");

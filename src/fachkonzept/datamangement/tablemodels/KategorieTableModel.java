@@ -9,14 +9,13 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
 
     /* Editable State Column Values */
     private static final int EDITABLE_STATE_COLUMN_EDIT = 0;
-
     private static final int EDITABLE_STATE_COLUMN_NAME = 1;
-
     private static final int EDITABLE_STATE_COLUMN_VOKSANZAHL = 2;
 
     /* Solid State Column Values */
     private static final int SOLID_STATE_COLUMN_NAME = 0;
     private static final int SOLID_STATE_COLUMN_VOKSANZAHL = 1;
+
     private final boolean edit;
     private final ArrayList<Kategorie> kategorien;
 
