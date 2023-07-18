@@ -21,6 +21,7 @@ public final class AbfrageKonzept
         currentVok = 0;
 
         voksBefuellen(numberVoks, kategorie);
+
         try
         {
             Datenbank.kategorieGelernt(kategorie);
@@ -28,6 +29,7 @@ public final class AbfrageKonzept
         {
             throw new RuntimeException(e);
         }
+         
     }
 
     public int anzahlVoks()
@@ -52,7 +54,7 @@ public final class AbfrageKonzept
             voks = new Vokabel[numberVoks];
         }
         vokabeln.subList(numberVoks, vokabeln.size()).clear(); // limit Arraylist to specified number of vocabularies
-		Collections.shuffle(vokabeln);
+        Collections.shuffle(vokabeln);
         for (int i = 0; i < numberVoks; i++)
         {
             voks[i] = vokabeln.get(i);

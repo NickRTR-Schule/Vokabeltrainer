@@ -10,17 +10,11 @@ import fachkonzept.navigation.NavigationStack;
 
 public final class AbfrageSteuerung
 {
-    private AbfrageKonzept dasAbfrageKonzept;
+    private final AbfrageKonzept dasAbfrageKonzept;
 
     public AbfrageSteuerung(int numberVocs, Kategorie kategorie)
     {
-        try
-        {
-            dasAbfrageKonzept = new AbfrageKonzept(numberVocs, kategorie);
-        } catch (Exception e)
-        {
-            System.out.println(e.getLocalizedMessage());
-        }
+        dasAbfrageKonzept = new AbfrageKonzept(numberVocs, kategorie);
     }
 
     public void oeffnenAbgebrochen()
