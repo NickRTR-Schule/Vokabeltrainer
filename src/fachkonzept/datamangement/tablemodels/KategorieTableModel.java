@@ -58,8 +58,7 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
             {
                 case EDITABLE_STATE_COLUMN_EDIT -> kategorien.contains(kategorie);
                 case EDITABLE_STATE_COLUMN_NAME -> kategorie.liesName();
-                case EDITABLE_STATE_COLUMN_VOKSANZAHL ->
-                        kategorien.contains(kategorie) ? kategorie.liesVokabeln().size() + 1 : kategorie.liesVokabeln().size();
+                case EDITABLE_STATE_COLUMN_VOKSANZAHL -> kategorie.liesVokabeln().size();
                 default -> null;
             };
         } else
