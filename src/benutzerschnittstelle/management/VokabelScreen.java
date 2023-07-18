@@ -86,7 +86,7 @@ public final class VokabelScreen extends CustomPanel
             try
             {
                 assert stream != null;
-                return CustomConverter.byteToIcon(stream.readAllBytes(), 75);
+                return CustomConverter.byteToIcon(stream.readAllBytes(), 150);
             } catch (IOException e)
             {
                 e.printStackTrace();
