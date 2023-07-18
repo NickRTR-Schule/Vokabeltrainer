@@ -3,6 +3,8 @@ package benutzerschnittstelle;
 import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import benutzerschnittstelle.komponenten.CustomTextField;
+import datenspeicherung.Datenbank;
+import datenspeicherung.Kategorie;
 import exceptions.EndOfAbfrageException;
 import steuerung.AbfrageSteuerung;
 import steuerung.MainFrameSteuerung;
@@ -21,15 +23,11 @@ public final class Abfrage extends CustomPanel
      * The Controller to this View
      */
     private final AbfrageSteuerung steuerung;
-
     private final JLabel wortLabel;
     private final JLabel verwendungshinweisLabel;
     private final JLabel lautschriftLabel;
-
     private final CustomTextField uebersetzungField;
-
     private int enteredNumberVoks;
-
     private int anzahlAbfragen = 0;
     private int anzahlRichtig = 0;
 
@@ -37,8 +35,8 @@ public final class Abfrage extends CustomPanel
     {
         super("Abfrage");
         enteredNumberVoks = frageVokabelAnzahl();
+        Kategorie kat = frageKategorie();
         steuerung = new AbfrageSteuerung(enteredNumberVoks);
-        // Init Components
         wortLabel = new JLabel("Wort", SwingConstants.CENTER);
         verwendungshinweisLabel = new JLabel("Verwendungshinweis", SwingConstants.CENTER);
         lautschriftLabel = new JLabel("Lautschrift", SwingConstants.CENTER);
@@ -65,7 +63,6 @@ public final class Abfrage extends CustomPanel
         constraints.weightx = .5;
         setLayout(layout);
         constraints.gridx = 0;
-        // TODO-js: Change Layout
         final JPanel spacerPanel1 = new JPanel();
         spacerPanel1.setBackground(Color.WHITE);
         add(spacerPanel1, constraints);
@@ -121,6 +118,21 @@ public final class Abfrage extends CustomPanel
         } else
         {
             return Integer.parseInt(input);
+        }
+    }
+
+    private Kategorie frageKategorie()
+    {
+        final JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 1));
+        final JComboBox<Kategorie> dropdown = new JComboBox<>(Datenbank.liesKategorien().toArray(new Kategorie[0]));
+        panel.add(dropdown);
+        if (JOptionPane.showConfirmDialog(this, panel) == JOptionPane.OK_OPTION)
+        {
+            return (Kategorie) dropdown.getSelectedItem();
+        } else
+        {
+            return null;
         }
     }
 

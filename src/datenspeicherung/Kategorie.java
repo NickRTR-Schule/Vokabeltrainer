@@ -37,4 +37,10 @@ public final class Kategorie
     {
         vokabeln = voks;
     }
+
+    @Override
+    public String toString()
+    {
+        return name;
+    }
 }
