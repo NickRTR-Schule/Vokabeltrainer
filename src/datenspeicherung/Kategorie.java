@@ -1,22 +1,26 @@
 package datenspeicherung;
 
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.Objects;
 
 public final class Kategorie
 {
     private final String name;
+    private Date zuletztGeuebt;
     private final ArrayList<Vokabel> vokabeln;
 
-    public Kategorie(String name)
+    public Kategorie(String name, Date zuletztGeuebt)
     {
         this.name = name;
+        this.zuletztGeuebt = zuletztGeuebt;
         vokabeln = new ArrayList<>();
     }
 
-    public Kategorie(String name, ArrayList<Vokabel> vokabeln)
+    public Kategorie(String name, Date zuletztGeuebt, ArrayList<Vokabel> vokabeln)
     {
         this.name = name;
+        this.zuletztGeuebt = zuletztGeuebt;
         this.vokabeln = vokabeln;
     }
 
@@ -25,9 +29,19 @@ public final class Kategorie
         return name;
     }
 
+    public Date liesZuletztGeuebt()
+    {
+        return zuletztGeuebt;
+    }
+
     public ArrayList<Vokabel> liesVokabeln()
     {
         return vokabeln;
+    }
+
+    public void setzeZuletztGeuebt(Date zuletztGeuebt)
+    {
+        this.zuletztGeuebt = zuletztGeuebt;
     }
 
     public void entferneVokabel(Vokabel vok)

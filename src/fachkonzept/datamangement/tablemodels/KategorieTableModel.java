@@ -3,6 +3,7 @@ package fachkonzept.datamangement.tablemodels;
 import datenspeicherung.Kategorie;
 
 import java.util.ArrayList;
+import java.sql.Date;
 
 public final class KategorieTableModel extends CustomTableModel<Kategorie>
 {
@@ -12,11 +13,15 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
 
     private static final int EDITABLE_STATE_COLUMN_NAME = 1;
 
-    private static final int EDITABLE_STATE_COLUMN_VOKSANZAHL = 2;
+    private static final int EDITABLE_STATE_COLUMN_ZULETZT = 2;
+
+    private static final int EDITABLE_STATE_COLUMN_VOKSANZAHL = 3;
 
     /* Solid State Column Values */
     private static final int SOLID_STATE_COLUMN_NAME = 0;
-    private static final int SOLID_STATE_COLUMN_VOKSANZAHL = 1;
+    private static final int SOLID_STATE_COLUMN_ZULETZT = 1;
+    private static final int SOLID_STATE_COLUMN_VOKSANZAHL = 2;
+
     private final boolean edit;
     private final ArrayList<Kategorie> kategorien;
 
@@ -25,11 +30,13 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
         super(
                 new String[]{
                         "Name",
+                        "Zuletzt Geübt",
                         "Anzahl Vokabeln"
                 },
                 new Class<?>[]{
                         String.class,
-                        Integer.class
+                        Date.class,
+                        Integer.class,
                 },
                 edit
         );
@@ -58,6 +65,7 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
             {
                 case EDITABLE_STATE_COLUMN_EDIT -> kategorien.contains(kategorie);
                 case EDITABLE_STATE_COLUMN_NAME -> kategorie.liesName();
+                case EDITABLE_STATE_COLUMN_ZULETZT -> kategorie.liesZuletztGeuebt();
                 case EDITABLE_STATE_COLUMN_VOKSANZAHL ->
                         kategorien.contains(kategorie) ? kategorie.liesVokabeln().size() + 1 : kategorie.liesVokabeln().size();
                 default -> null;
@@ -67,6 +75,7 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
             result = switch (column)
             {
                 case SOLID_STATE_COLUMN_NAME -> kategorie.liesName();
+                case SOLID_STATE_COLUMN_ZULETZT -> kategorie.liesZuletztGeuebt();
                 case SOLID_STATE_COLUMN_VOKSANZAHL -> kategorie.liesVokabeln().size();
                 default -> null;
             };

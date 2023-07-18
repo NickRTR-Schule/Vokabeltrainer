@@ -127,8 +127,8 @@ public final class Datenbank
             throws DatenbankAccessException, DatenbankLeseException
     {
         final ArrayList<Kategorie> ergebnis = new ArrayList<>();
-        String sqlStmt = "SELECT name ";
-        sqlStmt += "FROM Kategorie ";
+        String sqlStmt = "SELECT name, zuletzt_geuebt ";
+        sqlStmt += "FROM Kategorie";
         try
         {
             stmt = con.prepareStatement(sqlStmt);
@@ -136,8 +136,9 @@ public final class Datenbank
             while (result.next())
             {
                 final String name = result.getString("name");
+                final Date zuletztGeuebt = result.getDate("zuletzt_geuebt");
                 final ArrayList<Vokabel> vokabeln = liesVokabelnForKat(name);
-                ergebnis.add(new Kategorie(name, vokabeln));
+                ergebnis.add(new Kategorie(name, zuletztGeuebt, vokabeln));
             }
             result.close();
         } catch (SQLException e)
@@ -253,7 +254,7 @@ public final class Datenbank
     public static void kategorieHinzufuegen(Kategorie dieKategorie) throws DatenbankAccessException, DuplicateKategorieException, DatenbankSchreibException
     {
         oeffneDatenbank();
-        if (existiertKategorie(dieKategorie.liesName()))
+        if (existiertKategorie(dieKategorie))
         {
             throw new DuplicateKategorieException();
         }
@@ -437,8 +438,35 @@ public final class Datenbank
         );
     }
 
-    private static boolean existiertKategorie(String name)
+    private static boolean existiertKategorie(Kategorie pKategorie)
     {
-        return kategorien.contains(new Kategorie(name));
+        return kategorien.contains(pKategorie);
+    }
+
+    public static void kategorieGelernt(Kategorie pKategorie) throws DatenbankAccessException, DatenbankSchreibException
+    {
+        oeffneDatenbank();
+        String sqlStmt = "UPDATE kategorie ";
+        sqlStmt += "SET zuletzt_geuebt = ? ";
+        sqlStmt += "WHERE name = ?";
+
+        Date today = new Date(System.currentTimeMillis());
+
+        try
+        {
+            stmt = con.prepareStatement(sqlStmt);
+            stmt.setDate(1, today);
+            stmt.setString(2, pKategorie.liesName());
+            stmt.executeUpdate();
+        } catch (SQLException e)
+        {
+            throw new DatenbankSchreibException(DatenbankObject.kategorie);
+        }
+        schliesseDatenbank();
+
+        pKategorie.setzeZuletztGeuebt(today);
+
+        kategorien.remove(liesKategorie(pKategorie.liesName()));
+        kategorien.add(pKategorie);
     }
 }

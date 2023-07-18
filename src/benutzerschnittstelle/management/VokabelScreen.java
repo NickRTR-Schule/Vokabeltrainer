@@ -94,19 +94,19 @@ public final class VokabelScreen extends CustomPanel
         constraints.gridy = 1;
         panel.add(wortTxtField, constraints);
         constraints.gridy = 2;
-        panel.add(new JLabel("Uebersetzung"), constraints);
+        panel.add(new JLabel("Übersetzung"), constraints);
         uebersetzungTxtField.addKeyListener(new CustomKeyListener());
         constraints.gridy = 4;
         panel.add(uebersetzungTxtField, constraints);
         constraints.gridwidth = 1;
         constraints.gridy = 5;
         constraints.gridx = 1;
-        final JButton abbildungsBtn = new JButton("Abbildung hinzufuegen");
+        final JButton abbildungsBtn = new JButton("Abbildung hinzufügen");
         abbildungsBtn.addActionListener((ignored) -> {
         });
         panel.add(abbildungsBtn, constraints);
         constraints.gridx = 2;
-        final JButton ausspracheBtn = new JButton("Aussprache hinzufuegen");
+        final JButton ausspracheBtn = new JButton("Aussprache hinzufügen");
         ausspracheBtn.addActionListener((ignored) -> {
         });
         panel.add(ausspracheBtn, constraints);
@@ -124,7 +124,7 @@ public final class VokabelScreen extends CustomPanel
         constraints.gridy = 10;
         panel.add(new JLabel("Kategorien"), constraints);
         constraints.gridy = 11;
-        final CustomButton mappingBtn = new CustomButton("Mapping");
+        final CustomButton mappingBtn = new CustomButton("Kategorie(n) auswählen");
         mappingBtn.addActionListener((ignored) ->
                 steuerung.mappingGeklickt(vok, kategorien));
         panel.add(mappingBtn, constraints);

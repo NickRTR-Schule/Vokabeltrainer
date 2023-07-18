@@ -21,6 +21,16 @@ public final class AbfrageKonzept
         currentVok = 0;
 
         voksBefuellen(numberVoks, kategorie);
+        try
+        {
+            Datenbank.kategorieGelernt(kategorie);
+        } catch (DatenbankAccessException e)
+        {
+            throw new RuntimeException(e);
+        } catch (DatenbankSchreibException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
     public int anzahlVoks()
