@@ -1,6 +1,7 @@
 package datenspeicherung;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public final class Vokabel implements Comparable<Vokabel>
 {
@@ -130,6 +131,21 @@ public final class Vokabel implements Comparable<Vokabel>
     public void entferneKategorie(Kategorie kat)
     {
         kategorien.remove(kat);
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vokabel vokabel = (Vokabel) o;
+        return Objects.equals(wort, vokabel.wort) && Objects.equals(uebersetzung, vokabel.uebersetzung);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(wort, uebersetzung);
     }
 
     @Override
