@@ -119,7 +119,7 @@ public final class Abfrage extends CustomPanel
     {
         try
         {
-            abbildungsLabel.setIcon(CustomConverter.byteToIcon(abbildung, 50));
+            abbildungsLabel.setIcon(CustomConverter.byteToIcon(abbildung, 150));
         } catch (IOException e)
         {
             JOptionPane.showMessageDialog(this, "Fehler beim Laden der Abbildung");
