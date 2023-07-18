@@ -1,6 +1,7 @@
 package fachkonzept.datamangement.converting;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -18,5 +19,12 @@ public class CustomConverter
         final Image scaledInstance = image.getScaledInstance(scale, scale, Image.SCALE_DEFAULT);
         icon.setImage(scaledInstance);
         return icon;
+    }
+
+    public static Clip byteToAudio(byte[] bytes) throws UnsupportedAudioFileException, IOException, LineUnavailableException
+    {
+        final AudioInputStream stream = AudioSystem.getAudioInputStream(new ByteArrayInputStream(bytes));
+        final DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat());
+        return (Clip) AudioSystem.getLine(info);
     }
 }

@@ -40,6 +40,8 @@ public final class VokabelScreen extends CustomPanel
     private final CustomTextField verwendungsHinweisTxtField;
     private final JLabel abbildungsLabel;
     private byte[] abbildung;
+
+    private byte[] audio;
     private ArrayList<Kategorie> kategorien;
     private Vokabel vok;
     private boolean bearbeiten;
@@ -56,6 +58,7 @@ public final class VokabelScreen extends CustomPanel
         kategorien = new ArrayList<>();
         vok = null;
         abbildung = null;
+        audio = null;
         abbildungsLabel = new JLabel(iconLaden());
         setValues();
     }
@@ -71,6 +74,7 @@ public final class VokabelScreen extends CustomPanel
         verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
         kategorien = vokabel.liesKategorien();
         abbildung = vokabel.liesAbbildung();
+        audio = vokabel.liesAussprache();
         updateImage();
     }
 
@@ -159,6 +163,21 @@ public final class VokabelScreen extends CustomPanel
         constraints.gridx = 2;
         final JButton ausspracheBtn = new JButton("Aussprache hinzufügen");
         ausspracheBtn.addActionListener((ignored) -> {
+            final JFileChooser fileChooser = new JFileChooser();
+            final FileNameExtensionFilter filter = new FileNameExtensionFilter("Audio", "mp3", "wav");
+            fileChooser.setFileFilter(filter);
+            final File file;
+            if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+            {
+                file = fileChooser.getSelectedFile();
+                try
+                {
+                    audio = Files.readAllBytes(Paths.get(file.getPath()));
+                } catch (IOException e)
+                {
+                    JOptionPane.showMessageDialog(this, "Fehler beim Laden des Audios");
+                }
+            }
         });
         panel.add(ausspracheBtn, constraints);
         constraints.gridx = 1;

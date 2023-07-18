@@ -10,6 +10,7 @@ import fachkonzept.datamangement.converting.CustomConverter;
 import steuerung.AbfrageSteuerung;
 import steuerung.MainFrameSteuerung;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -31,6 +32,9 @@ public final class Abfrage extends CustomPanel
     private final JLabel lautschriftLabel;
     private final CustomTextField uebersetzungField;
     private final JLabel abbildungsLabel;
+    private final JButton audioButton;
+    private Clip audioClip;
+    private boolean audioplaying;
     private int enteredNumberVoks;
     private int anzahlAbfragen = 0;
     private int anzahlRichtig = 0;
@@ -47,6 +51,9 @@ public final class Abfrage extends CustomPanel
         uebersetzungField = new CustomTextField();
         uebersetzungField.setHorizontalAlignment(JTextField.CENTER);
         abbildungsLabel = new JLabel();
+        audioButton = new JButton();
+        audioplaying = false;
+        audioClip = null;
         setValues();
         build();
     }
@@ -79,6 +86,22 @@ public final class Abfrage extends CustomPanel
         constraints.gridx = 1;
         constraints.gridy = 2;
         add(lautschriftLabel, constraints);
+        constraints.gridx = 2;
+        audioButton.addActionListener((ignored) -> {
+            updateAudioLabel();
+            if (audioplaying)
+            {
+                audioClip.stop();
+            } else
+            {
+                audioClip.start();
+            }
+            audioplaying = !audioplaying;
+        });
+        if (steuerung.liesAktuelleVokabel().liesAussprache() != null)
+        {
+            add(audioButton, constraints);
+        }
         constraints.gridx = 1;
         constraints.gridy = 3;
         add(verwendungshinweisLabel, constraints);
@@ -110,6 +133,7 @@ public final class Abfrage extends CustomPanel
         }
         wortLabel.setText(steuerung.liesAktuelleVokabel().liesWort());
         updateAbbildungsLabel(steuerung.liesAktuelleVokabel().liesAbbildung());
+        //updateAudio()
         wortLabel.setFont(new Font(MainFrame.liesFont().getFontName(), Font.BOLD, 16));
         lautschriftLabel.setText(steuerung.liesAktuelleVokabel().liesLautschrift());
         verwendungshinweisLabel.setText(steuerung.liesAktuelleVokabel().liesVerwendungshinweis());
@@ -117,12 +141,38 @@ public final class Abfrage extends CustomPanel
 
     private void updateAbbildungsLabel(byte[] abbildung)
     {
+        if (abbildung == null)
+        {
+            return;
+        }
         try
         {
             abbildungsLabel.setIcon(CustomConverter.byteToIcon(abbildung, 50));
         } catch (IOException e)
         {
             JOptionPane.showMessageDialog(this, "Fehler beim Laden der Abbildung");
+        }
+    }
+
+    private void updateAudioLabel()
+    {
+        try
+        {
+            //audioButton.setIcon();
+        } catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "");
+        }
+    }
+
+    private void updateAudio(byte[] audio)
+    {
+        try
+        {
+            audioClip = CustomConverter.byteToAudio(audio);
+        } catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "Fehler beim Laden des Audios");
         }
     }
 
