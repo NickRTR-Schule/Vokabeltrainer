@@ -15,6 +15,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.sql.Date;
 
 /**
  * The Screen to test the Users knowledge and quiz the vocabs stored
@@ -144,7 +145,7 @@ public final class Abfrage extends CustomPanel
         final JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 1));
         final JComboBox<Kategorie> dropdown = new JComboBox<>(Datenbank.liesKategorien().toArray(new Kategorie[0]));
-        dropdown.addItem(new Kategorie("Alle", Datenbank.liesVokabeln()));
+        dropdown.addItem(new Kategorie("Alle", new Date(System.currentTimeMillis()), Datenbank.liesVokabeln()));
         panel.add(dropdown);
         if (JOptionPane.showConfirmDialog(this, panel) == JOptionPane.OK_OPTION)
         {
