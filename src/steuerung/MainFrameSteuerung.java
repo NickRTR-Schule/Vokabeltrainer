@@ -128,17 +128,6 @@ public final class MainFrameSteuerung
     }
 
     /**
-     * WARNING! Only use in Navigation Stack
-     *
-     * @param screen
-     * @param obj
-     */
-    public void open(UIScreens screen, Object obj)
-    {
-        mainFrame.open(screen, obj);
-    }
-
-    /**
      * Navigates to the KategorieScreen of this App
      */
     private void openKategorieuebersicht(Kategorie kategorie)

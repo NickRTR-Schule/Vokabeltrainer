@@ -24,7 +24,8 @@ public final class Vokabelliste extends ListView<Vokabel>
                 new VokabelTableModel(kat, vokabeln),
                 new VokabellisteSteuerung(),
                 new SuchkonzeptVokabeln(),
-                getCsb()
+                getCsb(),
+                true
         );
         table.getColumnModel().getColumn(VokabelTableModel.EDITABLE_STATE_COLUMN_QUOTE).setCellRenderer(new DefaultTableCellRenderer()
         {
@@ -50,7 +51,7 @@ public final class Vokabelliste extends ListView<Vokabel>
 
     public Vokabelliste() throws DatenbankAccessException, DatenbankLeseException
     {
-        super("Vokabeln", new VokabelTableModel(), new VokabellisteSteuerung(), new SuchkonzeptVokabeln(), getCsb());
+        super("Vokabeln", new VokabelTableModel(), new VokabellisteSteuerung(), new SuchkonzeptVokabeln(), getCsb(), false);
     }
 
     private static CustomButton getCsb()

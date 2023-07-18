@@ -21,10 +21,11 @@ public abstract class ListView<T> extends CustomPanel
     private final ListenSteuerung<T> steuerung;
     private final JTextField searchField;
     private final Suchkonzept<T> suchkonzept;
+    private final boolean edit;
     private ArrayList<T> objects;
 
     public ListView(String name, CustomTableModel<T> model,
-                    ListenSteuerung<T> steuerung, Suchkonzept<T> suchkonzept, CustomButton btn)
+                    ListenSteuerung<T> steuerung, Suchkonzept<T> suchkonzept, CustomButton btn, boolean edit)
     {
         super(name, btn);
         try
@@ -35,6 +36,7 @@ public abstract class ListView<T> extends CustomPanel
             objects = new ArrayList<>();
             JOptionPane.showMessageDialog(this, "Fehler beim laden der Daten");
         }
+        this.edit = edit;
         this.steuerung = steuerung;
         this.model = model;
         this.suchkonzept = suchkonzept;
@@ -71,7 +73,10 @@ public abstract class ListView<T> extends CustomPanel
         constraints.weightx = 0;
         constraints.weighty = 0;
         constraints.gridy = 2;
-        panel.add(getActionPanel(), constraints);
+        if (!edit)
+        {
+            panel.add(getActionPanel(), constraints);
+        }
         return panel;
     }
 
@@ -101,7 +106,7 @@ public abstract class ListView<T> extends CustomPanel
             model.addRow(obj);
         }
     }
-    
+
     public void geklicktSuche(String text)
     {
         updateTable(suchkonzept.suche(text));

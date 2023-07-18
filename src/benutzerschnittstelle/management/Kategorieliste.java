@@ -22,13 +22,14 @@ public final class Kategorieliste extends ListView<Kategorie>
                 new KategorieTableModel(vok, kategorien),
                 new KategorielisteSteuerung(),
                 new SuchkonzeptKategorie(),
-                getCsb()
+                getCsb(),
+                true
         );
     }
 
     public Kategorieliste() throws DatenbankAccessException, DatenbankLeseException
     {
-        super("Kategorien", new KategorieTableModel(), new KategorielisteSteuerung(), new SuchkonzeptKategorie(), getCsb());
+        super("Kategorien", new KategorieTableModel(), new KategorielisteSteuerung(), new SuchkonzeptKategorie(), getCsb(), false);
     }
 
     private static CustomButton getCsb()

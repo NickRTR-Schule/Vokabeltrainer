@@ -71,6 +71,7 @@ public final class MainFrame extends JFrame
             case Abfrage -> setContentPane(new WrapperPanel(new Abfrage()));
             case Ersteller -> setContentPane(new WrapperPanel(new VokabelScreen()));
             case Statistik -> setContentPane(new WrapperPanel(new Statistik()));
+            case Kategorieeuebersicht -> setContentPane(new WrapperPanel(new KategorieScreen()));
             case Vokabelliste ->
             {
                 try
