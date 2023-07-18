@@ -126,6 +126,7 @@ public final class Abfrage extends CustomPanel
         final JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 1));
         final JComboBox<Kategorie> dropdown = new JComboBox<>(Datenbank.liesKategorien().toArray(new Kategorie[0]));
+        dropdown.addItem(new Kategorie("Alle", Datenbank.liesVokabeln()));
         panel.add(dropdown);
         if (JOptionPane.showConfirmDialog(this, panel) == JOptionPane.OK_OPTION)
         {
