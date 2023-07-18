@@ -19,7 +19,7 @@ public final class Kategorieliste extends ListView<Kategorie>
     {
         super(
                 "Kategorien",
-                new KategorieTableModel(vok, kategorien),
+                new KategorieTableModel(kategorien),
                 new KategorielisteSteuerung(),
                 new SuchkonzeptKategorie(),
                 getCsb(),

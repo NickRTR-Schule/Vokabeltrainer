@@ -18,7 +18,6 @@ public final class SuchkonzeptKategorie extends Suchkonzept<Kategorie>
 
     @Override
     protected ArrayList<Kategorie> liesAlleDaten()
-            throws DatenbankAccessException, DatenbankLeseException
     {
         return Datenbank.liesKategorien();
     }

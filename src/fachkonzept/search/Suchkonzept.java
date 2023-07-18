@@ -15,8 +15,7 @@ public abstract class Suchkonzept<T>
         alleObjekte = liesAlleDaten();
     }
 
-    protected abstract ArrayList<T> liesAlleDaten()
-            throws DatenbankLeseException, DatenbankAccessException;
+    protected abstract ArrayList<T> liesAlleDaten();
 
     public abstract ArrayList<T> suche(String text);
 }

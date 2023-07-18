@@ -2,7 +2,7 @@
 
 ## Screens
 
-<img src="Dashboard.jpeg" width="400px" alt="Dashboard Beispiel">
+<img src="Dashboard.jpeg" width="3024" alt="Dashboard Beispiel">
 
 ### Dashboard
 
@@ -16,7 +16,7 @@
 
 ### Kategorieübersicht
 
-<img src="Kategorieuebersicht.jpeg" width="400px" alt="Kategorieuebersichtsbeispiel">
+<img src="Kategorieuebersicht.jpeg" width="3024" alt="Kategorieuebersichtsbeispiel">
 
 - Kategoriename
 - Tabelle
@@ -24,7 +24,7 @@
 
 ### Vokabelersteller
 
-<img src="Vokabelersteller.jpeg" width="400px" alt="Vokabelersteller Beispiel">
+<img src="Vokabelersteller.jpeg" width="3024" alt="Vokabelersteller Beispiel">
 
 - Eingabefelder
     - Wort

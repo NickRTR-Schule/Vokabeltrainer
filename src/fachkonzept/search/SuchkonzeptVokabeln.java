@@ -18,7 +18,6 @@ public final class SuchkonzeptVokabeln extends Suchkonzept<Vokabel>
 
     @Override
     protected ArrayList<Vokabel> liesAlleDaten()
-            throws DatenbankAccessException, DatenbankLeseException
     {
         return Datenbank.liesVokabeln();
     }

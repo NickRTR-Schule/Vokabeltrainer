@@ -161,7 +161,6 @@ public final class VokabelScreen extends CustomPanel
         //panel.add(abbildungsLabel, constraints);
 
         wortTxtField.requestFocus();
-        // TODO-js: Work on that
         wortTxtField.requestFocus(FocusEvent.Cause.ACTIVATION);
         return panel;
     }

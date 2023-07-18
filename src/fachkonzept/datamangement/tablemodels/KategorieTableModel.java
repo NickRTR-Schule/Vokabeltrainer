@@ -1,7 +1,6 @@
 package fachkonzept.datamangement.tablemodels;
 
 import datenspeicherung.Kategorie;
-import datenspeicherung.Vokabel;
 
 import java.util.ArrayList;
 
@@ -18,11 +17,10 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
     /* Solid State Column Values */
     private static final int SOLID_STATE_COLUMN_NAME = 0;
     private static final int SOLID_STATE_COLUMN_VOKSANZAHL = 1;
-    private final Vokabel vok;
     private final boolean edit;
     private final ArrayList<Kategorie> kategorien;
 
-    private KategorieTableModel(boolean edit, Vokabel vok, ArrayList<Kategorie> kategorien)
+    private KategorieTableModel(boolean edit, ArrayList<Kategorie> kategorien)
     {
         super(
                 new String[]{
@@ -36,18 +34,17 @@ public final class KategorieTableModel extends CustomTableModel<Kategorie>
                 edit
         );
         this.edit = edit;
-        this.vok = vok;
         this.kategorien = kategorien;
     }
 
-    public KategorieTableModel(Vokabel vok, ArrayList<Kategorie> kategorien)
+    public KategorieTableModel(ArrayList<Kategorie> kategorien)
     {
-        this(true, vok, kategorien);
+        this(true, kategorien);
     }
 
     public KategorieTableModel()
     {
-        this(false, null, null);
+        this(false, null);
     }
 
     @Override

@@ -72,7 +72,13 @@ public final class KategorieScreen extends CustomPanel
         storeBtn.addActionListener((ignored) -> {
             if (nameTxtField.getText().length() > 0)
             {
-                steuerung.kategorieHinzufuegen(nameTxtField.getText());
+                try
+                {
+                    steuerung.kategorieHinzufuegen(nameTxtField.getText());
+                } catch (Exception e)
+                {
+                    JOptionPane.showMessageDialog(this, e.getLocalizedMessage());
+                }
             }
             MainFrameSteuerung.getInstance().openDashboard();
         });

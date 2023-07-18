@@ -244,18 +244,70 @@ public final class Datenbank
         }
         vokabeln.add(dieVokabel);
         schliesseDatenbank();
+        for (Kategorie kat : dieVokabel.liesKategorien())
+        {
+            vokabelZuKategorieHinzufuegen(dieVokabel, kat);
+        }
     }
 
-    public static void kategorieHinzufuegen(Kategorie dieKategorie)
+    public static void kategorieHinzufuegen(Kategorie dieKategorie) throws DatenbankAccessException, DuplicateKategorieException, DatenbankSchreibException
     {
-        // TODO: implement
+        oeffneDatenbank();
+        if (existiertKategorie(dieKategorie.liesName()))
+        {
+            throw new DuplicateKategorieException();
+        }
+        String sqlStmt = "INSERT INTO Kategorie (name) ";
+        sqlStmt += "VALUES (?)";
+        try
+        {
+            stmt = con.prepareStatement(sqlStmt);
+            stmt.setString(1, dieKategorie.liesName());
+            stmt.executeUpdate();
+        } catch (SQLException e)
+        {
+            throw new DatenbankSchreibException(DatenbankObject.kategorie);
+        }
+        kategorien.add(dieKategorie);
+        schliesseDatenbank();
+        for (Vokabel vok : dieKategorie.liesVokabeln())
+        {
+            vokabelZuKategorieHinzufuegen(vok, dieKategorie);
+        }
     }
 
-    public static void vokabelZuKategorieHinzufuegen(Vokabel vok, Kategorie kat)
+    private static void vokabelZuKategorieHinzufuegen(Vokabel vok, Kategorie kat) throws DatenbankAccessException, DatenbankSchreibException
     {
+        if (kat.liesVokabeln().contains(vok))
+        {
+            if (vok.liesKategorien().contains(kat))
+            {
+                return;
+            } else
+            {
+                kat.entferneVokabel(vok);
+            }
+        } else if (vok.liesKategorien().contains(kat))
+        {
+            vok.entferneKategorie(kat);
+        }
+        oeffneDatenbank();
+        String sqlStmt = "INSERT INTO Beziehung (wort, uebersetzung, name) ";
+        sqlStmt += "VALUES (?, ?, ?)";
+        try
+        {
+            stmt = con.prepareStatement(sqlStmt);
+            stmt.setString(1, vok.liesWort());
+            stmt.setString(2, vok.liesUebersetzung());
+            stmt.setString(3, kat.liesName());
+            stmt.executeUpdate();
+        } catch (SQLException e)
+        {
+            throw new DatenbankSchreibException(DatenbankObject.vokabel);
+        }
         vok.fuegeKategorieHinzu(kat);
         kat.fuegeVokabelHinzu(vok);
-        // TODO: update in Database
+        schliesseDatenbank();
     }
 
     /* ========================== */
@@ -392,7 +444,22 @@ public final class Datenbank
         }
     }
 
-    public static void debugOutput()
+    private static boolean existiertKategorie(String name)
     {
+        String sqlStmt = "SELECT name ";
+        sqlStmt += "FROM Kategorie ";
+        sqlStmt += "WHERE name = ?";
+        try
+        {
+            stmt = con.prepareStatement(sqlStmt);
+            stmt.setString(1, name);
+            final ResultSet result = stmt.executeQuery();
+            final boolean r = result.next();
+            result.close();
+            return r;
+        } catch (SQLException ignored)
+        {
+            return false;
+        }
     }
 }

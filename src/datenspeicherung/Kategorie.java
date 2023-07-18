@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public final class Kategorie
 {
     private final String name;
-    private ArrayList<Vokabel> vokabeln;
+    private final ArrayList<Vokabel> vokabeln;
 
     public Kategorie(String name, ArrayList<Vokabel> vokabeln)
     {
@@ -31,11 +31,6 @@ public final class Kategorie
     public void fuegeVokabelHinzu(Vokabel vok)
     {
         vokabeln.add(vok);
-    }
-
-    public void aendereVokabeln(ArrayList<Vokabel> voks)
-    {
-        vokabeln = voks;
     }
 
     @Override

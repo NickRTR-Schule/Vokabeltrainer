@@ -43,7 +43,7 @@ public final class VokabelScreenSteuerung
 
     }
 
-    public ArrayList<Kategorie> liesKategorien() throws Exception
+    public ArrayList<Kategorie> liesKategorien()
     {
         return Datenbank.liesKategorien();
     }

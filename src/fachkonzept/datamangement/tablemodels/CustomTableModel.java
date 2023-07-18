@@ -15,11 +15,8 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
 
     protected final ArrayList<Integer> editableColumns;
 
-    private final boolean edit;
-
     public CustomTableModel(String[] columnNames, Class<?>[] columnClasses, boolean edit)
     {
-        this.edit = edit;
         this.rows = new Vector<>();
         this.editableColumns = new ArrayList<>();
         final String[] localColumnNames;
@@ -30,8 +27,7 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
         {
             this.editableColumns.add(0);
             localColumnNames = new String[columnCountWithEdit];
-            // TODO-js: change
-            localColumnNames[0] = "Aktiv";
+            localColumnNames[0] = "Enthält";
             System.arraycopy(columnNames, 0, localColumnNames, 1, columnCountWithoutEdit);
             localColumnClasses = new Class<?>[columnCountWithEdit];
             localColumnClasses[0] = Boolean.class;
