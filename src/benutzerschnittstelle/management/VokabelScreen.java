@@ -10,10 +10,13 @@ import fachkonzept.listeners.CustomKeyListener;
 import fachkonzept.navigation.NavigationStack;
 import steuerung.management.VokabelScreenSteuerung;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.FocusEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,11 +40,10 @@ public final class VokabelScreen extends CustomPanel
     private final CustomTextField uebersetzungTxtField;
     private final CustomTextField lautschriftTxtField;
     private final CustomTextField verwendungsHinweisTxtField;
+    private final JLabel abbildungsLabel;
     private byte[] abbildung;
     private ArrayList<Kategorie> kategorien;
     private Vokabel vok;
-    private JLabel abbildungsLabel;
-
     private boolean bearbeiten;
 
     public VokabelScreen()
@@ -70,11 +72,8 @@ public final class VokabelScreen extends CustomPanel
         lautschriftTxtField.setText(vokabel.liesLautschrift());
         verwendungsHinweisTxtField.setText(vokabel.liesVerwendungshinweis());
         kategorien = vokabel.liesKategorien();
-        if (vokabel.liesAbbildung() != null)
-        {
-            abbildungsLabel = new JLabel(new ImageIcon(vokabel.liesAbbildung()));
-        }
         abbildung = vokabel.liesAbbildung();
+        updateImage();
     }
 
     private ImageIcon iconLaden()
@@ -157,6 +156,7 @@ public final class VokabelScreen extends CustomPanel
                 try
                 {
                     abbildung = Files.readAllBytes(Paths.get(file.getPath()));
+                    updateImage();
                 } catch (IOException e)
                 {
                     JOptionPane.showMessageDialog(this, "Fehler beim Laden der Abbildung");
@@ -195,7 +195,7 @@ public final class VokabelScreen extends CustomPanel
                 final Vokabel localVok = new Vokabel(
                         wortTxtField.getText(),
                         uebersetzungTxtField.getText(),
-                        null, null,
+                        abbildung, null,
                         lautschriftTxtField.getText(),
                         verwendungsHinweisTxtField.getText(),
                         0, 0,
@@ -218,5 +218,26 @@ public final class VokabelScreen extends CustomPanel
         wortTxtField.requestFocus();
         wortTxtField.requestFocus(FocusEvent.Cause.ACTIVATION);
         return panel;
+    }
+
+    private void updateImage()
+    {
+        if (abbildung == null)
+        {
+            return;
+        }
+        try
+        {
+            final BufferedImage bfi = ImageIO.read(new ByteArrayInputStream(abbildung));
+            final ImageIcon icon = new ImageIcon(bfi);
+            final Image image = icon.getImage();
+            final Image scaledInstance = image.getScaledInstance(75, 75,
+                    Image.SCALE_DEFAULT);
+            icon.setImage(scaledInstance);
+            abbildungsLabel.setIcon(icon);
+        } catch (IOException ignored)
+        {
+            JOptionPane.showMessageDialog(this, "Fehler beim Laden der Abbildung");
+        }
     }
 }
