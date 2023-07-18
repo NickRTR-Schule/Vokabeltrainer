@@ -1,12 +1,18 @@
 package steuerung;
 
 import benutzerschnittstelle.MainFrame;
+import benutzerschnittstelle.komponenten.MappingWindow;
 import benutzerschnittstelle.navigation.UIScreens;
+import datenspeicherung.Datenbank;
 import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
+import exceptions.datenbank.DatenbankAccessException;
+import exceptions.datenbank.DatenbankLeseException;
 import fachkonzept.navigation.NavigationStack;
 
+import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * The Main Frame Controller controlling the Main Frame and with that Navigation
@@ -38,13 +44,29 @@ public final class MainFrameSteuerung
      */
     public static void main(String[] args)
     {
-        EventQueue.invokeLater(() -> shared = new MainFrameSteuerung());
+        EventQueue.invokeLater(() -> {
+            shared = new MainFrameSteuerung();
+            try
+            {
+                shared.initDatabase();
+            } catch (Exception ignored)
+            {
+                JOptionPane.showMessageDialog(shared.mainFrame, "Fehler beim Laden der Datenbank");
+            }
+        });
     }
 
     public static MainFrameSteuerung getInstance()
     {
         return shared;
     }
+
+    public void initDatabase() throws DatenbankAccessException, DatenbankLeseException
+    {
+        Datenbank.init();
+    }
+
+    /* Navigation Stack Methods */
 
     private void openForward(UIScreens screen)
     {
@@ -55,6 +77,21 @@ public final class MainFrameSteuerung
     {
         NavigationStack.getInstance().forward(screen, obj);
     }
+
+    /**
+     * WARNING!
+     * Only use in Navigation Stack
+     *
+     * @param screen - The Screen to navigate to
+     * @param obj    - the Object that can be passed to the Screen you want to
+     *               navigate to
+     */
+    public void openForNavigationStack(UIScreens screen, Object obj)
+    {
+        mainFrame.open(screen, obj);
+    }
+
+    /* Open Methods to open different Screens inside the Application */
 
     /**
      * Navigates to the Dashboard of this App
@@ -88,17 +125,6 @@ public final class MainFrameSteuerung
         {
             throw new IllegalArgumentException();
         }
-    }
-
-    /**
-     * WARNING! Only use in Navigation Stack
-     *
-     * @param screen
-     * @param obj
-     */
-    public void open(UIScreens screen, Object obj)
-    {
-        mainFrame.open(screen, obj);
     }
 
     /**
@@ -157,5 +183,19 @@ public final class MainFrameSteuerung
         final UIScreens screen = UIScreens.Statistik;
         openForward(screen);
         mainFrame.open(screen);
+    }
+
+    public void openMapping(Class<?> oClass, ArrayList<?> objects)
+    {
+        final MappingWindow<?, ?> window = new MappingWindow<>(oClass, objects);
+        window.pack();
+        window.setVisible(true);
+    }
+
+    public void openMapping(Object object, ArrayList<?> objects)
+    {
+        final MappingWindow<?, ?> window = new MappingWindow<>(object, objects);
+        window.pack();
+        window.setVisible(true);
     }
 }

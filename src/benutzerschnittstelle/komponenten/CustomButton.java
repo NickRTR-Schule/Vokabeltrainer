@@ -2,6 +2,7 @@ package benutzerschnittstelle.komponenten;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public final class CustomButton extends JButton
 {
@@ -19,6 +20,21 @@ public final class CustomButton extends JButton
     {
         this(title, null);
     }
+
+    public static CustomButton newVocabBtn(ActionListener listener)
+    {
+        final CustomButton btn = new CustomButton("Vokabel erstellen", "Erstelle eine neue Vokabel");
+        btn.addActionListener(listener);
+        return btn;
+    }
+
+    public static CustomButton newKatBtn(ActionListener listener)
+    {
+        final CustomButton btn = new CustomButton("Kategorie erstellen", "Erstelle eine neue Kategorie");
+        btn.addActionListener(listener);
+        return btn;
+    }
+
 
     private void setValues(String tooltip)
     {

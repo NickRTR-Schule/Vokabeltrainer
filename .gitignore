@@ -1,6 +1,6 @@
-# Files and Folders for Jetbrains IDEA Support.
-.idea
-Vokabeltrainer.iml
+# IntelliJ related stuff
+.idea/workspace.xml
+.idea/misc.xml
 
 # Outputs and Binary Files
 /out

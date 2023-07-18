@@ -10,7 +10,7 @@ public final class KategorielisteSteuerung implements ListenSteuerung<Kategorie>
 
 
     @Override
-    public ArrayList<Kategorie> liesDaten() throws Exception
+    public ArrayList<Kategorie> liesDaten()
     {
         return Datenbank.liesKategorien();
     }

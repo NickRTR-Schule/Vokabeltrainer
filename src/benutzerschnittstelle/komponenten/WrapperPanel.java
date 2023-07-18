@@ -27,7 +27,7 @@ public final class WrapperPanel extends JPanel
         setLayout(new GridBagLayout());
         constraints.gridx = 0;
         constraints.gridy = 0;
-        add(new NavigationBar(content.getTitle()), constraints);
+        add(new NavigationBar(content.getTitle(), content.getBtn()), constraints);
         constraints.gridy = 1;
         constraints.weightx = 0.5;
         constraints.weighty = 0.5;

@@ -13,7 +13,7 @@ public final class DatenbankKategorieTest
 
 
     @Test
-    public void test() throws Exception
+    public void test()
     {
         // Kategorie hinzufuegen
 

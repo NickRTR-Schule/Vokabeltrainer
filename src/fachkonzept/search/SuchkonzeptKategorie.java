@@ -18,7 +18,6 @@ public final class SuchkonzeptKategorie extends Suchkonzept<Kategorie>
 
     @Override
     protected ArrayList<Kategorie> liesAlleDaten()
-            throws DatenbankAccessException, DatenbankLeseException
     {
         return Datenbank.liesKategorien();
     }
@@ -27,12 +26,12 @@ public final class SuchkonzeptKategorie extends Suchkonzept<Kategorie>
     public ArrayList<Kategorie> suche(String text)
     {
         final ArrayList<Kategorie> arrayListSearch = new ArrayList<>();
-        for (int i = 0; i < alleObjekte.size(); i++)
+        for (Kategorie kategorie : alleObjekte)
         {
-            if (alleObjekte.get(i).liesName().toLowerCase()
+            if (kategorie.liesName().toLowerCase()
                     .contains(text.toLowerCase()))
             {
-                arrayListSearch.add(alleObjekte.get(i));
+                arrayListSearch.add(kategorie);
             }
         }
         return arrayListSearch;

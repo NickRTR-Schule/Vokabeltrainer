@@ -1,58 +1,77 @@
 package fachkonzept;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import datenspeicherung.Datenbank;
+import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 import exceptions.EndOfAbfrageException;
 import exceptions.datenbank.DatenbankAccessException;
 import exceptions.datenbank.DatenbankSchreibException;
 
-public final class AbfrageKonzept {
-	private Vokabel[] voks;
-	private int currentVok;
+import java.util.ArrayList;
+import java.util.Collections;
 
-	public AbfrageKonzept(int numberVoks) throws Exception {
-		this.voks = new Vokabel[numberVoks];
-		currentVok = 0;
+public final class AbfrageKonzept
+{
+    private Vokabel[] voks;
+    private int currentVok;
 
-		voksBefuellen(numberVoks);
-	}
+    public AbfrageKonzept(int numberVoks, Kategorie kategorie)
+    {
+        this.voks = new Vokabel[numberVoks];
+        currentVok = 0;
 
-	public int anzahlVoks() {
-		return voks.length;
-	}
+        voksBefuellen(numberVoks, kategorie);
+    }
 
-	private void voksBefuellen(int numberVoks) throws Exception {
-		ArrayList<Vokabel> vokabeln = Datenbank.liesVokabeln();
-		Collections.sort(vokabeln);
-		if (vokabeln.size() < numberVoks) {
-			numberVoks = vokabeln.size();
-			voks = new Vokabel[numberVoks];
-		}
+    public int anzahlVoks()
+    {
+        return voks.length;
+    }
+
+    private void voksBefuellen(int numberVoks, Kategorie kategorie)
+    {
+        final ArrayList<Vokabel> vokabeln;
+        if (kategorie != null)
+        {
+            vokabeln = kategorie.liesVokabeln();
+        } else
+        {
+            vokabeln = Datenbank.liesVokabeln();
+        }
+        Collections.sort(vokabeln);
+        if (vokabeln.size() < numberVoks)
+        {
+            numberVoks = vokabeln.size();
+            voks = new Vokabel[numberVoks];
+        }
 //		Collections.shuffle(vokabeln);
-		for (int i = 0; i < numberVoks; i++) {
-			voks[i] = vokabeln.get(i);
-		}
-	}
+        for (int i = 0; i < numberVoks; i++)
+        {
+            voks[i] = vokabeln.get(i);
+        }
+    }
 
-	public Vokabel naechsteVokabel() throws EndOfAbfrageException {
-		if (currentVok < voks.length - 1) {
-			return voks[++currentVok];
-		} else {
-			throw new EndOfAbfrageException();
-		}
-	}
+    public Vokabel naechsteVokabel() throws EndOfAbfrageException
+    {
+        if (currentVok < voks.length - 1)
+        {
+            return voks[++currentVok];
+        } else
+        {
+            throw new EndOfAbfrageException();
+        }
+    }
 
-	public boolean pruefeEingabe(String eingabe) throws DatenbankAccessException, DatenbankSchreibException {
-		boolean richtig = eingabe.equals(voks[currentVok].liesUebersetzung());
-		voks[currentVok].wiederholt(richtig);
-		Datenbank.vokabelWiederholt(voks[currentVok]);
-		return richtig;
-	}
+    public boolean pruefeEingabe(String eingabe) throws DatenbankAccessException, DatenbankSchreibException
+    {
+        boolean richtig = eingabe.equals(voks[currentVok].liesUebersetzung());
+        voks[currentVok].wiederholt(richtig);
+        Datenbank.vokabelWiederholt(voks[currentVok]);
+        return richtig;
+    }
 
-	public Vokabel liesAktuelleVokabel() {
-		return voks[currentVok];
-	}
+    public Vokabel liesAktuelleVokabel()
+    {
+        return voks[currentVok];
+    }
 }

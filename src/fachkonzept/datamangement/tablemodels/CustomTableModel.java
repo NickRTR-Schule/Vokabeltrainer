@@ -1,6 +1,7 @@
 package fachkonzept.datamangement.tablemodels;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public abstract class CustomTableModel<T> extends AbstractTableModel
@@ -12,11 +13,32 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
 
     protected final Class<?>[] columnClasses;
 
-    public CustomTableModel(Vector<T> rows, String[] columnNames, Class<?>[] columnClasses)
+    protected final ArrayList<Integer> editableColumns;
+
+    public CustomTableModel(String[] columnNames, Class<?>[] columnClasses, boolean edit)
     {
-        this.rows = rows;
-        this.columnNames = columnNames;
-        this.columnClasses = columnClasses;
+        this.rows = new Vector<>();
+        this.editableColumns = new ArrayList<>();
+        final String[] localColumnNames;
+        final Class<?>[] localColumnClasses;
+        final int columnCountWithoutEdit = columnNames.length;
+        final int columnCountWithEdit = columnCountWithoutEdit + 1;
+        if (edit)
+        {
+            this.editableColumns.add(0);
+            localColumnNames = new String[columnCountWithEdit];
+            localColumnNames[0] = "Enthält";
+            System.arraycopy(columnNames, 0, localColumnNames, 1, columnCountWithoutEdit);
+            localColumnClasses = new Class<?>[columnCountWithEdit];
+            localColumnClasses[0] = Boolean.class;
+            System.arraycopy(columnClasses, 0, localColumnClasses, 1, columnCountWithoutEdit);
+        } else
+        {
+            localColumnNames = columnNames;
+            localColumnClasses = columnClasses;
+        }
+        this.columnNames = localColumnNames;
+        this.columnClasses = localColumnClasses;
     }
 
     @Override
@@ -56,5 +78,17 @@ public abstract class CustomTableModel<T> extends AbstractTableModel
     public void removeRow(T obj)
     {
         rows.remove(obj);
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex)
+    {
+        return editableColumns.contains(columnIndex);
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex)
+    {
+        super.setValueAt(aValue, rowIndex, columnIndex);
     }
 }

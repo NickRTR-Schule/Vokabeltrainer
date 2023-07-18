@@ -63,7 +63,7 @@ public final class KategorieScreen extends CustomPanel
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.gridwidth = 2;
-        panel.add(new JLabel("Wort"), constraints);
+        panel.add(new JLabel("Name"), constraints);
         nameTxtField.addKeyListener(new CustomKeyListener());
         constraints.gridy = 1;
         panel.add(nameTxtField, constraints);
@@ -72,7 +72,13 @@ public final class KategorieScreen extends CustomPanel
         storeBtn.addActionListener((ignored) -> {
             if (nameTxtField.getText().length() > 0)
             {
-                steuerung.kategorieHinzufuegen(nameTxtField.getText());
+                try
+                {
+                    steuerung.kategorieHinzufuegen(nameTxtField.getText());
+                } catch (Exception e)
+                {
+                    JOptionPane.showMessageDialog(this, e.getLocalizedMessage());
+                }
             }
             MainFrameSteuerung.getInstance().openDashboard();
         });

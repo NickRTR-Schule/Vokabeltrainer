@@ -9,7 +9,7 @@ public final class VokabellisteSteuerung implements ListenSteuerung<Vokabel>
 {
 
     @Override
-    public ArrayList<Vokabel> liesDaten() throws Exception
+    public ArrayList<Vokabel> liesDaten()
     {
         return Datenbank.liesVokabeln();
     }
