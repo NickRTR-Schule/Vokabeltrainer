@@ -206,7 +206,8 @@ public final class VokabelScreen extends CustomPanel
                 final Vokabel localVok = new Vokabel(
                         wortTxtField.getText(),
                         uebersetzungTxtField.getText(),
-                        abbildung, null,
+                        abbildung,
+                        audio,
                         lautschriftTxtField.getText(),
                         verwendungsHinweisTxtField.getText(),
                         0, 0,

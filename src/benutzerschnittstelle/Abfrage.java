@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 
 /**
@@ -133,7 +134,7 @@ public final class Abfrage extends CustomPanel
         }
         wortLabel.setText(steuerung.liesAktuelleVokabel().liesWort());
         updateAbbildungsLabel(steuerung.liesAktuelleVokabel().liesAbbildung());
-        //updateAudio()
+        updateAudio(steuerung.liesAktuelleVokabel().liesAussprache());
         wortLabel.setFont(new Font(MainFrame.liesFont().getFontName(), Font.BOLD, 16));
         lautschriftLabel.setText(steuerung.liesAktuelleVokabel().liesLautschrift());
         verwendungshinweisLabel.setText(steuerung.liesAktuelleVokabel().liesVerwendungshinweis());
@@ -143,6 +144,16 @@ public final class Abfrage extends CustomPanel
     {
         if (abbildung == null)
         {
+            final InputStream stream = Abfrage.class.getClassLoader()
+                    .getResourceAsStream("Image-placeholder.png");
+            try
+            {
+                assert stream != null;
+                abbildungsLabel.setIcon(CustomConverter.byteToIcon(stream.readAllBytes(), 150));
+            } catch (IOException e)
+            {
+                throw new RuntimeException(e);
+            }
             return;
         }
         try
@@ -158,7 +169,13 @@ public final class Abfrage extends CustomPanel
     {
         try
         {
-            //audioButton.setIcon();
+            if (audioplaying)
+            {
+                audioButton.setIcon(loadImage(PlayType.pause));
+            } else
+            {
+                audioButton.setIcon(loadImage(PlayType.play));
+            }
         } catch (Exception e)
         {
             JOptionPane.showMessageDialog(this, "");
@@ -167,6 +184,10 @@ public final class Abfrage extends CustomPanel
 
     private void updateAudio(byte[] audio)
     {
+        if (audio == null)
+        {
+            return;
+        }
         try
         {
             audioClip = CustomConverter.byteToAudio(audio);
@@ -213,6 +234,7 @@ public final class Abfrage extends CustomPanel
             wortLabel.setText(steuerung.naechsteVokabel().liesWort());
             verwendungshinweisLabel.setText(steuerung.liesAktuelleVokabel().liesVerwendungshinweis());
             updateAbbildungsLabel(steuerung.liesAktuelleVokabel().liesAbbildung());
+            updateAudio(steuerung.liesAktuelleVokabel().liesAussprache());
         } catch (EndOfAbfrageException ignored)
         {
             double erfolgsquote = (double) anzahlRichtig / anzahlAbfragen * 100;
@@ -253,5 +275,31 @@ public final class Abfrage extends CustomPanel
     public void vokRichtig()
     {
         frageAb();
+    }
+
+    private ImageIcon loadImage(PlayType type)
+    {
+        final String name = switch (type)
+        {
+            case play -> "play.png";
+            case pause -> "pause.png";
+        };
+        final InputStream stream = Abfrage.class.getClassLoader()
+                .getResourceAsStream(name);
+        try
+        {
+            assert stream != null;
+            return CustomConverter.byteToIcon(stream.readAllBytes(), 50);
+        } catch (Exception ignored)
+        {
+            JOptionPane.showMessageDialog(this, "Fehler beim Laden der Datei");
+        }
+        return null;
+    }
+
+    private enum PlayType
+    {
+        play,
+        pause
     }
 }
