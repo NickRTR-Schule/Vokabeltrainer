@@ -24,10 +24,7 @@ public final class AbfrageKonzept
         try
         {
             Datenbank.kategorieGelernt(kategorie);
-        } catch (DatenbankAccessException e)
-        {
-            throw new RuntimeException(e);
-        } catch (DatenbankSchreibException e)
+        } catch (DatenbankAccessException | DatenbankSchreibException e)
         {
             throw new RuntimeException(e);
         }
@@ -40,7 +37,7 @@ public final class AbfrageKonzept
 
     private void voksBefuellen(int numberVoks, Kategorie kategorie)
     {
-        final ArrayList<Vokabel> vokabeln;
+        ArrayList<Vokabel> vokabeln;
         if (kategorie != null)
         {
             vokabeln = kategorie.liesVokabeln();
@@ -54,7 +51,8 @@ public final class AbfrageKonzept
             numberVoks = vokabeln.size();
             voks = new Vokabel[numberVoks];
         }
-//		Collections.shuffle(vokabeln);
+        vokabeln.subList(numberVoks, vokabeln.size()).clear(); // limit Arraylist to specified number of vocabularies
+		Collections.shuffle(vokabeln);
         for (int i = 0; i < numberVoks; i++)
         {
             voks[i] = vokabeln.get(i);
