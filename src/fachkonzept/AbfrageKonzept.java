@@ -15,7 +15,7 @@ public final class AbfrageKonzept
     private Vokabel[] voks;
     private int currentVok;
 
-    public AbfrageKonzept(int numberVoks, Kategorie kategorie) throws Exception
+    public AbfrageKonzept(int numberVoks, Kategorie kategorie)
     {
         this.voks = new Vokabel[numberVoks];
         currentVok = 0;
@@ -28,12 +28,12 @@ public final class AbfrageKonzept
         return voks.length;
     }
 
-    private void voksBefuellen(int numberVoks, Kategorie kategorie) throws Exception
+    private void voksBefuellen(int numberVoks, Kategorie kategorie)
     {
         final ArrayList<Vokabel> vokabeln;
         if (kategorie != null)
         {
-            vokabeln = Datenbank.liesVokabelnForKat(kategorie.liesName());
+            vokabeln = kategorie.liesVokabeln();
         } else
         {
             vokabeln = Datenbank.liesVokabeln();

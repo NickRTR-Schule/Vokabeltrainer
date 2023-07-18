@@ -176,37 +176,14 @@ public final class Datenbank
     }
 
     public static ArrayList<Vokabel> liesVokabelnForKat(String name)
-            throws DatenbankAccessException, DatenbankLeseException
     {
-        oeffneDatenbank();
-        String sqlStmt = "SELECT Vokabel.wort, Vokabel.uebersetzung, abbildung, aussprache, lautschrift, verwendungshinweis, wiederholungen, anzahlrichtig ";
-        sqlStmt += "FROM Vokabel, Beziehung ";
-        sqlStmt += "WHERE name = ?";
-        ArrayList<Vokabel> ergebnis = new ArrayList<>();
-        try
+        final ArrayList<Vokabel> ergebnis = new ArrayList<>();
+        for (Vokabel vokabel : vokabeln)
         {
-            stmt = con.prepareStatement(sqlStmt);
-            stmt.setString(1, name);
-            final ResultSet result = stmt.executeQuery();
-            while (result.next())
+            if (vokabel.liesKategorien().contains(new Kategorie(name)))
             {
-                ergebnis.add(
-                        new Vokabel(
-                                result.getString("wort"),
-                                result.getString("uebersetzung"),
-                                result.getBytes("abbildung"),
-                                result.getBytes("aussprache"),
-                                result.getString("lautschrift"),
-                                result.getString("verwendungshinweis"),
-                                result.getInt("wiederholungen"),
-                                result.getInt("anzahlrichtig")
-                        )
-                );
+                ergebnis.add(vokabel);
             }
-            result.close();
-        } catch (SQLException e)
-        {
-            throw new DatenbankLeseException(DatenbankObject.vokabel);
         }
         return ergebnis;
     }
@@ -423,43 +400,22 @@ public final class Datenbank
 
     private static boolean existiertVokabel(String wort, String uebersetzung)
     {
-        // DB-Abfrage als String
-        String sqlStmt = "SELECT * ";
-        sqlStmt += "FROM Vokabel ";
-        sqlStmt += "WHERE wort = ? AND uebersetzung = ?";
-        try
-        {
-            // DB-Abfrage vorbereiten
-            stmt = con.prepareStatement(sqlStmt);
-            // DB-Abfrage ausführen
-            stmt.setString(1, wort);
-            stmt.setString(2, uebersetzung);
-            final ResultSet result = stmt.executeQuery();
-            final boolean r = result.next();
-            result.close();
-            return r;
-        } catch (SQLException ignored)
-        {
-            return false;
-        }
+        return vokabeln.contains(
+                new Vokabel(
+                        wort,
+                        uebersetzung,
+                        null,
+                        null,
+                        null,
+                        null,
+                        0,
+                        0
+                )
+        );
     }
 
     private static boolean existiertKategorie(String name)
     {
-        String sqlStmt = "SELECT name ";
-        sqlStmt += "FROM Kategorie ";
-        sqlStmt += "WHERE name = ?";
-        try
-        {
-            stmt = con.prepareStatement(sqlStmt);
-            stmt.setString(1, name);
-            final ResultSet result = stmt.executeQuery();
-            final boolean r = result.next();
-            result.close();
-            return r;
-        } catch (SQLException ignored)
-        {
-            return false;
-        }
+        return kategorien.contains(new Kategorie(name));
     }
 }
