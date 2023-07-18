@@ -1,5 +1,6 @@
 package steuerung;
 
+import datenspeicherung.Kategorie;
 import datenspeicherung.Vokabel;
 import exceptions.EndOfAbfrageException;
 import exceptions.datenbank.DatenbankAccessException;
@@ -11,11 +12,11 @@ public final class AbfrageSteuerung
 {
     private AbfrageKonzept dasAbfrageKonzept;
 
-    public AbfrageSteuerung(int numberVocs)
+    public AbfrageSteuerung(int numberVocs, Kategorie kategorie)
     {
         try
         {
-            dasAbfrageKonzept = new AbfrageKonzept(numberVocs);
+            dasAbfrageKonzept = new AbfrageKonzept(numberVocs, kategorie);
         } catch (Exception e)
         {
             System.out.println(e.getLocalizedMessage());
