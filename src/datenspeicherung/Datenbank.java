@@ -29,14 +29,6 @@ public final class Datenbank
     public static void init() throws DatenbankAccessException, DatenbankLeseException
     {
         ladeDaten();
-        for (Vokabel vok : vokabeln)
-        {
-            System.out.println(vok.liesKategorien());
-        }
-        for (Kategorie kat : kategorien)
-        {
-            System.out.println(kat.liesVokabeln());
-        }
     }
 
     private static void ladeDaten() throws DatenbankAccessException, DatenbankLeseException
