@@ -1,6 +1,7 @@
 package benutzerschnittstelle.navigation;
 
 import benutzerschnittstelle.komponenten.CustomButton;
+import fachkonzept.datamangement.converting.CustomConverter;
 import fachkonzept.navigation.NavigationStack;
 
 import javax.swing.*;
@@ -85,16 +86,10 @@ public final class NavigationBar extends JPanel
         try (final InputStream stream = NavigationBar.class.getClassLoader()
                 .getResourceAsStream("Icon_arrow_left_highres.png"))
         {
-            final ImageIcon icon;
             try
             {
                 assert stream != null;
-                icon = new ImageIcon(stream.readAllBytes());
-                final Image image = icon.getImage();
-                final Image scaledInstance = image.getScaledInstance(25, 25,
-                        Image.SCALE_DEFAULT);
-                icon.setImage(scaledInstance);
-                return icon;
+                return CustomConverter.byteToIcon(stream.readAllBytes(), 25);
             } catch (IOException e)
             {
                 e.printStackTrace();
