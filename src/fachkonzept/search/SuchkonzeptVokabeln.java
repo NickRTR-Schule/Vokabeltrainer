@@ -2,8 +2,6 @@ package fachkonzept.search;
 
 import datenspeicherung.Datenbank;
 import datenspeicherung.Vokabel;
-import exceptions.datenbank.DatenbankAccessException;
-import exceptions.datenbank.DatenbankLeseException;
 
 import java.util.ArrayList;
 
@@ -11,7 +9,6 @@ public final class SuchkonzeptVokabeln extends Suchkonzept<Vokabel>
 {
 
     public SuchkonzeptVokabeln()
-            throws DatenbankAccessException, DatenbankLeseException
     {
         super();
     }
