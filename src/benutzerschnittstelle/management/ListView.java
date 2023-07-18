@@ -4,7 +4,6 @@ import benutzerschnittstelle.komponenten.CustomButton;
 import benutzerschnittstelle.komponenten.CustomPanel;
 import fachkonzept.datamangement.tablemodels.CustomTableModel;
 import fachkonzept.search.Suchkonzept;
-import steuerung.DashboardSteuerung;
 import steuerung.MainFrameSteuerung;
 import steuerung.management.ListenSteuerung;
 import steuerung.management.VokabellisteSteuerung;
@@ -139,7 +138,7 @@ public abstract class ListView<T> extends CustomPanel
         final JButton addBtn = new JButton("Hinzufügen");
         if (steuerung instanceof VokabellisteSteuerung)
         {
-            addBtn.addActionListener((ignored) -> new DashboardSteuerung().erstellerGeklickt());
+            addBtn.addActionListener((ignored) -> MainFrameSteuerung.getInstance().openErsteller());
         } else
         {
             addBtn.addActionListener((ignored) -> MainFrameSteuerung.getInstance().openKategorieuebersicht());
