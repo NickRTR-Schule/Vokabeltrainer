@@ -112,20 +112,24 @@ public abstract class ListView<T> extends CustomPanel
 
     private void updateTable(ArrayList<T> newObjects)
     {
+        table.removeAll();
         for (int i = 0; i < model.getRowCount(); i++)
         {
-            model.removeRow(model.getObjectForRow(i));
+            i--;
+            System.out.println(model.getRowCount());
+            model.removeRow(model.getObjectForRow(0));
+            model.fireTableDataChanged();
         }
         for (final T obj : newObjects)
         {
             model.addRow(obj);
         }
+        table.setModel(model);
     }
 
     public void geklicktSuche(String text)
     {
         updateTable(suchkonzept.suche(text));
-        model.fireTableDataChanged();
     }
 
     private JPanel getActionPanel()

@@ -25,8 +25,7 @@ public final class SuchkonzeptVokabeln extends Suchkonzept<Vokabel>
         final ArrayList<Vokabel> arrayListSearch = new ArrayList<>();
         for (Vokabel vokabel : alleObjekte)
         {
-            if (vokabel.liesWort().toLowerCase()
-                    .contains(text.toLowerCase()))
+            if (vokabel.liesWort().toLowerCase().contains(text.toLowerCase()))
             {
                 arrayListSearch.add(vokabel);
             }
