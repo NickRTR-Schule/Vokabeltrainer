@@ -44,7 +44,7 @@ public final class Abfrage extends CustomPanel
     {
         super("Abfrage");
         enteredNumberVoks = frageVokabelAnzahl();
-        Kategorie kat = frageKategorie();
+        final Kategorie kat = frageKategorie();
         steuerung = new AbfrageSteuerung(enteredNumberVoks, kat);
         wortLabel = new JLabel("Wort", SwingConstants.CENTER);
         verwendungshinweisLabel = new JLabel("Verwendungshinweis", SwingConstants.CENTER);
