@@ -234,6 +234,7 @@ public final class Abfrage extends CustomPanel
             wortLabel.setText(steuerung.naechsteVokabel().liesWort());
             verwendungshinweisLabel.setText(steuerung.liesAktuelleVokabel().liesVerwendungshinweis());
             updateAbbildungsLabel(steuerung.liesAktuelleVokabel().liesAbbildung());
+            lautschriftLabel.setText(steuerung.liesAktuelleVokabel().liesLautschrift());
             updateAudio(steuerung.liesAktuelleVokabel().liesAussprache());
         } catch (EndOfAbfrageException ignored)
         {
