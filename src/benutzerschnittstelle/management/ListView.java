@@ -116,7 +116,6 @@ public abstract class ListView<T> extends CustomPanel
         for (int i = 0; i < model.getRowCount(); i++)
         {
             i--;
-            System.out.println(model.getRowCount());
             model.removeRow(model.getObjectForRow(0));
             model.fireTableDataChanged();
         }
